@@ -5,7 +5,7 @@
     width: 750px;
     height: 700px;
     overflow: hidden;
-    justify-content: space-around;
+    justify-content: space-evenly;
     text-align: center;
 }
 

@@ -12,7 +12,7 @@ function BarraLateral(props) {
 
   return (
     <div>
-      <div className="menu-icon" style={{width: '150px'}}>
+      <div className="menu-icon" style={{width: '150px', display: 'flex'}}>
         <FontAwesomeIcon icon={faBars} onClick={changeStateBar} className='text-cor-roxa' />
       </div>
       <div className={`barra-lateral ${open ? 'aberto' : ''}`} style={{ opacity: open ? 1 : 0 }}>

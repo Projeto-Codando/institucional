@@ -33,6 +33,10 @@
   color: white;
 }
 
+.container{
+  padding: 0 15vh;
+}
+
 .App-link {
   color: #61dafb;
 }
@@ -48,11 +52,13 @@
 }
 
 .escreva-codigo {
+  padding: 0 15vh;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
-
+  justify-content: space-between;
+  height: 50vh;
+  overflow: hidden;
 }
 
 .text-escreva-codigo {
@@ -79,13 +85,22 @@
 .section-cards{
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   background-image: url('./imgs/banner-verde.svg');
-  background-size: cover;
   background-repeat: no-repeat;
+  background-size: cover;
   height: 100vh;
 }
 
 .video-container{
   height: 60vh;
+}
+
+.section-valores{
+  display: flex;
+  gap: 50px;
+}
+
+.section-valores .cardComImg{
+  width: 50%;
 }

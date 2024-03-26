@@ -12,8 +12,8 @@ function Header() {
         <img src={Logo} alt="Logo codando" />
       </div>
       <div className="button">
-        <Botao backgroundColor= '#662E9B' 
-        width='8vw' 
+        <Botao backgroundColor= '#662E9B'
+        width='8vw'
         texto='Entrar'
         padding='15px'/>
       </div>
