@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+:root{
+  --cor-roxa: #662E9B;
+  --cor-amarela: #F3DE2C;
+  --cor-laranja: #FB6107;
+  --cor-verde: #7CB518;
+  --cor-branco: #fff;
+  --cor-preta: #000;
+}
+
+.cor-roxa{
+  background-color: var(--cor-roxa);
+}
+
+.cor-verde{
+  background-color: var(--cor-verde);
+}
+
+.cor-verde:hover{
+  background-color: #9cbe60;
+}
+
+.text-cor-roxa{
+  color: var(--cor-roxa);
+}
+
+button:hover{
+  opacity: 0.85;
+  cursor: pointer;
+}

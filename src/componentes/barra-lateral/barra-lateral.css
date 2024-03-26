@@ -1,0 +1,23 @@
+.barra-lateral {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0px;
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  overflow-x: hidden;
+  display: flex;
+  align-items: left;
+  transition: all 1s ease; /* Transição da largura com duração de 0.3 segundos e função de temporização ease-in-out */
+}
+
+.barra-lateral.aberto {
+  width: 200px;
+}
+
+.menu-icon:hover,
+.barra-lateral.aberto:hover {
+  cursor: pointer;
+}

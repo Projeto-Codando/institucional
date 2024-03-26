@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Kodchasan:wght@300;400;500;700&family=Moulpali&family=Poppins:wght@300;500;700&family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+*{
+  font-family: 'Nunito', sans-serif;
+}
+
+.banner{
+  background: rgba(0,0,0,0.65) url('../../imgs/efeb59a5c15c74105be4c9601e4afb95.png');
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 70vh;
+  width: 100vw;
+  background-blend-mode: darken;
+  /* border-bottom-left-radius: 50vh;
+  border-bottom-right-radius: 50vh; */
+}
+
+.font-ppp2{
+  font-family: "Press Start 2P", system-ui;
+  font-weight: 400;
+  font-size: 40px;
+  color: #FB6107;
+  align-items: center;
+}
+
+h1{
+  font-size: 40px;
+  color: white;
+  text-shadow: 1px 1px 2px black;
+}
+
+h3{
+  color: white;
+}
+
+
+

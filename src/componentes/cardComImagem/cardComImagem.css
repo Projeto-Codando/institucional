@@ -1,0 +1,27 @@
+.cardComImg{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 750px;
+    height: 700px;
+    overflow: hidden;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.imagemCard{
+    overflow: hidden;
+    width: 300px;
+    height: 300px;
+    background-color: #662E9B;
+    align-items: center;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+}
+
+button{
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 20px;
+}

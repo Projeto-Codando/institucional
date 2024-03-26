@@ -1,0 +1,14 @@
+*{
+  overflow-x: hidden;
+}
+.header{
+  margin: 10px 0px;
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  font-size: 24px;
+  gap: 25vw;
+  width: 100vw;
+}
+
+
