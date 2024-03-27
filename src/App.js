@@ -89,7 +89,7 @@ function App() {
           img={controleImg}
           color="black"
           backgroundColor="#7CB518"
-          alt="Imagem 8-Bti de um macaco muito fofinho"
+          alt="Imagem 8-BIT de um macaco muito fofinho"
           titulo="Gameficação"
           descricao="As crianças aprendem a programar em um ambiente envolvente e gratificante, com elementos de jogos que tornam a experiência educacional estimulante."
         />
