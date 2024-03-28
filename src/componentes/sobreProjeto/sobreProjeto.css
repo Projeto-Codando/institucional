@@ -1,0 +1,34 @@
+.sobre-projeto{
+    height:100vh;
+    background: url('../../imgs/banner-bananas.svg');
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.section-sobre-projeto{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    gap: 100px;
+}
+
+.lado-esquerdo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 50%;
+    gap: 100px;
+}
+
+.lado-direito{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 50%;
+    gap: 100px;
+}

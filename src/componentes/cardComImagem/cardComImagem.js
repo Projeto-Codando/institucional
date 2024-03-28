@@ -1,7 +1,6 @@
 import Botao from '../botao/botoes.js'
 import './cardComImagem.css'
 
-
 function CardComIMG(props) {
     return (
         <div className="cardComImg" style={{
@@ -21,7 +20,7 @@ function CardComIMG(props) {
                     fontSize: '18px',
                 }}>{props.descricao}</p>
             </div>
-            {props.showButton && (
+            {props.statusBotao && (
                 <Botao
                     backgroundColor='#662E9B'
                     width="12vw"
