@@ -7,7 +7,7 @@ function CardComIMG(props) {
         <div className="cardComImg" style={{
             justifyContent: 'space-evenly',
         }}>
-            <div className="imagemCard" style={{borderRadius: '360px', backgroundColor: props.backgroundColor}}>
+            <div className="imagemCard" style={{borderRadius: '360px', backgroundColor: props.backgroundColor || "#662E9B"}}>
                 <img src={props.img} alt={props.alt}/>
             </div>
             <div style={{
@@ -21,7 +21,7 @@ function CardComIMG(props) {
                     fontSize: '18px',
                 }}>{props.descricao}</p>
             </div>
-            {props.showButton && (
+            {props.statusBotao && (
                 <Botao
                     backgroundColor='#662E9B'
                     width="12vw"
