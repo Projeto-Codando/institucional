@@ -1,7 +1,6 @@
 import Botao from '../botao/botoes.js'
 import './cardComImagem.css'
 
-
 function CardComIMG(props) {
     return (
         <div className="cardComImg" style={{
