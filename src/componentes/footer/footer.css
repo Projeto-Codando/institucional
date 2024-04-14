@@ -1,43 +1,143 @@
 .container-footer{
   display: flex;
   flex-direction: row;
-  background-color: chartreuse;
   justify-content: space-between;
+  height: 600px;
+  z-index: 1;
 }
 
-.container-fora{
-  background-color: blue;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+ .container-fora{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: 0 15vh;
+  }
+  
+
+.container-footer .img-back{
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  transition: opacity 0.5s ease;
 }
 
-.ladoEsquerdo, .ladoDireito{
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+@media(max-width: 2840px){  
+  .container-fora{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: 0 15vh;
+  }
+  
+  .card-footer{
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    
+  }
+  
+  .ladoEsquerdo, .ladoDireito{
+    flex-direction: column;
+    width: 50%;
+    align-content: center;
+  }
+  
+  .ladoEsquerdo span{
+    font-size: 20px;
+    margin-bottom: 6px;
+    color: #FFFFFF80;
+    text-align: start;
+  }
+  
+  .ladoEsquerdo h1{
+    margin-bottom: 11px;
+  }
+  
+  .ladoDireito p{
+    font-size: 20px;
+    color: #FFF;
+  }
+  .topo, .baixo{
+    display: flex;
+    justify-content: center;
+  }
+  
+  .topo h1, .baixo h1{
+    font-size: 32px;
+  }
+  
+  .copyright{
+    text-align: left;
+    font-size: 1.3rem;
+  }
 }
 
-.topo, .baixo{
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
+@media (max-width: 1024px) {
+  .ladoDireito img {
+    width: 290px;
+  }
+
+  .topo h1, .baixo h1{
+    font-size: 30px;
+  }
+}
+@media(max-width: 768px){
+  .container-fora{
+    padding: 0 8vh;
+  }
+
+  .ladoDireito p{
+    font-size: 15px;
+  }
+  
+  .ladoDireito img {
+    width: 300px;
+  }
+
+  .topo h1, .baixo h1{
+    font-size: 20px;
+  }
+
+  .ladoEsquerdo span{
+    font-size: 15px;
+  }
 }
 
-.topo div, .baixo div{
-  width: 50%;
-  text-align: left;
-}
+@media only screen and (min-width: 320px) and (max-width: 425px)
+{
+  .container-footer{
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: end;
+  }
 
-.topo h1, .baixo h1{
-  font-size: 2rem;
-}
+  .container-fora{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: 0 8vh;
+  }
+  .ladoDireito img {
+    width: 235px;
+  }
 
-.copyright{
-  text-align: left;
-  font-size: 1.3rem;
-}
+  .ladoEsquerdo, .ladoDireito{
+    flex-direction: column;
+    width: 100%;
+    align-content: center;
+  }
 
+  .topo, .baixo{
+    display: flex;
+    justify-content: space-between;
+  }
 
+  .topo h1, .baixo h1{
+    font-size: 17px;
+  }
+} 

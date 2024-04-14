@@ -9,6 +9,8 @@ import macacoOculos from '../imgs/MacacoOculos.svg'
 import controleImg from '../imgs/Controle.svg'
 import CardComIMG from '../componentes/cardComImagem/cardComImagem'
 import { SobreProjeto } from '../componentes/sobreProjeto/sobreProjeto'
+import Faq from '../componentes/faq/faq'
+import Footer from '../componentes/footer/footer'
 
 
 function SiteInstitucional() {
@@ -98,6 +100,8 @@ function SiteInstitucional() {
                 />
             </div>
             <SobreProjeto/>
+            <Faq/>
+            <Footer/>
         </div>
     )
 }

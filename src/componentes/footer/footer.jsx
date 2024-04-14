@@ -1,37 +1,39 @@
 import React from 'react'
 import './footer.css'
 import Logo from '../../imgs/LogoAmarela.svg'
+import Background from '../../imgs/background-footer.png'
 
 export default function Footer() {
-
   return (
     <footer>
-      <div className="container-footer container-fora">
+
+      <div className="container-footer container-fora" >
+        <img className="img-back" src={Background} alt="Img de fundo" />
         <div className="container-footer">
           <div className="ladoEsquerdo">
             <div className='topo'>
-              <div>
+              <div className='card-footer'>
                 <h1>Projeto</h1>
-                <p>Sobre nós</p>
-                <p>Parceiros</p>
-                <p>Review</p>
+                  <span>Sobre nós</span>
+                  <span>Parceiros</span>
+                  <span>Review</span>
               </div>
-              <div>
+              <div className='card-footer'>
                 <h1>Educadores</h1>
-                <p>Estudantes</p>
-                <p>Progresso</p>
+                <span>Estudantes</span>
+                <span>Progresso</span>
               </div>
             </div>
             <div className='baixo'>
-              <div>
+              <div className='card-footer'>
                 <h1>Suporte</h1>
-                <p>Help Center</p>
-                <p>FAQ</p>
+                <span>Help Center</span>
+                <span>FAQ</span>
               </div>
-              <div>
+              <div className='card-footer'>
                 <h1>Alunos</h1>
-                <p>Plataforma</p>
-                <p>Ajuda</p>
+                <span>Plataforma</span>
+                <span>Ajuda</span>
               </div>
             </div>
           </div>

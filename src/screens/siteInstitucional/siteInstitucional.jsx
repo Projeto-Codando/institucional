@@ -2,7 +2,8 @@ import Header from '../../componentes/header/header'
 import Card from '../../componentes/card/card'
 import VideoPlayer from '../../componentes/videoPlayer/videoPlayer'
 import BannerComBotao from '../../componentes/bannerComBotao/bannerComBotao'
-import Footer from '../../componentes/footer/footer'
+import Footer from '../../componentes/footer/footer.jsx'
+import Faq from '../../componentes/faq/faq.jsx'
 import imgProf from '../../imgs/prof_img.svg'
 import imgAluno from '../../imgs/aluno_img.svg'
 import macacoFofo from '../../imgs/MacacoFofo.svg'
@@ -10,6 +11,7 @@ import macacoOculos from '../../imgs/MacacoOculos.svg'
 import controleImg from '../../imgs/Controle.svg'
 import CardComIMG from '../../componentes/cardComImagem/cardComImagem'
 import './siteInstitucional.css'
+import { SobreProjeto } from '../../componentes/sobreProjeto/sobreProjeto.js'
 
 function SiteInstitucional(){
   return(
@@ -92,8 +94,9 @@ function SiteInstitucional(){
           descricao="As crianças aprendem a programar em um ambiente envolvente e gratificante, com elementos de jogos que tornam a experiência educacional estimulante."
         />
       </div>
-
-      <Footer/>
+      <SobreProjeto/>
+      <Faq/>
+      <Footer />
     </div>
 
   )
