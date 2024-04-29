@@ -6,8 +6,8 @@ function CardComIMG(props) {
         <div className="cardComImg" style={{
             justifyContent: 'space-evenly',
         }}>
-            <div className="imagemCard" style={{borderRadius: '360px', backgroundColor: props.backgroundColor || "#662E9B"}}>
-                <img src={props.img} alt={props.alt}/>
+            <div className="imagemCard" style={{ borderRadius: '360px', backgroundColor: props.backgroundColor || "#662E9B" }}>
+                <img src={props.img} alt={props.alt} />
             </div>
             <div style={{
                 overflow: 'hidden',

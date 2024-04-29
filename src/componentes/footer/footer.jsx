@@ -7,8 +7,7 @@ export default function Footer() {
   return (
     <footer>
 
-      <div className="container-footer container-fora" >
-        <img className="img-back" src={Background} alt="Img de fundo" />
+      <div className="container-fora" >
         <div className="container-footer">
           <div className="ladoEsquerdo">
             <div className='topo'>

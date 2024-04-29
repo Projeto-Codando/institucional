@@ -1,14 +1,57 @@
-.container-faq{
-    position: relative;
+.section-faq{
+    background: url(../../imgs/background-faq.svg);
+    height:80vh;
+    max-height: 627px;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    margin-top: 1px;
+    padding: 0 15vh;
+    align-items: center;
 }
 
-.container-faq .img-back{
-    top: 0;
-    left: 0;
-    z-index: 0;
+.container-faq{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    position: absolute;
-    transition: opacity 0.5s ease;
+}
+.titulo-faq{
+    margin-bottom: 8pxpx;
+}
+.titulo-faq span{
+    font-size: 64px;
+    color: black;
+    font-weight: 800;
+    
+}
+
+.card-faq{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: url(../../imgs/card-faq.png);
+    width: 800px;
+    height: 100px;
+    margin-bottom: 23px;
+    box-shadow: 0px 7px 12px 0px black;
+}
+
+.redirect{
+   padding: 0px 40px 0px;
+}
+
+.card-faq span{
+    font-size: 24px;
+    color: white;
+    text-shadow: 3px 3px 3px black;
+}
+
+.subtitulo-faq{
+    width: 100%;
+    text-align: end;
+    font-size: 24px;
+    color: #763B16;
+    font-weight: 700;
 }
