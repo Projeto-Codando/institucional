@@ -1,0 +1,62 @@
+.section-formulario-login{
+    height: 400px;
+    width: 600px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 3px 3px 20px 0px black;
+    position: relative;
+    overflow: visible;
+}
+
+.container-formulario-login{
+  display: flex;
+  justify-content: center;
+}
+
+.image-Container {
+  position: absolute;
+  right: 100%;
+  overflow: visible;
+  top: -125px;
+
+}
+  
+  .image-Container img {
+    height: auto;
+  }
+
+  .section-formulario-login .subtitulo-login{
+    padding: 10% 0px 0px 0%;
+    margin-left: 12%;
+    font-size: 18px;
+    width: 250px;
+    height: min-content;
+    border-bottom: solid 1px black;
+    font-weight: bold;
+  }
+
+  .subtitulo-login span{
+    margin-left: 7px;
+  }
+
+  .forms-login{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 435px;
+    height: 226px;
+    margin-top: 10px;
+  }
+  
+  .nomes{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .buttom-login{
+    width: 100%;
+    height: 14%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }

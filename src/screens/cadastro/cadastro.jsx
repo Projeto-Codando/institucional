@@ -1,11 +1,22 @@
+import './cadastro.css'
 import Header from "../../componentes/headerLoginCadastro/headerLogin";
-import BackgroundLogin from "../../componentes/backgroundLogins/backgroundLogin";
-
+import Formulario from "../../componentes/formularios/formularioCadastro"
 function Cadastro(){
   return(
     <div>
       <Header />
-      <BackgroundLogin />
+      
+      <section className='sectionBackgroundCadastro' >
+            <div className='buttom-voltar'>
+                <button> &lt; Voltar </button>
+            </div>
+            <div className='container-background-cadastro' >
+            
+                <Formulario />
+                
+            </div>
+        </section >
+      
     </div>
     
   )

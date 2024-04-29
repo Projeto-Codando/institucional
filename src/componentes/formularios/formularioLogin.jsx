@@ -1,30 +1,19 @@
-import './formularioCadastro.css'
-import MacacoOculos from '../../imgs/macaco-oculos.png'
+import './formularioLogin.css'
+import MacacoOculos from '../../imgs/macaco-oculos-esq.png'
 import InputsLogin from '../inputsLogins/inputsLogins'
 import Botao from '../botao/botoes'
 export default function Formulario() {
     return (
-        <form className='section-formulario'>
+        <form className='section-formulario-login'>
 
-            <div className='subtitulo'>
+            <div className='subtitulo-login'>
                 <span>Detalhes da conta</span>
             </div>
-            <div className='container-formulario'>
-                <div className='forms'>
-                    <div className='nomes'>
-                        <InputsLogin
-                            text='Nome'
-                            id='nome'
-                            width='200px'
-                        />
-                        <InputsLogin
-                            text='Sobrenome'
-                            id='sobrenome'
-                            width='200px'
-                        />
-                    </div>
+            <div className='container-formulario-login'>
+                <div className='forms-login'>
+                    
                     <InputsLogin
-                        text='Nickname'
+                        text='Nickname (Apelido)'
                         id='nickname'
                     />
                     <InputsLogin
@@ -35,13 +24,9 @@ export default function Formulario() {
                         text='Senha'
                         id='sobrenome'
                     />
-                    <InputsLogin
-                        text='Confirmação de Senha'
-                        id='sobrenome'
-                    />
                 </div>
             </div>
-            <div className='buttom'>
+            <div className='buttom-login'>
                 
                 <Botao
                 backgroundColor= "#662E9B"
@@ -55,11 +40,11 @@ export default function Formulario() {
                 width= "240px"
                 height= "35px"
                 padding= "0px"
-                texto="Cadastrar"
+                texto="Entrar"
                 />
             </div>
 
-            <div className="image-container">
+            <div className="image-Container">
                 <img src={MacacoOculos} alt="Imagem" />
             </div>
         </form>
