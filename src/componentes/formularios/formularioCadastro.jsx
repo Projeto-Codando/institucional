@@ -2,7 +2,7 @@ import './formularioCadastro.css'
 import MacacoOculos from '../../imgs/macaco-oculos.png'
 import InputsLogin from '../inputsLogins/inputsLogins'
 import Botao from '../botao/botoes'
-export default function Formulario() {
+export default function Formulario(props) {
     return (
         <form className='section-formulario'>
 
@@ -16,33 +16,39 @@ export default function Formulario() {
                             text='Nome'
                             id='nome'
                             width='200px'
+                            onChange={typeof props.setNome === 'function' ? props.setNome : undefined}
                         />
                         <InputsLogin
                             text='Sobrenome'
                             id='sobrenome'
                             width='200px'
+                            onChange={typeof props.setSobrenome === 'function' ? props.setSobrenome : undefined}
                         />
                     </div>
                     <InputsLogin
                         text='Nickname'
                         id='nickname'
+                        onChange={typeof props.setApelido === 'function' ? props.setApelido : undefined}
                     />
                     <InputsLogin
                         text='Senha da Turma'
-                        id='sobrenome'
+                        id='senhaTurma'
+                        onChange={typeof props.setSenhaTurma === 'function' ? props.setSenhaTurma : undefined}
                     />
                     <InputsLogin
                         text='Senha'
-                        id='sobrenome'
+                        id='senha'
+                        onChange={typeof props.setSenha === 'function' ? props.setSenha : undefined}
                     />
                     <InputsLogin
                         text='Confirmação de Senha'
-                        id='sobrenome'
+                        id='confirmacaoSenha'
+                        onChange={typeof props.setSenha === 'function' ? props.setSenha : undefined}
                     />
                 </div>
             </div>
             <div className='buttom'>
-                
+
                 <Botao
                 backgroundColor= "#662E9B"
                 fontSize= "20px"
@@ -56,6 +62,7 @@ export default function Formulario() {
                 height= "35px"
                 padding= "0px"
                 texto="Cadastrar"
+                onClick={props.onClick}
                 />
             </div>
 

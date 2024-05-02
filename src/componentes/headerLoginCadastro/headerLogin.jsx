@@ -2,7 +2,6 @@ import './headerLogin.css'
 import Logo from "../../imgs/Logo.svg"
 import Botao from '../botao/botoes.js'
 import BarraLateral from '../barra-lateral/barra-lateral.js'
-import Background from '../../imgs/banner-bananas.png'
 
 export default function HeaderLogin() {
     return (

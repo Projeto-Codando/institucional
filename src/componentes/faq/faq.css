@@ -1,6 +1,6 @@
-.section-faq{
+.section-faq {
     background: url(../../imgs/background-faq.svg);
-    height:80vh;
+    height: 80vh;
     max-height: 627px;
     overflow: hidden;
     background-repeat: no-repeat;
@@ -9,25 +9,27 @@
     align-items: center;
 }
 
-.container-faq{
+.container-faq {
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    justify-content: flex-start;
     align-items: center;
     width: 100%;
     height: 100%;
 }
-.titulo-faq{
-    margin-bottom: 8pxpx;
+
+.titulo-faq {
+    margin-bottom: 8px;
 }
-.titulo-faq span{
+
+.titulo-faq span {
     font-size: 64px;
     color: black;
     font-weight: 800;
-    
+
 }
 
-.card-faq{
+.card-faq {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -38,19 +40,19 @@
     box-shadow: 0px 7px 12px 0px black;
 }
 
-.redirect{
-   padding: 0px 40px 0px;
+.redirect {
+    padding: 0px 40px 0px;
 }
 
-.card-faq span{
+.card-faq span {
     font-size: 24px;
     color: white;
     text-shadow: 3px 3px 3px black;
 }
 
-.subtitulo-faq{
+.subtitulo-faq {
     width: 100%;
-    text-align: end;
+    text-align: flex-end;
     font-size: 24px;
     color: #763B16;
     font-weight: 700;

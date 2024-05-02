@@ -2,7 +2,7 @@ import './formularioLogin.css'
 import MacacoOculos from '../../imgs/macaco-oculos-esq.png'
 import InputsLogin from '../inputsLogins/inputsLogins'
 import Botao from '../botao/botoes'
-export default function Formulario() {
+export default function Formulario(props) {
     return (
         <form className='section-formulario-login'>
 
@@ -11,36 +11,34 @@ export default function Formulario() {
             </div>
             <div className='container-formulario-login'>
                 <div className='forms-login'>
-                    
                     <InputsLogin
                         text='Nickname (Apelido)'
                         id='nickname'
-                    />
-                    <InputsLogin
-                        text='Senha da Turma'
-                        id='sobrenome'
+                        onChange={typeof props.setApelido === 'function' ? props.setApelido : undefined}
                     />
                     <InputsLogin
                         text='Senha'
-                        id='sobrenome'
+                        id='senha'
+                        onChange={typeof props.setSenha === 'function' ? props.setSenha : undefined}
                     />
                 </div>
             </div>
             <div className='buttom-login'>
-                
+
                 <Botao
-                backgroundColor= "#662E9B"
-                fontSize= "20px"
-                border= "2px solid black"
-                color= "white"
-                display= "flex"
-                align-items= "center"
-                justify-content= "center"
-                overflow= "hidden"
-                width= "240px"
-                height= "35px"
-                padding= "0px"
-                texto="Entrar"
+                    backgroundColor="#662E9B"
+                    fontSize="20px"
+                    border="2px solid black"
+                    color="white"
+                    display="flex"
+                    align-items="center"
+                    justify-content="center"
+                    overflow="hidden"
+                    width="240px"
+                    height="35px"
+                    padding="0px"
+                    texto="Entrar"
+                    onClick={props.onClick}
                 />
             </div>
 
