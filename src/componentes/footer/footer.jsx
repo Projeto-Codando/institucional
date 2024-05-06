@@ -1,14 +1,12 @@
 import React from 'react'
 import './footer.css'
 import Logo from '../../imgs/LogoAmarela.svg'
-import Background from '../../imgs/background-footer.png'
 
 export default function Footer() {
   return (
     <footer>
 
-      <div className="container-footer container-fora" >
-        <img className="img-back" src={Background} alt="Img de fundo" />
+      <div className="container-fora" >
         <div className="container-footer">
           <div className="ladoEsquerdo">
             <div className='topo'>

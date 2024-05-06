@@ -1,0 +1,29 @@
+* {
+  overflow-x: hidden;
+}
+
+.headerLogin {
+  font-size: 24px;
+  display: grid;
+  grid-template-columns: 20vw 40vw 20vw;
+  justify-content: space-between;
+  align-items: center;
+  margin: 11px 0px;
+  padding: 0px 4vw;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+}
+
+@media(max-width: 768px) {
+  .headerLogin {
+    font-size: 14px;
+  }
+}
