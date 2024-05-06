@@ -1,0 +1,16 @@
+.portalProfessor{
+    text-align: center;
+  }
+.portal{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding-left: 50px;
+    padding-top: 20px;
+    padding-bottom: 25px;
+    background-image: url(../../imgs/image\ 21.svg);
+    background-size: cover;
+    text-align: start;
+}
+
+  
