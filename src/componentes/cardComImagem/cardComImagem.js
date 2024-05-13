@@ -11,6 +11,7 @@ function CardComIMG(props) {
             </div>
             <div style={{
                 overflow: 'hidden',
+                height: '230px'
             }}>
                 <h1 style={{
                     color: props.color || 'white',

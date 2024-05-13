@@ -15,6 +15,7 @@
     height: 90vh;
     background-image: url(../../imgs/banner-verde.svg);
     background-size: cover;
+    overflow: hidden;
 }
 
 .buttom-voltar{

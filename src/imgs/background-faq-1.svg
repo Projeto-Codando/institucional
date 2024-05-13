@@ -1,17 +1,17 @@
-<svg width="1449" height="627" viewBox="0 0 1449 627" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<path d="M2 246C1218.07 370.575 1159.11 299.257 1442 246V575H2V246Z" fill="#6CC6DE"/>
-<path d="M0 -35L316.5 40L398 67.5L410 79.5L477.5 109.5H608V90.9578V-35V374H0V-35Z" fill="url(#pattern0_770_402)"/>
-<path d="M0 461.5L594 350.5L608 111V520L0 620V461.5Z" fill="url(#pattern1_770_402)"/>
-<path d="M1453 -53L599 123.464L611 425.5V520H1453V-53Z" fill="url(#pattern2_770_402)"/>
-<rect x="-1" y="162" width="314" height="280" fill="url(#pattern3_770_402)"/>
-<rect width="249" height="249" transform="matrix(-1 0 0 1 232 85)" fill="url(#pattern4_770_402)"/>
-<rect x="103" y="334" width="216" height="167" fill="url(#pattern5_770_402)"/>
-<path d="M-66 340H150V507H-66V340Z" fill="url(#pattern6_770_402)"/>
-<rect x="1216.14" y="244.255" width="401.574" height="356.526" transform="rotate(-1.31761 1216.14 244.255)" fill="url(#pattern7_770_402)"/>
-<path d="M-1 517.704C429.694 427.448 -115.427 635.469 961.489 506.194C2038.4 376.919 957.167 943 957.167 943H-1V517.704Z" fill="#949198" fill-opacity="0.8"/>
-<path d="M8 619.083C733.264 518.847 973.8 565.088 1449 619.083V1093H8V619.083Z" fill="#737275"/>
-<path d="M2.49997 510.46C631.71 421.652 100.085 615.817 894.701 771.884C1689.32 927.95 986.5 927.95 986.5 927.95L2.5 927.95L2.49997 510.46Z" fill="#737176" fill-opacity="0.8"/>
-<path d="M1452.5 901.773C804.773 991.966 1443.5 808.771 625.5 650.27C-192.5 491.77 531 491.77 531 491.77L956.5 508.27L1292 491.77L1318 534.27H1452.5V901.773Z" fill="#737176" fill-opacity="0.8"/>
+<svg width="1453" height="627" viewBox="0 0 1453 627" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<path d="M6 246C1222.07 370.575 1163.11 299.257 1446 246V575H6V246Z" fill="#6CC6DE"/>
+<path d="M4 -35L320.5 40L402 67.5L414 79.5L481.5 109.5H612V90.9578V-35V374H4V-35Z" fill="url(#pattern0_770_402)"/>
+<path d="M4 461.5L598 350.5L612 111V520L4 620V461.5Z" fill="url(#pattern1_770_402)"/>
+<path d="M1457 -53L603 123.464L615 425.5V520H1457V-53Z" fill="url(#pattern2_770_402)"/>
+<rect x="3" y="162" width="314" height="280" fill="url(#pattern3_770_402)"/>
+<rect width="249" height="249" transform="matrix(-1 0 0 1 236 85)" fill="url(#pattern4_770_402)"/>
+<rect x="107" y="334" width="216" height="167" fill="url(#pattern5_770_402)"/>
+<path d="M-62 340H154V507H-62L-62 340Z" fill="url(#pattern6_770_402)"/>
+<rect x="1220.14" y="244.255" width="401.574" height="356.526" transform="rotate(-1.31761 1220.14 244.255)" fill="url(#pattern7_770_402)"/>
+<path d="M3 517.704C433.694 427.448 -111.427 635.469 965.489 506.194C2042.4 376.919 961.167 943 961.167 943H3V517.704Z" fill="#949198" fill-opacity="0.8"/>
+<path d="M12 619.083C737.264 518.847 977.8 565.088 1453 619.083V1093H12V619.083Z" fill="#737275"/>
+<path d="M6.49997 510.46C635.71 421.652 104.085 615.817 898.701 771.884C1693.32 927.95 990.5 927.95 990.5 927.95L6.5 927.95L6.49997 510.46Z" fill="#737176" fill-opacity="0.8"/>
+<path d="M1456.5 901.773C808.773 991.966 1447.5 808.771 629.5 650.27C-188.5 491.77 535 491.77 535 491.77L960.5 508.27L1296 491.77L1322 534.27H1456.5V901.773Z" fill="#737176" fill-opacity="0.8"/>
 <defs>
 <pattern id="pattern0_770_402" patternContentUnits="objectBoundingBox" width="1" height="1">
 <use xlink:href="#image0_770_402" transform="scale(0.00165289 0.00245711)"/>
