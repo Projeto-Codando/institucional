@@ -12,7 +12,7 @@ function Portal(){
 
 
     return(
-        <div className='portalProfessor'>
+        <div className='portalProfessor' style={{overflow: 'hidden'}}>
             <div className='modalCriacao' style={{zIndex: '10'}}>
               </div>
               <Header className='container' />

@@ -1,4 +1,6 @@
 .portalProfessor{
+    overflow: hidden;
+
     text-align: center;
   }
 .portal{
