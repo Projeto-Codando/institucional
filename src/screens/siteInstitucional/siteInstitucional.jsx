@@ -51,7 +51,7 @@ function SiteInstitucional(){
           O currículo de codificação Codando promove o desenvolvimento de habilidades de
           funcionamento executivo, como resolução de problemas e planejamento, bem como
           pensamento geométrico e matemático.'
-          statusBotao="true"
+          statusBotao="false"
         />
 
         <CardComIMG
@@ -62,7 +62,7 @@ function SiteInstitucional(){
           encontrando diversão no processo de desenvolvimento de suas habilidades. Através dessa metodologia,
           ele é incentivado a explorar conceitos complexos de programação de uma maneira envolvente e cativante,
           tornando o aprendizado uma experiência dinâmica e divertida.'
-          statusBotao="true"
+          statusBotao="false"
         />
       </div>
       <div className='container' >
