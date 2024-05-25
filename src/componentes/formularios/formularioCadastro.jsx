@@ -14,12 +14,14 @@ export default function Formulario(props) {
                     <div className='nomes'>
                         <InputsLogin
                             text='Nome'
+                            type='text'
                             id='nome'
                             width='200px'
                             onChange={typeof props.setNome === 'function' ? props.setNome : undefined}
                         />
                         <InputsLogin
                             text='Sobrenome'
+                            type='text'
                             id='sobrenome'
                             width='200px'
                             onChange={typeof props.setSobrenome === 'function' ? props.setSobrenome : undefined}
@@ -27,21 +29,25 @@ export default function Formulario(props) {
                     </div>
                     <InputsLogin
                         text='Nickname'
+                        type='text'
                         id='nickname'
                         onChange={typeof props.setApelido === 'function' ? props.setApelido : undefined}
                     />
                     <InputsLogin
                         text='Senha da Turma'
+                        type='text'
                         id='senhaTurma'
                         onChange={typeof props.setSenhaTurma === 'function' ? props.setSenhaTurma : undefined}
                     />
                     <InputsLogin
                         text='Senha'
+                        type='text'
                         id='senha'
                         onChange={typeof props.setSenha === 'function' ? props.setSenha : undefined}
                     />
                     <InputsLogin
                         text='Confirmação de Senha'
+                        type='text'
                         id='confirmacaoSenha'
                         onChange={typeof props.setSenha === 'function' ? props.setSenha : undefined}
                     />

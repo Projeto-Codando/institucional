@@ -2,6 +2,7 @@
 import './cadastro.css'
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Logo from "../../imgs/Logo.svg"
 import { toast } from 'react-toastify';
 import Header from "../../componentes/headerLoginCadastro/headerLogin";
 import Formulario from "../../componentes/formularios/formularioCadastro";
@@ -44,11 +45,15 @@ function Cadastro(){
 
   return(
     <div>
-      <Header />
+      <Header
+        statusBotao1="true"
+        logo={Logo}
+        justifyContent="center"
+      />
 
       <section className='sectionBackgroundCadastro' >
             <div className='buttom-voltar'>
-                <button> &lt; Voltar </button>
+                <button onClick={() => navigate("/")}> &lt; Voltar </button>
             </div>
             <div className='container-background-cadastro' >
 
