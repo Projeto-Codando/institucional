@@ -1,0 +1,13 @@
+.navegacao {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 150px;
+    background-color: aqua;
+    border-radius: 10px 10px 0px 0px;
+}
+.navegacao label {
+    font-size: 20px;
+    font-weight: bolder;
+}
