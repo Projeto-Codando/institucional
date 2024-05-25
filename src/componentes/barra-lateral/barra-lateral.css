@@ -10,6 +10,7 @@
   overflow-x: hidden;
   display: flex;
   align-items: left;
+  z-index: 3;
   transition: all 1s ease; /* Transição da largura com duração de 0.3 segundos e função de temporização ease-in-out */
 }
 

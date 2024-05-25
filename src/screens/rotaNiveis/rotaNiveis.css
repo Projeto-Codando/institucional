@@ -1,0 +1,227 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+.press-start-2p-regular {
+    font-family: "Press Start 2P", system-ui;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.containerBemVindo {
+    height: 132px;
+    width: 100%;
+    background-color: #7CB518;
+    
+    display: flex;
+    align-items: center;
+}
+
+.cardsBemVindo {
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+    width: 1003px;
+    padding: 0px 0px 0px 120px;
+}
+
+.bemVindo {
+    display: flex;
+    justify-content: space-between;
+    width: 368px;
+    align-items: center;
+}
+
+.bemVindo span {
+    font-family: "Press Start 2P";
+    color: white;
+    font-size: 18px;
+}
+
+.bemVindo img {
+    width: 106px;
+    height: 106px;
+
+}
+
+.cardTema {
+    display: flex;
+    height: max-content;
+}
+
+.tema {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.span1 {
+    color: white;
+    font: 15px;
+}
+
+.span2 {
+    color: white;
+    font-size: 19px;
+    font-weight: bold;
+}
+
+.background-bemVindo {
+    position: absolute;
+    right: 0;
+}
+
+.botaoBemVindo{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.botaoBemVindo button{
+    width: 180px;
+    height: 41px;
+    background-color: white;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.containerRota {
+    background-image: url(../../imgs/Background-rota.png);
+    width: 100%;
+    height: 587px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.rota {
+    height: 425px;
+    width: 622px;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+}
+
+.cardNiveis2 {
+    display: flex;
+    justify-content: space-around;
+    width: 80%;
+}
+
+.cardNiveis1 {
+    display: flex;
+    flex-direction: column-reverse;
+    height: 60%;
+    justify-content: space-between;
+
+}
+
+.nivel {
+    background: #D9D9D9;
+    width: 80px;
+    height: 80px;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+.nivel span{
+    font-size: 56px;
+    color: #565656;
+    font-weight: bold;
+}
+.containerNivel {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+}
+
+.containerAula {
+    height: 440px;
+    width: 400px;
+    background-color: #F0ECEC;
+    border-radius: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.materia {
+    width: 80%;
+    height: max-content;
+    display: flex;
+    justify-content: space-between;
+}
+
+.cardAula {
+    height: 85%;
+    width: 85%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.aula {
+    color: #7CB518;
+}
+
+.tituloMateria {
+    width: max-content;
+    background-color: #7CB518;
+    color: white;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 17px;
+    padding: 1px;
+}
+
+.titulo span {
+    font-family: "Press Start 2P", system-ui;
+    font-size: 19px;
+}
+
+.subtituloAula {
+    width: 86%;
+}
+
+.subtituloAula span{
+    font-size: 21px;
+    font-weight: 600;
+}
+
+.estrelaAula {
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    gap: 7px;
+}
+
+.estrelaAula img{
+    width: 50px;
+}
+
+.estrelaAula span{
+    font-size: 31px;
+    text-align: center;
+    font-weight: 900;
+    color: #F3DE2C;
+}
+
+.botaoAula {
+    display: flex;
+    justify-content: center;
+}
+
+.botaoAula button {
+    width: 180px;
+    height: 41px;
+    background-color: #7CB518;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+

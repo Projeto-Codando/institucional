@@ -4,8 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import api from '../../api';
 import FormularioLogin from "../../componentes/formularios/formularioLogin";
-import Header from "../../componentes/header/header";
+import Header from "../../componentes/headerLoginCadastro/headerLogin";
 import './login.css'
+import Logo from "../../imgs/Logo.svg"
+
 
 function Login() {
     let navigate = useNavigate()
@@ -32,10 +34,14 @@ function Login() {
 
     return (
         <div>
-            <Header />
+            <Header 
+               statusBotao2="true"
+               logo={Logo}
+               justifyContent="center"
+            />
             <section className='sectionBackgroundLogin' >
                 <div className='buttom-voltar'>
-                    <button> &lt; Voltar </button>
+                    <button onClick={() => navigate("/")}> &lt; Voltar </button>
                 </div>
                 <div className='container-background' >
                 <FormularioLogin setApelido={setApelido} setSenha={setSenha} onClick={handleSave} />

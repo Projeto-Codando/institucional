@@ -1,0 +1,6 @@
+.sectionJogo{
+    height: 100vh;
+    background: url(../../imgs/back-banner-bananas.png);
+    display: flex;
+    flex-direction: column;
+}
