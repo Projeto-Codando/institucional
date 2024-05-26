@@ -5,6 +5,13 @@
     background-color: #F3DE2C;
 }
 
+.sectionBackgroundCadastroProfessor{
+    height: 90vh;
+    width: 100%;
+    position: relative;
+    background-color: #FFF171;
+}
+
 .container-background-cadastro{
     position: absolute;
     display: flex;
