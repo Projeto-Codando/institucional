@@ -7,8 +7,10 @@ import Cadastro from './screens/cadastro/cadastro';
 import Login from './screens/login/login';
 import LoginProfessor from './screens/login/loginProfessor';
 import PortalSala from './screens/portalSala/portalSala';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import CadastroProfessor from './screens/cadastro/cadastroProfessor';
+import Jogo from './screens/jogo/jogo'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Lobby from './screens/lobby/lobby';
 
 
 
@@ -22,6 +24,8 @@ function App() {
         <Route path='/portal' element={ <Portal />} />
         <Route path='/cadastro' element={ <Cadastro/> }/>
         <Route path='/cadastroProfessor' element={ <CadastroProfessor/> }/>
+        <Route path='/lobby' element={ <Lobby/>}/>
+        <Route path='/jogo' element={ <Jogo/>}/>
         <Route path='/portal/sala' element={ <PortalSala/> }/>
 
       </Routes>

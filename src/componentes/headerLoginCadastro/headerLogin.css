@@ -15,6 +15,7 @@
 .buttons {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .logo {
@@ -22,6 +23,15 @@
   justify-content: center;
 }
 
+.estrela span{
+font-weight: bold;
+}
+.estrela img{
+  margin-right: 6px;
+}
+.serie span{
+  font-weight: bold;
+  }
 @media(max-width: 768px) {
   .headerLogin {
     font-size: 14px;

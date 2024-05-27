@@ -14,11 +14,14 @@ export default function Formulario(props) {
                     <InputsLogin
                         text='Nickname (Apelido)'
                         id='nickname'
+                        width='97%'
                         onChange={typeof props.setApelido === 'function' ? props.setApelido : undefined}
                     />
                     <InputsLogin
                         text='Senha'
                         id='senha'
+                        type='password'
+                        width='97%'
                         onChange={typeof props.setSenha === 'function' ? props.setSenha : undefined}
                     />
                 </div>
