@@ -1,6 +1,21 @@
 .sectionJogo{
-    height: 100vh;
+    height: 719px;
     background: url(../../imgs/back-banner-bananas.png);
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
 }
+
+.niveisJogo{
+    display: flex;
+    width: 90%;
+}
+
+.containerJogo{
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+}
+
+

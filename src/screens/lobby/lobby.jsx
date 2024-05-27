@@ -1,5 +1,4 @@
-import './rotaNiveis.css'
-import React, { useState } from 'react';
+import './lobby.css'
 import Header from "../../componentes/headerLoginCadastro/headerLogin";
 import Logo from "../../imgs/verde-logo.svg"
 import Avatar from "../../imgs/img-avatar.png"
@@ -8,7 +7,7 @@ import Estrela from '../../imgs/estrela.png'
 import Start from '../../imgs/start.png'
 
 
-function RotasNiveis() {
+function Lobby() {
 
     return (
         <div className='rotaNiveis'>
@@ -76,4 +75,4 @@ function RotasNiveis() {
 
 }
 
-export default RotasNiveis; 
+export default Lobby; 

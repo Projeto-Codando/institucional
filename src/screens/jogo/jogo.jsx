@@ -2,8 +2,11 @@ import './jogo.css'
 import React, { useState } from 'react';
 import Header from "../../componentes/headerLoginCadastro/headerLogin";
 import Logo from "../../imgs/logo-roxo.png"
-function Jogo() {
+import Quiz from '../../componentes/quiz/quiz';
+import TrianguloE from '../../imgs/triangulo-esquerda.png'
+import TrianguloD from '../../imgs/triangulo-direita.png'
 
+function Jogo() {
     return (
         <div className='jogo'>
             <Header
@@ -14,15 +17,22 @@ function Jogo() {
             />
             <div className='sectionJogo'>
                 <div className='niveisJogo'>
-                    
+                    <div>
+                        <img src={TrianguloD} alt="Triangulo esquerda" />
+                        <div></div>
+                    </div>
                 </div>
                 <div className='containerJogo'>
-                    
+                    <Quiz/>
+                    <div className='telaQuiz'>  
+                        <div className='imagemQuiz'>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     )
-    
+
 
 }
 

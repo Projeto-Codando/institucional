@@ -11,6 +11,7 @@ export default function Formulario(props) {
             </div>
             <div className='container-formulario'>
                 <div className='forms'>
+                    
                     <div className='nomes'>
                         <InputsLogin
                             text='Nome'
@@ -30,24 +31,28 @@ export default function Formulario(props) {
                     <InputsLogin
                         text='Nickname'
                         type='text'
+                        width='97%'
                         id='nickname'
                         onChange={typeof props.setApelido === 'function' ? props.setApelido : undefined}
                     />
                     <InputsLogin
                         text='Senha da Turma'
                         type='text'
+                        width='97%'
                         id='senhaTurma'
                         onChange={typeof props.setSenhaTurma === 'function' ? props.setSenhaTurma : undefined}
                     />
                     <InputsLogin
                         text='Senha'
-                        type='text'
+                        type='password'
                         id='senha'
+                        width='97%'
                         onChange={typeof props.setSenha === 'function' ? props.setSenha : undefined}
                     />
                     <InputsLogin
                         text='Confirmação de Senha'
-                        type='text'
+                        type='password'
+                        width='97%'
                         id='confirmacaoSenha'
                         onChange={typeof props.setSenha === 'function' ? props.setSenha : undefined}
                     />
@@ -68,6 +73,7 @@ export default function Formulario(props) {
                 height= "35px"
                 padding= "0px"
                 texto="Cadastrar"
+                type="submit"
                 onClick={props.onClick}
                 />
             </div>

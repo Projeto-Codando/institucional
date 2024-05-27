@@ -7,8 +7,9 @@ import { toast } from 'react-toastify';
 import Header from "../../componentes/headerLoginCadastro/headerLogin";
 import Formulario from "../../componentes/formularios/formularioCadastro";
 import api from '../../api';
+import * as Yup from 'yup';
 
-function Cadastro(){
+function Cadastro() {
   let navigate = useNavigate()
 
   const [nome, setNome] = useState("")
@@ -17,33 +18,51 @@ function Cadastro(){
   const [senhaTurma, setSenhaTurma] = useState("")
   const [senha, setSenha] = useState("")
 
-  const handleSavePost = (event) => {
-    event.preventDefault();
-    alert("Clicou no botão")
-    const objetoAdicionado = {
-        nome,
-        sobrenome,
-        apelido,
-        senhaTurma,
-        senha,
-        "status": "ativo"
-    }
-    api.post(`/alunos`, objetoAdicionado, {
-      headers: {
-        'Authorization': `Bearer ${sessionStorage.getItem("token")}`
-      }
-    })
-    .then((json) => {
-        toast.success("Login efetuado com sucesso")
-        sessionStorage.setItem("token", json.data.token)
-        console.info("A requisição foi um sucesso")
-        navigate("/")
-    }).catch(() => {
-        toast.error("Ocorreu um erro ao tentar realizar o login, por favor, tente novamente.");
-    })
-  }
+  const validadionSchema = Yup.object().shape({
+    nome: Yup.string('Nome inválido').matches(/^[A-Za-zÀ-ÿ]+$/, 'Nome inválido').required('Todos os campos devem estar preenchidos'),
+    sobrenome: Yup.string('Sobrenome inválido').matches(/^[A-Za-zÀ-ÿ]+$/, 'Sobrenome inválido').required('Todos os campos devem estar preenchidos'),
+    apelido: Yup.string('Apelido inválido').required('Todos os campos devem estar preenchidos'),
+    senha: Yup.string().required('Todos os campos devem estar preenchidos').min(8, 'No mínimo 8 dígitos')
+  });
 
-  return(
+  const handleSavePost = async (event) => {
+    event.preventDefault();
+    console.log("Clicou no botão");
+
+    const objetoAdicionado = {
+      nome,
+      sobrenome,
+      apelido,
+      senhaTurma,
+      senha,
+      "status": "ativo"
+    }
+
+    try {
+      await validadionSchema.validate(objetoAdicionado, { abortEarly: false });
+      console.log("Dados válidos:", objetoAdicionado);
+
+      api.post(`/alunos`, objetoAdicionado)
+        .then((json) => {
+          console.log(json)
+          toast.success("Cadastro realizado com sucesso!")
+          sessionStorage.setItem("token", json.data.token)
+  
+          navigate("/lobby") // Adicionar rota lobby
+        }).catch(() => {
+          toast.error("Ocorreu um erro no seu cadastro !");
+        });
+
+    } catch (error) {
+      if (error instanceof Yup.ValidationError) {
+        console.error("Erros de validação:");
+        error.inner.forEach((err) => {
+          console.error(err.message);
+        });
+      }
+    }
+  }
+  return (
     <div>
       <Header
         statusBotao1="true"
@@ -52,15 +71,13 @@ function Cadastro(){
       />
 
       <section className='sectionBackgroundCadastro' >
-            <div className='buttom-voltar'>
-                <button onClick={() => navigate("/")}> &lt; Voltar </button>
-            </div>
-            <div className='container-background-cadastro' >
-
-                <Formulario onClick={handleSavePost} setNome={setNome} setSobrenome={setSobrenome} setApelido={setApelido} setSenhaTurma={setSenhaTurma} setSenha={setSenha}/>
-
-            </div>
-        </section >
+        <div className='buttom-voltar'>
+          <button onClick={() => navigate("/")}> &lt; Voltar </button>
+        </div>
+        <div className='container-background-cadastro'>
+          <Formulario onClick={handleSavePost} setNome={setNome} setSobrenome={setSobrenome} setApelido={setApelido} setSenhaTurma={setSenhaTurma} setSenha={setSenha} />
+        </div>
+      </section >
 
     </div>
 
