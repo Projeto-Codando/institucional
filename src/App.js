@@ -24,7 +24,6 @@ function App() {
         <Route path='/lobby' element={ <Lobby/>}/>
         <Route path='/jogo' element={ <Jogo/>}/>
         <Route path='/portal/sala' element={ <PortalSala/> }/>
-
       </Routes>
     </BrowserRouter>
   )

@@ -9,7 +9,6 @@ import { useNavigate } from 'react-router-dom'
 export default function HeaderLogin(props) {
     const navigate = useNavigate();
     return (
-
         <header className="headerLogin">
             <BarraLateral />
             <div className="logo">
