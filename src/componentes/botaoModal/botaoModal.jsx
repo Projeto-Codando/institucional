@@ -4,7 +4,7 @@ export default function InputsLogin(props) {
 
     return (
         <div class="botao-modal">
-            <button for={props.text}>{props.text}</button>
+            <button onClick={props.onClick} for={props.text}>{props.text}</button>
     
         </div>
     )

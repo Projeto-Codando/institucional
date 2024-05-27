@@ -1,9 +1,19 @@
-import './modalCriacao.css'
-import Xzinho from '../../imgs/xModal.svg'
-import Inputs from '../inputsModal/inputsModal'
-import Botao from '../botaoModal/botaoModal'
-import { height, width } from '@fortawesome/free-brands-svg-icons/fa42Group'
-function modalCriacao({ isOpen }) {
+import './modalCriacao.css';
+import Xzinho from '../../imgs/xModal.svg';
+import Inputs from '../inputsModal/inputsModal';
+import Botao from '../botaoModal/botaoModal';
+import { Formik, Form } from 'formik';
+import * as Yup from 'yup';
+import { ErrorMessage } from 'formik';
+
+const validationSchema = Yup.object().shape({
+    nomeTurma: Yup.string().required('Campo Obrigatório'),
+    escolaridade: Yup.string().required('Campo Obrigatório'),
+    qtdAlunos: Yup.string().required('Campo Obrigatório')
+
+ })
+
+function modalCriacao({ isOpen, onClose, ...props }) {
     const BACKGROUND_STYLE = {
         position: 'fixed',
         top: '0',
@@ -12,7 +22,7 @@ function modalCriacao({ isOpen }) {
         right: '0',
         backgroundColor: 'rgb(0,0,0, 0.7)',
         zIndex: '1000'
-    }
+    };
     const MODAL_STYLE = {
         display: 'flex',
         position: 'fixed',
@@ -24,38 +34,55 @@ function modalCriacao({ isOpen }) {
         backgroundColor: '#fff',
         borderRadius: '10px',
         flexDirection: 'column'
+    };
 
-    }
     if (isOpen) {
         return (
             <div className='modalCriacao'>
                 <div style={BACKGROUND_STYLE}>
                     <div style={MODAL_STYLE}>
                         <div style={{ display: 'flex', justifyContent: 'end', padding: '15px', paddingBottom: '0px' }}>
-                            <img src={Xzinho} onClick={''} style={{ width: '40px', cursor: 'pointer' }}></img>
+                            <img src={Xzinho} onClick={onClose} style={{ width: '40px', cursor: 'pointer' }} alt="close"></img>
                         </div>
                         <span style={{ color: '#476334', fontSize: '30px', textShadow: 'none', fontWeight: 'bold', marginTop: '0px' }}>Criar uma turma</span>
-                            <Inputs
-                                text='Nome da Turma'
-                                id='nomeTurma'/>
-                        
-                            <Inputs
-                                text='Escolaridade'
-                                id='escolaridade'/>
-                    
-                            <Inputs
-                            text='Quantidade de Alunos'
-                            id='qtdAlunos'/>
-                            <Botao
-                            text='Criar turma'
-                            id='criarTurma' />
-                        
+                        <Formik
+                            initialValues={{ nomeTurma: '', escolaridade: '', qtdAlunos: '' }}
+                            onSubmit={values => {
+                                console.log(values);
+                            }}
+                            validationSchema={validationSchema}
+                        >
+                            {({ handleSubmit }) => (
+                                <Form onSubmit={handleSubmit}>
+                                    <Inputs
+                                        text='Nome da Turma'
+                                        id='nomeTurma'
+                                        onChange={typeof props.setNomeTurma === 'function' ? props.setNomeTurma : undefined}
+                                    />
+                                    <Inputs
+                                        text='Escolaridade'
+                                        id='escolaridade'
+                                        onChange={typeof props.setEscolaridade === 'function' ? props.setEscolaridade : undefined}
+                                    />
+                                    <Inputs
+                                        text='Quantidade de Alunos'
+                                        id='qtdAlunos'
+                                        onChange={typeof props.setQtdAlunos === 'function' ? props.setQtdAlunos : undefined}
+                                    />
+                                    <Botao
+                                        text='Criar turma'
+                                        id='criarTurma'
+                                        onClick={props.onClick}
+                                    />
+                                </Form>
+                            )}
+                        </Formik>
                     </div>
                 </div>
-
-            </div>)
+            </div>
+        );
     }
-    return null
+    return null;
 }
 
 export default modalCriacao;
