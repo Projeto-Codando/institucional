@@ -2,13 +2,16 @@ import './formularioCadastro.css'
 import MacacoOculos from '../../imgs/macaco-professorR.png'
 import InputsLogin from '../inputsLogins/inputsLogins'
 import Botao from '../botao/botoes'
+import SubtituloForm from '../subtituloForm/subtituloForm'
 export default function Formulario(props) {
     return (
         <form className='section-formulario'>
 
-            <div className='subtitulo'>
-                <span>Detalhes da conta</span>
-            </div>
+            <SubtituloForm 
+            checked={true}
+            navigateProfessor='cadastroProfessor'
+            navigateAluno='cadastro'
+            />
             <div className='container-formulario'>
                 <div className='forms'>
                     <div className='nomes'>
@@ -45,19 +48,19 @@ export default function Formulario(props) {
             <div className='buttom'>
 
                 <Botao
-                backgroundColor= "#662E9B"
-                fontSize= "20px"
-                border= "2px solid black"
-                color= "white"
-                display= "flex"
-                align-items= "center"
-                justify-content= "center"
-                overflow= "hidden"
-                width= "240px"
-                height= "35px"
-                padding= "0px"
-                texto="Cadastrar"
-                onClick={props.onClick}
+                    backgroundColor="#662E9B"
+                    fontSize="20px"
+                    border="2px solid black"
+                    color="white"
+                    display="flex"
+                    align-items="center"
+                    justify-content="center"
+                    overflow="hidden"
+                    width="240px"
+                    height="35px"
+                    padding="0px"
+                    texto="Cadastrar"
+                    onClick={props.onClick}
                 />
             </div>
 

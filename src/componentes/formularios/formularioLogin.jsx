@@ -2,13 +2,15 @@ import './formularioLogin.css'
 import MacacoOculos from '../../imgs/macaco-oculos-esq.png'
 import InputsLogin from '../inputsLogins/inputsLogins'
 import Botao from '../botao/botoes'
+import SubtituloForm from '../subtituloForm/subtituloForm'
 export default function Formulario(props) {
     return (
         <form className='section-formulario-login'>
-
-            <div className='subtitulo-login'>
-                <span>Detalhes da conta</span>
-            </div>
+            <SubtituloForm
+            checked={false}
+            navigateProfessor='loginProfessor'
+            navigateAluno='login'
+            />
             <div className='container-formulario-login'>
                 <div className='forms-login'>
                     <InputsLogin
