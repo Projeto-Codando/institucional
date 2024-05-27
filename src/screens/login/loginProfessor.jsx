@@ -4,7 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import api from '../../api';
 import FormularioLoginProfessor from "../../componentes/formularios/formularioLoginProfessor";
-import Header from "../../componentes/header/header";
+import Header from "../../componentes/headerLoginCadastro/headerLogin";
+import Logo from "../../imgs/Logo.svg";
+import * as Yup from 'yup';
 import './login.css'
 
 function LoginProfessor() {
@@ -12,33 +14,58 @@ function LoginProfessor() {
     const [email, setEmail] = useState("")
     const [senha, setSenha] = useState("")
 
-    const handleSave = () => {
+    const validadionSchema = Yup.object().shape({
+        email: Yup.string('E-mail invalido').email('E-mail invalido').required('Todos os campos devem estar preenchidos'),
+        senha: Yup.string().required('Todos os campos devem estar preenchidos').min(8, 'Insira 8 ou mais caractéres')
+    });
+
+    const handleSave = async (event) => {
         event.preventDefault();
         console.log(email, senha + "Teste usuarios")
-        alert("Clicou no botão")
         const objetoAdicionado = {
             email,
             senha
         }
-        api.post(`/professores/login`, objetoAdicionado)
-        .then((json) => {
-            toast.success("Login efetuado com sucesso")
-            sessionStorage.setItem("token", json.data.token)
-            navigate("/")
-        }).catch(() => {
-            toast.error("Ocorreu um erro ao tentar realizar o login, por favor, tente novamente.");
-        })
+
+        try {
+            await validadionSchema.validate(objetoAdicionado, { abortEarly: false });
+            console.log("Dados válidos:", objetoAdicionado);
+
+            api.post(`/professores/login`, objetoAdicionado)
+                .then((json) => {
+                    toast.success("Login realizado com sucesso")
+                    sessionStorage.setItem("token", json.data.token)
+                    navigate("/")
+                }).catch(() => {
+                    toast.error("Ocorreu um erro ao tentar realizar o login, por favor, tente novamente.");
+                })
+
+        } catch (error) {
+            if (error instanceof Yup.ValidationError) {
+                console.error("Erros de validação:");
+                error.inner.forEach((err) => {
+                    console.error(err.message);
+                    toast.error(err.message);
+                });
+            }
+        }
+
+
     }
 
     return (
         <div>
-            <Header />
+            <Header
+                statusBotao2="true"
+                logo={Logo}
+                justifyContent="center"
+            />
             <section className='sectionBackgroundLoginProfessor' >
                 <div className='buttom-voltar'>
                     <button> &lt; Voltar </button>
                 </div>
                 <div className='container-backgroundProfessor' >
-                <FormularioLoginProfessor setEmail={setEmail} setSenha={setSenha} onClick={handleSave} />
+                    <FormularioLoginProfessor setEmail={setEmail} setSenha={setSenha} onClick={handleSave} />
                 </div>
             </section >
         </div>

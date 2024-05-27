@@ -22,7 +22,7 @@ function Cadastro() {
     nome: Yup.string('Nome inválido').matches(/^[A-Za-zÀ-ÿ]+$/, 'Nome inválido').required('Todos os campos devem estar preenchidos'),
     sobrenome: Yup.string('Sobrenome inválido').matches(/^[A-Za-zÀ-ÿ]+$/, 'Sobrenome inválido').required('Todos os campos devem estar preenchidos'),
     apelido: Yup.string('Apelido inválido').required('Todos os campos devem estar preenchidos'),
-    senha: Yup.string().required('Todos os campos devem estar preenchidos').min(8, 'No mínimo 8 dígitos')
+    senha: Yup.string().required('Todos os campos devem estar preenchidos').min(8, 'Insira 8 ou mais caractéres')
   });
 
   const handleSavePost = async (event) => {
@@ -50,7 +50,7 @@ function Cadastro() {
   
           navigate("/lobby") // Adicionar rota lobby
         }).catch(() => {
-          toast.error("Ocorreu um erro no seu cadastro !");
+          console.log("Ocorreu um erro no seu cadastro!");
         });
 
     } catch (error) {
@@ -58,6 +58,7 @@ function Cadastro() {
         console.error("Erros de validação:");
         error.inner.forEach((err) => {
           console.error(err.message);
+          toast.error(err.message);
         });
       }
     }
