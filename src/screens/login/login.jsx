@@ -16,19 +16,18 @@ function Login() {
 
     const validadionSchema = Yup.object().shape({
         apelido: Yup.string('Apelido inválido').required('Todos os campos devem estar preenchidos'),
-        senha: Yup.string().required('Todos os campos devem estar preenchidos').min(8, 'No mínimo 8 dígitos')
+        senha: Yup.string().required('Todos os campos devem estar preenchidos').min(8, 'Insira 8 ou mais caractéres')
     });
 
     const handleSave = async (event) => {
         event.preventDefault();
-        alert("Clicou no botão")
-
+    
         const objetoAdicionado = {
             apelido,
             senha
         }
         try {
-            await validadionSchema.validate(objetoAdicionado, { abortEarly: false });
+            await validadionSchema.validate(objetoAdicionado, {     abortEarly: false });
             console.log("Dados válidos:", objetoAdicionado);
 
             api.post(`/alunos/login`, objetoAdicionado)
@@ -45,6 +44,7 @@ function Login() {
                 console.error("Erros de validação:");
                 error.inner.forEach((err) => {
                     console.error(err.message);
+                    toast.error(err.message);
                 });
             }
         }

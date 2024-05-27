@@ -6,6 +6,8 @@ import { toast } from 'react-toastify';
 import Header from "../../componentes/headerLoginCadastro/headerLogin";
 import Formulario from "../../componentes/formularios/formularioCadastroProfessor";
 import api from '../../api';
+import Logo from "../../imgs/Logo.svg";
+import * as Yup from 'yup';
 
 function CadastroProfessor(){
   let navigate = useNavigate()
@@ -16,9 +18,16 @@ function CadastroProfessor(){
   const [senhaTurma, setSenhaTurma] = useState("")
   const [senha, setSenha] = useState("")
 
-  const handleSavePost = (event) => {
+  const validadionSchema = Yup.object().shape({
+    nome: Yup.string('Nome inválido').matches(/^[A-Za-zÀ-ÿ]+$/, 'Nome inválido').required('Todos os campos devem estar preenchidos'),
+    email: Yup.string('E-mail invalido').email('E-mail invalido').required('Todos os campos devem estar preenchidos'),
+    sobrenome: Yup.string('Sobrenome inválido').matches(/^[A-Za-zÀ-ÿ]+$/, 'Sobrenome inválido').required('Todos os campos devem estar preenchidos'),
+    apelido: Yup.string('Apelido inválido').required('Todos os campos devem estar preenchidos'),
+    senha: Yup.string().required('Todos os campos devem estar preenchidos').min(8, 'Insira 8 ou mais caractéres')
+  });
+
+  const handleSavePost = async (event) => {
     event.preventDefault();
-    alert("Clicou no botão")
     const objetoAdicionado = {
         nome,
         sobrenome,
@@ -27,24 +36,44 @@ function CadastroProfessor(){
         senha,
         "status": "ativo"
     }
-    api.post(`/alunos`, objetoAdicionado, {
-      headers: {
-        'Authorization': `Bearer ${sessionStorage.getItem("token")}`
+
+    try {
+      await validadionSchema.validate(objetoAdicionado, { abortEarly: false });
+      console.log("Dados válidos:", objetoAdicionado);
+
+      api.post(`/alunos`, objetoAdicionado, {
+        headers: {
+          'Authorization': `Bearer ${sessionStorage.getItem("token")}`
+        }
+      })
+      .then((json) => {
+          toast.success("Cadastro realizado com sucesso!")
+          sessionStorage.setItem("token", json.data.token)
+          console.info("A requisição foi um sucesso")
+          navigate("/")
+      }).catch(() => {
+          console.log("Ocorreu um erro ao tentar realizar o login, por favor, tente novamente.");
+      })
+
+    } catch (error) {
+      if (error instanceof Yup.ValidationError) {
+        console.error("Erros de validação:");
+        error.inner.forEach((err) => {
+          console.error(err.message);
+          toast.error(err.message);
+        });
       }
-    })
-    .then((json) => {
-        toast.success("Login efetuado com sucesso")
-        sessionStorage.setItem("token", json.data.token)
-        console.info("A requisição foi um sucesso")
-        navigate("/")
-    }).catch(() => {
-        toast.error("Ocorreu um erro ao tentar realizar o login, por favor, tente novamente.");
-    })
+    }
+
   }
 
   return(
     <div>
-      <Header />
+      <Header 
+      statusBotao1="true"
+      logo={Logo}
+      justifyContent="center"
+      />
 
       <section className='sectionBackgroundCadastroProfessor' >
             <div className='buttom-voltar'>

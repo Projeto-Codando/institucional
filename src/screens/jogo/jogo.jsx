@@ -17,10 +17,9 @@ function Jogo() {
             />
             <div className='sectionJogo'>
                 <div className='niveisJogo'>
-                    <div>
                         <img src={TrianguloD} alt="Triangulo esquerda" />
                         <div></div>
-                    </div>
+                        <img src={TrianguloE} alt="Triangulo direita" />
                 </div>
                 <div className='containerJogo'>
                     <Quiz/>
