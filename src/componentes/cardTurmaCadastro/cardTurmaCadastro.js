@@ -37,7 +37,7 @@ function CardTurmaCadastro(props) {
             onClose={closeModal}
             setNomeTurma={props.setNomeTurma}
             setEscolaridade={props.setEscolaridade}
-            setQtdAlunos={props.setQtdAlunos}
+            setSenhaTurma={props.setSenhaTurma}
             onClick={props.onClick}
           />
         </div>

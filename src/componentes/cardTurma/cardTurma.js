@@ -5,11 +5,10 @@ import SerieImg from '../../imgs/Serie.svg';
 import QtdAlunosImg from '../../imgs/qtdAlunos.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsis } from '@fortawesome/free-solid-svg-icons';
-import ModalEdicao from '../modalEdicao/modalEdicao.js'
+import ModalCriacao from '../modalCriacao/modalCriacao';  // Atualize este import
 
-
-function CardTurma(props) {
-    const [openModal, setOpenModal] = useState(false)
+function CardTurma({ turma, serie, qtdAlunos, setNomeTurma, setEscolaridade, setSenhaTurma, onClick, configCardTurma, index, setEditingTurmaIndex }) {
+    const [openModal, setOpenModal] = useState(false);
     const [menuAberto, setMenuAberto] = useState(false);
     const [cardVisivel, setCardVisivel] = useState(true);
 
@@ -22,11 +21,11 @@ function CardTurma(props) {
     };
 
     const cardTurmaStyle = {
-        overflow: props.configCardTurma.overflow,
-        backgroundColor: props.configCardTurma.backgroundColor,
-        padding: props.configCardTurma.padding,
-        width: props.configCardTurma.width,
-        color: props.configCardTurma.color,
+        overflow: configCardTurma.overflow,
+        backgroundColor: configCardTurma.backgroundColor,
+        padding: configCardTurma.padding,
+        width: configCardTurma.width,
+        color: configCardTurma.color,
         position: 'relative',
         zIndex: '2',
         display: cardVisivel ? 'block' : 'none',
@@ -47,33 +46,48 @@ function CardTurma(props) {
         width: '150px',
     };
 
+    const handleEdit = () => {
+        setNomeTurma(turma);
+        setEscolaridade(serie.replace('ª Ano', ''));
+        setSenhaTurma(''); // Supondo que você não exibe a senha; se necessário, adicione aqui
+        setEditingTurmaIndex(index);
+        setOpenModal(true);
+    };
+
     return (
         <div className='cardTurma' style={cardTurmaStyle}>
-              <ModalEdicao isOpen={openModal} setModalOpen={() => setOpenModal(!openModal)}/>
+            <ModalCriacao
+                isOpen={openModal}
+                onClose={() => setOpenModal(false)}
+                setNomeTurma={setNomeTurma}
+                setEscolaridade={setEscolaridade}
+                setSenhaTurma={setSenhaTurma}
+                onClick={onClick}
+                modalTitle="Editar Turma"
+                buttonText="Salvar"
+            />
             <div className='reticencias' style={{ display: 'flex', justifyContent: 'end', paddingRight: '50px', paddingTop: '20px' }}>
                 <FontAwesomeIcon icon={faEllipsis} style={{ height: '30px', cursor: 'pointer' }} onClick={toggleMenu} />
                 {menuAberto && (
                     <div className='menuOpcoes' style={menuStyle}>
-                        <div style={{ height: '30px', cursor: 'pointer' }} onClick={() => setOpenModal(true)} className='opcaoMenu'>Editar</div>
+                        <div style={{ height: '30px', cursor: 'pointer' }} onClick={handleEdit} className='opcaoMenu'>Editar</div>
                         <div style={{ padding: '0', height: '1px', width: '100%', backgroundColor: 'rgba(000, 000, 000, 0.5)' }} className='linha'></div>
                         <div style={{ height: '30px', cursor: 'pointer' }} className='opcaoMenu' onClick={arquivarCard}>Arquivar</div>
-                      
                     </div>
-                    
                 )}
             </div>
             <div className="imagemCardTurma" style={{ borderRadius: '20px' }}>
                 <img src={TurmaImg1} alt='Turma' />
             </div>
             <div className='textoCardTurma' style={{ fontWeight: 'Bold', fontSize: '30px', display: 'flex', flexDirection: 'column' }}>
-                {props.turma}
+                {turma}
                 <div className='serie' style={{ display: 'flex', justifyContent: 'center', gap: '10px' }}>
                     <img src={SerieImg} alt='Série' />
-                    {props.serie}
+                    {serie}
                 </div>
                 <div className='qtdAlunos' style={{ display: 'flex', justifyContent: 'center', gap: '10px' }}>
                     <img src={QtdAlunosImg} alt='Quantidade de Alunos' />
-                    {props.qtdAlunos}
+                    {qtdAlunos}
                 </div>
             </div>
         </div>

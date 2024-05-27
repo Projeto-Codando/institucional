@@ -1,12 +1,15 @@
-import './inputsModal.css'
+import './inputsModal.css';
 
 export default function InputsModal(props) {
-
-    return (
-        <div class="inputs">
-            <label for={props.text}>{props.text}</label>
-            <input type="text" id={props.id}
-            />
-        </div>
-    )
+  return (
+    <div className="inputs">
+      <label htmlFor={props.text}>{props.text}</label>
+      <input
+        type="text"
+        id={props.id}
+        value={props.value}
+        onChange={props.onChange}
+      />
+    </div>
+  );
 }

@@ -5,30 +5,53 @@ import Ajuda from '../../componentes/ajuda/ajuda';
 import { useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
 import './portalProfessor.css';
+import * as Yup from 'yup';
+import { ErrorMessage } from 'formik';
 
+const validationSchema = Yup.object().shape({
+    nomeTurma: Yup.string().required('Campo Obrigatório'),
+    escolaridade: Yup.string().required('Campo Obrigatório'),
+    senhaTurma: Yup.string().required('Campo Obrigatório').min(6, 'No mínimo 6 digitos da senha da Turma!')
+
+});
 
 function Portal() {
   let navigate = useNavigate();
 
   const [nomeTurma, setNomeTurma] = useState('');
   const [escolaridade, setEscolaridade] = useState('');
-  const [qtdAlunos, setQtdAlunos] = useState('');
+  const [senhaTurma, setSenhaTurma] = useState('');
   const [turmas, setTurmas] = useState([]);
 
-  const handleSavePost = () => {
+  const handleSavePost = async (event) => {
+    event.preventDefault();
+    console.log("Clicou no botão");
+
     const novaTurma = {
       nomeTurma,
       escolaridade,
-      qtdAlunos,
+      senhaTurma,
     };
 
-    setTurmas([...turmas, novaTurma]);
-    alert("Clicou no botão")
-    console.log(turmas)
+    try {
+      await validationSchema.validate(novaTurma, {abortEarly: false});
+      console.log("Dados válidos:", novaTurma);
+   
+      setTurmas([...turmas, novaTurma]);
+      console.log(turmas)
 
-    setNomeTurma('');
-    setEscolaridade('');
-    setQtdAlunos('');
+      setNomeTurma('');
+      setEscolaridade('');
+      setSenhaTurma('');
+  
+    } catch (error) {
+      if (error instanceof Yup.ValidationError) {
+        console.error("Erros de validação:");
+        error.inner.forEach((err) => {
+          console.error(err.message);
+        })
+      }
+    }
   };
 
   return (
@@ -41,7 +64,7 @@ function Portal() {
             onClick={handleSavePost}
             setNomeTurma={setNomeTurma}
             setEscolaridade={setEscolaridade}
-            setQtdAlunos={setQtdAlunos}
+            setSenhaTurma={setSenhaTurma}
             text="Criar turma"
             configCardTurmaCadastro={{
               backgroundColor: '#FFFFFF99',
@@ -55,7 +78,7 @@ function Portal() {
               key={index}
               turma={turma.nomeTurma}
               serie={`${turma.escolaridade}ª Ano`}
-              qtdAlunos={`${turma.qtdAlunos} Alunos`}
+              qtdAlunos={`${turma.qtdAlunosn || 0} Alunos`}
               configCardTurma={{
                 backgroundColor: '#FFFFFF99',
                 padding: '3px',
