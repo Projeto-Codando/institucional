@@ -49,6 +49,7 @@ function Portal() {
         console.error("Erros de validação:");
         error.inner.forEach((err) => {
           console.error(err.message);
+          
         })
       }
     }
