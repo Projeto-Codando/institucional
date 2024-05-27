@@ -1,0 +1,55 @@
+.progresso {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+.aulas {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60%;
+}
+.nomesLabels {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+
+}
+.nomesLabels p {
+    font-size: 20px;
+    font-weight: bold;
+}
+.barraVertical {
+    height: 30px;
+    width: 1.5px;
+    background-color: #9E6AE1;
+}
+.barraHorizontal {
+    height: 1px;
+    width: 80%;
+    background-color: #9E6AE1;
+}
+.alertas {
+    margin-top: 20px;
+    margin-left: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #FEFFFE;
+    width: 30%;
+    height: 90%;
+    border: solid 2px #476334;
+    border-radius: 10px ;
+    justify-content: start;
+    gap: 20px;
+}
+.alertas h1 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: black;
+    text-shadow: none;
+}
+.alertas img {
+    width: 300px;
+}

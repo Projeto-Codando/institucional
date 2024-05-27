@@ -1,0 +1,38 @@
+.qtdConclusao img {
+    height: 25px;
+
+}
+.qtdConclusao {
+    margin-left: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+.detalhesAula {
+    width: 75%;
+    justify-content: start;
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+
+
+}
+.detalhesAula p {
+    font-size: 20px;
+}
+.mediaPoints {
+    margin-left: 130px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+
+
+
+}
+.mediaPoints img {
+    height: 15px;
+
+}

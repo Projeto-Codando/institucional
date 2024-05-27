@@ -4,10 +4,12 @@
     align-items: center;
     height: 40px;
     width: 150px;
-    background-color: aqua;
+    background-color: #82502F;
     border-radius: 10px 10px 0px 0px;
+    border: solid 2px #476334;
 }
 .navegacao label {
+    color: #ffff;
     font-size: 20px;
     font-weight: bolder;
 }
