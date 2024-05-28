@@ -2,6 +2,7 @@ import Botao from '../botao/botoes.js'
 import './cardComImagem.css'
 
 function CardComIMG(props) {
+    const  cadastroPath = `/${props.cadastroPath}`;
     return (
         <div className="cardComImg" style={{
             justifyContent: 'space-evenly',
@@ -30,7 +31,7 @@ function CardComIMG(props) {
                     fontSize="20px"
                     padding="20px"
                     onClick={() => {
-                        window.location.href = "cadastro.html"
+                        window.location.href = cadastroPath;
                     }}
                 />
             )}

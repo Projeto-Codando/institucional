@@ -28,7 +28,7 @@ function SiteInstitucional() {
                                 envolvente e inspirador, promovendo uma revolução na forma como a tecnologia é incorporada à educação."
                         configCard={{
                             backgroundColor: '#662E9B',
-                            padding: '3vw', 
+                            padding: '3vw',
                             width: '18vw',
                             color: 'white'
                         }}
@@ -46,6 +46,7 @@ function SiteInstitucional() {
                     alignItems: 'center',
                     display: 'flex',
                     flexDirection: 'column',
+                    cadastroPath: 'cadastroProfessor'
                 }}
                     img={imgProf}
                     alt="Imagem professor ensinando os alunos"
@@ -55,6 +56,7 @@ function SiteInstitucional() {
                                funcionamento executivo, como resolução de problemas e planejamento, bem como
                                pensamento geométrico e matemático.'
                     statusBotao="true"
+                    
                 />
                 <CardComIMG
                     img={imgAluno}
@@ -66,6 +68,7 @@ function SiteInstitucional() {
           ele é incentivado a explorar conceitos complexos de programação de uma maneira envolvente e cativante,
           tornando o aprendizado uma experiência dinâmica e divertida.'
                     statusBotao="true"
+                    cadastroPath= 'cadastroProfessor'
                 />
             </div>
             <div className='container'>
@@ -99,9 +102,9 @@ function SiteInstitucional() {
                     descricao="As crianças aprendem a programar em um ambiente envolvente e gratificante, com elementos de jogos que tornam a experiência educacional estimulante."
                 />
             </div>
-            <SobreProjeto/>
-            <Faq/>
-            <Footer/>
+            <SobreProjeto />
+            <Faq />
+            <Footer />
         </div>
     )
 }

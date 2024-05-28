@@ -62,7 +62,7 @@ function LoginProfessor() {
             />
             <section className='sectionBackgroundLoginProfessor' >
                 <div className='buttom-voltar'>
-                    <button> &lt; Voltar </button>
+                    <button onClick={() => navigate("/")}> &lt; Voltar </button>
                 </div>
                 <div className='container-backgroundProfessor' >
                     <FormularioLoginProfessor setEmail={setEmail} setSenha={setSenha} onClick={handleSave} />

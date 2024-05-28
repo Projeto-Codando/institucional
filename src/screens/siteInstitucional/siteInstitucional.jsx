@@ -43,6 +43,7 @@ function SiteInstitucional(){
           alignItems: 'center',
           display: 'flex',
           flexDirection: 'column',
+          
         }}
           img={imgProf}
           alt="Imagem professor ensinando os alunos"
@@ -52,9 +53,10 @@ function SiteInstitucional(){
           funcionamento executivo, como resolução de problemas e planejamento, bem como
           pensamento geométrico e matemático.'
           statusBotao="false"
+          cadastroPath= 'cadastroProfessor'
         />
 
-        <CardComIMG
+        <CardComIMG 
           img={imgAluno}
           alt="Imagem aluno estudando no seu notebook"
           titulo='Alunos'
@@ -63,6 +65,8 @@ function SiteInstitucional(){
           ele é incentivado a explorar conceitos complexos de programação de uma maneira envolvente e cativante,
           tornando o aprendizado uma experiência dinâmica e divertida.'
           statusBotao="false"
+          cadastroPath= 'cadastro'
+          
         />
       </div>
       <div className='container' >
