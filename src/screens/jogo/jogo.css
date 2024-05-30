@@ -3,13 +3,16 @@
     background: url(../../imgs/back-banner-bananas.png);
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
     align-items: center;
 }
 
 .niveisJogo{
     display: flex;
     width: 90%;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 45px;
+    margin-top: 35px;
 }
 
 .containerJogo{
@@ -18,4 +21,11 @@
     width: 90%;
 }
 
+.cardsNivel{
+    display: flex;
+    width: 100%;
+}
 
+.trianguloD{
+    margin-right: 30px;
+}
