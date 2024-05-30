@@ -1,7 +1,10 @@
-import './modalEdicao.css'
-import Xzinho from '../../imgs/xModal.svg'
-import { height, width } from '@fortawesome/free-brands-svg-icons/fa42Group'
-function modalEdicao({isOpen}){
+import './modalEdicao.css';
+import Xzinho from '../../imgs/xModal.svg';
+import Inputs from '../inputsModal/inputsModal';
+import Botao from '../botaoModal/botaoModal';
+
+
+function modalEdicao({ isOpen, onClose, ...props }) {
     const BACKGROUND_STYLE = {
         position: 'fixed',
         top: '0',
@@ -10,46 +13,55 @@ function modalEdicao({isOpen}){
         right: '0',
         backgroundColor: 'rgb(0,0,0, 0.7)',
         zIndex: '1000'
-    }
+    };
     const MODAL_STYLE = {
+        display: 'flex',
         position: 'fixed',
         top: '50%',
         left: '50%',
         transform: 'translate(-50%,-50%)',
-        height: '550px',
+        height: '500px',
         width: '450px',
         backgroundColor: '#fff',
         borderRadius: '10px',
+        flexDirection: 'column'
+    };
 
-    } 
-    if(isOpen) {
-    return(
-        <div className='modalEdicao'>
-            <div style={BACKGROUND_STYLE}>
-                <div style={MODAL_STYLE}>
-                    <div style={{display: 'flex',justifyContent: 'end', padding: '15px', paddingBottom: '0px'}}>
-                    <img src={Xzinho} style={{width: '40px', cursor: 'pointer'}}></img>
+    if (isOpen) {
+        return (
+            <div className='modalCriacao'>
+                <div style={BACKGROUND_STYLE}>
+                    <div style={MODAL_STYLE}>
+                        <div style={{ display: 'flex', justifyContent: 'end', padding: '15px', paddingBottom: '0px' }}>
+                            <img src={Xzinho} onClick={onClose} style={{ width: '40px', cursor: 'pointer' }} alt="close"></img>
+                        </div>
+                        <span style={{ color: '#476334', fontSize: '30px', textShadow: 'none', fontWeight: 'bold', marginTop: '0px' }}>Editar uma turma</span>
+                        <Inputs
+                            text='Nome da Turma'
+                            id='nomeTurma'
+                            onChange={typeof props.setNomeTurma === 'function' ? props.setNomeTurma : undefined}
+                        />
+                        <Inputs
+                            text='Escolaridade'
+                            id='escolaridade'
+                            onChange={typeof props.setEscolaridade === 'function' ? props.setEscolaridade : undefined}
+                        />
+                        <Inputs
+                            text='Senha Turma'
+                            id='senhaTurma'
+                            onChange={typeof props.setSenhaTurma === 'function' ? props.setSenhaTurma : undefined}
+                        />
+                        <Botao
+                            text='Editar turma'
+                            id='editarTurma'
+                            onClick={props.onClick}
+                        />
                     </div>
-               <h1 style={{color: '#476334', fontSize: '30px', textShadow: 'none', fontWeight: 'bold', marginTop: '0px'}}>Editar uma turma</h1>
-               <div className='inputs'>
-                <label>Nome da Turma</label>
-                <input></input>
-               </div>
-               <div className='inputs'>
-                <label>Escolaridade</label>
-                <input></input>
-               </div>
-               <div className='inputs'>
-                <label>Quantidade de Alunos</label>
-                <input></input>
-               </div>
-               <button className='botãoCriar'>Editar turma</button>
-               </div>
+                </div>
             </div>
-                
-            </div>    )
+        );
     }
-    return null
+    return null;
 }
 
 export default modalEdicao;

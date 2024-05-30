@@ -2,16 +2,7 @@ import './modalCriacao.css';
 import Xzinho from '../../imgs/xModal.svg';
 import Inputs from '../inputsModal/inputsModal';
 import Botao from '../botaoModal/botaoModal';
-import { Formik, Form } from 'formik';
-import * as Yup from 'yup';
-import { ErrorMessage } from 'formik';
 
-const validationSchema = Yup.object().shape({
-    nomeTurma: Yup.string().required('Campo Obrigatório'),
-    escolaridade: Yup.string().required('Campo Obrigatório'),
-    qtdAlunos: Yup.string().required('Campo Obrigatório')
-
- })
 
 function modalCriacao({ isOpen, onClose, ...props }) {
     const BACKGROUND_STYLE = {
@@ -45,38 +36,26 @@ function modalCriacao({ isOpen, onClose, ...props }) {
                             <img src={Xzinho} onClick={onClose} style={{ width: '40px', cursor: 'pointer' }} alt="close"></img>
                         </div>
                         <span style={{ color: '#476334', fontSize: '30px', textShadow: 'none', fontWeight: 'bold', marginTop: '0px' }}>Criar uma turma</span>
-                        <Formik
-                            initialValues={{ nomeTurma: '', escolaridade: '', qtdAlunos: '' }}
-                            onSubmit={values => {
-                                console.log(values);
-                            }}
-                            validationSchema={validationSchema}
-                        >
-                            {({ handleSubmit }) => (
-                                <Form onSubmit={handleSubmit}>
-                                    <Inputs
-                                        text='Nome da Turma'
-                                        id='nomeTurma'
-                                        onChange={typeof props.setNomeTurma === 'function' ? props.setNomeTurma : undefined}
-                                    />
-                                    <Inputs
-                                        text='Escolaridade'
-                                        id='escolaridade'
-                                        onChange={typeof props.setEscolaridade === 'function' ? props.setEscolaridade : undefined}
-                                    />
-                                    <Inputs
-                                        text='Quantidade de Alunos'
-                                        id='qtdAlunos'
-                                        onChange={typeof props.setQtdAlunos === 'function' ? props.setQtdAlunos : undefined}
-                                    />
-                                    <Botao
-                                        text='Criar turma'
-                                        id='criarTurma'
-                                        onClick={props.onClick}
-                                    />
-                                </Form>
-                            )}
-                        </Formik>
+                        <Inputs
+                            text='Nome da Turma'
+                            id='nomeTurma'
+                            onChange={typeof props.setNomeTurma === 'function' ? props.setNomeTurma : undefined}
+                        />
+                        <Inputs
+                            text='Escolaridade'
+                            id='escolaridade'
+                            onChange={typeof props.setEscolaridade === 'function' ? props.setEscolaridade : undefined}
+                        />
+                        <Inputs
+                            text='Senha Turma'
+                            id='senhaTurma'
+                            onChange={typeof props.setSenhaTurma === 'function' ? props.setSenhaTurma : undefined}
+                        />
+                        <Botao
+                            text='Criar turma'
+                            id='criarTurma'
+                            onClick={props.onClick}
+                        />
                     </div>
                 </div>
             </div>
