@@ -1,0 +1,27 @@
+.cardConteudo {
+    display: flex;
+    justify-content: center;
+    background-color: #476334;
+    align-items: center;
+    width: 350px;
+    height: 425px;
+    background-image: url(../../imgs/Background\ bananas.png);
+    border-radius: 10px;
+    gap: 10px;
+}
+
+.tituloConteudo {
+    display: flex;
+    justify-content: center;
+    width: 90%;
+    height: 50px;
+    background-color: #F3DE2C;
+    border-radius: 10px;
+    border: black solid 1px;
+}
+
+.tituloConteudo h1 {
+    font-size: 20px;
+    color: black;
+    text-shadow: none;
+}
