@@ -2,6 +2,7 @@ import './modalCriacao.css';
 import Xzinho from '../../imgs/xModal.svg';
 import Inputs from '../inputsModal/inputsModal';
 import Botao from '../botaoModal/botaoModal';
+import SelectBox from '../inputsModal/selectBoxModal'
 
 
 function modalCriacao({ isOpen, onClose, ...props }) {
@@ -41,10 +42,8 @@ function modalCriacao({ isOpen, onClose, ...props }) {
                             id='nomeTurma'
                             onChange={typeof props.setNomeTurma === 'function' ? props.setNomeTurma : undefined}
                         />
-                        <Inputs
-                            text='Escolaridade'
-                            id='escolaridade'
-                            onChange={typeof props.setEscolaridade === 'function' ? props.setEscolaridade : undefined}
+                        <SelectBox
+                        text='Escolaridade'
                         />
                         <Inputs
                             text='Senha Turma'

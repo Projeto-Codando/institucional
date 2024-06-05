@@ -22,9 +22,8 @@
     const [turmas, setTurmas] = useState([]);
 
     const validationSchema = Yup.object().shape({
-      nomeTurma: Yup.string().required('Campo Nome da Turma Obrigatório'),
-      escolaridade: Yup.string().required('Campo Escolaridade Obrigatório'),
-      senhaTurma: Yup.string().required('Campo Senha Turma Obrigatório').min(6, 'No mínimo 6 digitos da senha da Turma!')
+      nomeTurma: Yup.string().required('Campo Obrigatório'),
+      senhaTurma: Yup.string().required('Campo Obrigatório').min(6, 'No mínimo 6 digitos da senha da Turma!')
 
   });
 
@@ -84,7 +83,7 @@
               <CardTurma
                 key={index}
                 turma={turma.nomeTurma}
-                serie={`${turma.escolaridade}ª Ano`}
+                serie={turma.escolaridade}
                 qtdAlunos={`${turma.qtdAlunos || 0} Alunos`}
                 configCardTurma={{
                   backgroundColor: '#FFFFFF99',
