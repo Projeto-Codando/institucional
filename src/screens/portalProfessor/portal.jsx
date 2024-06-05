@@ -85,7 +85,7 @@
                 key={index}
                 turma={turma.nomeTurma}
                 serie={`${turma.escolaridade}ª Ano`}
-                qtdAlunos={`${turma.qtdAlunos} Alunos`}
+                qtdAlunos={`${turma.qtdAlunos || 0} Alunos`}
                 configCardTurma={{
                   backgroundColor: '#FFFFFF99',
                   padding: '3px',

@@ -2,6 +2,7 @@ import './portalSala.css'
 import Header from '../../componentes/header/header'
 import FaixaTurma from '../../componentes/faixaTurma/faixaTurma';
 import Progresso from '../../componentes/progresso/progresso';
+import Conteudo from '../../componentes/conteudos/conteudos';
 
 
 function portalSala() {
@@ -15,9 +16,9 @@ function portalSala() {
                     codigo="31204"
                 />
                 <div className='telaPrincipal'>
-                    <Progresso 
-                    />
+                    <Conteudo/>
                 </div>
+                
             </div>
         </div>
 
