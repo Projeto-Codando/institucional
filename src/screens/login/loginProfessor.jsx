@@ -8,6 +8,7 @@ import Header from "../../componentes/headerLoginCadastro/headerLogin";
 import Logo from "../../imgs/Logo.svg";
 import * as Yup from 'yup';
 import './login.css'
+import Jogo from '../jogo/jogo'
 
 function LoginProfessor() {
     let navigate = useNavigate()
@@ -31,11 +32,16 @@ function LoginProfessor() {
             await validadionSchema.validate(objetoAdicionado, { abortEarly: false });
             console.log("Dados válidos:", objetoAdicionado);
 
-            api.post(`/professores/login`, objetoAdicionado)
+            api.post(`/educadores/login`, objetoAdicionado)
                 .then((json) => {
                     toast.success("Login realizado com sucesso")
+                    sessionStorage.clear();
+                    console.log(json.data);
                     sessionStorage.setItem("token", json.data.token)
-                    navigate("/")
+                    sessionStorage.setItem("userId", json.data.userId)
+                    sessionStorage.setItem("email", json.data.email)
+                    sessionStorage.setItem("nome", json.data.nome)
+                    navigate("/portal")
                 }).catch(() => {
                     toast.error("Ocorreu um erro ao tentar realizar o login, por favor, tente novamente.");
                 })

@@ -6,6 +6,12 @@ import MetadeFloresta from "../../imgs/background-floresta-cortado.png"
 import Estrela from '../../imgs/estrela.png'
 import Start from '../../imgs/start.png'
 
+const nomeTurma = sessionStorage.getItem("nomeTurma")
+
+const codigo = sessionStorage.getItem("senhaTurma")
+const nomeUsuario = sessionStorage.getItem("nomeUser")
+
+
 
 function Lobby() {
 
@@ -23,10 +29,10 @@ function Lobby() {
                     <div className='cardsBemVindo'>
                         <div className='bemVindo'>
                             <img src={Avatar} alt="Imagem avatar" />
-                            <span>Bem Vindo(a), <br />Lisandra!</span>
+                            <span>Bem Vindo(a), <br />{nomeUsuario}</span>
                         </div>
                         <div className='cardTema'>1
-                            
+
                             <div className='tema'>
                                 <span className='span1'>Tema atual:</span>
                                 <span className='span2'>Laço de Repetição</span>
@@ -71,8 +77,8 @@ function Lobby() {
 
         </div>
     )
-    
+
 
 }
 
-export default Lobby; 
+export default Lobby;

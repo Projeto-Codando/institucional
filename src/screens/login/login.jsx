@@ -21,20 +21,39 @@ function Login() {
 
     const handleSave = async (event) => {
         event.preventDefault();
-    
+
         const objetoAdicionado = {
             apelido,
             senha
         }
         try {
             await validadionSchema.validate(objetoAdicionado, {     abortEarly: false });
-            console.log("Dados válidos:", objetoAdicionado);
-
             api.post(`/alunos/login`, objetoAdicionado)
                 .then((json) => {
                     toast.success("Login efetuado com sucesso")
                     sessionStorage.setItem("token", json.data.token)
+                    sessionStorage.setItem("userId", json.data.userId)
+                    sessionStorage.setItem("apelidoUser", json.data.apelido)
+                    sessionStorage.setItem("nomeUser", json.data.nome)
+                    sessionStorage.setItem("moedas", json.data.alunoListagemDTO.moedas)
+                    sessionStorage.setItem("idTurma", json.data.alunoListagemDTO.idTurma)
                     navigate("/lobby")
+
+                    console.log( "Token: "+ sessionStorage.getItem("tokenUsuario"));
+
+                    api.get(`/turmas/buscar-turma-por-id/${sessionStorage.getItem("idTurma")}`, {
+                        headers: {
+                            Authorization: `Bearer ${sessionStorage.getItem("token")}`
+                        }
+                    }).then((json) => {
+                        console.log(json.data)
+                        sessionStorage.setItem("Escolaridade", json.data.fkEscolaridade.descricao)
+                        sessionStorage.setItem("nomeTurma", json.data.nome)
+                        sessionStorage.setItem("senhaTurma", json.data.senha)
+                    }).catch(() => {
+                        toast.error("Não foi possível encontrar a turma!");
+                    })
+
                 }).catch(() => {
                     toast.error("Não possui cadastro na plataforma!");
                 })
@@ -48,6 +67,7 @@ function Login() {
                 });
             }
         }
+
     }
 
     return (

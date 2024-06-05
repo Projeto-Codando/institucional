@@ -6,6 +6,9 @@ import Estrela from '../../imgs/estrela.png'
 import Avatar from '../../imgs/img-avatar.png'
 import { useNavigate } from 'react-router-dom'
 
+const escolaridade = sessionStorage.getItem("Escolaridade")
+const moedas = sessionStorage.getItem("moedas")
+
 export default function HeaderLogin(props) {
     const navigate = useNavigate();
     return (
@@ -43,12 +46,12 @@ export default function HeaderLogin(props) {
                 {props.statusEstrela && (
                     <div className='estrela'>
                         <img src={Estrela} alt="imagem estrela" />
-                        <span>7</span>
+                        <span>{moedas}</span>
                     </div>
                 )}
                 {props.statusSerie && (
                     <div className='serie'>
-                        <span>5º Ano</span>
+                        <span>{escolaridade}</span>
                     </div>
                 )}
                 {props.statusAvatar && (
