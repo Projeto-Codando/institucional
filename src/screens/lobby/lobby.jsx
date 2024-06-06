@@ -16,6 +16,8 @@ function Lobby() {
                 statusEstrela="true"
                 statusSerie="true"
                 statusAvatar="true"
+                statusLogin='true'
+                statusLoginAluno='true'
             />
             <div className='sectionRotas'>
                 <div className='containerBemVindo'>

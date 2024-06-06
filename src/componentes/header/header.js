@@ -1,7 +1,7 @@
 import React from 'react'
 import Logo from "../../imgs/Logo.svg"
 import Botao from '../botao/botoes.js'
-import BarraLateral from '../barra-lateral/barra-lateral.js'
+import BarraLateral from '../barra-lateral/barra-lateral'
 import './header.css'
 import { useNavigate } from 'react-router-dom'
 

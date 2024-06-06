@@ -18,7 +18,8 @@ import { SobreProjeto } from '../../componentes/sobreProjeto/sobreProjeto.js'
 function SiteInstitucional(){
   return(
     <div className="siteInstitucional">
-      <Header className='container' />
+      <Header className='container' 
+      />
       <BannerComBotao className='container' />
       <h1 style={{ color: "#662E9B", fontSize: '48px' }}>Escreva o codigo!</h1>
       <div className='section escreva-codigo'>

@@ -1,7 +1,8 @@
-  import Header from '../../componentes/header/header';
+  import Header from '../../componentes/headerLoginCadastro/headerLogin'
   import CardTurmaCadastro from '../../componentes/cardTurmaCadastro/cardTurmaCadastro';
   import CardTurma from '../../componentes/cardTurma/cardTurma';
   import Ajuda from '../../componentes/ajuda/ajuda';
+  import Logo from "../../imgs/verde-logo.svg"
   import { useNavigate } from 'react-router-dom';
   import React, { useState } from 'react';
   import './portalProfessor.css';
@@ -63,7 +64,13 @@
     }
     return (
       <div className="portalProfessor" style={{ overflow: 'hidden' }}>
-        <Header className="container" />
+        <Header 
+        statusLogin='true'
+        statusLoginProfessor='true'
+        statusAvatar="true"
+        logo={Logo}
+        justifyContent='center'
+        />
         <div className="portal">
           <h1 style={{ color: "#ffffff", fontSize: '32px' }}>Bem Vindo(a), Lisandra</h1>
           <div className="CardTurmas" style={{ display: 'flex', flexDirection: 'row', gap: '50px' }}>

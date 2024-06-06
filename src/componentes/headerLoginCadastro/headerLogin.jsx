@@ -1,7 +1,7 @@
 import './headerLogin.css'
 
 import Botao from '../botao/botoes.js'
-import BarraLateral from '../barra-lateral/barra-lateral.js'
+import BarraLateral from '../barra-lateral/barra-lateral'
 import Estrela from '../../imgs/estrela.png'
 import Avatar from '../../imgs/img-avatar.png'
 import { useNavigate } from 'react-router-dom'
@@ -10,7 +10,12 @@ export default function HeaderLogin(props) {
     const navigate = useNavigate();
     return (
         <header className="headerLogin">
-            <BarraLateral />
+            <BarraLateral 
+            logoff={props.statusLogoff}
+            loginAluno={props.statusLoginAluno}
+            loginProfessor={props.statusLoginProfessor}
+            login={props.statusLogin}
+            />
             <div className="logo">
                 <img src={props.logo} alt="Logo codando" />
             </div>

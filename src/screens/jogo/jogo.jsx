@@ -18,6 +18,8 @@ function Jogo() {
                 statusEstrela="true"
                 statusSerie="true"
                 statusAvatar="true"
+                statusLogin='true'
+                statusLoginAluno='true'
             />
             <div className='sectionJogo'>
                 <div className='niveisJogo'>

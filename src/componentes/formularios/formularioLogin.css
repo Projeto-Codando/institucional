@@ -121,3 +121,15 @@
   color: #343434;
   transition: color 0.3s;
 }
+
+.password-container {
+  display: flex;
+  align-items: center;
+}
+
+.eye-icon {
+  cursor: pointer;
+  margin-left: 30px;
+  display: flex;
+  align-items: center;
+}
