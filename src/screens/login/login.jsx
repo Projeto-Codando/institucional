@@ -30,6 +30,9 @@ function Login() {
             await validadionSchema.validate(objetoAdicionado, {     abortEarly: false });
             api.post(`/alunos/login`, objetoAdicionado)
                 .then((json) => {
+
+                    sessionStorage.clear()
+                    console.log(json.data)
                     toast.success("Login efetuado com sucesso")
                     sessionStorage.setItem("token", json.data.token)
                     sessionStorage.setItem("userId", json.data.userId)
@@ -37,19 +40,17 @@ function Login() {
                     sessionStorage.setItem("nomeUser", json.data.nome)
                     sessionStorage.setItem("moedas", json.data.alunoListagemDTO.moedas)
                     sessionStorage.setItem("idTurma", json.data.alunoListagemDTO.idTurma)
-                    navigate("/lobby")
-
-                    console.log( "Token: "+ sessionStorage.getItem("tokenUsuario"));
+                    sessionStorage.setItem("ImagemURL_AVATAR", json.data.alunoListagemDTO.avatares[json.data.alunoListagemDTO.idAvatar].imagemURL)
 
                     api.get(`/turmas/buscar-turma-por-id/${sessionStorage.getItem("idTurma")}`, {
                         headers: {
                             Authorization: `Bearer ${sessionStorage.getItem("token")}`
                         }
                     }).then((json) => {
-                        console.log(json.data)
-                        sessionStorage.setItem("Escolaridade", json.data.fkEscolaridade.descricao)
+                        sessionStorage.setItem("escolaridade", json.data.fkEscolaridade.descricao)
                         sessionStorage.setItem("nomeTurma", json.data.nome)
                         sessionStorage.setItem("senhaTurma", json.data.senha)
+                        navigate("/lobby")
                     }).catch(() => {
                         toast.error("Não foi possível encontrar a turma!");
                     })

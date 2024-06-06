@@ -19,8 +19,6 @@ function Portal() {
   const [senhaTurma, setSenhaTurma] = useState('')
   const [turmas, setTurmas] = useState([])
   const fkEducador = sessionStorage.getItem('userId')
-  const nome = nomeTurma
-  const senha = senhaTurma
 
   const validationSchema = Yup.object().shape({
     nomeTurma: Yup.string().required('Campo Obrigatório'),
@@ -34,14 +32,20 @@ function Portal() {
         Authorization: `Bearer ${sessionStorage.getItem('token')}`
       }
     }).then(response => {
-      const updatedTurmas = response.data.map(turma => {
-        return {
-          ...turma,
-          nomeTurma: turma.nome,
-          escolaridade: turma.fkEscolaridade.descricao,
-          senhaTurma: turma.senha
-        };
-      });
+      console.log(response.data);
+      const updatedTurmas = response.data
+          .filter(turma => turma.statusTurma === "Ativa")
+          .map(turma => {
+            console.log(turma)
+          return {
+            ...turma,
+            nomeTurma: turma.nome,
+            escolaridade: turma.fkEscolaridade.descricao,
+            senhaTurma: turma.senha,
+            qtdAlunos: turma.alunos.length,
+            idCard: turma.idTurma
+          };
+        });
       setTurmas(updatedTurmas);
     }).catch(error => {
       console.error(error)
@@ -102,7 +106,7 @@ return (
   <div className="portalProfessor" style={{ overflow: 'hidden' }}>
     <Header className="container" />
     <div className="portal">
-      <h1 style={{ color: "#ffffff", fontSize: '32px' }}>Bem Vindo(a), Lisandra</h1>
+      <h1 style={{ color: "#ffffff", fontSize: '32px' }}>Bem vindo(a), {sessionStorage.getItem("nome")}</h1>
       <div className="CardTurmas" style={{ display: 'flex', flexDirection: 'row', gap: '50px' }}>
         <CardTurmaCadastro
           onClick={handleSavePost}
@@ -123,6 +127,7 @@ return (
             turma={turma.nomeTurma}
             serie={turma.escolaridade}
             qtdAlunos={`${turma.qtdAlunos || 0} Alunos`}
+            idCard={turma.idCard}
             configCardTurma={{
               backgroundColor: '#FFFFFF99',
               padding: '3px',

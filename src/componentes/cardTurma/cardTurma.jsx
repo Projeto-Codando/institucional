@@ -1,25 +1,36 @@
-import React, { useState } from 'react';
-import './cardTurma.css';
-import TurmaImg1 from '../../imgs/CardTurma1.png';
-import SerieImg from '../../imgs/Serie.svg';
-import QtdAlunosImg from '../../imgs/qtdAlunos.svg';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEllipsis } from '@fortawesome/free-solid-svg-icons';
+import React, { useState } from 'react'
+import './cardTurma.css'
+import TurmaImg1 from '../../imgs/CardTurma1.png'
+import SerieImg from '../../imgs/Serie.svg'
+import QtdAlunosImg from '../../imgs/qtdAlunos.svg'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEllipsis } from '@fortawesome/free-solid-svg-icons'
 import ModalEdicao from '../modalEdicao/modalEdicao.js'
+import api from '../../api'
 
 
 function CardTurma(props) {
     const [openModal, setOpenModal] = useState(false)
-    const [menuAberto, setMenuAberto] = useState(false);
-    const [cardVisivel, setCardVisivel] = useState(true);
+    const [menuAberto, setMenuAberto] = useState(false)
+    const [cardVisivel, setCardVisivel] = useState(true)
 
     const toggleMenu = () => {
-        setMenuAberto(!menuAberto);
-    };
+        setMenuAberto(!menuAberto)
+    }
 
     const arquivarCard = () => {
-        setCardVisivel(false);
-    };
+        api.post(`/turmas/desativar/${sessionStorage.getItem("userId")}/${props.idCard}`, {}, {
+            headers: {
+                Authorization: `Bearer ${sessionStorage.getItem('token')}`
+            }
+        }).then(response => {
+            console.log(response)
+        }).catch(error => {
+            console.error(error)
+        })
+
+        setCardVisivel(false)
+    }
 
     const cardTurmaStyle = {
         overflow: props.configCardTurma.overflow,
@@ -30,7 +41,7 @@ function CardTurma(props) {
         position: 'relative',
         zIndex: '2',
         display: cardVisivel ? 'block' : 'none',
-    };
+    }
 
     const menuStyle = {
         display: 'flex',
@@ -45,11 +56,11 @@ function CardTurma(props) {
         zIndex: '999',
         boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
         width: '150px',
-    };
+    }
 
     return (
-        <div className='cardTurma' style={cardTurmaStyle}>
-              <ModalEdicao isOpen={openModal} setModalOpen={() => setOpenModal(!openModal)}/>
+        <div className='cardTurma' style={cardTurmaStyle} idCard={props.idCard}>
+            <ModalEdicao isOpen={openModal} setModalOpen={() => setOpenModal(!openModal)} />
             <div className='reticencias' style={{ display: 'flex', justifyContent: 'end', paddingRight: '50px', paddingTop: '20px' }}>
                 <FontAwesomeIcon icon={faEllipsis} style={{ height: '30px', cursor: 'pointer' }} onClick={toggleMenu} />
                 {menuAberto && (
@@ -76,7 +87,7 @@ function CardTurma(props) {
                 </div>
             </div>
         </div>
-    );
+    )
 }
 
-export default CardTurma;
+export default CardTurma

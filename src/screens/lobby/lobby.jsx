@@ -1,19 +1,26 @@
 import './lobby.css'
 import Header from "../../componentes/headerLoginCadastro/headerLogin";
 import Logo from "../../imgs/verde-logo.svg"
-import Avatar from "../../imgs/img-avatar.png"
 import MetadeFloresta from "../../imgs/background-floresta-cortado.png"
 import Estrela from '../../imgs/estrela.png'
 import Start from '../../imgs/start.png'
+import { useEffect, useState } from 'react'
 
 const nomeTurma = sessionStorage.getItem("nomeTurma")
-
 const codigo = sessionStorage.getItem("senhaTurma")
 const nomeUsuario = sessionStorage.getItem("nomeUser")
 
-
-
 function Lobby() {
+
+    const [nomeUsuario, setNomeUsuario] = useState("");
+    const [avatar, setAvatar] = useState(0);
+
+    useEffect(() => {
+      const nome = sessionStorage.getItem("nomeUser");
+      const avatar = sessionStorage.getItem("ImagemURL_AVATAR");
+      setNomeUsuario(nome);
+      setAvatar(avatar);
+    }, []);
 
     return (
         <div className='rotaNiveis'>
@@ -28,7 +35,7 @@ function Lobby() {
                     <img className='background-bemVindo' src={MetadeFloresta} alt="Background Floresta" />
                     <div className='cardsBemVindo'>
                         <div className='bemVindo'>
-                            <img src={Avatar} alt="Imagem avatar" />
+                            <img src={avatar} alt="Imagem avatar" style={{borderRadius: "360px"}}/>
                             <span>Bem Vindo(a), <br />{nomeUsuario}</span>
                         </div>
                         <div className='cardTema'>1

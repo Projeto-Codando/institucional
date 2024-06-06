@@ -3,14 +3,35 @@ import './headerLogin.css'
 import Botao from '../botao/botoes.js'
 import BarraLateral from '../barra-lateral/barra-lateral.js'
 import Estrela from '../../imgs/estrela.png'
-import Avatar from '../../imgs/img-avatar.png'
 import { useNavigate } from 'react-router-dom'
-
-const escolaridade = sessionStorage.getItem("Escolaridade")
-const moedas = sessionStorage.getItem("moedas")
+import React, { useEffect, useState } from 'react'
 
 export default function HeaderLogin(props) {
-    const navigate = useNavigate();
+
+    const [escolaridade, setEscolaridade] = useState("")
+    const [moedas, setMoedas] = useState(0)
+    const [avatar, setAvatar] = useState(0)
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        const handleStorageChange = () => {
+          const escolaridade = sessionStorage.getItem("escolaridade");
+          const moedas = sessionStorage.getItem("moedas");
+          const avatar = sessionStorage.getItem("ImagemURL_AVATAR");
+          setEscolaridade(escolaridade);
+          setAvatar(avatar);
+          setMoedas(moedas);
+        };
+
+        handleStorageChange();
+
+        window.addEventListener("storage", handleStorageChange);
+
+        return () => {
+          window.removeEventListener('storage', handleStorageChange);
+        };
+      }, []);
+
     return (
         <header className="headerLogin">
             <BarraLateral />
@@ -56,7 +77,7 @@ export default function HeaderLogin(props) {
                 )}
                 {props.statusAvatar && (
                     <div className='avatar'>
-                        <img src={Avatar} alt="imagem do avatar" />
+                        <img src={avatar} alt="imagem do avatar" style={{width: "59px", height: "59px"}}/>
                     </div>
                 )}
             </div>
