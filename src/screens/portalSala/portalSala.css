@@ -1,4 +1,6 @@
-
+*{
+    overflow: hidden;
+}
 .portalSala{
         position: absolute;
         display: flex;

@@ -21,20 +21,40 @@ function Login() {
 
     const handleSave = async (event) => {
         event.preventDefault();
-    
+
         const objetoAdicionado = {
             apelido,
             senha
         }
         try {
             await validadionSchema.validate(objetoAdicionado, {     abortEarly: false });
-            console.log("Dados válidos:", objetoAdicionado);
-
             api.post(`/alunos/login`, objetoAdicionado)
                 .then((json) => {
+
+                    sessionStorage.clear()
+                    console.log(json.data)
                     toast.success("Login efetuado com sucesso")
                     sessionStorage.setItem("token", json.data.token)
-                    navigate("/lobby")
+                    sessionStorage.setItem("userId", json.data.userId)
+                    sessionStorage.setItem("apelidoUser", json.data.apelido)
+                    sessionStorage.setItem("nomeUser", json.data.nome)
+                    sessionStorage.setItem("moedas", json.data.alunoListagemDTO.moedas)
+                    sessionStorage.setItem("idTurma", json.data.alunoListagemDTO.idTurma)
+                    sessionStorage.setItem("ImagemURL_AVATAR", json.data.alunoListagemDTO.avatares[json.data.alunoListagemDTO.idAvatar].imagemURL)
+
+                    api.get(`/turmas/buscar-turma-por-id/${sessionStorage.getItem("idTurma")}`, {
+                        headers: {
+                            Authorization: `Bearer ${sessionStorage.getItem("token")}`
+                        }
+                    }).then((json) => {
+                        sessionStorage.setItem("escolaridade", json.data.fkEscolaridade.descricao)
+                        sessionStorage.setItem("nomeTurma", json.data.nome)
+                        sessionStorage.setItem("senhaTurma", json.data.senha)
+                        navigate("/lobby")
+                    }).catch(() => {
+                        toast.error("Não foi possível encontrar a turma!");
+                    })
+
                 }).catch(() => {
                     toast.error("Não possui cadastro na plataforma!");
                 })
@@ -48,6 +68,7 @@ function Login() {
                 });
             }
         }
+
     }
 
     return (

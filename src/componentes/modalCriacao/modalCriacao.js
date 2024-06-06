@@ -1,10 +1,11 @@
-import './modalCriacao.css';
-import Xzinho from '../../imgs/xModal.svg';
-import Inputs from '../inputsModal/inputsModal';
-import Botao from '../botaoModal/botaoModal';
+import './modalCriacao.css'
+import Xzinho from '../../imgs/xModal.svg'
+import Inputs from '../inputsModal/inputsModal'
+import Botao from '../botaoModal/botaoModal'
+import SelectBox from '../inputsModal/selectBoxModal'
 
 
-function modalCriacao({ isOpen, onClose, ...props }) {
+function modalCriacao({ isOpen, onClose, escolaridade, setEscolaridade, ...props }) {
     const BACKGROUND_STYLE = {
         position: 'fixed',
         top: '0',
@@ -13,7 +14,7 @@ function modalCriacao({ isOpen, onClose, ...props }) {
         right: '0',
         backgroundColor: 'rgb(0,0,0, 0.7)',
         zIndex: '1000'
-    };
+    }
     const MODAL_STYLE = {
         display: 'flex',
         position: 'fixed',
@@ -25,7 +26,7 @@ function modalCriacao({ isOpen, onClose, ...props }) {
         backgroundColor: '#fff',
         borderRadius: '10px',
         flexDirection: 'column'
-    };
+    }
 
     if (isOpen) {
         return (
@@ -41,11 +42,7 @@ function modalCriacao({ isOpen, onClose, ...props }) {
                             id='nomeTurma'
                             onChange={typeof props.setNomeTurma === 'function' ? props.setNomeTurma : undefined}
                         />
-                        <Inputs
-                            text='Escolaridade'
-                            id='escolaridade'
-                            onChange={typeof props.setEscolaridade === 'function' ? props.setEscolaridade : undefined}
-                        />
+                        <SelectBox text="Escolaridade" value={escolaridade} onChange={e => setEscolaridade(e.target.value)} />
                         <Inputs
                             text='Senha Turma'
                             id='senhaTurma'
@@ -59,9 +56,9 @@ function modalCriacao({ isOpen, onClose, ...props }) {
                     </div>
                 </div>
             </div>
-        );
+        )
     }
-    return null;
+    return null
 }
 
-export default modalCriacao;
+export default modalCriacao
