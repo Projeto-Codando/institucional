@@ -1,0 +1,35 @@
+.tema {
+    background-color: white;
+    width: 85%;
+    height: 100px;
+    border-radius: 10px;
+    padding: 10px;
+}
+.detalhes {
+    display: flex;
+    width: 100%;
+}
+.bolinhasTotais {
+    display: flex;
+    gap: 5px;
+    width: 60%;
+}
+.verMais {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 50px;
+    width: 100px;
+    height: 30px;
+    background-color: yellow;
+}
+.tituloTema {
+    font-weight: bold;
+}
+.linhaFina {
+    height: 0.7px;
+    width: 50%;
+    background-color: black;
+}

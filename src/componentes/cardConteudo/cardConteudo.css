@@ -1,13 +1,15 @@
 .cardConteudo {
     display: flex;
     justify-content: center;
+    flex-direction: column;
     background-color: #476334;
     align-items: center;
     width: 350px;
     height: 425px;
     background-image: url(../../imgs/Background\ bananas.png);
+    
     border-radius: 10px;
-    gap: 10px;
+    gap: 30px;
 }
 
 .tituloConteudo {

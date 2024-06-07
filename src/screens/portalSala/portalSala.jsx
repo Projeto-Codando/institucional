@@ -3,6 +3,7 @@ import Header from '../../componentes/header/header'
 import FaixaTurma from '../../componentes/faixaTurma/faixaTurma';
 import Progresso from '../../componentes/progresso/progresso';
 import Conteudo from '../../componentes/conteudos/conteudos';
+import Estudantes from '../../componentes/estudantes/estudantes';
 
 
 function portalSala() {
@@ -16,8 +17,9 @@ function portalSala() {
                     codigo="31204"
                 />
                 <div className='telaPrincipal'>
-                    <Conteudo/>
+                <Estudantes/>
                 </div>
+             
                 
             </div>
         </div>
