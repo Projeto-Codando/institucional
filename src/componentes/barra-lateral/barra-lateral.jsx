@@ -15,11 +15,12 @@ import AvatarZebra from '../../imgs/avatarAlunoZebra.png'
 import IconClip from '../../imgs/IconClip.png'
 import IconPasta from '../../imgs/IconPasta.png'
 import IconUsers from '../../imgs/IconUsers.png'
+import { useNavigate } from 'react-router-dom'
 
 
 function BarraLateral(props) {
   const [open, setOpen] = useState(false);
-
+  const navigate = useNavigate()
   function changeStateBar() {
     setOpen(!open)
   }
@@ -56,7 +57,7 @@ function BarraLateral(props) {
                 </div>
               </div>
               <div className='containerRow'>
-                <button className='botaoLogin'> <img src={IconUser} alt="icone usuario" />Fazer login</button>
+                <button className='botaoLogin' onClick={() => navigate("/login")}> <img src={IconUser} o alt="icone usuario" />Fazer login</button>
               </div>
             </div>
           )
@@ -79,12 +80,12 @@ function BarraLateral(props) {
                 <div className='lineDivisoria'>
                 </div>
               </div>
+              <div className='containerRowTitulo'>
+                <span className='nameCodando'>Codando</span>
+              </div>
             </div>
           )
           }
-          <div className='containerRowTitulo'>
-            <span className='nameCodando'>Codando</span>
-          </div>
           {props.loginAluno && (
             <div>
               <div className='row'>
@@ -115,74 +116,77 @@ function BarraLateral(props) {
 
           {props.loginProfessor && (
             <div>
-            <div className='row'>
-              <img src={IconUsers} alt="Users" />
-              <span>Turmas</span>
-            </div>
+              <div className='row'>
+                <img src={IconUsers} alt="Users" />
+                <span>Turmas</span>
+              </div>
 
-            <div className='row'>
-              <img src={IconClip} alt="Clip" />
-              <span>Turmas Arquivadas</span>
-            </div>
+              <div className='row'>
+                <img src={IconClip} alt="Clip" />
+                <span>Turmas Arquivadas</span>
+              </div>
 
-            <div className='row'>
-              <img src={IconPasta} alt="Pasta" />
-              <span>Meus Projetos</span>
-            </div>
+              <div className='row'>
+                <img src={IconPasta} alt="Pasta" />
+                <span>Meus Projetos</span>
+              </div>
 
-            <div className='row'>
-              <img src={IconQuestion} alt="Question" />
-              <span>Ajuda</span>
-            </div>
-            <div className='containerRow'>
-              <div className='lineDivisoria'>
+              <div className='row'>
+                <img src={IconQuestion} alt="Question" />
+                <span>Ajuda</span>
+              </div>
+              <div className='containerRow'>
+                <div className='lineDivisoria'>
+                </div>
+              </div>
+
+              <div className='containerRowTitulo'>
+                <span className='nameCodando'>Estudantes</span>
               </div>
             </div>
-
-            <div className='containerRowTitulo'>
-              <span className='nameCodando'>Estudantes</span>
-            </div>
-          </div>
           )
           }
-          
-          <div className='containerScroll'>
-            <div className='rowAluno'>
-              <img src={AvatarZebra} alt="avatar do aluno" />
-              <span>Nome Aluno</span>
-              <div className='statusAluno'></div>
+          {props.login && (
+            <div className='containerScroll'>
+              <div className='rowAluno'>
+                <img src={AvatarZebra} alt="avatar do aluno" />
+                <span>Nome Aluno</span>
+                <div className='statusAluno'></div>
+              </div>
+              <div className='rowAluno'>
+                <img src={AvatarZebra} alt="avatar do aluno" />
+                <span>Nome Aluno</span>
+                <div className='statusAluno'></div>
+              </div>
+              <div className='rowAluno'>
+                <img src={AvatarZebra} alt="avatar do aluno" />
+                <span>Nome Aluno</span>
+                <div className='statusAluno'></div>
+              </div>
+              <div className='rowAluno'>
+                <img src={AvatarZebra} alt="avatar do aluno" />
+                <span>Nome Aluno</span>
+                <div className='statusAluno'></div>
+              </div>
+              <div className='rowAluno'>
+                <img src={AvatarZebra} alt="avatar do aluno" />
+                <span>Nome Aluno</span>
+                <div className='statusAluno'></div>
+              </div>
+              <div className='rowAluno'>
+                <img src={AvatarZebra} alt="avatar do aluno" />
+                <span>Nome Aluno</span>
+                <div className='statusAluno'></div>
+              </div>
+              <div className='rowAluno'>
+                <img src={AvatarZebra} alt="avatar do aluno" />
+                <span>Nome Aluno</span>
+                <div className='statusAluno'></div>
+              </div>
             </div>
-            <div className='rowAluno'>
-              <img src={AvatarZebra} alt="avatar do aluno" />
-              <span>Nome Aluno</span>
-              <div className='statusAluno'></div>
-            </div>
-            <div className='rowAluno'>
-              <img src={AvatarZebra} alt="avatar do aluno" />
-              <span>Nome Aluno</span>
-              <div className='statusAluno'></div>
-            </div>
-            <div className='rowAluno'>
-              <img src={AvatarZebra} alt="avatar do aluno" />
-              <span>Nome Aluno</span>
-              <div className='statusAluno'></div>
-            </div>
-            <div className='rowAluno'>
-              <img src={AvatarZebra} alt="avatar do aluno" />
-              <span>Nome Aluno</span>
-              <div className='statusAluno'></div>
-            </div>
-            <div className='rowAluno'>
-              <img src={AvatarZebra} alt="avatar do aluno" />
-              <span>Nome Aluno</span>
-              <div className='statusAluno'></div>
-            </div>
-            <div className='rowAluno'>
-              <img src={AvatarZebra} alt="avatar do aluno" />
-              <span>Nome Aluno</span>
-              <div className='statusAluno'></div>
-            </div>
-          </div>
+          )
+          }
+
 
         </div>
       </div>

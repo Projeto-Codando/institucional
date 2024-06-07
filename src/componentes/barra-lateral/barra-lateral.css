@@ -111,8 +111,8 @@
 }
 
 .containerScroll {
-  width: 138px;
-  height: 144px;
+  width: 175px;
+  height: 30vh;
   overflow-y: scroll;
   margin-left: 22px;
   scrollbar-width: thin; /* Para Firefox */

@@ -14,7 +14,8 @@ function Lobby() {
 
     const [nomeUsuario, setNomeUsuario] = useState("");
     const [avatar, setAvatar] = useState(0);
-    const [nivelSelecionado, setNivelSelecionado] = useState(1); // Inicialize com 1
+    const [nivelSelecionado, setNivelSelecionado] = useState(1); 
+    
 
     useEffect(() => {
         const nome = sessionStorage.getItem("nomeUser");
