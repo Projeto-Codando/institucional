@@ -143,6 +143,7 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 16px;
 }
 
@@ -155,4 +156,5 @@
   height: 10px;
   background-color: #AEF13A;
   border-radius: 100%;
+  margin-right: 10px;
 }
