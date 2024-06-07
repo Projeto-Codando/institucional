@@ -22,7 +22,6 @@ function CadastroProfessor(){
     nome: Yup.string('Nome inválido').matches(/^[A-Za-zÀ-ÿ]+$/, 'Nome inválido').required('Todos os campos devem estar preenchidos'),
     email: Yup.string('E-mail invalido').email('E-mail invalido').required('Todos os campos devem estar preenchidos'),
     sobrenome: Yup.string('Sobrenome inválido').matches(/^[A-Za-zÀ-ÿ]+$/, 'Sobrenome inválido').required('Todos os campos devem estar preenchidos'),
-    apelido: Yup.string('Apelido inválido').required('Todos os campos devem estar preenchidos'),
     senha: Yup.string().required('Todos os campos devem estar preenchidos').min(8, 'Insira 8 ou mais caractéres')
   });
 
@@ -41,16 +40,13 @@ function CadastroProfessor(){
       await validadionSchema.validate(objetoAdicionado, { abortEarly: false });
       console.log("Dados válidos:", objetoAdicionado);
 
-      api.post(`/alunos`, objetoAdicionado, {
-        headers: {
-          'Authorization': `Bearer ${sessionStorage.getItem("token")}`
-        }
+      api.post(`/educadores`, objetoAdicionado, {
       })
       .then((json) => {
           toast.success("Cadastro realizado com sucesso!")
           sessionStorage.setItem("token", json.data.token)
           console.info("A requisição foi um sucesso")
-          navigate("/")
+          navigate("/loginProfessor")
       }).catch(() => {
           console.log("Ocorreu um erro ao tentar realizar o login, por favor, tente novamente.");
       })

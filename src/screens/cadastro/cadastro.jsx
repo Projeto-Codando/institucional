@@ -48,7 +48,7 @@ function Cadastro() {
           toast.success("Cadastro realizado com sucesso!")
           sessionStorage.setItem("token", json.data.token)
   
-          navigate("/lobby") // Adicionar rota lobby
+          navigate("/login") // Adicionar rota lobby
         }).catch(() => {
           console.log("Ocorreu um erro no seu cadastro!");
         });
