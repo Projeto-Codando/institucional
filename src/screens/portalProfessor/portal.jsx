@@ -84,7 +84,8 @@ function Portal() {
       nome: nomeTurma,
       senha: senhaTurma,
       fkEscolaridade: escolaridade,
-      fkEducador: fkEducador
+      fkEducador: fkEducador,
+      fkModulo: 1
     }
 
     try {
@@ -154,7 +155,7 @@ function Portal() {
               turma={turma.nomeTurma}
               serie={turma.escolaridade}
               qtdAlunos={`${turma.qtdAlunos || 0} Alunos`}
-              idCard={turma.idCard}
+              idCard={index + 1}
               onClick={() => handleClickCard(turma.idCard)}
               configCardTurma={{
                 backgroundColor: '#FFFFFF99',

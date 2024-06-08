@@ -9,10 +9,14 @@ import Estudantes from '../../componentes/estudantes/estudantes';
 import api from '../../api';
 import { toast } from 'react-toastify';
 
+sessionStorage.setItem("ImagemURL_AVATAR", "https://previews.dropbox.com/p/thumb/ACQrgeBBcui9gljnEFhmCTgAXZbSMILhpwZmjNgKRXnTMwDJ9qlA6mQBF0G9ZJVpWu6xiQ3QGzryGAj9uUdXrqGklSeUamwWjddiMPqmW4o33M_rNz-EeiiDnoDPXmn2wYutrh9rJP7SdC3GDJoQOWwDkkLsi-bxZ57tyLw473qgZiQJY40h6GeuAaFihrvPS_8rNypaMFi7pp8rA1V691XudMtN5AhYw05xuMd178c3eDXGPklR3LM7cf1V5owUWdlyCv4g_n6hSKQWRmjR3NmSDjcgmoc4fzBjJ3yly4UdbIrNRWqd8Se7w--7NNSn2X2PB34I5RqoG8QrcT6SR4ac/p.png")
+
 function PortalSala() {
   const [turmaData, setTurmaData] = useState(null);
   const [isAlunoLoggedIn, setIsAlunoLoggedIn] = useState(false);
   const [isProfessorLoggedIn, setIsProfessorLoggedIn] = useState(false);
+  const [estudantes, setEstudantes] = useState([]);
+  const [turmaBuscada, setTurmaBuscada] = useState(sessionStorage.getItem('idTurmaClicada'));
 
   useEffect(() => {
 
@@ -26,8 +30,6 @@ function PortalSala() {
       setIsProfessorLoggedIn(true);
     }
 
-    const turmaBuscada = sessionStorage.getItem('idTurmaClicada');
-
     api.get(`/turmas/buscar-turma-por-id/${turmaBuscada}`, {
       headers: {
         Authorization: `Bearer ${sessionStorage.getItem("token")}`
@@ -36,7 +38,9 @@ function PortalSala() {
       if (json.data === null) {
         toast.error("Não foi possível encontrar a turma!");
       } else {
+        console.log(json.data);
         setTurmaData(json.data);
+        setEstudantes(json.data.alunos);
       }
     }).catch((error) => {
       console.log(error)
@@ -46,6 +50,8 @@ function PortalSala() {
   if (!turmaData) {
     return null; 
   }
+
+  console.log(estudantes);
 
   return (
     <div className='body'>
@@ -58,6 +64,7 @@ function PortalSala() {
         statusEstrela={isAlunoLoggedIn ? "true" : null}
         statusSerie={isAlunoLoggedIn ? "true" : null}
         statusAvatar={isAlunoLoggedIn || isProfessorLoggedIn ? "true" : null}
+        listaEstudantes={estudantes}
       />
       <div className='portalSala'>
         <FaixaTurma
@@ -66,7 +73,9 @@ function PortalSala() {
           codigo={turmaData.senha}
         />
         <div className='telaPrincipal'>
-          <Conteudo />
+          <Conteudo
+          idTurma={turmaBuscada}
+          />
         </div>
       </div>
     </div>

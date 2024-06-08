@@ -5,8 +5,11 @@ import RetanguloInvertivo from '../../imgs/retanguloInvertido.svg'
 import Retangulo from '../../imgs/retangulo.svg'
 import DescricaoAula from '../descricaoAula/descricaoAula';
 import Botao from '../botaoConteudo/botaoConteudo'
+import { useState } from 'react';
 
 function ModalConteudo({ isOpen, onClose, escolaridade, setEscolaridade, ...props }) {
+    const aula = props.conteudoAula;
+
     const BACKGROUND_STYLE = {
         position: 'fixed',
         top: '0',
@@ -50,23 +53,14 @@ function ModalConteudo({ isOpen, onClose, escolaridade, setEscolaridade, ...prop
                                 </span>
                                 </div>
                                 <div className='aulasDescricao'>
-                                <DescricaoAula
-                                numeroAula='01'
-                                nomeAula='While'
-                                descricaoTexto='Lorem ipsum dolor sit amet consectetur. Nisi rhoncus diam magna ullamcorper Lorem ipsum dolor sit amet consectetur.'
-
-                                />
-                                <DescricaoAula
-                                numeroAula='02'
-                                nomeAula='For'
-                                descricaoTexto='Lorem ipsum dolor sit amet consectetur. Nisi rhoncus diam magna ullamcorper Lorem ipsum dolor sit amet consectetur.'
-                                />
-                                <DescricaoAula
-                                numeroAula='03'
-                                nomeAula='Do While'
-                                descricaoTexto='Lorem ipsum dolor sit amet consectetur. Nisi rhoncus diam magna ullamcorper Lorem ipsum dolor sit amet consectetur.'
-                                />
-
+                                    {aula.map((aula, index) => (
+                                        <DescricaoAula
+                                            key={index}
+                                            numeroAula={index + 1}
+                                            nomeAula={aula.titulo}
+                                            descricaoTexto={aula.descricao}
+                                        />
+                                    ))}
                                 </div>
                             <Botao
                             text='Atribuir'
