@@ -1,17 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
 .barra-lateral {
   position: fixed;
   top: 0;
   left: 0;
-  height: 100%;
+  height: 120%;
   width: 0px;
-  background-color: #333;
-  color: #fff;
-  padding: 20px;
+  background-color: #ffff;
   overflow-x: hidden;
   display: flex;
-  align-items: left;
+  flex-direction: column;
   z-index: 3;
-  transition: all 1s ease; /* Transição da largura com duração de 0.3 segundos e função de temporização ease-in-out */
+  transition: all 1s ease;
+}
+
+.section-barra-lateral.aberto {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 5;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 .barra-lateral.aberto {
@@ -23,6 +34,127 @@
   cursor: pointer;
 }
 
-.menu-icon{
+.menu-icon {
   width: 150px;
+}
+
+.botao-fechar {
+  width: 22.44px;
+  height: 18.85px;
+  margin-left: 22px;
+  margin-top: 44px;
+}
+
+.container-menu {
+  height: min-content;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logoC {
+  margin-right: 45px;
+  margin-top: 28px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  margin-left: 22px;
+  margin-bottom: 15px;
+  font-size: 15px;
+}
+
+.row span {
+  margin-left: 10px;
+}
+
+.containerRow {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.lineDivisoria {
+  width: 144px;
+  height: 1px;
+  background-color: #D4D4D4;
+  margin-bottom: 20px;
+}
+
+.containerRowTitulo {
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  margin-left: 22px;
+  font-weight: bold;
+}
+
+.containerRowTitulo .nameCodando {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.botaoLogin {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  background-color: #D9D9D9;
+  border-color: #D9D9D9;
+  border-bottom-style: none;
+  color: black;
+  font-size: 10px;
+  width: 100px;
+  font-weight: normal;
+  font-family: "Inter", sans-serif;
+}
+
+.containerScroll {
+  width: 175px;
+  height: 30vh;
+  overflow-y: scroll;
+  margin-left: 22px;
+  scrollbar-width: thin; /* Para Firefox */
+  scrollbar-color: #888 #e0e0e0; /* Para Firefox */
+}
+
+/* Para navegadores baseados em Webkit (Chrome, Safari) */
+.containerScroll::-webkit-scrollbar {
+  width: 8px; /* Largura da barra de rolagem */
+}
+
+.containerScroll::-webkit-scrollbar-track {
+  background: #e0e0e0; /* Cor do track (fundo da barra de rolagem) */
+  border-radius: 10px;
+}
+
+.containerScroll::-webkit-scrollbar-thumb {
+  background-color: #888; /* Cor da parte rolável da barra de rolagem */
+  border-radius: 10px;
+  border: 2px solid #e0e0e0; /* Espaço entre o thumb e o track */
+}
+
+.containerScroll::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* Cor da parte rolável da barra de rolagem quando hover */
+}
+
+.rowAluno {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.rowAluno span {
+  font-size: 12px;
+}
+
+.statusAluno {
+  width: 10px;
+  height: 10px;
+  background-color: #AEF13A;
+  border-radius: 100%;
+  margin-right: 10px;
 }

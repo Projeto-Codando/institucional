@@ -1,15 +1,16 @@
-import './formularioLogin.css'
-import MacacoOculos from '../../imgs/macaco-oculos-esq.png'
-import InputsLogin from '../inputsLogins/inputsLogins'
-import Botao from '../botao/botoes'
-import SubtituloForm from '../subtituloForm/subtituloForm'
+import './formularioLogin.css';
+import MacacoOculos from '../../imgs/macaco-oculos-esq.png';
+import InputsLogin from '../inputsLogins/inputsLogins';
+import Botao from '../botao/botoes';
+import SubtituloForm from '../subtituloForm/subtituloForm';
+
 export default function Formulario(props) {
     return (
         <form className='section-formulario-login'>
             <SubtituloForm
-            checked={false}
-            navigateProfessor='loginProfessor'
-            navigateAluno='login'
+                checked={false}
+                navigateProfessor='loginProfessor'
+                navigateAluno='login'
             />
             <div className='container-formulario-login'>
                 <div className='forms-login'>
@@ -29,15 +30,14 @@ export default function Formulario(props) {
                 </div>
             </div>
             <div className='buttom-login'>
-
                 <Botao
                     backgroundColor="#662E9B"
                     fontSize="20px"
                     border="2px solid black"
                     color="white"
                     display="flex"
-                    align-items="center"
-                    justify-content="center"
+                    alignItems="center"
+                    justifyContent="center"
                     overflow="hidden"
                     width="240px"
                     height="35px"
@@ -46,10 +46,9 @@ export default function Formulario(props) {
                     onClick={props.onClick}
                 />
             </div>
-
             <div className="image-Container">
                 <img src={MacacoOculos} alt="Imagem" />
             </div>
         </form>
-    )
+    );
 }

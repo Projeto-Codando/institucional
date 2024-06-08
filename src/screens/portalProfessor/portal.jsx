@@ -108,6 +108,10 @@ function Portal() {
   const handleModalClose = () => {
     setIsModalOpen(false);
   };
+    setNomeTurma('')
+    setEscolaridade('')
+    setSenhaTurma('')
+    window.location.reload()
 
   return (
     <div className="portalProfessor" style={{ overflow: 'hidden' }}>

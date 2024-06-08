@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './quiz.css';
 
 export default function Quiz(props) {
+
     const [selectedOption, setSelectedOption] = useState(null);
     const [isCorrect, setIsCorrect] = useState(null);
 
@@ -30,8 +31,10 @@ export default function Quiz(props) {
             </div>
             <div className='quizRespostas'>
                 <div className="quiz-question">
+
                     {['1', '2', '3', '4'].map((option, index) => {
                         const correct = index === 0;
+                        
                         const isSelected = selectedOption === index;
                         const optionClass = isSelected ? (isCorrect ? 'correct' : 'incorrect') : '';
 

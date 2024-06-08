@@ -1,8 +1,3 @@
-.body *{
-    overflow: hidden;
-    overflow-y: hidden;
-    
-}
 .portalSala{
         position: absolute;
         display: flex;

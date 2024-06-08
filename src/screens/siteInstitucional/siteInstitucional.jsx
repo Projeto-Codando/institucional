@@ -1,4 +1,4 @@
-import Header from '../../componentes/header/header'
+import Header from "../../componentes/headerLoginCadastro/headerLogin";
 import Card from '../../componentes/card/card'
 import VideoPlayer from '../../componentes/videoPlayer/videoPlayer'
 import BannerComBotao from '../../componentes/bannerComBotao/bannerComBotao'
@@ -9,16 +9,51 @@ import imgAluno from '../../imgs/aluno_img.svg'
 import macacoFofo from '../../imgs/MacacoFofo.svg'
 import macacoOculos from '../../imgs/MacacoOculos.svg'
 import controleImg from '../../imgs/Controle.svg'
+import Logo from "../../imgs/Logo.svg";
 import CardComIMG from '../../componentes/cardComImagem/cardComImagem'
 import './siteInstitucional.css'
 import { SobreProjeto } from '../../componentes/sobreProjeto/sobreProjeto.js'
+import { useEffect, useState } from 'react';
 
 
 
-function SiteInstitucional(){
-  return(
+function SiteInstitucional() {
+
+  const [isAlunoLoggedIn, setIsAlunoLoggedIn] = useState(false);
+  const [isProfessorLoggedIn, setIsProfessorLoggedIn] = useState(false);
+
+  useEffect(() => {
+
+    const apelido = sessionStorage.getItem("apelido");
+    const email = sessionStorage.getItem("email");
+
+    if(apelido){
+      setIsAlunoLoggedIn(true);
+    }
+    if(email){
+      setIsProfessorLoggedIn(true);
+    }
+
+  }, []);
+
+
+  return (
     <div className="siteInstitucional">
-      <Header className='container' />
+
+      <Header
+        logo={Logo}
+        statusBotao1={isAlunoLoggedIn || isProfessorLoggedIn ? null : "true"}
+        statusBotao2={isAlunoLoggedIn || isProfessorLoggedIn ? null : "true"}
+        statusLogoff={isAlunoLoggedIn || isProfessorLoggedIn ? null : "true"}
+        statusLogin={isAlunoLoggedIn || isProfessorLoggedIn ? "true" : null}
+        statusLoginAluno={isAlunoLoggedIn ? "true" : null}
+        statusLoginProfessor={isProfessorLoggedIn ? "true" : null}
+        statusEstrela={isAlunoLoggedIn ? "true" : null}
+        statusSerie={isAlunoLoggedIn ? "true" : null}
+        statusAvatar={isAlunoLoggedIn || isProfessorLoggedIn ? "true" : null}
+      />
+
+
       <BannerComBotao className='container' />
       <h1 style={{ color: "#662E9B", fontSize: '48px' }}>Escreva o codigo!</h1>
       <div className='section escreva-codigo'>
@@ -43,7 +78,7 @@ function SiteInstitucional(){
           alignItems: 'center',
           display: 'flex',
           flexDirection: 'column',
-          
+
         }}
           img={imgProf}
           alt="Imagem professor ensinando os alunos"
@@ -53,10 +88,10 @@ function SiteInstitucional(){
           funcionamento executivo, como resolução de problemas e planejamento, bem como
           pensamento geométrico e matemático.'
           statusBotao="false"
-          cadastroPath= 'cadastroProfessor'
+          cadastroPath='cadastroProfessor'
         />
 
-        <CardComIMG 
+        <CardComIMG
           img={imgAluno}
           alt="Imagem aluno estudando no seu notebook"
           titulo='Alunos'
@@ -65,13 +100,13 @@ function SiteInstitucional(){
           ele é incentivado a explorar conceitos complexos de programação de uma maneira envolvente e cativante,
           tornando o aprendizado uma experiência dinâmica e divertida.'
           statusBotao="false"
-          cadastroPath= 'cadastro'
-          
+          cadastroPath='cadastro'
+
         />
       </div>
       <div className='container' >
-        <h1  style={{color: 'black', fontSize: '48px'}}>
-        As crianças vão amar aprender a codificar
+        <h1 style={{ color: 'black', fontSize: '48px' }}>
+          As crianças vão amar aprender a codificar
         </h1>
       </div>
       <div className='container section-valores'>
@@ -100,8 +135,8 @@ function SiteInstitucional(){
           descricao="As crianças aprendem a programar em um ambiente envolvente e gratificante, com elementos de jogos que tornam a experiência educacional estimulante."
         />
       </div>
-      <SobreProjeto/>
-      <Faq/>
+      <SobreProjeto />
+      <Faq />
       <Footer />
     </div>
 

@@ -124,7 +124,8 @@
     border-radius: 100%;
     display: flex;
     align-items: center;
-    justify-content: center
+    justify-content: center;
+    cursor: pointer;
 }
 .nivel span{
     font-size: 56px;
@@ -225,3 +226,32 @@
     align-items: center;
 }
 
+.cardAula.hidden {
+    display: none;
+}
+
+.cardAula.visible {
+    display: flex;
+}
+
+.nivel-selecionado {
+    background: #F3DE2C; 
+    width: 120px;
+    height: 120px;
+    cursor: default;
+}
+
+.nivel-selecionado span{
+    color: white;
+    font-size: 80px;
+}
+
+.borda-nivel{
+    width: 110px;
+    height: 110px;
+    border-radius: 100%;
+    border-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;    
+}
