@@ -92,7 +92,6 @@ function Portal() {
     setNomeTurma('')
     setEscolaridade('')
     setSenhaTurma('')
-    window.location.reload()
 
   } catch (error) {
     if (error instanceof Yup.ValidationError) {

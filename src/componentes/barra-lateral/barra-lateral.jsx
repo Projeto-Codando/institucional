@@ -17,6 +17,7 @@ import IconPasta from '../../imgs/IconPasta.png'
 import IconUsers from '../../imgs/IconUsers.png'
 import { useNavigate } from 'react-router-dom'
 
+const apelidoAluno = sessionStorage.getItem("apelidoUser")
 
 function BarraLateral(props) {
   const [open, setOpen] = useState(false);
@@ -146,48 +147,22 @@ function BarraLateral(props) {
             </div>
           )
           }
-          {props.login && (
-            <div className='containerScroll'>
-              <div className='rowAluno'>
-                <img src={AvatarZebra} alt="avatar do aluno" />
-                <span>Nome Aluno</span>
-                <div className='statusAluno'></div>
-              </div>
-              <div className='rowAluno'>
-                <img src={AvatarZebra} alt="avatar do aluno" />
-                <span>Nome Aluno</span>
-                <div className='statusAluno'></div>
-              </div>
-              <div className='rowAluno'>
-                <img src={AvatarZebra} alt="avatar do aluno" />
-                <span>Nome Aluno</span>
-                <div className='statusAluno'></div>
-              </div>
-              <div className='rowAluno'>
-                <img src={AvatarZebra} alt="avatar do aluno" />
-                <span>Nome Aluno</span>
-                <div className='statusAluno'></div>
-              </div>
-              <div className='rowAluno'>
-                <img src={AvatarZebra} alt="avatar do aluno" />
-                <span>Nome Aluno</span>
-                <div className='statusAluno'></div>
-              </div>
-              <div className='rowAluno'>
-                <img src={AvatarZebra} alt="avatar do aluno" />
-                <span>Nome Aluno</span>
-                <div className='statusAluno'></div>
-              </div>
-              <div className='rowAluno'>
-                <img src={AvatarZebra} alt="avatar do aluno" />
-                <span>Nome Aluno</span>
-                <div className='statusAluno'></div>
-              </div>
-            </div>
-          )
-          }
-
-
+          <div className='containerScroll' id="listaAlunosLogados">
+            {props.login && Array.isArray(props.listaAlunos) && (
+              console.log(props.listaAlunos),
+              props.listaAlunos
+                .filter(aluno => aluno.apelido !== apelidoAluno)
+                .map((aluno) => {
+                  return (
+                    <div className='rowAluno'>
+                      <img src={AvatarZebra} alt="Avatar do Aluno" />
+                      <span>@{aluno.apelido}</span>
+                      <div className={'statusAluno' + aluno.status}></div>
+                    </div>
+                  )
+                })
+            )}
+          </div>
         </div>
       </div>
 

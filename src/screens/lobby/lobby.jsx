@@ -5,6 +5,8 @@ import MetadeFloresta from "../../imgs/background-floresta-cortado.png";
 import Estrela from '../../imgs/estrela.png';
 import Start from '../../imgs/start.png';
 import { useEffect, useState } from 'react';
+import api from '../../api';
+import { toast } from 'react-toastify';
 
 const nomeTurma = sessionStorage.getItem("nomeTurma");
 const codigo = sessionStorage.getItem("senhaTurma");
@@ -15,10 +17,21 @@ function Lobby() {
     const [nomeUsuario, setNomeUsuario] = useState("");
     const [avatar, setAvatar] = useState(0);
     const [nivelSelecionado, setNivelSelecionado] = useState(1); 
-    
+    const [turma, setTurma] = useState({});
+
 
     useEffect(() => {
-        const nome = sessionStorage.getItem("nomeUser");
+        api.get(`/turmas/buscar-turma-por-id/${sessionStorage.getItem("idTurma")}`, {
+            headers: {
+                Authorization: `Bearer ${sessionStorage.getItem("token")}`
+            }
+        }).then((json) => {
+            setTurma(json.data.alunos);
+        }).catch(() => {
+            toast.error("Não foi possível encontrar a turma!");
+        })
+
+        const nome = sessionStorage.getItem("apelidoUser");
         const avatar = sessionStorage.getItem("ImagemURL_AVATAR");
         setNomeUsuario(nome);
         setAvatar(avatar);
@@ -37,6 +50,7 @@ function Lobby() {
                 statusAvatar="true"
                 statusLogin='true'
                 statusLoginAluno='true'
+                listaAlunos = {turma}
             />
             <div className='sectionRotas'>
                 <div className='containerBemVindo'>
@@ -44,12 +58,13 @@ function Lobby() {
                     <div className='cardsBemVindo'>
                         <div className='bemVindo'>
                             <img src={avatar} alt="Imagem avatar" style={{borderRadius: "360px"}}/>
-                            <span>Bem Vindo(a), <br />{nomeUsuario}</span>
+                            <span>Bem Vindo(a), <br />
+                            @{nomeUsuario}</span>
                         </div>
                         <div className='cardTema'>
                             <div className='tema'>
                                 <span className='span1'>Tema atual:</span>
-                                <span className='span2'>Laço de Repetição</span>
+                                <span className='span2'>Condicional</span>
                                 <button className='botaoBemVindo'> <img src={Start} alt="" />Continue</button>
                             </div>
                         </div>
@@ -98,11 +113,11 @@ function Lobby() {
                         <div className={`cardAula ${nivelSelecionado === 1 ? 'visible' : 'hidden'}`}>
                             <div className='materia'>
                                 <span className='aula'>Aula 01</span>
-                                <span className='tituloMateria'>Logica de Programação</span>
+                                <span className='tituloMateria'>Condicional</span>
                             </div>
-                            <div className='titulo'><span>Laço de Repetição</span></div>
+                            <div className='titulo'><span>If / Else</span></div>
                             <div className='subtituloAula'>
-                                <span>Lorem ipsum dolor sit amet consec tetur. Nisi rhoncus diam magna ullamcorper Lorem ipsum dolor sit amet consectetur.</span>
+                                <span>Aula detalhada sobre a combinação das estruturas condicionais if e else, incluindo exemplos de uso em fluxos de controle.</span>
                             </div>
                             <div className='estrelaAula'>
                                 <img src={Estrela} alt="estrelaAula" /> <span>0 / 5</span>
@@ -113,11 +128,11 @@ function Lobby() {
                         <div className={`cardAula ${nivelSelecionado === 2 ? 'visible' : 'hidden'}`}>
                             <div className='materia'>
                                 <span className='aula'>Aula 02</span>
-                                <span className='tituloMateria'>Logica de Programação</span>
+                                <span className='tituloMateria'>Condicional</span>
                             </div>
-                            <div className='titulo'><span>Laço de Repetição</span></div>
+                            <div className='titulo'><span>Switch Case</span></div>
                             <div className='subtituloAula'>
-                                <span>Lorem ipsum dolor sit amet consec tetur. Nisi rhoncus diam magna ullamcorper Lorem ipsum dolor sit amet consectetur.</span>
+                                <span>Aula explicativa sobre a estrutura condicional switch case, ideal para selecionar entre várias opções baseadas em uma única variável.</span>
                             </div>
                             <div className='estrelaAula'>
                                 <img src={Estrela} alt="estrelaAula" /> <span>0 / 5</span>
@@ -130,7 +145,7 @@ function Lobby() {
                                 <span className='aula'>Aula 03</span>
                                 <span className='tituloMateria'>Logica de Programação</span>
                             </div>
-                            <div className='titulo'><span>Laço de Repetição</span></div>
+                            <div className='titulo'><span>Variável</span></div>
                             <div className='subtituloAula'>
                                 <span>Lorem ipsum dolor sit amet consec tetur. Nisi rhoncus diam magna ullamcorper Lorem ipsum dolor sit amet consectetur.</span>
                             </div>

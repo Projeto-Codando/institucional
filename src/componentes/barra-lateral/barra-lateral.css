@@ -151,10 +151,18 @@
   font-size: 12px;
 }
 
-.statusAluno {
+.statusAlunoAtivo{
   width: 10px;
   height: 10px;
   background-color: #AEF13A;
+  border-radius: 100%;
+  margin-right: 10px;
+}
+
+.statusAlunoInativo{
+  width: 10px;
+  height: 10px;
+  background-color: #d1d1d1;
   border-radius: 100%;
   margin-right: 10px;
 }
