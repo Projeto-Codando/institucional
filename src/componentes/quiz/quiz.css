@@ -1,7 +1,7 @@
 .quiz{
     background-color: #662E9B;
     width: 498px;
-    height: 486px;
+    height: max-content;
     border-radius: 50px;
     display: flex;
     flex-direction: column;
@@ -37,21 +37,22 @@
 .tituloQuiz{
     text-align: center;
     margin-top: 20px;
+    margin-bottom: 25px;
 }
 
 .tituloQuiz span{
-    font-size: 30px;
+    font-size: 15px;
     font-weight: bold;
     color: white;
 }
 
 .exemplo{
     width: 366px;
-    height: 79px;
+    height: max-content;
     background-color: #B8B8B8;
     border: solid 2px black;
     border-radius: 10px;
-    margin-top: 25px;
+    
     margin-bottom: 25px;
     padding: 10px;
 }
@@ -113,6 +114,6 @@
 }
 
 .quiz-option.incorrect {
-    background-color: red;
+    background-color: #FF0000;
     color: white;
 }

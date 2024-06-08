@@ -16,7 +16,8 @@ function Botao(props) {
       justifyContent: 'center',
       padding: props.padding || '',
       overflow: 'hidden',
-      type: props.type || 'button'
+      type: props.type || 'button',
+      marginBottom: props.marginBottom
     }} onClick={props.onClick}>
       {props.texto}
     </button>

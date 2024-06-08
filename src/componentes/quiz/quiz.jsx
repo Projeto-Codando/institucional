@@ -1,14 +1,30 @@
 import React, { useState } from 'react';
 import './quiz.css';
+import ModalConteudoQuiz from '../modalConteudo/modalConteudoQuiz';
 
 export default function Quiz(props) {
 
     const [selectedOption, setSelectedOption] = useState(null);
     const [isCorrect, setIsCorrect] = useState(null);
 
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const openModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
+
     const handleOptionClick = (correct, index) => {
         setSelectedOption(index);
         setIsCorrect(correct);
+        if (correct && props.onCorrect) {
+            setTimeout(() => {
+                openModal();
+            }, 500); // Delay de 0,5 segundos
+        }
     };
 
     return (
@@ -16,25 +32,24 @@ export default function Quiz(props) {
             <div className='topBarQuiz'>
                 <span>&lt; Voltar</span>
                 <span className='tituloTopBar'>QUIZ</span>
-                <span>2 de 7</span>
+                <span>{props.numeroQuestao} de {props.qtdQuestao}</span>
             </div>
             <div className='linhaDivisor'></div>
-            <div className='tituloQuiz'> <span>Quantos passos o macaco tem que andar para pegar a banana ?</span>
-            </div>
-            <div className='exemplo'>
-                <span>
-                    {`for (int i = 1; i <= totalPassos; i++) {`}  <br/> 
-                        {`System.out.println("O macaco deu " + i + " passos");`} <br/>
-                    {`}`}
-                </span>
-
-            </div>
+            <div className='tituloQuiz'><span>{props.tituloQuiz}</span></div>
+            {props.statusExemplo && (
+                <div className='exemplo'>
+                    <span>{props.exemplo}</span>
+                </div>
+            )}
             <div className='quizRespostas'>
                 <div className="quiz-question">
-
-                    {['1', '2', '3', '4'].map((option, index) => {
-                        const correct = index === 0;
-                        
+                    <ModalConteudoQuiz
+                    isOpen={isModalOpen}
+                    onClose={closeModal}
+                    
+                    />
+                    {[props.opcao1, props.opcao2, props.opcao3, props.opcao4].map((option, index) => {
+                        const correct = index === props.indexCorreto;
                         const isSelected = selectedOption === index;
                         const optionClass = isSelected ? (isCorrect ? 'correct' : 'incorrect') : '';
 

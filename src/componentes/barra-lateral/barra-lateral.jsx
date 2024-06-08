@@ -17,9 +17,11 @@ import IconPasta from '../../imgs/IconPasta.png';
 import IconUsers from '../../imgs/IconUsers.png';
 import { useNavigate } from 'react-router-dom';
 import ModalEscolhaAvatar from '../modalEscolhaAvatar/modalEscolhaAvatar';
+import ModalComprarAvatar from '../modalComprarAvatar/modalComprarAvatar';
+
 const apelidoAluno = sessionStorage.getItem("apelidoUser")
 const avatarSession = sessionStorage.getItem("ImagemURL_AVATAR")
-import ModalComprarAvatar from '../modalComprarAvatar/modalComprarAvatar';
+
 
 function BarraLateral(props) {
     const [isModalOpen, setIsModalOpen] = useState(false);

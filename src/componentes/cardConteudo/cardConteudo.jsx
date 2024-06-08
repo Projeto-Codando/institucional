@@ -1,5 +1,5 @@
 import './cardConteudo.css'
-import Tema  from '../tema/tema'
+import Tema from '../tema/tema'
 
 
 export default function CardConteudo(props) {
@@ -9,10 +9,10 @@ export default function CardConteudo(props) {
                 <h1>{props.titulo}</h1>
             </div>
             <Tema
-            tituloTema="Laço de Repetição"
+                tituloTema="Laço de Repetição"
             />
             <Tema
-            tituloTema="Condicional"></Tema>
-                    </div>
+                tituloTema="Condicional"></Tema>
+        </div>
     )
 }
