@@ -1,0 +1,14 @@
+.botao-modal{
+    display: flex;
+    align-items: end;
+}
+.botao-modal button {
+    width: 200px;
+    height: 50px;
+    border: black 1px solid;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    background-color: #FB6107;
+    color: white;
+}

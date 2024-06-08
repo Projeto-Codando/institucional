@@ -1,5 +1,7 @@
-*{
+.body *{
     overflow: hidden;
+    overflow-y: hidden;
+    
 }
 .portalSala{
         position: absolute;
@@ -14,6 +16,7 @@
     }
 
     .telaPrincipal{
+
         display: flex;
         justify-content: center;
         width: 95%;

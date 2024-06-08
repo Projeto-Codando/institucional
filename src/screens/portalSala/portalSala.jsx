@@ -8,8 +8,8 @@ import Estudantes from '../../componentes/estudantes/estudantes';
 
 function portalSala() {
     return (
-        <div >
-            <Header className='container' />
+        <div className='body'>
+            <Header className='container'/>
             <div className='portalSala'>
                 <FaixaTurma
                     text="6C-2024"
@@ -17,7 +17,7 @@ function portalSala() {
                     codigo="31204"
                 />
                 <div className='telaPrincipal'>
-                <Estudantes/>
+                <Progresso/>
                 </div>
              
                 

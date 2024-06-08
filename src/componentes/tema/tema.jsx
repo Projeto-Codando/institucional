@@ -1,8 +1,26 @@
 import './tema.css'
 import Bolinhas from '../bolinhas/bolinhas'
+import React, { useState } from 'react';
+import ModalConteudo from '../modalConteudo/modalConteudo';
 export default function Tema(props) {
+    
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const openModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
+
     return (
-        <div className='tema'>
+        <div className='temaDescricao'>
+            <ModalConteudo
+             isOpen={isModalOpen}
+             onClose={closeModal}
+             temaTitulo={props.tituloTema}
+             />
             <div className='tituloTema'>
                 {props.tituloTema}
                 <div className='linhaFina'></div>
@@ -19,9 +37,10 @@ export default function Tema(props) {
                     numeroAula='4'/>
 
                 </div>
-                <div className='verMais'>
+                <button className='verMais' onClick={openModal} >
                     Ver Mais
-                </div>
+                </button>
+                
             </div>
         </div>
 
