@@ -41,6 +41,7 @@ export default function HeaderLogin(props) {
             loginProfessor={props.statusLoginProfessor}
             login={props.statusLogin}
             listaAlunos={props.listaAlunos}
+            listaEstudantes={props.listaEstudantes}
             />
             <div className="logo">
                 <img src={props.logo} alt="Logo codando" />
