@@ -6,6 +6,7 @@ import Estrela from '../../imgs/estrela.png'
 import { useNavigate } from 'react-router-dom'
 import React, { useEffect, useState } from 'react'
 import Avatar from '../../imgs/img-avatar.png'
+import ModalEscolhaAvatar from '../modalEscolhaAvatar/modalEscolhaAvatar.jsx'
 
 export default function HeaderLogin(props) {
 
@@ -13,6 +14,16 @@ export default function HeaderLogin(props) {
     const [moedas, setMoedas] = useState(0)
     const [avatar, setAvatar] = useState(0)
     const navigate = useNavigate()
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+
+    const openModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
 
     useEffect(() => {
         const handleStorageChange = () => {
@@ -83,9 +94,14 @@ export default function HeaderLogin(props) {
                     </div>
                 )}
                 {props.statusAvatar && (
-                    <div className='avatar'>
+                    <div className='avatar' onClick={openModal}>
                         <img src={avatar || Avatar} alt="imagem do avatar" style={{width: "59px", height: "59px"}}/>
+                        <ModalEscolhaAvatar
+                        isOpen={isModalOpen}
+                        onClose={closeModal}
+                        />
                     </div>
+                    
                 )}
             </div>
         </header>

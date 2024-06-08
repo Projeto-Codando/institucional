@@ -23,7 +23,7 @@ function Cadastro() {
 
     useEffect(() => {
 
-        const apelido = sessionStorage.getItem("apelido");
+        const apelido = sessionStorage.getItem("apelidoUser");
         const email = sessionStorage.getItem("email");
 
         if (apelido) {
