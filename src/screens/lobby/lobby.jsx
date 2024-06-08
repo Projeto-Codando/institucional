@@ -72,7 +72,7 @@ function Lobby() {
                     <div className='cardsBemVindo'>
                         <div className='bemVindo'>
                             <img src={avatar} alt="Imagem avatar" style={{borderRadius: "360px"}}/>
-                            <span>Bem Vindo(a), <br />
+                            <span>Bem vindo(a), <br />
                             @{nomeUsuario}</span>
                         </div>
                         <div className='cardTema'>
