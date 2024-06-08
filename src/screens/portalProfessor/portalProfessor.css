@@ -21,5 +21,8 @@
 .cardTurma.blur {
   filter: blur(2px);
 }
+.catdTurmas {
+  display: flex;
+}
 
   
