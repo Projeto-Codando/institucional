@@ -66,7 +66,7 @@ function PortalSala() {
           codigo={turmaData.senha}
         />
         <div className='telaPrincipal'>
-          <Progresso />
+          <Conteudo />
         </div>
       </div>
     </div>

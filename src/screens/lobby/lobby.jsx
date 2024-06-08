@@ -25,6 +25,7 @@ function Lobby() {
                 Authorization: `Bearer ${sessionStorage.getItem("token")}`
             }
         }).then((json) => {
+            console.log(json.data)
             setTurma(json.data.alunos);
         }).catch(() => {
             toast.error("Não foi possível encontrar a turma!");
@@ -35,7 +36,7 @@ function Lobby() {
         setNomeUsuario(nome);
         setAvatar(avatar);
 
-        const apelido = sessionStorage.getItem("apelido");
+        const apelido = sessionStorage.getItem("apelidoUser");
         const email = sessionStorage.getItem("email");
 
         if (apelido) {
@@ -63,6 +64,7 @@ function Lobby() {
                 statusEstrela={isAlunoLoggedIn ? "true" : null}
                 statusSerie={isAlunoLoggedIn ? "true" : null}
                 statusAvatar={isAlunoLoggedIn || isProfessorLoggedIn ? "true" : null}
+                listaAlunos={turma}
             />
             <div className='sectionRotas'>
                 <div className='containerBemVindo'>

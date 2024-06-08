@@ -17,6 +17,8 @@ import IconPasta from '../../imgs/IconPasta.png';
 import IconUsers from '../../imgs/IconUsers.png';
 import { useNavigate } from 'react-router-dom';
 import ModalEscolhaAvatar from '../modalEscolhaAvatar/modalEscolhaAvatar';
+const apelidoAluno = sessionStorage.getItem("apelidoUser")
+const avatarSession = sessionStorage.getItem("ImagemURL_AVATAR")
 
 function BarraLateral(props) {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -34,8 +36,6 @@ function BarraLateral(props) {
     function changeStateBar() {
         setOpen(!open);
     }
-
-    console.log('Rendering BarraLateral', { isModalOpen, open });
 
     return (
         <div>
@@ -58,8 +58,8 @@ function BarraLateral(props) {
                                 <img src={IconBox} alt="Planos" />
                                 <span>Planos</span>
                             </div>
-                            <ModalEscolhaAvatar 
-                                isOpen={isModalOpen} 
+                            <ModalEscolhaAvatar
+                                isOpen={isModalOpen}
                                 onClose={closeModal} />
                             <div className='row'>
                                 <img src={IconFaq} alt="F.A.Q" />
@@ -145,17 +145,23 @@ function BarraLateral(props) {
                             </div>
                         </div>
                     )}
-                    {props.login && (
-                        <div className='containerScroll'>
-                            {[...Array(7)].map((_, index) => (
-                                <div key={index} className='rowAluno'>
-                                    <img src={AvatarZebra} alt="avatar do aluno" />
-                                    <span>Nome Aluno</span>
-                                    <div className='statusAluno'></div>
-                                </div>
-                            ))}
-                        </div>
-                    )}
+                    <div className='containerScroll' id="listaAlunosLogados">
+                        {props.login && Array.isArray(props.listaAlunos) && (
+                            console.log(props.listaAlunos),
+                            props.listaAlunos
+                                .filter(aluno => aluno.apelido !== apelidoAluno)
+                                .map((aluno) => {
+                                    return (
+                                        <div className='rowAluno'>
+                                            <img src={avatarSession} style={{width: '24px', height: '24px'}} alt="Avatar do Aluno" />
+                                            <span>@{aluno.apelido}</span>
+                                            <div className={'statusAluno' + aluno.status}></div>
+                                        </div>
+                                    )
+                                }
+                            )
+                        )}
+                    </div>
                 </div>
             </div>
         </div>
