@@ -16,6 +16,7 @@ function PortalSala() {
   const [isAlunoLoggedIn, setIsAlunoLoggedIn] = useState(false);
   const [isProfessorLoggedIn, setIsProfessorLoggedIn] = useState(false);
   const [estudantes, setEstudantes] = useState([]);
+  const [turmaBuscada, setTurmaBuscada] = useState(sessionStorage.getItem('idTurmaClicada'));
 
   useEffect(() => {
 
@@ -28,8 +29,6 @@ function PortalSala() {
     if (email) {
       setIsProfessorLoggedIn(true);
     }
-
-    const turmaBuscada = sessionStorage.getItem('idTurmaClicada');
 
     api.get(`/turmas/buscar-turma-por-id/${turmaBuscada}`, {
       headers: {
@@ -63,7 +62,6 @@ function PortalSala() {
         statusSerie={isAlunoLoggedIn ? "true" : null}
         statusAvatar={isAlunoLoggedIn || isProfessorLoggedIn ? "true" : null}
         listaEstudantes={estudantes}
-        
       />
       <div className='portalSala'>
         <FaixaTurma
@@ -72,7 +70,9 @@ function PortalSala() {
           codigo={turmaData.senha}
         />
         <div className='telaPrincipal'>
-          <Conteudo />
+          <Conteudo
+          idTurma={turmaBuscada}
+          />
         </div>
       </div>
     </div>

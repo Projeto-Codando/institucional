@@ -11,7 +11,6 @@ import IconUser from '../../imgs/IconUser.png';
 import IconPay from '../../imgs/IconPlay.png';
 import IconGlobe from '../../imgs/IconGlobe.png';
 import IconQuestion from '../../imgs/IconQuestion.png';
-import AvatarZebra from '../../imgs/avatarAlunoZebra.png';
 import IconClip from '../../imgs/IconClip.png';
 import IconPasta from '../../imgs/IconPasta.png';
 import IconUsers from '../../imgs/IconUsers.png';
@@ -48,8 +47,7 @@ function BarraLateral(props) {
     function changeStateBar() {
         setOpen(!open);
     }
-    console.log("Login usuario " + props.login)
-    console.log("Lista alunos " + JSON.stringify(props.listaAlunos))
+
     return (
         <div>
             <div className="menu-icon" style={{ width: '150px', display: 'flex' }}>
@@ -140,7 +138,6 @@ function BarraLateral(props) {
                             </div>
                             <div className='containerScroll' id="listaAlunosLogados">
                                 {Array.isArray(props.listaAlunos) && (
-                                    console.log(props.listaAlunos),
                                     props.listaAlunos
                                         .filter(aluno => aluno.apelido !== apelidoAluno)
                                         .map((aluno) => {
@@ -188,7 +185,6 @@ function BarraLateral(props) {
                             </div>
                             <div className="containerScroll">
                                 {props.listaEstudantes && Array.isArray(props.listaEstudantes) && (
-                                    console.log(props.listaEstudantes),
                                     props.listaEstudantes.map((estudante) => {
                                         return (
                                             <div className='rowAluno' key={estudante.id}>
