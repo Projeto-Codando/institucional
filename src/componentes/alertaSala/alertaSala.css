@@ -1,0 +1,33 @@
+.alertaSala{
+    display: flex;
+    border-radius: 20px;
+ width: 300px;
+ height: 100px;
+}
+.tituloAlerta {
+
+    display: flex;
+    padding-left: 20px;
+    align-items: center;
+    height: 40px;
+    justify-content: start;
+    gap: 10px;
+}
+.textos {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
+.imagemAlerta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30%;
+}
+.imagemAlerta img {
+    width: 50px;
+    height: max-content;
+}
+.descricao {
+    padding-left: 20px;
+}

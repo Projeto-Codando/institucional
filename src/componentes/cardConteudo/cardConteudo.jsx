@@ -1,4 +1,6 @@
 import './cardConteudo.css'
+import Tema  from '../tema/tema'
+
 
 export default function CardConteudo(props) {
     return (
@@ -6,6 +8,11 @@ export default function CardConteudo(props) {
             <div className='tituloConteudo'>
                 <h1>{props.titulo}</h1>
             </div>
-        </div>
+            <Tema
+            tituloTema="Laço de Repetição"
+            />
+            <Tema
+            tituloTema="Condicional"></Tema>
+                    </div>
     )
 }

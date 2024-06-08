@@ -5,6 +5,7 @@ import Progresso from '../../componentes/progresso/progresso';
 import Conteudo from '../../componentes/conteudos/conteudos';
 import Logo from '../../imgs/verde-logo.svg'
 import { useEffect, useState } from 'react';
+import Estudantes from '../../componentes/estudantes/estudantes';
 
 function PortalSala() {
 
@@ -44,9 +45,12 @@ function PortalSala() {
                     codigo="31204"
                 />
                 <div className='telaPrincipal'>
-                    <Conteudo />
+                <Progresso
+                
+                />
                 </div>
-
+             
+                
             </div>
         </div>
 

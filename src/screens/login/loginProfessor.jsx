@@ -71,10 +71,7 @@ function LoginProfessor() {
                 });
             }
         }
-
-
     }
-
     return (
         <div>
             <Header

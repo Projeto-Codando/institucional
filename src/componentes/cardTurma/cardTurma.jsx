@@ -1,22 +1,30 @@
-import React, { useState } from 'react'
-import './cardTurma.css'
-import TurmaImg1 from '../../imgs/CardTurma1.png'
-import SerieImg from '../../imgs/Serie.svg'
-import QtdAlunosImg from '../../imgs/qtdAlunos.svg'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEllipsis } from '@fortawesome/free-solid-svg-icons'
-import ModalEdicao from '../modalEdicao/modalEdicao.js'
-import api from '../../api'
-
+import React, { useState } from 'react';
+import './cardTurma.css';
+import TurmaImg1 from '../../imgs/CardTurma1.png';
+import SerieImg from '../../imgs/Serie.svg';
+import QtdAlunosImg from '../../imgs/qtdAlunos.svg';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEllipsis } from '@fortawesome/free-solid-svg-icons';
+import ModalEdicao from '../modalCriacao/modalEdicao.js';
+import api from '../../api';
 
 function CardTurma(props) {
-    const [openModal, setOpenModal] = useState(false)
-    const [menuAberto, setMenuAberto] = useState(false)
-    const [cardVisivel, setCardVisivel] = useState(true)
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const openModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
+
+    const [menuAberto, setMenuAberto] = useState(false);
+    const [cardVisivel, setCardVisivel] = useState(true);
 
     const toggleMenu = () => {
-        setMenuAberto(!menuAberto)
-    }
+        setMenuAberto(!menuAberto);
+    };
 
     const arquivarCard = () => {
         api.post(`/turmas/desativar/${sessionStorage.getItem("userId")}/${props.idCard}`, {}, {
@@ -24,13 +32,13 @@ function CardTurma(props) {
                 Authorization: `Bearer ${sessionStorage.getItem('token')}`
             }
         }).then(response => {
-            console.log(response)
+            console.log(response);
         }).catch(error => {
-            console.error(error)
-        })
+            console.error(error);
+        });
 
-        setCardVisivel(false)
-    }
+        setCardVisivel(false);
+    };
 
     const cardTurmaStyle = {
         overflow: props.configCardTurma.overflow,
@@ -39,9 +47,9 @@ function CardTurma(props) {
         width: props.configCardTurma.width,
         color: props.configCardTurma.color,
         position: 'relative',
-        zIndex: '2',
+    
         display: cardVisivel ? 'block' : 'none',
-    }
+    };
 
     const menuStyle = {
         display: 'flex',
@@ -56,20 +64,32 @@ function CardTurma(props) {
         zIndex: '999',
         boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
         width: '150px',
-    }
+    };
 
     return (
         <div className='cardTurma' style={cardTurmaStyle} idCard={props.idCard}>
-            <ModalEdicao isOpen={openModal} setModalOpen={() => setOpenModal(!openModal)} />
+            <ModalEdicao
+                edicaoNomeTurma={props.edicaoNomeTurma}
+                edicaoSenhaTurma={props.edicaoSenhaTurma}
+                value={props.value}
+                isOpen={isModalOpen}
+                onClose={closeModal}
+                nomeTurma={props.turma}
+                escolaridade={props.serie}
+                senhaTurma={props.senhaTurma}
+                setNomeTurma={props.setNomeTurma}
+                setEscolaridade={props.setEscolaridade}
+                setSenhaTurma={props.setSenhaTurma}
+                onClick={props.onClick}
+            />
             <div className='reticencias' style={{ display: 'flex', justifyContent: 'end', paddingRight: '50px', paddingTop: '20px' }}>
                 <FontAwesomeIcon icon={faEllipsis} style={{ height: '30px', cursor: 'pointer' }} onClick={toggleMenu} />
                 {menuAberto && (
                     <div className='menuOpcoes' style={menuStyle}>
-                        <div style={{ height: '30px', cursor: 'pointer' }} onClick={() => setOpenModal(true)} className='opcaoMenu'>Editar</div>
+                        <div style={{ height: '30px', cursor: 'pointer' }} onClick={openModal} className='opcaoMenu'>Editar</div>
                         <div style={{ padding: '0', height: '1px', width: '100%', backgroundColor: 'rgba(000, 000, 000, 0.5)' }} className='linha'></div>
                         <div style={{ height: '30px', cursor: 'pointer' }} className='opcaoMenu' onClick={arquivarCard}>Arquivar</div>
                     </div>
-
                 )}
             </div>
             <div className="imagemCardTurma" style={{ borderRadius: '20px' }}>
@@ -87,7 +107,7 @@ function CardTurma(props) {
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
-export default CardTurma
+export default CardTurma;

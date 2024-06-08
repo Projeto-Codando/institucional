@@ -1,6 +1,8 @@
 .conteudo {
-    display: flex;
+    scroll-behavior: auto;
+    display: -webkit-inline-box;
     align-items: center;
     width: 100%;
     padding: 30px;
+    gap: 20px;
 }
