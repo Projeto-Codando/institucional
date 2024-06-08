@@ -35,7 +35,7 @@ function Lobby() {
         setNomeUsuario(nome);
         setAvatar(avatar);
 
-        const apelido = sessionStorage.getItem("apelido");
+        const apelido = sessionStorage.getItem("apelidoUser");
         const email = sessionStorage.getItem("email");
 
         if (apelido) {

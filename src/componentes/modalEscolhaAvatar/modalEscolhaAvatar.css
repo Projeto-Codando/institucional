@@ -11,7 +11,6 @@
     justify-content: center;
     align-items: center;
     height: 100%;
-        
 }
 
 .linha-avatar{
@@ -75,6 +74,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
+    overflow-y: scroll;
 }
 
 .avatar{
@@ -99,4 +99,3 @@
     border-radius: 20px;
     border: 0px solid #fff; /* Espaço entre o thumb e o track */
 }
-
