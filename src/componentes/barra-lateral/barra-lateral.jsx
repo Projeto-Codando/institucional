@@ -17,12 +17,14 @@ import IconPasta from '../../imgs/IconPasta.png';
 import IconUsers from '../../imgs/IconUsers.png';
 import { useNavigate } from 'react-router-dom';
 import ModalEscolhaAvatar from '../modalEscolhaAvatar/modalEscolhaAvatar';
+import ModalComprarAvatar from '../modalComprarAvatar/modalComprarAvatar';
 
 const apelidoAluno = sessionStorage.getItem("apelidoUser");
 const avatarSession = sessionStorage.getItem("ImagemURL_AVATAR");
 
 function BarraLateral(props) {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isModalCompraOpen, setIsModalCompraOpen] = useState(false);
     const [open, setOpen] = useState(false);
     const navigate = useNavigate();
 
@@ -33,6 +35,15 @@ function BarraLateral(props) {
     const closeModal = () => {
         setIsModalOpen(false);
     };
+
+    const openModalCompra = () => {
+        setIsModalCompraOpen(true);
+    };
+
+    const closeModalCompra = () => {
+        setIsModalCompraOpen(false);
+    };
+
 
     function changeStateBar() {
         setOpen(!open);
@@ -56,7 +67,7 @@ function BarraLateral(props) {
                                 <img src={IconHome} alt="Home" />
                                 <span>Inicio</span>
                             </div>
-                            <div className='row' onClick={openModal}>
+                            <div className='row' >
                                 <img src={IconBox} alt="Planos" />
                                 <span>Planos</span>
                             </div>
@@ -65,6 +76,7 @@ function BarraLateral(props) {
                                 <img src={IconFaq} alt="F.A.Q" />
                                 <span>F.A.Q</span>
                             </div>
+
                             <div className='containerRow'>
                                 <div className='lineDivisoria'></div>
                             </div>
@@ -81,24 +93,33 @@ function BarraLateral(props) {
                                 <img src={IconHome} alt="Home" />
                                 <span>Inicio</span>
                             </div>
-                            <div className='row'>
+                            <div className='row' onClick={openModalCompra}>
                                 <img src={IconBox} alt="Banana" />
                                 <span>Banana Points</span>
                             </div>
-                            <div className='row'>
+                            <ModalComprarAvatar
+                                isOpen={isModalCompraOpen}
+                                onClose={closeModalCompra}
+                            />
+                        </div>
+                    )}
+                    {props.loginAluno && (
+                        <div>
+                            <div className='row' onClick={openModal}>
                                 <img src={IconUser} alt="Perfil" />
                                 <span>Perfil</span>
                             </div>
+                            <ModalEscolhaAvatar
+                                isOpen={isModalOpen}
+                                onClose={closeModal}
+                            />
+
                             <div className='containerRow'>
                                 <div className='lineDivisoria'></div>
                             </div>
                             <div className='containerRowTitulo'>
                                 <span className='nameCodando'>Codando</span>
                             </div>
-                        </div>
-                    )}
-                    {props.loginAluno && (
-                        <div>
                             <div className='row'>
                                 <img src={IconPay} alt="Play" />
                                 <span>Continuar jogo</span>
@@ -137,6 +158,12 @@ function BarraLateral(props) {
                     )}
                     {props.loginProfessor && (
                         <div>
+                            <div className='containerRow'>
+                                <div className='lineDivisoria'></div>
+                            </div>
+                            <div className='containerRowTitulo'>
+                                <span className='nameCodando'>Codando</span>
+                            </div>
                             <div className='row'>
                                 <img src={IconUsers} alt="Users" />
                                 <span>Turmas</span>

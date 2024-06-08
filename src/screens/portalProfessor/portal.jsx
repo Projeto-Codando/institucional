@@ -1,7 +1,8 @@
-import Header from '../../componentes/header/header'
+import Header from '../../componentes/headerLoginCadastro/headerLogin'
 import CardTurmaCadastro from '../../componentes/cardTurmaCadastro/cardTurmaCadastro'
 import CardTurma from '../../componentes/cardTurma/cardTurma'
 import Ajuda from '../../componentes/ajuda/ajuda'
+import Logo from '../../imgs/verde-logo.svg'
 import { useNavigate } from 'react-router-dom'
 import React, { useEffect, useState } from 'react'
 import './portalProfessor.css'
@@ -19,6 +20,8 @@ function Portal() {
   const [senhaTurma, setSenhaTurma] = useState('')
   const [turmas, setTurmas] = useState([])
   const fkEducador = sessionStorage.getItem('userId')
+  const [isAlunoLoggedIn, setIsAlunoLoggedIn] = useState(false);
+  const [isProfessorLoggedIn, setIsProfessorLoggedIn] = useState(false);
 
   const validationSchema = Yup.object().shape({
     nomeTurma: Yup.string().required('Campo Obrigatório'),
@@ -49,6 +52,17 @@ function Portal() {
     }).catch(error => {
       console.error(error)
     })
+
+    const apelido = sessionStorage.getItem("apelidoUser");
+    const email = sessionStorage.getItem("email");
+
+    if(apelido){
+      setIsAlunoLoggedIn(true);
+    }
+    if(email){
+      setIsProfessorLoggedIn(true);
+    }
+
   }, [])
 
   const handleClickCard = (idCard) => {
@@ -108,7 +122,16 @@ function Portal() {
   }
   return (
     <div className="portalProfessor" style={{ overflow: 'hidden' }}>
-      <Header className="container" />
+      <Header
+        logo={Logo}
+        statusLogoff={isAlunoLoggedIn || isProfessorLoggedIn ? null : "true"}
+        statusLogin={isAlunoLoggedIn || isProfessorLoggedIn ? "true" : null}
+        statusLoginAluno={isAlunoLoggedIn ? "true" : null}
+        statusLoginProfessor={isProfessorLoggedIn ? "true" : null}
+        statusEstrela={isAlunoLoggedIn ? "true" : null}
+        statusSerie={isAlunoLoggedIn ? "true" : null}
+        statusAvatar={isAlunoLoggedIn || isProfessorLoggedIn ? "true" : null}
+      />
       <div className="portal">
         <h1 style={{ color: "#ffffff", fontSize: '32px' }}>Bem vindo(a), {sessionStorage.getItem("nome")}</h1>
         <div className="CardTurmas" style={{ display: 'flex', flexDirection: 'row', gap: '50px' }}>

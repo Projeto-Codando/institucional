@@ -36,7 +36,7 @@ function ModalEscolhaAvatar({ isOpen, onClose }) {
                                     width='150px'
                                     border='white 1px solid'
                                     fontSize='22px'
-                                
+
                                 />
                                 <Botao
                                     backgroundColor='#FB6107'
@@ -46,7 +46,7 @@ function ModalEscolhaAvatar({ isOpen, onClose }) {
                                     width='150px'
                                     border='white 1px solid'
                                     fontSize='22px'
-                                    
+
                                 />
                             </div>
                         </div>

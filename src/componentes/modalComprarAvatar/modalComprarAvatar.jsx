@@ -4,7 +4,7 @@ import Avatar from '../../imgs/avatar-gato.png'
 import Botao from '../../componentes/botao/botoes'
 
 
-function ModalEscolhaAvatar({ }) {
+function ModalEscolhaAvatar({isOpen, onClose }) {
     
     if (isOpen) {
         return (
@@ -13,42 +13,19 @@ function ModalEscolhaAvatar({ }) {
                     <div className='card-avatar'>
                         <div className='linha-avatar'>
                             <div className='titulo-avatar'>
-                                <span>Escolha o Avatar!</span>
+                                <span>Loja de Avatares!</span>
                             </div>
-                            <img src={Close} alt="botao fechar" />
+                            <img src={Close} alt="botao fechar" onClick={onClose} />
                         </div>
                         <div className='linha-avatar'>
                             <div className='imagem-avatar'>
                                 <img src={Avatar} alt="" />
                             </div>
                             <div className='avatares'>
-                                <div className='avatar'></div>
-                                <div className='avatar'></div>
-                                <div className='avatar'></div>
-                                <div className='avatar'></div>
-                                <div className='avatar'></div>
-                                <div className='avatar'></div>
-                                <div className='avatar'></div>
-                                <div className='avatar'></div>
-                                <div className='avatar'></div>
-                                <div className='avatar'></div>
-                                <div className='avatar'></div>
-                                <div className='avatar'></div>
-                                <div className='avatar'></div>
-                                <div className='avatar'></div> 
-                                <div className='avatar'></div>
-                                <div className='avatar'></div>
-                                <div className='avatar'></div>
-                                <div className='avatar'></div>
-                                <div className='avatar'></div>
-                                <div className='avatar'></div>
-                                <div className='avatar'></div> 
-                                <div className='avatar'></div>
-                                <div className='avatar'></div>
-                                <div className='avatar'></div>
-                                <div className='avatar'></div>
-                                <div className='avatar'></div>
-                                <div className='avatar'></div>
+                                {/* Avatares */}
+                                {[...Array(26)].map((_, index) => (
+                                    <div key={index} className='avatar'></div>
+                                ))}
                             </div>
                         </div>
 
@@ -57,21 +34,13 @@ function ModalEscolhaAvatar({ }) {
                                 <Botao
                                 backgroundColor='#FB6107' 
                                 cor='#FFF' 
-                                texto='Salvar'
+                                texto='Comprar'
                                 padding='5px'
                                 width='150px'
                                 border='white 1px solid'
                                 fontSize= '22px'
                                 />
-                                <Botao
-                                backgroundColor='#FB6107' 
-                                cor='#FFF' 
-                                texto='Cancelar'
-                                padding='5px'
-                                width='150px'
-                                border='white 1px solid'
-                                fontSize= '22px'
-                                />
+                        
                             </div>
                         </div>
 
