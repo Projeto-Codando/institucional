@@ -8,7 +8,7 @@ import { faEllipsis } from '@fortawesome/free-solid-svg-icons';
 import ModalEdicao from '../modalCriacao/modalEdicao.js';
 import api from '../../api';
 
-function CardTurma(props) {
+function CardTurma({ onClick, ...props}) {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const openModal = () => {
@@ -67,7 +67,7 @@ function CardTurma(props) {
     };
 
     return (
-        <div className='cardTurma' style={cardTurmaStyle} idCard={props.idCard}>
+        <div className='cardTurma' style={cardTurmaStyle} idCard={props.idCard} onClick={onClick}>
             <ModalEdicao
                 edicaoNomeTurma={props.edicaoNomeTurma}
                 edicaoSenhaTurma={props.edicaoSenhaTurma}

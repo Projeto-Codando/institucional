@@ -1,8 +1,8 @@
-.botao-modal{
+.botao-conteudo{
     display: flex;
     align-items: end;
 }
-.botao-modal button {
+.botao-conteudo button {
     width: 200px;
     height: 50px;
     border: black 1px solid;

@@ -8,10 +8,6 @@ import { useEffect, useState } from 'react';
 import api from '../../api';
 import { toast } from 'react-toastify';
 
-const nomeTurma = sessionStorage.getItem("nomeTurma");
-const codigo = sessionStorage.getItem("senhaTurma");
-const nomeUsuario = sessionStorage.getItem("nomeUser");
-
 function Lobby() {
 
     const [nomeUsuario, setNomeUsuario] = useState("");
