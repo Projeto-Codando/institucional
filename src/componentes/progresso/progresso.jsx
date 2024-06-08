@@ -1,6 +1,4 @@
 import './progresso.css'
-import Alerta from '../../imgs/AlertaTeste.svg'
-import Alerta2 from '../../imgs/AlertaTeste2.svg'
 import AlertaSala from '../alertaSala/alertaSala'
 import DetalhesAula from '../detalhesAula/detalhesAula'
 

@@ -17,7 +17,9 @@ function portalSala() {
                     codigo="31204"
                 />
                 <div className='telaPrincipal'>
-                <Progresso/>
+                <Progresso
+                
+                />
                 </div>
              
                 
