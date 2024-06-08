@@ -10,9 +10,6 @@ import { useState } from 'react';
 function ModalConteudo({ isOpen, onClose, escolaridade, setEscolaridade, ...props }) {
     const aula = props.conteudoAula;
 
-    console.log('Aula')
-    console.log(aula)
-
     const BACKGROUND_STYLE = {
         position: 'fixed',
         top: '0',

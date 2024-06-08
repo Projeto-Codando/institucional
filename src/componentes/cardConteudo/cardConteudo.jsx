@@ -3,7 +3,6 @@ import Tema from '../tema/tema'
 
 export default function CardConteudo(props) {
     const temas = props.temas;
-    console.log("Lista de temas " + temas);
 
     return (
         <div className='cardConteudo'>

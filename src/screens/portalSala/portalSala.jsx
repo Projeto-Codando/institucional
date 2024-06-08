@@ -38,6 +38,7 @@ function PortalSala() {
       if (json.data === null) {
         toast.error("Não foi possível encontrar a turma!");
       } else {
+        console.log(json.data);
         setTurmaData(json.data);
         setEstudantes(json.data.alunos);
       }
@@ -49,6 +50,8 @@ function PortalSala() {
   if (!turmaData) {
     return null; 
   }
+
+  console.log(estudantes);
 
   return (
     <div className='body'>
