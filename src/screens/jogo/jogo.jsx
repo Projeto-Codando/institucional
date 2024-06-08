@@ -1,5 +1,5 @@
 import './jogo.css'
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Header from "../../componentes/headerLoginCadastro/headerLogin";
 import Logo from "../../imgs/logo-roxo.png"
 import Quiz from '../../componentes/quiz/quiz';
@@ -11,15 +11,38 @@ import IconControle from '../../imgs/iconControle.png'
 import IconControleRoxo from '../../imgs/iconControleRoxo.png'
 
 function Jogo() {
+
+    const [isAlunoLoggedIn, setIsAlunoLoggedIn] = useState(false);
+    const [isProfessorLoggedIn, setIsProfessorLoggedIn] = useState(false);
+
+    useEffect(() => {
+
+        const apelido = sessionStorage.getItem("apelido");
+        const email = sessionStorage.getItem("email");
+
+        if (apelido) {
+            setIsAlunoLoggedIn(true);
+        }
+        if (email) {
+            setIsProfessorLoggedIn(true);
+        }
+
+    }, []);
+
+
     return (
         <div className='jogo'>
             <Header
                 logo={Logo}
-                statusEstrela="true"
-                statusSerie="true"
-                statusAvatar="true"
-                statusLogin='true'
-                statusLoginAluno='true'
+                statusBotao1={isAlunoLoggedIn || isProfessorLoggedIn ? null : "true"}
+                statusBotao2={isAlunoLoggedIn || isProfessorLoggedIn ? null : "true"}
+                statusLogoff={isAlunoLoggedIn || isProfessorLoggedIn ? null : "true"}
+                statusLogin={isAlunoLoggedIn || isProfessorLoggedIn ? "true" : null}
+                statusLoginAluno={isAlunoLoggedIn ? "true" : null}
+                statusLoginProfessor={isProfessorLoggedIn ? "true" : null}
+                statusEstrela={isAlunoLoggedIn ? "true" : null}
+                statusSerie={isAlunoLoggedIn ? "true" : null}
+                statusAvatar={isAlunoLoggedIn || isProfessorLoggedIn ? "true" : null}
             />
             <div className='sectionJogo'>
                 <div className='niveisJogo'>

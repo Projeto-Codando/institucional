@@ -12,7 +12,10 @@ function Lobby() {
 
     const [nomeUsuario, setNomeUsuario] = useState("");
     const [avatar, setAvatar] = useState(0);
-    const [nivelSelecionado, setNivelSelecionado] = useState(1); 
+    const [nivelSelecionado, setNivelSelecionado] = useState(1);
+    const [isAlunoLoggedIn, setIsAlunoLoggedIn] = useState(false);
+    const [isProfessorLoggedIn, setIsProfessorLoggedIn] = useState(false);
+
     const [turma, setTurma] = useState({});
 
 
@@ -31,6 +34,16 @@ function Lobby() {
         const avatar = sessionStorage.getItem("ImagemURL_AVATAR");
         setNomeUsuario(nome);
         setAvatar(avatar);
+
+        const apelido = sessionStorage.getItem("apelido");
+        const email = sessionStorage.getItem("email");
+
+        if (apelido) {
+            setIsAlunoLoggedIn(true);
+        }
+        if (email) {
+            setIsProfessorLoggedIn(true);
+        }
     }, []);
 
     const handleNivelClick = (nivel) => {
@@ -41,12 +54,15 @@ function Lobby() {
         <div className='rotaNiveis'>
             <Header
                 logo={Logo}
-                statusEstrela="true"
-                statusSerie="true"
-                statusAvatar="true"
-                statusLogin='true'
-                statusLoginAluno='true'
-                listaAlunos = {turma}
+                statusBotao1={isAlunoLoggedIn || isProfessorLoggedIn ? null : "true"}
+                statusBotao2={isAlunoLoggedIn || isProfessorLoggedIn ? null : "true"}
+                statusLogoff={isAlunoLoggedIn || isProfessorLoggedIn ? null : "true"}
+                statusLogin={isAlunoLoggedIn || isProfessorLoggedIn ? "true" : null}
+                statusLoginAluno={isAlunoLoggedIn ? "true" : null}
+                statusLoginProfessor={isProfessorLoggedIn ? "true" : null}
+                statusEstrela={isAlunoLoggedIn ? "true" : null}
+                statusSerie={isAlunoLoggedIn ? "true" : null}
+                statusAvatar={isAlunoLoggedIn || isProfessorLoggedIn ? "true" : null}
             />
             <div className='sectionRotas'>
                 <div className='containerBemVindo'>
@@ -69,38 +85,38 @@ function Lobby() {
                 <div className='containerRota'>
                     <div className='rota'>
                         <div className='cardNiveis1'>
-                            <div 
-                                className={`nivel ${nivelSelecionado === 1 ? 'nivel-selecionado' : ''}`} 
+                            <div
+                                className={`nivel ${nivelSelecionado === 1 ? 'nivel-selecionado' : ''}`}
                                 onClick={() => handleNivelClick(1)}
-                            > 
-                                <span>1</span> 
+                            >
+                                <span>1</span>
                             </div>
-                            <div 
-                                className={`nivel ${nivelSelecionado === 2 ? 'nivel-selecionado' : ''}`} 
+                            <div
+                                className={`nivel ${nivelSelecionado === 2 ? 'nivel-selecionado' : ''}`}
                                 onClick={() => handleNivelClick(2)}
-                            > 
-                                <span>2</span> 
+                            >
+                                <span>2</span>
                             </div>
                         </div>
                         <div className='containerNivel'>
                             <div className='cardNiveis2'>
-                                <div 
-                                    className={`nivel ${nivelSelecionado === 3 ? 'nivel-selecionado' : ''}`} 
+                                <div
+                                    className={`nivel ${nivelSelecionado === 3 ? 'nivel-selecionado' : ''}`}
                                     onClick={() => handleNivelClick(3)}
-                                > 
-                                    <span>3</span> 
+                                >
+                                    <span>3</span>
                                 </div>
-                                <div 
-                                    className={`nivel ${nivelSelecionado === 4 ? 'nivel-selecionado' : ''}`} 
+                                <div
+                                    className={`nivel ${nivelSelecionado === 4 ? 'nivel-selecionado' : ''}`}
                                     onClick={() => handleNivelClick(4)}
-                                > 
-                                    <span>4</span> 
+                                >
+                                    <span>4</span>
                                 </div>
-                                <div 
-                                    className={`nivel ${nivelSelecionado === 5 ? 'nivel-selecionado' : ''}`} 
+                                <div
+                                    className={`nivel ${nivelSelecionado === 5 ? 'nivel-selecionado' : ''}`}
                                     onClick={() => handleNivelClick(5)}
-                                > 
-                                    <span>5</span> 
+                                >
+                                    <span>5</span>
                                 </div>
                             </div>
                         </div>
@@ -119,7 +135,7 @@ function Lobby() {
                                 <img src={Estrela} alt="estrelaAula" /> <span>0 / 5</span>
                             </div>
                             <div className='botaoAula'><button><img src={Start} alt="" />Iniciar</button></div>
-                        </div>   
+                        </div>
 
                         <div className={`cardAula ${nivelSelecionado === 2 ? 'visible' : 'hidden'}`}>
                             <div className='materia'>
@@ -134,7 +150,7 @@ function Lobby() {
                                 <img src={Estrela} alt="estrelaAula" /> <span>0 / 5</span>
                             </div>
                             <div className='botaoAula'><button><img src={Start} alt="" />Iniciar</button></div>
-                        </div>        
+                        </div>
 
                         <div className={`cardAula ${nivelSelecionado === 3 ? 'visible' : 'hidden'}`}>
                             <div className='materia'>
@@ -149,7 +165,7 @@ function Lobby() {
                                 <img src={Estrela} alt="estrelaAula" /> <span>0 / 5</span>
                             </div>
                             <div className='botaoAula'><button><img src={Start} alt="" />Iniciar</button></div>
-                        </div>   
+                        </div>
 
                         <div className={`cardAula ${nivelSelecionado === 4 ? 'visible' : 'hidden'}`}>
                             <div className='materia'>
@@ -164,9 +180,9 @@ function Lobby() {
                                 <img src={Estrela} alt="estrelaAula" /> <span>0 / 5</span>
                             </div>
                             <div className='botaoAula'><button><img src={Start} alt="" />Iniciar</button></div>
-                        </div>    
+                        </div>
 
-                         <div className={`cardAula ${nivelSelecionado === 5 ? 'visible' : 'hidden'}`}>
+                        <div className={`cardAula ${nivelSelecionado === 5 ? 'visible' : 'hidden'}`}>
                             <div className='materia'>
                                 <span className='aula'>Aula 05</span>
                                 <span className='tituloMateria'>Logica de Programação</span>
@@ -179,7 +195,7 @@ function Lobby() {
                                 <img src={Estrela} alt="estrelaAula" /> <span>0 / 5</span>
                             </div>
                             <div className='botaoAula'><button><img src={Start} alt="" />Iniciar</button></div>
-                        </div>                           
+                        </div>
                     </div>
                 </div>
             </div>

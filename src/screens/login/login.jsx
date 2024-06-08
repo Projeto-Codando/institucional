@@ -1,5 +1,5 @@
 /* eslint-disable no-restricted-globals */
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import api from '../../api';
@@ -14,6 +14,23 @@ function Login() {
     const [apelido, setApelido] = useState("")
     const [senha, setSenha] = useState("")
 
+    const [isAlunoLoggedIn, setIsAlunoLoggedIn] = useState(false);
+    const [isProfessorLoggedIn, setIsProfessorLoggedIn] = useState(false);
+
+    useEffect(() => {
+
+        const apelido = sessionStorage.getItem("apelido");
+        const email = sessionStorage.getItem("email");
+
+        if (apelido) {
+            setIsAlunoLoggedIn(true);
+        }
+        if (email) {
+            setIsProfessorLoggedIn(true);
+        }
+
+    }, []);
+
     const validadionSchema = Yup.object().shape({
         apelido: Yup.string('Apelido inválido').required('Todos os campos devem estar preenchidos'),
         senha: Yup.string().required('Todos os campos devem estar preenchidos').min(8, 'Insira 8 ou mais caractéres')
@@ -27,7 +44,7 @@ function Login() {
             senha
         }
         try {
-            await validadionSchema.validate(objetoAdicionado, {     abortEarly: false });
+            await validadionSchema.validate(objetoAdicionado, { abortEarly: false });
             api.post(`/alunos/login`, objetoAdicionado)
                 .then((json) => {
 
@@ -80,6 +97,7 @@ function Login() {
                 statusBotao2="true"
                 logo={Logo}
                 justifyContent="center"
+                statusLogoff={isAlunoLoggedIn || isProfessorLoggedIn ? null : "true"}
             />
             <section className='sectionBackgroundLogin' >
                 <div className='buttom-voltar'>

@@ -1,5 +1,5 @@
 /* eslint-disable no-restricted-globals */
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import api from '../../api';
@@ -14,6 +14,22 @@ function LoginProfessor() {
     let navigate = useNavigate()
     const [email, setEmail] = useState("")
     const [senha, setSenha] = useState("")
+    const [isAlunoLoggedIn, setIsAlunoLoggedIn] = useState(false);
+    const [isProfessorLoggedIn, setIsProfessorLoggedIn] = useState(false);
+
+    useEffect(() => {
+
+        const apelido = sessionStorage.getItem("apelido");
+        const email = sessionStorage.getItem("email");
+    
+        if(apelido){
+          setIsAlunoLoggedIn(true);
+        }
+        if(email){
+          setIsProfessorLoggedIn(true);
+        }
+    
+    }, []);
 
     const validadionSchema = Yup.object().shape({
         email: Yup.string('E-mail invalido').email('E-mail invalido').required('Todos os campos devem estar preenchidos'),
@@ -62,6 +78,7 @@ function LoginProfessor() {
                 statusBotao2="true"
                 logo={Logo}
                 justifyContent="center"
+                statusLogoff={isAlunoLoggedIn || isProfessorLoggedIn ? null : "true"}
             />
             <section className='sectionBackgroundLoginProfessor' >
                 <div className='buttom-voltar'>
