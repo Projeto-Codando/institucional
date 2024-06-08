@@ -6,6 +6,16 @@ export default function Conteudo(props) {
         <div className='conteudo'>
             <CardConteudo
             titulo="Lógica de Programação"/>
+             <CardConteudo
+            titulo="Lógica de Programação"/>
+             <CardConteudo
+            titulo="Lógica de Programação"/>
+             <CardConteudo
+            titulo="Lógica de Programação"/>
+             <CardConteudo
+            titulo="Lógica de Programação"/>
+             <CardConteudo
+            titulo="Lógica de Programação"/>
         </div>
     )
 }

@@ -1,8 +1,6 @@
-*{
-  overflow-x: hidden;
-}
+
 .header{
-  overflow: hidden;
+  overflow-x: hidden;
   padding: 0 15vh;
   margin: 10px 0px;
   display: flex;

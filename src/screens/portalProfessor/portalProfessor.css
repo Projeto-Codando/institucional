@@ -14,5 +14,12 @@
     background-size: cover;
     text-align: start;
 }
+.modalAberto {
+  z-index: 9999;
+}
+
+.cardTurma.blur {
+  filter: blur(2px);
+}
 
   
