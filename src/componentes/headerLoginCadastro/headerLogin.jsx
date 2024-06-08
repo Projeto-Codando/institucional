@@ -5,6 +5,7 @@ import BarraLateral from '../barra-lateral/barra-lateral'
 import Estrela from '../../imgs/estrela.png'
 import { useNavigate } from 'react-router-dom'
 import React, { useEffect, useState } from 'react'
+import Avatar from '../../imgs/img-avatar.png'
 
 export default function HeaderLogin(props) {
 
@@ -82,7 +83,7 @@ export default function HeaderLogin(props) {
                 )}
                 {props.statusAvatar && (
                     <div className='avatar'>
-                        <img src={avatar} alt="imagem do avatar" style={{width: "59px", height: "59px"}}/>
+                        <img src={avatar || Avatar} alt="imagem do avatar" style={{width: "59px", height: "59px"}}/>
                     </div>
                 )}
             </div>

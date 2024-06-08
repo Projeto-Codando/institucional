@@ -1,6 +1,6 @@
 /* eslint-disable no-restricted-globals */
 import './cadastro.css'
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Logo from "../../imgs/Logo.svg"
 import { toast } from 'react-toastify';
@@ -17,6 +17,24 @@ function Cadastro() {
   const [apelido, setApelido] = useState("")
   const [senhaTurma, setSenhaTurma] = useState("")
   const [senha, setSenha] = useState("")
+
+  const [isAlunoLoggedIn, setIsAlunoLoggedIn] = useState(false);
+    const [isProfessorLoggedIn, setIsProfessorLoggedIn] = useState(false);
+
+    useEffect(() => {
+
+        const apelido = sessionStorage.getItem("apelido");
+        const email = sessionStorage.getItem("email");
+
+        if (apelido) {
+            setIsAlunoLoggedIn(true);
+        }
+        if (email) {
+            setIsProfessorLoggedIn(true);
+        }
+
+    }, []);
+  
 
   const validadionSchema = Yup.object().shape({
     nome: Yup.string('Nome inválido').matches(/^[A-Za-zÀ-ÿ]+$/, 'Nome inválido').required('Todos os campos devem estar preenchidos'),
@@ -62,13 +80,16 @@ function Cadastro() {
         });
       }
     }
+
+    
   }
   return (
     <div>
       <Header
-        statusBotao1="true"
         logo={Logo}
         justifyContent="center"
+        statusBotao1={isAlunoLoggedIn || isProfessorLoggedIn ? null : "true"}
+        statusLogoff={isAlunoLoggedIn || isProfessorLoggedIn ? null : "true"}
       />
 
       <section className='sectionBackgroundCadastro' >
