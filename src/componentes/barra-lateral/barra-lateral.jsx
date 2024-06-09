@@ -117,6 +117,7 @@ function BarraLateral(props) {
                             <ModalEscolhaAvatar
                                 isOpen={isModalOpen}
                                 onClose={closeModal}
+                                listaAvatares={props.listaAvatares}
                             />
 
                             <div className='containerRow'>

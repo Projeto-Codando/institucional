@@ -2,16 +2,16 @@ import './modalEscolhaAvatar.css';
 import Close from '../../imgs/botao-close.png';
 import Avatar from '../../imgs/avatar-gato.png';
 import Botao from '../../componentes/botao/botoes';
-import { useState, useContext } from 'react';
-import { AvatarContext } from '../../componentes/modalEscolhaAvatar/avatarContext';
-import api from '../../api';
+import { useState } from 'react';
 import { toast } from 'react-toastify';
+import api from '../../api';
 
 function ModalEscolhaAvatar({ isOpen, onClose, onAvatarChange }) {
     const [selectedAvatar, setSelectedAvatar] = useState(null);
     const [nomeAvatar, setNomeAvatar] = useState("Avatar");
-    const avatares = useContext(AvatarContext);
-    const [atualizarAvatar, setAtualizarAvatar] = useState();
+
+    const avatares = JSON.parse(sessionStorage.getItem("avatares"));
+
 
     if (!isOpen) {
         return null;
@@ -20,6 +20,8 @@ function ModalEscolhaAvatar({ isOpen, onClose, onAvatarChange }) {
     const handleSave = async () => {
         const idAluno = sessionStorage.getItem("userId");
         const selectedAvatarData = avatares.find(avatar => avatar.imagemURL === selectedAvatar);
+
+        console.log(selectedAvatarData)
 
         if (selectedAvatarData) {
             const idAvatar = selectedAvatarData.id;
@@ -30,19 +32,20 @@ function ModalEscolhaAvatar({ isOpen, onClose, onAvatarChange }) {
                         Authorization: `Bearer ${sessionStorage.getItem('token')}`
                     }
                 });
-                console.log(response);
                 sessionStorage.setItem('idAvatar', idAvatar);
                 sessionStorage.setItem('ImagemURL_AVATAR', selectedAvatar);
                 window.location.reload();
-                setAtualizarAvatar(onAvatarChange)
+                onAvatarChange();
                 toast.success("Avatar alterado com sucesso!");
                 onClose();
             } catch (error) {
+
                 toast.error("Não foi possível alterar o avatar! " + (error.response?.data?.message || ''));
             }
+        } else {
+            toast.error("Avatar não selecionado ou inválido!");
         }
     };
-
 
     return (
         <div className='section-avatar'>

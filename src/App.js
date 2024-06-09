@@ -17,7 +17,7 @@ import Jogo5 from './screens/jogo/jogo5'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Lobby from './screens/lobby/lobby';
 import 'react-toastify/dist/ReactToastify.css';
-import { AvatarProvider } from './componentes/modalEscolhaAvatar/avatarContext'; // Import AvatarProvider
+import { AvatarProvider } from './componentes/avatarContext/avatarContext';
 
 function App() {
   return (

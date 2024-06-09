@@ -9,21 +9,20 @@ export const AvatarProvider = ({ children }) => {
     useEffect(() => {
         const fetchAvatars = async () => {
             try {
-                console.log("Attempting to fetch avatars...");
                 const token = sessionStorage.getItem("token");
                 if (!token) {
-                    console.error("No token found in session storage");
+                    console.error("O token não foi encontrado!");
                     return;
                 }
 
-                console.log("Token found, making API request...");
+                console.log("Token encontrado!");
                 const response = await api.get('/avatares', {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
                 });
                 setAvatares(response.data);
-                console.log("Avatares fetched successfully:", response.data);
+                console.log("Avatares carregados:", response.data)
             } catch (error) {
                 console.error("Error fetching avatars:", error);
             }
