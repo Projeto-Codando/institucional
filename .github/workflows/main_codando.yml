@@ -24,11 +24,13 @@ jobs:
       - name: npm install
         run: npm install
 
-      - name: Run ESLint
-        run: npx eslint 'src/**/*.{js,jsx,ts,tsx}' || true
+      - name: Lint JavaScript files
+        run: npx eslint 'src/**/*.{js,jsx,ts,tsx}' --max-warnings=0
 
-      - name: Fix ESLint errors
-        run: npx eslint 'src/**/*.{js,jsx,ts,tsx}' --fix || true
+      - name: Run CSS linter
+        run: |
+          npx stylelint "src/**/*.css" --max-warnings=0 || true
+          npx postcss "src/**/*.css" --use autoprefixer -o dist/styles.css || true
 
       - name: Build the project
         run: npm run build
