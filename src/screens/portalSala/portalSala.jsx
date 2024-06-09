@@ -77,7 +77,7 @@ function PortalSala() {
         <div className='telaPrincipal'>
           {visibleComponent === 'Conteudo' && <Conteudo />}
           {visibleComponent === 'Progresso' && <Progresso />}
-          {visibleComponent === 'Estudantes' && <Estudantes />}
+          {visibleComponent === 'Estudantes' && <Estudantes listaEstudantes={estudantes}/>}
         </div>
       </div>
     </div>

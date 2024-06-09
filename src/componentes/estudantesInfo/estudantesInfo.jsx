@@ -7,7 +7,7 @@ export default function estudantesInfo(props) {
             <div className='selectImagem'>
             <input type="checkbox" />
             <div className='avatarAtividade'>
-            <img src={props.AvatarAluno} alt="imagem do aluno" />
+            <img src={props.AvatarAluno} alt="imagem do aluno" style={{width: '50px', borderRadius: 360}}/>
             </div>
                         </div>
 

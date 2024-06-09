@@ -6,6 +6,10 @@ import Setinha from '../../imgs/setinhaEstudantes.svg';
 import EstudantesInfo from '../estudantesInfo/estudantesInfo';
 
 export default function Estudantes(props) {
+
+    const alunosTurma = props.listaEstudantes
+    const avatarGenerico = sessionStorage.getItem('defaultAvatar')
+
     return (
         <div className="estudantes">
             <div className='barraNavegacao'>
@@ -38,19 +42,12 @@ export default function Estudantes(props) {
                 </div>
             </div>
             <div className='estudantesInformacoes'>
-                <EstudantesInfo nomeAluno='Guilherme Santos' apelido='@guido' qtdPontos='10' />
-                <EstudantesInfo nomeAluno='Guilherme Santos' apelido='@guido' qtdPontos='10' />
-                <EstudantesInfo nomeAluno='Guilherme Santos' apelido='@guido' qtdPontos='10' />
-                <EstudantesInfo nomeAluno='Guilherme Santos' apelido='@guido' qtdPontos='10' />
-                <EstudantesInfo nomeAluno='Guilherme Santos' apelido='@guido' qtdPontos='10' />
-                <EstudantesInfo nomeAluno='Guilherme Santos' apelido='@guido' qtdPontos='10' />
-                <EstudantesInfo nomeAluno='Guilherme Santos' apelido='@guido' qtdPontos='10' />
-
-                <EstudantesInfo nomeAluno='Guilherme Santos' apelido='@guido' qtdPontos='10' />
-                <EstudantesInfo nomeAluno='Guilherme Santos' apelido='@guido' qtdPontos='10' />
-                <EstudantesInfo nomeAluno='Guilherme Santos' apelido='@guido' qtdPontos='10' />
-
-                
+                {alunosTurma.map((aluno) => {
+                    return (
+                        <EstudantesInfo nomeAluno={aluno.nome + ' ' + aluno.sobrenome} apelido={'@'+aluno.apelido} qtdPontos={aluno.pontuacao}  AvatarAluno={aluno.avatar[0]?.imagemURL || avatarGenerico}/>
+                    )
+                }
+                )}
             </div>
         </div>
     );
