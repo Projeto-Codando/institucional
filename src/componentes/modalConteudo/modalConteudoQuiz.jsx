@@ -1,9 +1,7 @@
 import React from 'react';
 import './modalConteudo.css';
-import Xzinho from '../../imgs/xModal.svg';
 import RetanguloVerdeInvertivo from '../../imgs/RetanguloVerdeInverso.png';
 import RetanguloVerde from '../../imgs/RetanguloVerde.png';
-import DescricaoAula from '../descricaoAula/descricaoAula';
 import Botao from '../botao/botoes';
 import BananaPoint from '../../imgs/estrela.png';
 import Parabens from '../../imgs/img-parabens.png';
@@ -50,7 +48,7 @@ function ModalConteudo({ isOpen, onClose, onCorrect, ...props }) {
                     <div style={MODAL_STYLE} >
                         <div className='conteudoCard'>
                             <div className='retangulo'>
-                                <img id="retanguloVerde" src={RetanguloVerdeInvertivo} />
+                                <img id="retanguloVerde" src={RetanguloVerdeInvertivo} alt='Retangulo verde'/>
                             </div>
                             <div className='borda' style={{padding: '15px'}}>
                                 <div style={{ display: 'flex', justifyContent: 'start', paddingBottom: '10px', width: '100%', alignItems: 'center', padding: '15px 0px 0px 20px' }}>
@@ -87,7 +85,7 @@ function ModalConteudo({ isOpen, onClose, onCorrect, ...props }) {
                                 />
                             </div>
                             <div className='retangulo'>
-                                <img id="retanguloVerde" src={RetanguloVerde} />
+                                <img id="retanguloVerde" src={RetanguloVerde} alt='Retangulo verde'/>
                             </div>
                         </div>
                     </div>

@@ -31,7 +31,7 @@ function ModalEscolhaAvatar({ isOpen, onClose, onAvatarChange }) {
             const idAvatar = selectedAvatarData.idAvatar || selectedAvatarData.id;
 
             try {
-                const response = await api.put(`avatares/aluno/${idAluno}/avatar-escolhido/${idAvatar}`, {}, {
+                await api.put(`avatares/aluno/${idAluno}/avatar-escolhido/${idAvatar}`, {}, {
                     headers: {
                         Authorization: `Bearer ${sessionStorage.getItem('token')}`
                     }

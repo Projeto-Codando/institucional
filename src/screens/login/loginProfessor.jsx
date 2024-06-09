@@ -8,7 +8,6 @@ import Header from "../../componentes/headerLoginCadastro/headerLogin";
 import Logo from "../../imgs/Logo.svg";
 import * as Yup from 'yup';
 import './login.css'
-import Jogo from '../jogo/jogo1'
 
 function LoginProfessor() {
     let navigate = useNavigate()
