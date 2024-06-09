@@ -1,4 +1,4 @@
-import './jogo.css'
+import './jogo1.css'
 import { useEffect, useState } from 'react';
 import Header from "../../componentes/headerLoginCadastro/headerLogin";
 import Logo from "../../imgs/logo-roxo.png"

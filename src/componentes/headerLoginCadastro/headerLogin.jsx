@@ -1,21 +1,22 @@
 import './headerLogin.css'
-
 import Botao from '../botao/botoes.js'
 import BarraLateral from '../barra-lateral/barra-lateral'
 import Estrela from '../../imgs/estrela.png'
 import { useNavigate } from 'react-router-dom'
 import React, { useEffect, useState } from 'react'
-import Avatar from '../../imgs/img-avatar.png'
 import ModalEscolhaAvatar from '../modalEscolhaAvatar/modalEscolhaAvatar.jsx'
 
 export default function HeaderLogin(props) {
 
     const [escolaridade, setEscolaridade] = useState("")
     const [moedas, setMoedas] = useState(0)
-    const [avatar, setAvatar] = useState(0)
+    const [avatar, setAvatar] = useState()
     const navigate = useNavigate()
     const [isModalOpen, setIsModalOpen] = useState(false);
 
+    const escolaridadeSession = sessionStorage.getItem("escolaridade");
+    const moedasSession = sessionStorage.getItem("moedas");
+    const avatarSession = sessionStorage.getItem("ImagemURL_AVATAR");
 
     const openModal = () => {
         setIsModalOpen(true);
@@ -27,12 +28,9 @@ export default function HeaderLogin(props) {
 
     useEffect(() => {
         const handleStorageChange = () => {
-          const escolaridade = sessionStorage.getItem("escolaridade");
-          const moedas = sessionStorage.getItem("moedas");
-          const avatar = sessionStorage.getItem("ImagemURL_AVATAR");
-          setEscolaridade(escolaridade);
-          setAvatar(avatar);
-          setMoedas(moedas);
+            setEscolaridade(escolaridadeSession);
+            setAvatar(avatarSession);
+            setMoedas(moedasSession);
         };
 
         handleStorageChange();
@@ -40,19 +38,20 @@ export default function HeaderLogin(props) {
         window.addEventListener("storage", handleStorageChange);
 
         return () => {
-          window.removeEventListener('storage', handleStorageChange);
+            window.removeEventListener('storage', handleStorageChange);
         };
-      }, []);
+    }, [avatar, avatarSession, escolaridadeSession, moedasSession]);
 
     return (
         <header className="headerLogin">
-            <BarraLateral 
-            logoff={props.statusLogoff}
-            loginAluno={props.statusLoginAluno}
-            loginProfessor={props.statusLoginProfessor}
-            login={props.statusLogin}
-            listaAlunos={props.listaAlunos}
-            listaEstudantes={props.listaEstudantes}
+            <BarraLateral
+                logoff={props.statusLogoff}
+                loginAluno={props.statusLoginAluno}
+                loginProfessor={props.statusLoginProfessor}
+                login={props.statusLogin}
+                listaAlunos={props.listaAlunos}
+                listaEstudantes={props.listaEstudantes}
+                onUpdateAvatar={props.onUpdateAvatar}
             />
             <div className="logo">
                 <img src={props.logo} alt="Logo codando" />
@@ -96,14 +95,14 @@ export default function HeaderLogin(props) {
                 )}
                 {props.statusAvatar && (
                     <div className='avatar' onClick={openModal}>
-                        <img src={avatar || Avatar} alt="imagem do avatar" style={{width: "59px", height: "59px"}}/>
-                        <ModalEscolhaAvatar
-                        isOpen={isModalOpen}
-                        onClose={closeModal}
-                        />
+                        <img src={avatar} alt="imagem do avatar" style={{ width: "59px", height: "59px" }} />
                     </div>
-                    
+
                 )}
+                <ModalEscolhaAvatar
+                    isOpen={isModalOpen}
+                    onClose={closeModal}
+                />
             </div>
         </header>
 

@@ -20,6 +20,7 @@ export default function Tema(props) {
              isOpen={isModalOpen}
              onClose={closeModal}
              temaTitulo={props.tituloTema}
+             conteudoAula={props.temas}
              />
             <div className='tituloTema'>
                 {props.tituloTema}
@@ -27,15 +28,12 @@ export default function Tema(props) {
             </div>
             <div className='detalhes'>
                 <div className='bolinhasTotais'>
-                    <Bolinhas
-                    numeroAula='1'/>
-                    <Bolinhas
-                    numeroAula='2'/>
-                    <Bolinhas
-                    numeroAula='3'/>
-                    <Bolinhas
-                    numeroAula='4'/>
-
+                    {[...Array(props.qtdAulas)].map((_, index) => (
+                        <Bolinhas
+                            key={index}
+                            numeroAula={index + 1}
+                        />
+                    ))}
                 </div>
                 <button className='verMais' onClick={openModal} >
                     Ver Mais
@@ -43,6 +41,5 @@ export default function Tema(props) {
                 
             </div>
         </div>
-
     )
 }

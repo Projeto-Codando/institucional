@@ -7,17 +7,17 @@ import Start from '../../imgs/start.png';
 import { useEffect, useState } from 'react';
 import api from '../../api';
 import { toast } from 'react-toastify';
-
+import { useNavigate } from 'react-router-dom'
 function Lobby() {
 
     const [nomeUsuario, setNomeUsuario] = useState("");
-    const [avatar, setAvatar] = useState(0);
+    const [avatar, setAvatar] = useState();
     const [nivelSelecionado, setNivelSelecionado] = useState(1);
     const [isAlunoLoggedIn, setIsAlunoLoggedIn] = useState(false);
     const [isProfessorLoggedIn, setIsProfessorLoggedIn] = useState(false);
+    const navigate = useNavigate();
 
     const [turma, setTurma] = useState({});
-
 
     useEffect(() => {
         api.get(`/turmas/buscar-turma-por-id/${sessionStorage.getItem("idTurma")}`, {
@@ -33,6 +33,7 @@ function Lobby() {
 
         const nome = sessionStorage.getItem("apelidoUser");
         const avatar = sessionStorage.getItem("ImagemURL_AVATAR");
+
         setNomeUsuario(nome);
         setAvatar(avatar);
 
@@ -45,7 +46,7 @@ function Lobby() {
         if (email) {
             setIsProfessorLoggedIn(true);
         }
-    }, []);
+    }, [avatar]);
 
     const handleNivelClick = (nivel) => {
         setNivelSelecionado(nivel);
@@ -65,6 +66,7 @@ function Lobby() {
                 statusSerie={isAlunoLoggedIn ? "true" : null}
                 statusAvatar={isAlunoLoggedIn || isProfessorLoggedIn ? "true" : null}
                 listaAlunos={turma}
+                onUpdateAvatar={(avatar) => setAvatar(avatar)}
             />
             <div className='sectionRotas'>
                 <div className='containerBemVindo'>
@@ -136,7 +138,7 @@ function Lobby() {
                             <div className='estrelaAula'>
                                 <img src={Estrela} alt="estrelaAula" /> <span>0 / 5</span>
                             </div>
-                            <div className='botaoAula'><button><img src={Start} alt="" />Iniciar</button></div>
+                            <div className='botaoAula'><button onClick={() => navigate("/jogo/1")}><img src={Start} alt="" />Iniciar</button></div>
                         </div>
 
                         <div className={`cardAula ${nivelSelecionado === 2 ? 'visible' : 'hidden'}`}>
@@ -151,7 +153,7 @@ function Lobby() {
                             <div className='estrelaAula'>
                                 <img src={Estrela} alt="estrelaAula" /> <span>0 / 5</span>
                             </div>
-                            <div className='botaoAula'><button><img src={Start} alt="" />Iniciar</button></div>
+                            <div className='botaoAula'><button onClick={() => navigate("/jogo/2")}><img src={Start} alt="" />Iniciar</button></div>
                         </div>
 
                         <div className={`cardAula ${nivelSelecionado === 3 ? 'visible' : 'hidden'}`}>
@@ -166,7 +168,7 @@ function Lobby() {
                             <div className='estrelaAula'>
                                 <img src={Estrela} alt="estrelaAula" /> <span>0 / 5</span>
                             </div>
-                            <div className='botaoAula'><button><img src={Start} alt="" />Iniciar</button></div>
+                            <div className='botaoAula'><button onClick={() => navigate("/jogo/3")}><img src={Start} alt="" />Iniciar</button></div>
                         </div>
 
                         <div className={`cardAula ${nivelSelecionado === 4 ? 'visible' : 'hidden'}`}>
@@ -181,7 +183,7 @@ function Lobby() {
                             <div className='estrelaAula'>
                                 <img src={Estrela} alt="estrelaAula" /> <span>0 / 5</span>
                             </div>
-                            <div className='botaoAula'><button><img src={Start} alt="" />Iniciar</button></div>
+                            <div className='botaoAula'><button onClick={() => navigate("/jogo/1")}><img src={Start} alt="" />Iniciar</button></div>
                         </div>
 
                         <div className={`cardAula ${nivelSelecionado === 5 ? 'visible' : 'hidden'}`}>
@@ -196,7 +198,7 @@ function Lobby() {
                             <div className='estrelaAula'>
                                 <img src={Estrela} alt="estrelaAula" /> <span>0 / 5</span>
                             </div>
-                            <div className='botaoAula'><button><img src={Start} alt="" />Iniciar</button></div>
+                            <div className='botaoAula'><button onClick={() => navigate("/jogo/1")}><img src={Start} alt="" />Iniciar</button></div>
                         </div>
                     </div>
                 </div>

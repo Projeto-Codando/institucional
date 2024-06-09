@@ -9,6 +9,8 @@ import './login.css'
 import Logo from "../../imgs/Logo.svg";
 import * as Yup from 'yup';
 
+
+
 function Login() {
     let navigate = useNavigate()
     const [apelido, setApelido] = useState("")
@@ -16,6 +18,7 @@ function Login() {
 
     const [isAlunoLoggedIn, setIsAlunoLoggedIn] = useState(false);
     const [isProfessorLoggedIn, setIsProfessorLoggedIn] = useState(false);
+    const [listaAvatares, setListaAvatares] = useState([])
 
     useEffect(() => {
 
@@ -58,7 +61,17 @@ function Login() {
                     sessionStorage.setItem("moedas", json.data.alunoListagemDTO.moedas)
                     sessionStorage.setItem("idTurma", json.data.alunoListagemDTO.idTurma)
                     sessionStorage.setItem("ïdAvatar", json.data.alunoListagemDTO.idAvatar)
-                    sessionStorage.setItem("ImagemURL_AVATAR", "https://previews.dropbox.com/p/thumb/ACQrgeBBcui9gljnEFhmCTgAXZbSMILhpwZmjNgKRXnTMwDJ9qlA6mQBF0G9ZJVpWu6xiQ3QGzryGAj9uUdXrqGklSeUamwWjddiMPqmW4o33M_rNz-EeiiDnoDPXmn2wYutrh9rJP7SdC3GDJoQOWwDkkLsi-bxZ57tyLw473qgZiQJY40h6GeuAaFihrvPS_8rNypaMFi7pp8rA1V691XudMtN5AhYw05xuMd178c3eDXGPklR3LM7cf1V5owUWdlyCv4g_n6hSKQWRmjR3NmSDjcgmoc4fzBjJ3yly4UdbIrNRWqd8Se7w--7NNSn2X2PB34I5RqoG8QrcT6SR4ac/p.png")
+                    sessionStorage.setItem("avatares", JSON.stringify(json.data.alunoListagemDTO.avatares))
+
+                    for (let i = 0; i < json.data.alunoListagemDTO.avatares.length; i++) {
+                        if (json.data.alunoListagemDTO.avatares[i].idAvatar === json.data.alunoListagemDTO.idAvatar) {
+                            sessionStorage.setItem("ImagemURL_AVATAR", json.data.alunoListagemDTO.avatares[i].imagemURL)
+                        }
+                    }
+
+                    if(json.data.alunoListagemDTO.avatares.length === 0){
+                        sessionStorage.setItem("ImagemURL_AVATAR", "https://previews.dropbox.com/p/thumb/ACQrgeBBcui9gljnEFhmCTgAXZbSMILhpwZmjNgKRXnTMwDJ9qlA6mQBF0G9ZJVpWu6xiQ3QGzryGAj9uUdXrqGklSeUamwWjddiMPqmW4o33M_rNz-EeiiDnoDPXmn2wYutrh9rJP7SdC3GDJoQOWwDkkLsi-bxZ57tyLw473qgZiQJY40h6GeuAaFihrvPS_8rNypaMFi7pp8rA1V691XudMtN5AhYw05xuMd178c3eDXGPklR3LM7cf1V5owUWdlyCv4g_n6hSKQWRmjR3NmSDjcgmoc4fzBjJ3yly4UdbIrNRWqd8Se7w--7NNSn2X2PB34I5RqoG8QrcT6SR4ac/p.png")
+                    }
 
                     api.get(`/turmas/buscar-turma-por-id/${sessionStorage.getItem("idTurma")}`, {
                         headers: {
@@ -98,6 +111,7 @@ function Login() {
                 logo={Logo}
                 justifyContent="center"
                 statusLogoff={isAlunoLoggedIn || isProfessorLoggedIn ? null : "true"}
+                listaAvatares={setListaAvatares}
             />
             <section className='sectionBackgroundLogin' >
                 <div className='buttom-voltar'>

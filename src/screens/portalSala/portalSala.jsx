@@ -9,8 +9,6 @@ import Estudantes from '../../componentes/estudantes/estudantes';
 import api from '../../api';
 import { toast } from 'react-toastify';
 
-sessionStorage.setItem("ImagemURL_AVATAR", "https://previews.dropbox.com/p/thumb/ACQrgeBBcui9gljnEFhmCTgAXZbSMILhpwZmjNgKRXnTMwDJ9qlA6mQBF0G9ZJVpWu6xiQ3QGzryGAj9uUdXrqGklSeUamwWjddiMPqmW4o33M_rNz-EeiiDnoDPXmn2wYutrh9rJP7SdC3GDJoQOWwDkkLsi-bxZ57tyLw473qgZiQJY40h6GeuAaFihrvPS_8rNypaMFi7pp8rA1V691XudMtN5AhYw05xuMd178c3eDXGPklR3LM7cf1V5owUWdlyCv4g_n6hSKQWRmjR3NmSDjcgmoc4fzBjJ3yly4UdbIrNRWqd8Se7w--7NNSn2X2PB34I5RqoG8QrcT6SR4ac/p.png")
-
 function PortalSala() {
   const [turmaData, setTurmaData] = useState(null);
   const [isAlunoLoggedIn, setIsAlunoLoggedIn] = useState(false);
@@ -18,6 +16,7 @@ function PortalSala() {
   const [estudantes, setEstudantes] = useState([]);
   const [visibleComponent, setVisibleComponent] = useState('Progresso'); 
   const [selectedNavegacao, setSelectedNavegacao] = useState('Progresso');
+  const [turmaBuscada, setTurmaBuscada] = useState(sessionStorage.getItem('idTurmaClicada'));
 
   useEffect(() => {
     const apelido = sessionStorage.getItem("apelidoUser");
@@ -30,8 +29,6 @@ function PortalSala() {
       setIsProfessorLoggedIn(true);
     }
 
-    const turmaBuscada = sessionStorage.getItem('idTurmaClicada');
-
     api.get(`/turmas/buscar-turma-por-id/${turmaBuscada}`, {
       headers: {
         Authorization: `Bearer ${sessionStorage.getItem("token")}`
@@ -40,6 +37,7 @@ function PortalSala() {
       if (json.data === null) {
         toast.error("Não foi possível encontrar a turma!");
       } else {
+        console.log(json.data);
         setTurmaData(json.data);
         setEstudantes(json.data.alunos);
       }
@@ -51,6 +49,8 @@ function PortalSala() {
   if (!turmaData) {
     return null; 
   }
+
+  console.log(estudantes);
 
   return (
     <div className='body'>

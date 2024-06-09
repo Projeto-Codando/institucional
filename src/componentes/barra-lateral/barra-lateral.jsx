@@ -11,13 +11,13 @@ import IconUser from '../../imgs/IconUser.png';
 import IconPay from '../../imgs/IconPlay.png';
 import IconGlobe from '../../imgs/IconGlobe.png';
 import IconQuestion from '../../imgs/IconQuestion.png';
-import AvatarZebra from '../../imgs/avatarAlunoZebra.png';
 import IconClip from '../../imgs/IconClip.png';
 import IconPasta from '../../imgs/IconPasta.png';
 import IconUsers from '../../imgs/IconUsers.png';
 import { useNavigate } from 'react-router-dom';
 import ModalEscolhaAvatar from '../modalEscolhaAvatar/modalEscolhaAvatar';
 import ModalComprarAvatar from '../modalComprarAvatar/modalComprarAvatar';
+
 
 const apelidoAluno = sessionStorage.getItem("apelidoUser");
 const avatarSession = sessionStorage.getItem("ImagemURL_AVATAR");
@@ -48,8 +48,7 @@ function BarraLateral(props) {
     function changeStateBar() {
         setOpen(!open);
     }
-    console.log("Login usuario " + props.login)
-    console.log("Lista alunos " + JSON.stringify(props.listaAlunos))
+
     return (
         <div>
             <div className="menu-icon" style={{ width: '150px', display: 'flex' }}>
@@ -71,7 +70,13 @@ function BarraLateral(props) {
                                 <img src={IconBox} alt="Planos" />
                                 <span>Planos</span>
                             </div>
-                            <ModalEscolhaAvatar isOpen={isModalOpen} onClose={closeModal} />
+
+                            <ModalEscolhaAvatar
+                                isOpen={isModalOpen}
+                                onClose={closeModal}
+                                onAvatarChange={props.onUpdateAvatar}
+                            />
+
                             <div className='row'>
                                 <img src={IconFaq} alt="F.A.Q" />
                                 <span>F.A.Q</span>
@@ -112,6 +117,7 @@ function BarraLateral(props) {
                             <ModalEscolhaAvatar
                                 isOpen={isModalOpen}
                                 onClose={closeModal}
+                                listaAvatares={props.listaAvatares}
                             />
 
                             <div className='containerRow'>
@@ -140,7 +146,6 @@ function BarraLateral(props) {
                             </div>
                             <div className='containerScroll' id="listaAlunosLogados">
                                 {Array.isArray(props.listaAlunos) && (
-                                    console.log(props.listaAlunos),
                                     props.listaAlunos
                                         .filter(aluno => aluno.apelido !== apelidoAluno)
                                         .map((aluno) => {
@@ -188,7 +193,6 @@ function BarraLateral(props) {
                             </div>
                             <div className="containerScroll">
                                 {props.listaEstudantes && Array.isArray(props.listaEstudantes) && (
-                                    console.log(props.listaEstudantes),
                                     props.listaEstudantes.map((estudante) => {
                                         return (
                                             <div className='rowAluno' key={estudante.id}>
