@@ -92,7 +92,7 @@ function CadastroProfessor() {
 
       <section className='sectionBackgroundCadastroProfessor' >
         <div className='buttom-voltar'>
-          <button onClick={() => navigate("/")}> &lt; Voltar </button>
+          <button onClick={() => navigate("/")}> &lt; VOLTAR </button>
         </div>
         <div className='container-background-cadastro' >
 

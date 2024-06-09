@@ -25,7 +25,8 @@ function Portal() {
 
   const validationSchema = Yup.object().shape({
     nomeTurma: Yup.string().required('Campo Obrigatório'),
-    senhaTurma: Yup.string().required('Campo Obrigatório').min(6, 'No mínimo 6 digitos da senha da Turma!')
+    senhaTurma: Yup.string().required('Campo Obrigatório').min(6, 'No mínimo 6 digitos da senha da Turma!'),
+    escolaridade: Yup.string().required('Campo Obrigatório')
   })
 
   useEffect(() => {
@@ -90,27 +91,24 @@ function Portal() {
 
     try {
       await validationSchema.validate(novaTurma, { abortEarly: false })
-      console.log("Dados válidos:", novaTurma)
-      toast.success("Criação da sala realizada com sucesso!")
 
       api.post('/turmas', turmaAdicionada, {
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem('token')}`
         }
       }).then(response => {
-        console.log(response.data)
+        toast.success("Criação da sala realizada com sucesso!")
+        setTurmas([...turmas, novaTurma])
+        window.location.reload()
       }
       ).catch(error => {
         console.error(error)
       })
 
-      setTurmas([...turmas, novaTurma])
-      console.log(turmas)
-
       setNomeTurma('')
       setEscolaridade('')
       setSenhaTurma('')
-      window.location.reload()
+
 
     } catch (error) {
       if (error instanceof Yup.ValidationError) {

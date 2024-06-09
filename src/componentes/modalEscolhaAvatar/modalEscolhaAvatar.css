@@ -86,8 +86,8 @@
     width: 350px;
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
     overflow-y: scroll;
+    align-content: flex-start;
 }
 
 .avatar{

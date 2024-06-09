@@ -71,11 +71,11 @@ function BarraLateral(props) {
                                 <span>Planos</span>
                             </div>
 
-                            <ModalEscolhaAvatar
+                            {/* <ModalEscolhaAvatar
                                 isOpen={isModalOpen}
                                 onClose={closeModal}
                                 onAvatarChange={props.onUpdateAvatar}
-                            />
+                            /> */}
 
                             <div className='row'>
                                 <img src={IconFaq} alt="F.A.Q" />
@@ -98,6 +98,10 @@ function BarraLateral(props) {
                                 <img src={IconHome} alt="Home" />
                                 <span>Inicio</span>
                             </div>
+                        </div>
+                    )}
+                    {props.loginAluno && (
+                        <div>
                             <div className='row' onClick={openModalCompra}>
                                 <img src={IconBox} alt="Banana" />
                                 <span>Banana Points</span>
@@ -106,10 +110,7 @@ function BarraLateral(props) {
                                 isOpen={isModalCompraOpen}
                                 onClose={closeModalCompra}
                             />
-                        </div>
-                    )}
-                    {props.loginAluno && (
-                        <div>
+
                             <div className='row' onClick={openModal}>
                                 <img src={IconUser} alt="Perfil" />
                                 <span>Perfil</span>

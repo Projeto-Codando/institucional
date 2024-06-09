@@ -29,9 +29,9 @@ export default function Quiz(props) {
     return (
         <div className='quiz'>
             <div className='topBarQuiz'>
-                <span onClick={props.onBack} style={{cursor: 'pointer'}}>&lt; Voltar</span>
+                <span onClick={props.onBack} style={{cursor: 'pointer'}}>&lt; VOLTAR</span>
                 <span className='tituloTopBar' >QUIZ</span>
-                <span>{props.numeroQuestao} de {props.qtdQuestao}</span>
+                <span>{props.numeroQuestao} DE {props.qtdQuestao}</span>
             </div>
             <div className='linhaDivisor'></div>
             <div className='tituloQuiz'><span>{props.tituloQuiz}</span></div>

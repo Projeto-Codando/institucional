@@ -4,13 +4,17 @@ import Avatar from '../../imgs/avatar-gato.png'
 import Botao from '../../componentes/botao/botoes'
 import { useContext, useState } from 'react'
 import { AvatarContext } from '../../componentes/avatarContext/avatarContext'
+import estrela from '../../imgs/estrela.png'
 import api from '../../api'
 import { toast } from 'react-toastify'
+import LoadingSpinner from '../../componentes/loadingSpinner/loadingSpinner'
 
 function ModalCompraAvatar({ isOpen, onClose }) {
     const [selectedAvatar, setSelectedAvatar] = useState(null);
     const [nomeAvatar, setNomeAvatar] = useState("Compre seu avatar!");
     const [precoAvatar, setPrecoAvatar] = useState(0);
+
+    const [isLoading, setIsLoading] = useState(false);
 
     const avataresPossuidos = JSON.parse(sessionStorage.getItem("avatares"));
 
@@ -21,10 +25,9 @@ function ModalCompraAvatar({ isOpen, onClose }) {
     );
 
     const handleBuyAvatar = async () => {
+        setIsLoading(true);
         const idAluno = sessionStorage.getItem("userId");
         const selectedAvatarData = avatares.find(avatar => avatar.imagemURL === selectedAvatar);
-
-        console.log(selectedAvatarData)
 
         const idAvatarComprado = selectedAvatarData.id;
 
@@ -35,41 +38,51 @@ function ModalCompraAvatar({ isOpen, onClose }) {
         }).then((json) => {
             toast.success("Avatar comprado com sucesso!");
             const listaAvataresSession = JSON.parse(sessionStorage.getItem('avatares'));
-            console.log("Lista de avatares session storage")
-            console.log(listaAvataresSession)
             listaAvataresSession.push(selectedAvatarData);
             sessionStorage.setItem("avatares", JSON.stringify(listaAvataresSession));
+            sessionStorage.setItem("moedas", sessionStorage.getItem("moedas") - selectedAvatarData.preço);
+            setIsLoading(false);
             window.location.reload();
             onClose();
         }).catch((error) => {
+            setIsLoading(false);
             console.error("Erro ao comprar avatar:", error);
-        }
-        );
+        });
     };
 
-        if (!isOpen) {
-            return null;
-        }
+    if (!isOpen) {
+        return null;
+    }
 
-        return (
+    return (
+        <div className='modal-compra-avatar'>
+            {isLoading && <LoadingSpinner />}
             <div className='section-avatar'>
                 <div className='container-avatar'>
-                    <div className='card-avatar'>
+                    <div className='card-avatar-comprar'>
                         <div className='linha-avatar'>
                             <div className='titulo-avatar'>
                                 <span>Loja de Avatares!</span>
                             </div>
-                            <img src={Close} alt="botao fechar" onClick={onClose} style={{cursor:'pointer'}} />
+                            <img src={Close} alt="botao fechar" onClick={onClose} style={{ cursor: 'pointer' }} />
                         </div>
                         <div className='linha-avatar'>
                             <div className='imagem-avatar'>
                                 <img src={selectedAvatar || Avatar} alt="Avatar" style={{ borderRadius: '360px' }} />
                                 <div className='texto-avatar'>{nomeAvatar}</div>
-                                <div className='texto-preco-avatar'>{precoAvatar}</div>
+                                <div className='texto-avatar' style={{ color: '#FFD700', backgroundColor: '#000033', padding: '10px 10px 10px 3px', borderRadius: 15 }}>
+                                    <img
+                                        src={estrela}
+                                        alt="icone de moeda"
+                                        style={{ width: '20px', height: '20px', marginRight: '5px' }}
+                                    />
+                                    {precoAvatar}
+                                </div>
                             </div>
                             <div className='avatares'>
-                                {avataresParaComprar && avataresParaComprar.map((avatar) => (
+                                {avataresParaComprar && [...avataresParaComprar].reverse().map((avatar) => (
                                     <img
+                                        key={avatar.id}
                                         src={avatar.imagemURL}
                                         className='avatar'
                                         alt={avatar.descricao}
@@ -77,8 +90,7 @@ function ModalCompraAvatar({ isOpen, onClose }) {
                                             setSelectedAvatar(avatar.imagemURL);
                                             setNomeAvatar(avatar.descricao);
                                             setPrecoAvatar(avatar.preço);
-                                        }
-                                        }
+                                        }}
                                     />
                                 ))}
                             </div>
@@ -100,7 +112,8 @@ function ModalCompraAvatar({ isOpen, onClose }) {
                     </div>
                 </div>
             </div>
-        );
-    }
+        </div>
+    );
+}
 
-    export default ModalCompraAvatar;
+export default ModalCompraAvatar;

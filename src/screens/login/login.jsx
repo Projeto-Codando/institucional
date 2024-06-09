@@ -115,7 +115,7 @@ function Login() {
             />
             <section className='sectionBackgroundLogin' >
                 <div className='buttom-voltar'>
-                    <button onClick={() => navigate("/")}> &lt; Voltar </button>
+                    <button onClick={() => navigate("/")}> &lt; VOLTAR </button>
                 </div>
                 <div className='container-background' >
                     <FormularioLogin setApelido={setApelido} setSenha={setSenha} onClick={handleSave} />

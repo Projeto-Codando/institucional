@@ -34,9 +34,9 @@
     align-items: center;
 }
 
-.card-avatar{
+.card-avatar-comprar{
     width: 660px;
-    height: 430px;
+    height: 450px;
     background-color: #7CB518;
     border-radius: 20px;
     padding: 20px;
@@ -99,4 +99,3 @@
     border-radius: 20px;
     border: 0px solid #fff; /* Espaço entre o thumb e o track */
 }
-

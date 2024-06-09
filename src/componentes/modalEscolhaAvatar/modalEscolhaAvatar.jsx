@@ -5,6 +5,7 @@ import Botao from '../../componentes/botao/botoes';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import api from '../../api';
+import LoadingSpinner from '../../componentes/loadingSpinner/loadingSpinner';
 
 function ModalEscolhaAvatar({ isOpen, onClose, onAvatarChange }) {
     const [selectedAvatar, setSelectedAvatar] = useState(null);
@@ -12,6 +13,7 @@ function ModalEscolhaAvatar({ isOpen, onClose, onAvatarChange }) {
 
     const avatares = JSON.parse(sessionStorage.getItem("avatares"));
 
+    const [isLoading, setIsLoading] = useState(false);
 
     if (!isOpen) {
         return null;
@@ -21,10 +23,12 @@ function ModalEscolhaAvatar({ isOpen, onClose, onAvatarChange }) {
         const idAluno = sessionStorage.getItem("userId");
         const selectedAvatarData = avatares.find(avatar => avatar.imagemURL === selectedAvatar);
 
+        setIsLoading(true);
+
         console.log(selectedAvatarData)
 
         if (selectedAvatarData) {
-            const idAvatar = selectedAvatarData.id;
+            const idAvatar = selectedAvatarData.idAvatar || selectedAvatarData.id;
 
             try {
                 const response = await api.put(`avatares/aluno/${idAluno}/avatar-escolhido/${idAvatar}`, {}, {
@@ -35,20 +39,23 @@ function ModalEscolhaAvatar({ isOpen, onClose, onAvatarChange }) {
                 sessionStorage.setItem('idAvatar', idAvatar);
                 sessionStorage.setItem('ImagemURL_AVATAR', selectedAvatar);
                 window.location.reload();
+                setIsLoading(false);
                 onAvatarChange();
                 toast.success("Avatar alterado com sucesso!");
                 onClose();
             } catch (error) {
-
-                toast.error("Não foi possível alterar o avatar! " + (error.response?.data?.message || ''));
+                setIsLoading(false);
+                console.error("Erro ao escolher avatar:", error);
             }
         } else {
+            setIsLoading(false);
             toast.error("Avatar não selecionado ou inválido!");
         }
     };
 
     return (
         <div className='section-avatar'>
+            {isLoading && <LoadingSpinner />}
             <div className='container-avatar'>
                 <div className='card-avatar'>
                     <div className='linha-avatar'>

@@ -39,21 +39,21 @@ export default function Formulario(props) {
                         onChange={typeof props.setApelido === 'function' ? props.setApelido : undefined}
                     />
                     <InputsLogin
-                        text='Senha da Turma'
+                        text='Senha da turma'
                         type='text'
                         width='97%'
                         id='senhaTurma'
                         onChange={typeof props.setSenhaTurma === 'function' ? props.setSenhaTurma : undefined}
                     />
                     <InputsLogin
-                        text='Senha'
+                        text='Sua senha'
                         type='password'
                         id='senha'
                         width='97%'
                         onChange={typeof props.setSenha === 'function' ? props.setSenha : undefined}
                     />
                     <InputsLogin
-                        text='Confirmação de Senha'
+                        text='Confirmação de senha'
                         type='password'
                         width='97%'
                         id='confirmacaoSenha'

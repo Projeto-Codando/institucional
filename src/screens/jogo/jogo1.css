@@ -8,7 +8,7 @@
 
 .niveisJogo{
     display: flex;
-    width: 90%;
+    /* width: 90%; */
     align-items: center;
     justify-content: space-between;
     margin-bottom: 45px;
@@ -25,6 +25,7 @@
 .cardsNivel{
     display: flex;
     width: 100%;
+    justify-content: center;
 }
 
 .trianguloD{

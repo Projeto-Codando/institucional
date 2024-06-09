@@ -42,7 +42,7 @@ export default function Formulario(props) {
                         onChange={typeof props.setSenha === 'function' ? props.setSenha : undefined}
                     />
                     <InputsLogin
-                        text='Confirmação de Senha'
+                        text='Confirmação de senha'
                         id='confirmacaoSenha'
                         type='password'
                         width='97%'

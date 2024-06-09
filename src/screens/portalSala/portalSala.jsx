@@ -71,11 +71,10 @@ function PortalSala() {
           codigo={turmaData.senha}
         />
         <div className='telaPrincipal'>
-          {/* <Conteudo
+          <Conteudo
           idTurma={turmaBuscada}
-          /> */}
-
-          <Progresso/>
+          />
+          {/* <Progresso/> */}
         </div>
       </div>
     </div>

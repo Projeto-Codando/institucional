@@ -94,7 +94,7 @@ function Cadastro() {
 
       <section className='sectionBackgroundCadastro' >
         <div className='buttom-voltar'>
-          <button onClick={() => navigate("/")}> &lt; Voltar </button>
+          <button onClick={() => navigate("/")}> &lt; VOLTAR </button>
         </div>
         <div className='container-background-cadastro'>
           <Formulario onClick={handleSavePost} setNome={setNome} setSobrenome={setSobrenome} setApelido={setApelido} setSenhaTurma={setSenhaTurma} setSenha={setSenha} />
