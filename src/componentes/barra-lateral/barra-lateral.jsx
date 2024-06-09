@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
+
 import './barra-lateral.css';
-import MenuAmarelo from '../../imgs/menuAmarelo.png';
+import BotaoClose from '../../imgs/closeButton.png';
 import LogoC from '../../imgs/Logo-C.svg';
 import IconHome from '../../imgs/IconHome.png';
 import IconBox from '../../imgs/IconBox.png';
@@ -57,16 +58,16 @@ function BarraLateral(props) {
             <div className={`section-barra-lateral ${open ? 'aberto' : ''}`}>
                 <div className={`barra-lateral ${open ? 'aberto' : ''}`} style={{ opacity: open ? 1 : 0 }}>
                     <div className='container-menu'>
-                        <img src={MenuAmarelo} alt="menu" onClick={changeStateBar} className='botao-fechar' />
+                        <img src={BotaoClose} alt="menu" onClick={changeStateBar} className='botao-fechar' />
                         <img src={LogoC} alt="logo c" className='logoC' />
                     </div>
                     {props.logoff && (
                         <div>
-                            <div className='row' style={{ marginTop: '50px' }}>
+                            <div className='row' style={{ marginTop: '20px' }}>
                                 <img src={IconHome} alt="Home" />
                                 <span>Inicio</span>
                             </div>
-                            <div className='row' >
+                            <div className='row' onClick={() => navigate("/")}>
                                 <img src={IconBox} alt="Planos" />
                                 <span>Planos</span>
                             </div>
@@ -77,7 +78,7 @@ function BarraLateral(props) {
                                 onAvatarChange={props.onUpdateAvatar}
                             /> */}
 
-                            <div className='row'>
+                            <div className='row' onClick={() => navigate("/")}>
                                 <img src={IconFaq} alt="F.A.Q" />
                                 <span>F.A.Q</span>
                             </div>
@@ -94,7 +95,7 @@ function BarraLateral(props) {
                     )}
                     {props.login && (
                         <div>
-                            <div className='row' style={{ marginTop: '50px' }}>
+                            <div className='row' style={{ marginTop: '20px' }}>
                                 <img src={IconHome} alt="Home" />
                                 <span>Inicio</span>
                             </div>
@@ -131,7 +132,7 @@ function BarraLateral(props) {
                                 <img src={IconPay} alt="Play" />
                                 <span>Continuar jogo</span>
                             </div>
-                            <div className='row'>
+                            <div className='row' onClick={() => {navigate("/lobby"); console.log("Botao clicado")}}>
                                 <img src={IconGlobe} alt="Globe" />
                                 <span>Mapa</span>
                             </div>

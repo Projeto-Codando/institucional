@@ -7,10 +7,8 @@ import { useNavigate } from 'react-router-dom'
 import React, { useEffect, useState } from 'react'
 import './portalProfessor.css'
 import * as Yup from 'yup'
-import { ErrorMessage } from 'formik'
 import { toast } from 'react-toastify'
 import api from '../../api';
-import { faKey } from '@fortawesome/free-solid-svg-icons'
 
 function Portal() {
   let navigate = useNavigate()
