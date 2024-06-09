@@ -97,13 +97,14 @@ export default function HeaderLogin(props) {
                 {props.statusAvatar && (
                     <div className='avatar' onClick={openModal}>
                         <img src={avatar || Avatar} alt="imagem do avatar" style={{width: "59px", height: "59px"}}/>
-                        <ModalEscolhaAvatar
-                        isOpen={isModalOpen}
-                        onClose={closeModal}
-                        />
+                       
                     </div>
                     
                 )}
+                 <ModalEscolhaAvatar
+                        isOpen={isModalOpen}
+                        onClose={closeModal}
+                        />
             </div>
         </header>
 

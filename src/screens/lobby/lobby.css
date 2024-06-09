@@ -12,6 +12,8 @@
     background-color: #7CB518;
     display: flex;
     align-items: center;
+    position: relative;
+    z-index: -1;
 }
 
 .cardsBemVindo {
