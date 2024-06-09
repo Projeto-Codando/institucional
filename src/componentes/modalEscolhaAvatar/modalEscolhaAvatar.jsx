@@ -55,7 +55,7 @@ function ModalEscolhaAvatar({ isOpen, onClose, onAvatarChange }) {
                         <div className='titulo-avatar'>
                             <span>Escolha o Avatar!</span>
                         </div>
-                        <img src={Close} alt="botao fechar" onClick={onClose} />
+                        <img src={Close} alt="botao fechar" onClick={onClose} style={{cursor: 'pointer'}} />
                     </div>
                     <div className='linha-avatar'>
                         <div className='imagem-avatar'>

@@ -1,22 +1,22 @@
-import './jogo1.css'
+import './jogo1.css';
 import { useEffect, useState } from 'react';
 import Header from "../../componentes/headerLoginCadastro/headerLogin";
-import Logo from "../../imgs/logo-roxo.png"
+import Logo from "../../imgs/logo-roxo.png";
 import Quiz from '../../componentes/quiz/quiz';
-import TrianguloE from '../../imgs/triangulo-esquerda.png'
-import TrianguloD from '../../imgs/triangulo-direita.png'
-import CardNivelJogo from '../../componentes/cardNivelJogo/cardNivelJogo'
-import IconStart from '../../imgs/iconStart.png'
-import IconControle from '../../imgs/iconControle.png'
-import IconControleRoxo from '../../imgs/iconControleRoxo.png'
+import TrianguloE from '../../imgs/triangulo-esquerda.png';
+import TrianguloD from '../../imgs/triangulo-direita.png';
+import CardNivelJogo from '../../componentes/cardNivelJogo/cardNivelJogo';
+import IconControle from '../../imgs/iconControle.png';
+import IconControleRoxo from '../../imgs/iconControleRoxo.png';
+import IconControleBranco from '../../imgs/IconControleBranco.png';
 
-function Jogo() {
+function Jogo2() {
 
     const [isAlunoLoggedIn, setIsAlunoLoggedIn] = useState(false);
     const [isProfessorLoggedIn, setIsProfessorLoggedIn] = useState(false);
+    const [quizStack, setQuizStack] = useState([1]);
 
     useEffect(() => {
-
         const apelido = sessionStorage.getItem("apelidoUser");
         const email = sessionStorage.getItem("email");
 
@@ -26,9 +26,17 @@ function Jogo() {
         if (email) {
             setIsProfessorLoggedIn(true);
         }
-
     }, []);
 
+    const handleNextQuiz = () => {
+        setQuizStack(prev => [...prev, prev[prev.length - 1] + 1]);
+    };
+
+    const handlePreviousQuiz = () => {
+        setQuizStack(prev => prev.length > 1 ? prev.slice(0, -1) : prev);
+    };
+
+    const currentQuiz = quizStack[quizStack.length - 1];
 
     return (
         <div className='jogo'>
@@ -46,43 +54,225 @@ function Jogo() {
             />
             <div className='sectionJogo'>
                 <div className='niveisJogo'>
-                    <img  className='trianguloD' src={TrianguloD} alt="Triangulo esquerda" />
+                    <img className='trianguloD' src={TrianguloD} alt="Triangulo direita" />
                     <div className='cardsNivel'>
-                        <CardNivelJogo 
-                        backgroundColor='#7CB518'
-                        statusTitulo='true'
-                        titulo='Aula 2'
+                        <CardNivelJogo
+                            backgroundColor='#7CB518'
+                            statusTitulo='true'
+                            titulo='Aula 2'
                         />
-                        <CardNivelJogo 
-                        backgroundColor= '#662E9B'
-                        statusImg='true'
-                        imagem={IconStart}
+                        <CardNivelJogo
+                            backgroundColor={currentQuiz === 1 ? '#F3DE2C' : currentQuiz > 1 ? '#662E9B' : '#D9D9D9'}
+                            statusImg='true'
+                            imagem={currentQuiz === 1 ? IconControle : currentQuiz > 1 ? IconControleBranco : IconControleRoxo}
                         />
-                        <CardNivelJogo 
-                        backgroundColor= '#F3DE2C'
-                        statusImg='true'
-                        imagem={IconControle}
+                        <CardNivelJogo
+                            backgroundColor={currentQuiz === 2 ? '#F3DE2C' : currentQuiz > 2 ? '#662E9B' : '#D9D9D9'}
+                            statusImg='true'
+                            imagem={currentQuiz === 2 ? IconControle : currentQuiz > 2 ? IconControleBranco : IconControleRoxo}
                         />
-                        <CardNivelJogo 
-                        backgroundColor= '#D9D9D9'
-                        statusImg='true'
-                        imagem={IconControleRoxo}
+                        <CardNivelJogo
+                            backgroundColor={currentQuiz === 3 ? '#F3DE2C' : currentQuiz > 3 ? '#662E9B' : '#D9D9D9'}
+                            statusImg='true'
+                            imagem={currentQuiz === 3 ? IconControle : currentQuiz > 3 ? IconControleBranco : IconControleRoxo}
+                        />
+                        <CardNivelJogo
+                            backgroundColor={currentQuiz === 4 ? '#F3DE2C' : currentQuiz > 4 ? '#662E9B' : '#D9D9D9'}
+                            statusImg='true'
+                            imagem={currentQuiz === 4 ? IconControle : currentQuiz > 4 ? IconControleBranco : IconControleRoxo}
+                        />
+                        <CardNivelJogo
+                            backgroundColor={currentQuiz === 5 ? '#F3DE2C' : currentQuiz > 5 ? '#662E9B' : '#D9D9D9'}
+                            statusImg='true'
+                            imagem={currentQuiz === 5 ? IconControle : currentQuiz > 5 ? IconControleBranco : IconControleRoxo}
+                        />
+                        <CardNivelJogo
+                            backgroundColor={currentQuiz === 6 ? '#F3DE2C' : currentQuiz > 6 ? '#662E9B' : '#D9D9D9'}
+                            statusImg='true'
+                            imagem={currentQuiz === 6 ? IconControle : currentQuiz > 6 ? IconControleBranco : IconControleRoxo}
                         />
                     </div>
-                    <img  className='trianguloE' src={TrianguloE} alt="Triangulo direita" />
+                    <img className='trianguloE' src={TrianguloE} alt="Triangulo esquerda" />
                 </div>
                 <div className='containerJogo'>
-                    <Quiz />
+                    {currentQuiz === 1 && (
+                        <Quiz
+                            numeroQuestao='1'
+                            qtdQuestao='6'
+                            tituloQuiz='Na floresta, os macacos estão aprendendo a linguagem dos pássaros para se comunicarem melhor. Para entender os sons dos pássaros, eles precisam identificar se dois cantos são iguais. Qual símbolo eles usam para fazer essa comparação?'
+                            opcao0='='
+                            opcao1='-'
+                            opcao2='=='
+                            opcao3='*'
+                            indexCorreto={2}
+                            exemploResposta={
+                                <pre>{`==`}</pre>
+                            }
+                            onCorrect={handleNextQuiz}
+                            onBack={handlePreviousQuiz}
+                        />
+                    )}
+                    {currentQuiz === 2 && (
+                        <Quiz
+                            numeroQuestao='2'
+                            qtdQuestao='6'
+                            tituloQuiz='Os macacos estão classificando diferentes tipos de folhas que encontram na selva. Eles usam um código onde 1 representa folhas grandes, 2 representa folhas médias e 3 representa folhas pequenas. Como eles podem usar um switch case para imprimir o tipo de folha?'
+                            statusExemploQuiz='true'
+                            exemplo={
+                                <pre>{`let tipoFolha = 2;  
+
+switch (tipoFolha) {  
+
+case 1: console.log("Folha grande"); break;  
+
+case 2: console.log("Folha média"); break;  
+
+case 3: console.log("Folha pequena"); break;  
+
+default: console.log("Tipo de folha desconhecido"); }  `}</pre>
+                            }
+                            opcao0=' Folha grande '
+                            opcao1=' Folha média  '
+                            opcao2='Folha pequena '
+                            opcao3='Tipo de folha desconhecido'
+                            indexCorreto={1}
+                            exemploResposta={
+                                <pre>{`Folha média`}</pre>
+                            }
+                            onCorrect={handleNextQuiz}
+                            onBack={handlePreviousQuiz}
+                        />
+                    )}
+                    {currentQuiz === 3 && (
+                        <Quiz
+                            numeroQuestao='3'
+                            qtdQuestao='6'
+                            tituloQuiz='Durante uma celebração na floresta, os macacos querem decidir que tipo de dança fazer. Eles têm uma variável tipoDanca onde a representa a dança do fogo, b representa a dança da chuva, e c representa a dança do sol. Qual switch case eles usariam?'
+                            statusExemploQuiz="true"
+                            exemplo={
+                                <pre>{`let tipoDanca = 'c'; 
+
+switch (tipoDanca) { 
+
+case 'a': console.log("Dança do fogo"); break; 
+
+case 'b': console.log("Dança da chuva"); break; 
+
+case 'c': console.log("Dança do sol"); break; 
+
+default: console.log("Tipo de dança desconhecido"); } `}</pre>
+                            }
+                            opcao0=' Dança do fogo'
+                            opcao1=' Dança da chuva '
+                            opcao2='Dança do sol '
+                            opcao3='Tipo de dança desconhecido'
+                            indexCorreto={2}
+                            exemploResposta={
+                                <pre>{`Dança do sol `}</pre>
+                            }
+                            onCorrect={handleNextQuiz}
+                            onBack={handlePreviousQuiz}
+                        />
+                    )}
+                    {currentQuiz === 4 && (
+                        <Quiz
+                            numeroQuestao='4'
+                            qtdQuestao='6'
+                            tituloQuiz='Os macacos estão escolhendo frutas para um banquete. Eles têm uma variável fruta onde 1 representa bananas, 2 representa maçãs, e 3 representa mangas. Qual switch case eles usariam para imprimir a fruta escolhida?  '
+                            statusExemploQuiz='true'
+                            exemplo={
+                                <pre>{`let luaCheia = true; 
+
+if (___) { 
+
+console.log("A lua está cheia!"); 
+
+} `}</pre>
+                            }
+                            opcao0='Bananas'
+                            opcao1='Maçãs'
+                            opcao2='Mangas'
+                            opcao3='Fruta desconhecida '
+                            exemploResposta={
+                                <pre>{`Fruta desconhecida `}</pre>
+                            }
+                            onCorrect={handleNextQuiz}
+                            indexCorreto={3}
+                            onBack={handlePreviousQuiz}
+                        />
+                    )}
+                    {currentQuiz === 5 && (
+                        <Quiz
+                            numeroQuestao='5'
+                            qtdQuestao='6'
+                            tituloQuiz='Os macacos estão decidindo a cor das flores para decorar suas casas. Eles têm uma variável corFlor onde red representa flores vermelhas, blue representa flores azuis, e yellow representa flores amarelas. Como usariam um switch case para decidir a cor? '
+                            statusExemploQuiz='true'
+                            exemplo={
+                                <pre>{`let corFlor = 'yellow'; 
+
+switch (corFlor) { 
+
+case 'red': console.log("Flores vermelhas"); break; 
+
+case 'blue': console.log("Flores azuis"); break; 
+
+case 'yellow': console.log("Flores amarelas"); break; 
+
+default: console.log("Cor de flor desconhecida"); } 
+
+  `}</pre>
+                            }
+                            opcao0='temperatura < 30'
+                            opcao1='temperatura >= 30'
+                            opcao2='temperatura == 30'
+                            opcao3='temperatura != 30'
+                            indexCorreto={1}
+                            exemploResposta={
+                                <pre>{`temperatura >= 30`}</pre>
+                            }
+                            onCorrect={handleNextQuiz}
+                            onBack={handlePreviousQuiz}
+                        />
+                    )}
+                    {currentQuiz === 6 && (
+                        <Quiz
+                            numeroQuestao='6'
+                            qtdQuestao='6'
+                            tituloQuiz='Em um jogo de esportes na selva, os macacos precisam decidir qual jogo jogar baseado no valor da variável jogo, onde 1 representa futebol, 2 representa basquete, e 3 representa vôlei. Qual switch case eles usariam? '
+                            statusExemploQuiz='true'
+                            exemplo={
+                                <pre>{`let jogo = 3; 
+
+switch (jogo) { 
+
+case 1: console.log("Futebol"); break; 
+
+case 2: console.log("Basquete"); break; 
+
+case 3: console.log("Vôlei"); break; 
+
+default: console.log("Jogo desconhecido"); } `}</pre>
+                            }
+                            opcao0='Futebol'
+                            opcao1='Basquete'
+                            opcao2='Vôlei'
+                            opcao3='Jogo desconhecido'
+                            indexCorreto={2}
+                            exemploResposta={
+                                <pre>{`Vôlei`}</pre>
+                            }
+                            onCorrect={handleNextQuiz}
+                            onBack={handlePreviousQuiz}
+                        />
+                    )}
+                   
                     <div className='telaQuiz'>
-                        <div className='imagemQuiz'>
-                        </div>
+                        <div className='imagemQuiz'></div>
                     </div>
                 </div>
             </div>
         </div>
-    )
-
-
+    );
 }
 
-export default Jogo; 
+export default Jogo2;
