@@ -8,7 +8,7 @@ import { faEllipsis } from '@fortawesome/free-solid-svg-icons';
 import ModalEdicao from '../modalCriacao/modalEdicao.js';
 import api from '../../api';
 
-function CardTurma({ onClick, ...props}) {
+function CardTurma({ onClick, ...props }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const openModal = () => {
@@ -47,7 +47,6 @@ function CardTurma({ onClick, ...props}) {
         width: props.configCardTurma.width,
         color: props.configCardTurma.color,
         position: 'relative',
-    
         display: cardVisivel ? 'block' : 'none',
     };
 
@@ -66,8 +65,15 @@ function CardTurma({ onClick, ...props}) {
         width: '150px',
     };
 
+    const handleCardClick = (event) => {
+        if (event.target.closest('.reticencias') || event.target.closest('.menuOpcoes')) {
+            return;
+        }
+        onClick(event);
+    };
+
     return (
-        <div className='cardTurma' style={cardTurmaStyle} idCard={props.idCard} onClick={onClick}>
+        <div className='cardTurma' style={cardTurmaStyle} idCard={props.idCard} onClick={handleCardClick}>
             <ModalEdicao
                 edicaoNomeTurma={props.edicaoNomeTurma}
                 edicaoSenhaTurma={props.edicaoSenhaTurma}

@@ -1,9 +1,9 @@
-import './portalSala.css'
+import './portalSala.css';
 import Header from "../../componentes/headerLoginCadastro/headerLogin";
 import FaixaTurma from '../../componentes/faixaTurma/faixaTurma';
 import Progresso from '../../componentes/progresso/progresso';
 import Conteudo from '../../componentes/conteudos/conteudos';
-import Logo from '../../imgs/verde-logo.svg'
+import Logo from '../../imgs/verde-logo.svg';
 import { useEffect, useState } from 'react';
 import Estudantes from '../../componentes/estudantes/estudantes';
 import api from '../../api';
@@ -14,10 +14,11 @@ function PortalSala() {
   const [isAlunoLoggedIn, setIsAlunoLoggedIn] = useState(false);
   const [isProfessorLoggedIn, setIsProfessorLoggedIn] = useState(false);
   const [estudantes, setEstudantes] = useState([]);
+  const [visibleComponent, setVisibleComponent] = useState('Progresso'); 
+  const [selectedNavegacao, setSelectedNavegacao] = useState('Progresso');
   const [turmaBuscada, setTurmaBuscada] = useState(sessionStorage.getItem('idTurmaClicada'));
 
   useEffect(() => {
-
     const apelido = sessionStorage.getItem("apelidoUser");
     const email = sessionStorage.getItem("email");
 
@@ -69,12 +70,14 @@ function PortalSala() {
           text={turmaData.nome}
           escolaridade={turmaData.fkEscolaridade.descricao}
           codigo={turmaData.senha}
+          setVisibleComponent={setVisibleComponent}
+          setSelectedNavegacao={setSelectedNavegacao}
+          selectedNavegacao={selectedNavegacao}
         />
         <div className='telaPrincipal'>
-          <Conteudo
-          idTurma={turmaBuscada}
-          />
-          {/* <Progresso/> */}
+          {visibleComponent === 'Conteudo' && <Conteudo />}
+          {visibleComponent === 'Progresso' && <Progresso />}
+          {visibleComponent === 'Estudantes' && <Estudantes />}
         </div>
       </div>
     </div>

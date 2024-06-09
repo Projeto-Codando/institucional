@@ -1,34 +1,85 @@
 .estudantes {
     display: flex;
+    flex-direction: column;
     width: 100%;
     height: 100%;
 }
+
 .barraNavegacao {
     display: flex;
-    padding: 20px;
+    padding: 20px 20px 10px 10px;
     align-items: center;
-    background-color: aqua;
-    width: 100%;
     height: 10%;
 }
+
 .selecionar {
+    color: #595959;
     display: flex;
-    width: 70%;
+    width: 100%;
     gap: 5px;
 }
+
 .selecionar input {
     border-radius: 20px;
 }
-.excluir {
+
+.botoesEstudantes {
+    color: white;
     display: flex;
-    border-radius: 15px;
+    border-radius: 5px;
     padding: 2px;
     align-items: center;
     gap: 10px;
     background-color: #817A8C;
-    width: 80px;
-    height: 30px;
+    width: auto;
+    height: 20px;
+    padding: 5px;
 }
+
+.excluir {
+    display: flex;
+    gap: 5px;
+}
+
 .excluir img {
     width: 10px;
+}
+
+.botoesDireita {
+    cursor: pointer;
+    justify-content: end;
+    width: 100%;
+    display: flex;
+    gap: 20px;
+}
+
+.pesquisarEstudantes {
+    cursor: pointer;
+}
+
+.ordernarEstudantes img {
+    width: 10px;
+}
+
+.ordernarEstudantes select {
+    color: white;
+    background-color: #817A8C;
+    border: none;
+    -moz-appearance: none;
+    text-overflow: '';
+}
+
+.selecionar {
+    font-weight: bolder;
+}
+
+.estudantesInformacoes {
+    display: flex;
+    gap: 10px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-height: calc(100% - 10%); /* Adjust the height to fit within telaPrincipal */
+    overflow-y: auto; /* Enable vertical scroll */
+    width: 100%; /* Ensure it takes the full width */
 }
