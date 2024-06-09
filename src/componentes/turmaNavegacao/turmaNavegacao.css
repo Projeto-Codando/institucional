@@ -1,4 +1,6 @@
+
 .navegacao {
+    cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -7,9 +9,21 @@
     background-color: #82502F;
     border-radius: 10px 10px 0px 0px;
     border: solid 2px #476334;
+    cursor: pointer;
 }
+
+.navegacao.selected {
+    background-color: #FFFFFF;
+    color: #000000;
+}
+
 .navegacao label {
+    cursor: pointer;
     color: #ffff;
     font-size: 20px;
     font-weight: bolder;
+}
+
+.navegacao.selected label {
+    color: #000000;
 }

@@ -1,10 +1,12 @@
-import './turmaNavegacao.css'
+import './turmaNavegacao.css';
 
 export default function turmaNavegacao(props) {
-
     return (
-        <div class="navegacao">
-            <label for={props.text}>{props.text}</label>
+        <div 
+            className={`navegacao ${props.isSelected ? 'selected' : ''}`} 
+            onClick={props.onClick}
+        >
+            <label>{props.text}</label>
         </div>
-    )
+    );
 }

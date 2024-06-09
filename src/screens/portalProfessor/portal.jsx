@@ -135,6 +135,7 @@ function Portal() {
       <div className="portal">
         <h1 style={{ color: "#ffffff", fontSize: '32px' }}>Bem vindo(a), {sessionStorage.getItem("nome")}</h1>
         <div className="CardTurmas" style={{ display: 'flex', flexDirection: 'row', gap: '50px' }}>
+          <div className='cardCadastro'>
           <CardTurmaCadastro
             onClick={handleSavePost}
             setNomeTurma={setNomeTurma}
@@ -148,6 +149,7 @@ function Portal() {
               color: '#476334'
             }}
           />
+          </div>
           {turmas.map((turma, index) => (
             <CardTurma
               key={index}
