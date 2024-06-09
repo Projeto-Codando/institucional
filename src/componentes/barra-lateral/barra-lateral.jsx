@@ -70,7 +70,13 @@ function BarraLateral(props) {
                                 <img src={IconBox} alt="Planos" />
                                 <span>Planos</span>
                             </div>
-                            <ModalEscolhaAvatar isOpen={isModalOpen} onClose={closeModal} />
+
+                            <ModalEscolhaAvatar
+                                isOpen={isModalOpen}
+                                onClose={closeModal}
+                                onAvatarChange={props.onUpdateAvatar}
+                            />
+
                             <div className='row'>
                                 <img src={IconFaq} alt="F.A.Q" />
                                 <span>F.A.Q</span>

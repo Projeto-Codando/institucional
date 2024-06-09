@@ -11,13 +11,12 @@ import { toast } from 'react-toastify';
 function Lobby() {
 
     const [nomeUsuario, setNomeUsuario] = useState("");
-    const [avatar, setAvatar] = useState(0);
+    const [avatar, setAvatar] = useState();
     const [nivelSelecionado, setNivelSelecionado] = useState(1);
     const [isAlunoLoggedIn, setIsAlunoLoggedIn] = useState(false);
     const [isProfessorLoggedIn, setIsProfessorLoggedIn] = useState(false);
 
     const [turma, setTurma] = useState({});
-
 
     useEffect(() => {
         api.get(`/turmas/buscar-turma-por-id/${sessionStorage.getItem("idTurma")}`, {
@@ -33,6 +32,7 @@ function Lobby() {
 
         const nome = sessionStorage.getItem("apelidoUser");
         const avatar = sessionStorage.getItem("ImagemURL_AVATAR");
+
         setNomeUsuario(nome);
         setAvatar(avatar);
 
@@ -45,7 +45,7 @@ function Lobby() {
         if (email) {
             setIsProfessorLoggedIn(true);
         }
-    }, []);
+    }, [avatar]);
 
     const handleNivelClick = (nivel) => {
         setNivelSelecionado(nivel);
@@ -65,6 +65,7 @@ function Lobby() {
                 statusSerie={isAlunoLoggedIn ? "true" : null}
                 statusAvatar={isAlunoLoggedIn || isProfessorLoggedIn ? "true" : null}
                 listaAlunos={turma}
+                onUpdateAvatar={(avatar) => setAvatar(avatar)}
             />
             <div className='sectionRotas'>
                 <div className='containerBemVindo'>
