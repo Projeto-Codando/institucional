@@ -72,10 +72,10 @@ function Jogo() {
                 <div className='niveisJogo'>
                     <img className='trianguloD' src={TrianguloD} alt="Triangulo direita" />
                     <div className='cardsNivel'>
-                    <CardNivelJogo 
-                        backgroundColor='#7CB518'
-                        statusTitulo='true'
-                        titulo='Aula 1'
+                        <CardNivelJogo
+                            backgroundColor='#7CB518'
+                            statusTitulo='true'
+                            titulo='Aula 1'
                         />
                         {[1, 2, 3, 4, 5, 6, 7].map((num) => (
                             <CardNivelJogo
@@ -83,7 +83,7 @@ function Jogo() {
                                 backgroundColor={getBackgroundColor(num)}
                                 statusImg='true'
                                 imagem={getIcon(num)}
-                            />  
+                            />
                         ))}
                     </div>
                     <img className='trianguloE' src={TrianguloE} alt="Triangulo esquerda" />
@@ -148,7 +148,7 @@ console.log("A quantidade de bananas é diferente que 5!"); `}</pre>
                             numeroQuestao='3'
                             qtdQuestao='7'
                             tituloQuiz='Você está ajudando um grupo de macacos programadores a desenvolver um sistema de acesso a uma caverna misteriosa na floresta. Para garantir a segurança, eles precisam verificar se a senha inserida pelo explorador tem pelo menos oito caracteres. Qual seria a melhor estrutura para realizar essa verificação? '
-                            
+
                             opcao0=' Iteração para contar caracteres '
                             opcao1='Verificação do comprimento da string '
                             opcao2=' Loop para verificar repetidamente '
@@ -284,9 +284,48 @@ console.log("A fruta é comestível!");
                             onFinal={true}
                         />
                     )}
-                    <div className='telaQuiz'>
-                        <div className='imagemQuiz'></div>
-                    </div>
+                    {currentQuiz === 1 && (
+                        <div className='telaQuiz'>
+                            <div className='imagemQuiz'></div>
+                        </div>
+                    )
+                    }
+                    {currentQuiz === 2 && (
+                        <div className='telaQuiz'>
+                            <div className='imagemQuiz'></div>
+                        </div>
+                    )
+                    }
+                    {currentQuiz === 3 && (
+                        <div className='telaQuiz'>
+                            <div className='imagemQuiz'></div>
+                        </div>
+                    )
+                    }
+                    {currentQuiz === 4 && (
+                        <div className='telaQuiz'>
+                            <div className='imagemQuiz'></div>
+                        </div>
+                    )
+                    }
+                    {currentQuiz === 5 && (
+                        <div className='telaQuiz'>
+                            <div className='imagemQuiz'></div>
+                        </div>
+                    )
+                    }
+                    {currentQuiz === 6 && (
+                        <div className='telaQuiz'>
+                            <div className='imagemQuiz'></div>
+                        </div>
+                    )
+                    }
+                    {currentQuiz === 7 && (
+                        <div className='telaQuiz'>
+                            <div className='imagemQuiz'></div>
+                        </div>
+                    )
+                    }
                 </div>
             </div>
         </div>
