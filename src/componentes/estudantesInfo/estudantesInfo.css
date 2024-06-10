@@ -1,31 +1,36 @@
-.estudantesInfo {
-    display: flex;
-    padding: 0 20px 0 20px;
-    align-items: center;
-    background-color: #476334;
-    width: 90%;
-    height: 70px;
-    gap: 100px;
-}
+    .estudantesInfo {
+        display: flex;
+        padding: 0 20px 0 20px;
+        align-items: center;
+        background-color: #476334;
+        width: 90%;
+        height: 70px;
+        gap: 100px;
+    }
 
-.selectImagem {
-    display: flex;
-    gap: 20px;
-}
+    .selectImagem {
+        display: flex;
+        gap: 20px;
+    }
 
-.selectImagem img {
-    width: 20px;
-}
+    .selectImagem img {
+        width: 20px;
+    }
 
-.infosPrincipais {
-    font-size: 24px;
-    font-weight: bold;
-    color: white;
-    gap: 60px;
-    display: flex;
-}
+    .infosPrincipais {
+        font-size: 24px;
+        font-weight: bold;
+        color: white;
+        gap: 60px;
+        display: flex;
+    }
 
-.pontosAluno {
-    display: flex;
-    gap: 5px;
-}
+    .pontosAluno {
+        display: flex;
+        gap: 5px;
+    }
+    .finalCard {
+        display: flex;
+        width: 30%;
+        justify-content: end;
+    }
