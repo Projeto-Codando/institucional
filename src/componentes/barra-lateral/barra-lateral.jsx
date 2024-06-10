@@ -18,7 +18,6 @@ import { useNavigate } from 'react-router-dom';
 import ModalEscolhaAvatar from '../modalEscolhaAvatar/modalEscolhaAvatar';
 import ModalComprarAvatar from '../modalComprarAvatar/modalComprarAvatar';
 
-
 const apelidoAluno = sessionStorage.getItem("apelidoUser");
 sessionStorage.setItem("defaultAvatar", "https://previews.dropbox.com/p/thumb/ACQrgeBBcui9gljnEFhmCTgAXZbSMILhpwZmjNgKRXnTMwDJ9qlA6mQBF0G9ZJVpWu6xiQ3QGzryGAj9uUdXrqGklSeUamwWjddiMPqmW4o33M_rNz-EeiiDnoDPXmn2wYutrh9rJP7SdC3GDJoQOWwDkkLsi-bxZ57tyLw473qgZiQJY40h6GeuAaFihrvPS_8rNypaMFi7pp8rA1V691XudMtN5AhYw05xuMd178c3eDXGPklR3LM7cf1V5owUWdlyCv4g_n6hSKQWRmjR3NmSDjcgmoc4fzBjJ3yly4UdbIrNRWqd8Se7w--7NNSn2X2PB34I5RqoG8QrcT6SR4ac/p.png");
 
@@ -154,7 +153,7 @@ function BarraLateral(props) {
                                         .map((aluno) => {
                                             return (
                                                 <div className='rowAluno' key={aluno.id}>
-                                                    <img src={aluno.avatar[0].imagemURL || avatarGenerico} style={{ width: '24px', height: '24px' }} alt="Avatar do Aluno" />
+                                                    <img src={aluno.avatar[0]?.imagemURL || avatarGenerico} style={{ width: '24px', height: '24px' }} alt="Avatar do Aluno" />
                                                     <span>@{aluno.apelido}</span>
                                                     <div className={'statusAluno' + aluno.status}></div>
                                                 </div>
