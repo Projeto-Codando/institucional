@@ -16,7 +16,7 @@ export default function HeaderLogin(props) {
 
     const escolaridadeSession = sessionStorage.getItem("escolaridade");
     const moedasSession = sessionStorage.getItem("moedas");
-    const avatarSession = sessionStorage.getItem("ImagemURL_AVATAR");
+    const avatarSession = sessionStorage.getItem("defaultAvatar");
 
     const openModal = () => {
         setIsModalOpen(true);
@@ -94,7 +94,7 @@ export default function HeaderLogin(props) {
                     </div>
                 )}
                 {props.statusAvatar && (
-                    <div className='avatar' onClick={openModal}>
+                    <div className='avatar' onClick={props.statusLoginProfessor ? undefined : openModal}>
                         <img src={avatar} alt="imagem do avatar" style={{ width: "59px", height: "59px" }} />
                     </div>
 
