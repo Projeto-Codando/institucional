@@ -155,6 +155,7 @@ function Portal() {
               qtdAlunos={`${turma.qtdAlunos || 0} Alunos`}
               idTurma={turma.idTurma}
               onClick={() => handleClickCard(turma.idCard)}
+              statusMenuOpcoes="true"
               configCardTurma={{
                 backgroundColor: '#FFFFFF99',
                 padding: '3px',
