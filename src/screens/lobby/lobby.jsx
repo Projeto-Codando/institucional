@@ -67,6 +67,7 @@ function Lobby() {
                 statusAvatar={isAlunoLoggedIn || isProfessorLoggedIn ? "true" : null}
                 listaAlunos={turma}
                 onUpdateAvatar={(avatar) => setAvatar(avatar)}
+                alunosAtivos="true"
             />
             <div className='sectionRotas'>
                 <div className='containerBemVindo'>
@@ -90,13 +91,13 @@ function Lobby() {
                         <div className='cardNiveis1'>
                             <div
                                 className={`nivel ${nivelSelecionado === 1 ? 'nivel-selecionado' : ''}`}
-                                onClick={() => handleNivelClick(1)}
+                                //onClick={() => handleNivelClick(1)}
                             >
                                 <span>1</span>
                             </div>
                             <div
                                 className={`nivel ${nivelSelecionado === 2 ? 'nivel-selecionado' : ''}`}
-                                onClick={() => handleNivelClick(2)}
+                                //onClick={() => handleNivelClick(2)}
                             >
                                 <span>2</span>
                             </div>
@@ -105,19 +106,19 @@ function Lobby() {
                             <div className='cardNiveis2'>
                                 <div
                                     className={`nivel ${nivelSelecionado === 3 ? 'nivel-selecionado' : ''}`}
-                                    onClick={() => handleNivelClick(3)}
+                                    //onClick={() => handleNivelClick(3)}
                                 >
                                     <span>3</span>
                                 </div>
                                 <div
                                     className={`nivel ${nivelSelecionado === 4 ? 'nivel-selecionado' : ''}`}
-                                    onClick={() => handleNivelClick(4)}
+                                    //onClick={() => handleNivelClick(4)}
                                 >
                                     <span>4</span>
                                 </div>
                                 <div
                                     className={`nivel ${nivelSelecionado === 5 ? 'nivel-selecionado' : ''}`}
-                                    onClick={() => handleNivelClick(5)}
+                                    //onClick={() => handleNivelClick(5)}
                                 >
                                     <span>5</span>
                                 </div>

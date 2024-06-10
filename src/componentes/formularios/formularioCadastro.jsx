@@ -21,7 +21,8 @@ export default function Formulario(props) {
                             type='text'
                             id='nome'
                             width='200px'
-                            onChange={typeof props.setNome === 'function' ? props.setNome : undefined}
+                            onChange={typeof props.suetNome === 'function' ? props.setNome : undefined}
+                            placeholder='Digite seu nome'
                         />
                         <InputsLogin
                             text='Sobrenome'
@@ -29,6 +30,7 @@ export default function Formulario(props) {
                             id='sobrenome'
                             width='200px'
                             onChange={typeof props.setSobrenome === 'function' ? props.setSobrenome : undefined}
+                            placeholder='Digite seu sobrenome'
                         />
                     </div>
                     <InputsLogin
@@ -37,6 +39,7 @@ export default function Formulario(props) {
                         width='97%'
                         id='nickname'
                         onChange={typeof props.setApelido === 'function' ? props.setApelido : undefined}
+                        placeholder='Escolha um nickname'
                     />
                     <InputsLogin
                         text='Senha da turma'
@@ -44,6 +47,7 @@ export default function Formulario(props) {
                         width='97%'
                         id='senhaTurma'
                         onChange={typeof props.setSenhaTurma === 'function' ? props.setSenhaTurma : undefined}
+                        placeholder='Senha da turma'
                     />
                     <InputsLogin
                         text='Sua senha'
@@ -51,6 +55,7 @@ export default function Formulario(props) {
                         id='senha'
                         width='97%'
                         onChange={typeof props.setSenha === 'function' ? props.setSenha : undefined}
+                        placeholder='Crie uma senha'
                     />
                     <InputsLogin
                         text='Confirmação de senha'
@@ -58,6 +63,7 @@ export default function Formulario(props) {
                         width='97%'
                         id='confirmacaoSenha'
                         onChange={typeof props.setSenha === 'function' ? props.setSenha : undefined}
+                        placeholder='Confirme sua senha'
                     />
                 </div>
             </div>

@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsis } from '@fortawesome/free-solid-svg-icons';
 import ModalEdicao from '../modalCriacao/modalEdicao.js';
 import api from '../../api';
+import ModalEscolhaAvatar from '../modalEscolhaAvatar/modalEscolhaAvatar.jsx';
 
 function CardTurma({ onClick, ...props }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -88,6 +89,7 @@ function CardTurma({ onClick, ...props }) {
                 setSenhaTurma={props.setSenhaTurma}
                 onClick={props.onClick}
             />
+            
             {props.statusMenuOpcoes && (
                 <div className='reticencias' style={{ display: 'flex', justifyContent: 'end', paddingRight: '50px', paddingTop: '20px' }}>
 

@@ -52,6 +52,8 @@ export default function HeaderLogin(props) {
                 listaAlunos={props.listaAlunos}
                 listaEstudantes={props.listaEstudantes}
                 onUpdateAvatar={props.onUpdateAvatar}
+                statusAula={props.statusAulaProfessor}
+                statusAlunosAtivos={props.alunosAtivos}
             />
             <div className="logo">
                 <img src={props.logo} alt="Logo codando" />

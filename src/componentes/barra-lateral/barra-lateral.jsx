@@ -63,7 +63,7 @@ function BarraLateral(props) {
                     </div>
                     {props.logoff && (
                         <div>
-                            <div className='row' style={{ marginTop: '20px' }}>
+                            <div className='row' onClick={() => { navigate("/"); }} style={{ marginTop: '20px' }}>
                                 <img src={IconHome} alt="Home" />
                                 <span>Inicio</span>
                             </div>
@@ -95,7 +95,7 @@ function BarraLateral(props) {
                     )}
                     {props.login && (
                         <div>
-                            <div className='row' style={{ marginTop: '20px' }}>
+                            <div className='row' onClick={() => { navigate("/"); }} style={{ marginTop: '20px' }}>
                                 <img src={IconHome} alt="Home" />
                                 <span>Inicio</span>
                             </div>
@@ -143,24 +143,31 @@ function BarraLateral(props) {
                             <div className='containerRow'>
                                 <div className='lineDivisoria'></div>
                             </div>
-                            <div className='containerRowTitulo'>
-                                <span className='nameCodando'>Colegas</span>
-                            </div>
-                            <div className='containerScroll' id="listaAlunosLogados">
-                                {Array.isArray(props.listaAlunos) && (
-                                    props.listaAlunos
-                                        .filter(aluno => aluno.apelido !== apelidoAluno)
-                                        .map((aluno) => {
-                                            return (
-                                                <div className='rowAluno' key={aluno.id}>
-                                                    <img src={aluno.avatar[0]?.imagemURL || avatarGenerico} style={{ width: '24px', height: '24px' }} alt="Avatar do Aluno" />
-                                                    <span>@{aluno.apelido}</span>
-                                                    <div className={'statusAluno' + aluno.status}></div>
-                                                </div>
-                                            );
-                                        })
-                                )}
-                            </div>
+                            {props.statusAlunosAtivos && (
+                                <div>
+                                    <div className='containerRowTitulo'>
+                                        <span className='nameCodando'>Colegas</span>
+                                    </div>
+                                    <div className='containerScroll' id="listaAlunosLogados">
+                                        {Array.isArray(props.listaAlunos) && (
+                                            props.listaAlunos
+                                                .filter(aluno => aluno.apelido !== apelidoAluno)
+                                                .map((aluno) => {
+                                                    return (
+                                                        <div className='rowAluno' key={aluno.id}>
+                                                            <img src={aluno.avatar[0]?.imagemURL || avatarGenerico} style={{ width: '24px', height: '24px' }} alt="Avatar do Aluno" />
+                                                            <span>@{aluno.apelido}</span>
+                                                            <div className={'statusAluno' + aluno.status}></div>
+                                                        </div>
+                                                    );
+                                                })
+                                        )}
+                                    </div>
+                                </div>
+                            )
+
+                            }
+
                         </div>
                     )}
                     {props.loginProfessor && (
@@ -186,22 +193,29 @@ function BarraLateral(props) {
                             <div className='containerRow'>
                                 <div className='lineDivisoria'></div>
                             </div>
-                            <div className='containerRowTitulo'>
-                                <span className='nameCodando'>Estudantes</span>
-                            </div>
-                            <div className="containerScroll">
-                                {props.listaEstudantes && Array.isArray(props.listaEstudantes) && (
-                                    props.listaEstudantes.map((estudante) => {
-                                        return (
-                                            <div className='rowAluno' key={estudante.id}>
-                                                <img src={(estudante.avatar[0]?.imagemURL) || avatarGenerico} style={{ width: '24px', height: '24px' }} alt="Avatar do Aluno" />
-                                                <span>{estudante.nome + " " + estudante.sobrenome}</span>
-                                                <div className={'statusAluno' + estudante.status}></div>
-                                            </div>
-                                        );
-                                    })
-                                )}
-                            </div>
+                            {props.statusAula && (
+                                <div>
+                                    <div className='containerRowTitulo'>
+                                        <span className='nameCodando'>Estudantes</span>
+                                    </div>
+                                    <div className="containerScroll">
+                                        {props.listaEstudantes && Array.isArray(props.listaEstudantes) && (
+                                            props.listaEstudantes.map((estudante) => {
+                                                return (
+                                                    <div className='rowAluno' key={estudante.id}>
+                                                        <img src={(estudante.avatar[0]?.imagemURL) || avatarGenerico} style={{ width: '24px', height: '24px' }} alt="Avatar do Aluno" />
+                                                        <span>{estudante.nome + " " + estudante.sobrenome}</span>
+                                                        <div className={'statusAluno' + estudante.status}></div>
+                                                    </div>
+                                                );
+                                            })
+                                        )}
+                                    </div>
+                                </div>
+                            )
+                            }
+
+
                         </div>
                     )}
                 </div>

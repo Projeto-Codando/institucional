@@ -18,6 +18,7 @@ export default function InputsLogin(props) {
                     id={props.id}
                     onChange={event => props.onChange(event.target.value)}
                     style={{ width: props.width || '433px' }}
+                    placeholder={props.placeholder}
                 />
                 {props.type === 'password' && (
                     <span className="eye-icon" onClick={togglePasswordVisibility}>

@@ -1,5 +1,5 @@
 import './formularioCadastro.css'
-import MacacoOculos from '../../imgs/macaco-professorR.png'
+import MacacoOculos from '../../imgs/macacoCadastroPro.png'
 import InputsLogin from '../inputsLogins/inputsLogins'
 import Botao from '../botao/botoes'
 import SubtituloForm from '../subtituloForm/subtituloForm'
@@ -20,12 +20,14 @@ export default function Formulario(props) {
                             id='nome'
                             width='200px'
                             onChange={typeof props.setNome === 'function' ? props.setNome : undefined}
+                            placeholder='Digite seu nome'
                         />
                         <InputsLogin
                             text='Sobrenome'
                             id='sobrenome'
                             width='200px'
                             onChange={typeof props.setSobrenome === 'function' ? props.setSobrenome : undefined}
+                            placeholder='Digite seu sobrenome'
                         />
                     </div>
                     <InputsLogin
@@ -33,6 +35,7 @@ export default function Formulario(props) {
                         id='email'
                         width='97%'
                         onChange={typeof props.setEmail === 'function' ? props.setEmail : undefined}
+                        placeholder='Digite seu email'
                     />
                     <InputsLogin
                         text='Senha'
@@ -40,6 +43,7 @@ export default function Formulario(props) {
                         type='password'
                         width='97%'
                         onChange={typeof props.setSenha === 'function' ? props.setSenha : undefined}
+                        placeholder='Crie uma senha'
                     />
                     <InputsLogin
                         text='Confirmação de senha'
@@ -47,6 +51,7 @@ export default function Formulario(props) {
                         type='password'
                         width='97%'
                         onChange={typeof props.setSenha === 'function' ? props.setSenha : undefined}
+                        placeholder='Confirme a senha'
                     />
                 </div>
             </div>

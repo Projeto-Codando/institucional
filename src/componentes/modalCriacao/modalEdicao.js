@@ -30,9 +30,13 @@ function ModalEdicao({ isOpen, onClose, escolaridade, setEscolaridade, ...props 
         boxSizing: 'border-box',
     };
 
+    
+
     if (isOpen) {
         return (
+            
             <div className="modalCriacao">
+                
                 <div style={BACKGROUND_STYLE}>
                     <div style={MODAL_STYLE}>
                         <div style={{ display: 'flex', justifyContent: 'end', paddingBottom: '10px' }}>
@@ -64,10 +68,11 @@ function ModalEdicao({ isOpen, onClose, escolaridade, setEscolaridade, ...props 
                             onClick={props.onClick}
                         />
                     </div>
-                </div>
-            </div>
+                </div>       
+            </div>  
         );
     }
+    
     return null;
 }
 

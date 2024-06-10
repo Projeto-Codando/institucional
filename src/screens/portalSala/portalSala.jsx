@@ -64,6 +64,7 @@ function PortalSala() {
         statusSerie={isAlunoLoggedIn ? "true" : null}
         statusAvatar={isAlunoLoggedIn || isProfessorLoggedIn ? "true" : null}
         listaEstudantes={estudantes}
+        statusAulaProfessor="true"
       />
       <div className='portalSala'>
         <FaixaTurma

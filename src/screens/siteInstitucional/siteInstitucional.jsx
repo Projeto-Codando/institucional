@@ -51,6 +51,7 @@ function SiteInstitucional() {
         statusEstrela={isAlunoLoggedIn ? "true" : null}
         statusSerie={isAlunoLoggedIn ? "true" : null}
         statusAvatar={isAlunoLoggedIn || isProfessorLoggedIn ? "true" : null}
+        
       />
 
 
