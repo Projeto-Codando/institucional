@@ -41,6 +41,7 @@ export default function Estudantes(props) {
 
     return (
         <div className="estudantes">
+            <div className='navegationBar'>
             <div className='barraNavegacao'>
                 <div className='selecionar'>
                     <input type="checkbox" />
@@ -75,10 +76,11 @@ export default function Estudantes(props) {
                     </div>
                 </div>
             </div>
+            </div>
             <div className='estudantesInformacoes'>
                 {alunosTurma.map((aluno) => {
                     return (
-                        <EstudantesInfo nomeAluno={aluno.nome + ' ' + aluno.sobrenome} apelido={'@' + aluno.apelido} qtdPontos={aluno.pontuacao} AvatarAluno={aluno.avatar[0]?.imagemURL || avatarGenerico} />
+                        <EstudantesInfo nomeAluno={aluno.nome + ' ' + aluno.sobrenome} apelido={'@' + aluno.apelido} qtdPontos={aluno.pontuacao} AvatarAluno={aluno.avatar[0]?.imagemURL || avatarGenerico} openEditarModal={openEditarModal} />
                     )
                 }
                 )}
