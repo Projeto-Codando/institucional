@@ -25,7 +25,7 @@ function Lobby() {
         fkAluno: sessionStorage.getItem("userId"),
         fkAula: nivelSelecionado
     }
-    
+
     console.log(body);
 
     const handleCreateNewProgressGame = () => {
@@ -38,7 +38,7 @@ function Lobby() {
             setIsLoading(false);
             console.log(response.data);
             toast.success("Quiz iniciado com sucesso!");
-            navigate(`/jogo/${nivelSelecionado}`); 
+            navigate(`/jogo/${nivelSelecionado}`);
         }).catch((error) => {
             setIsLoading(false);
             toast.error("Não foi possível iniciar o quiz! " + error.response.data.message);
@@ -164,7 +164,7 @@ function Lobby() {
                                 <span>Aula detalhada sobre a combinação das estruturas condicionais if e else, incluindo exemplos de uso em fluxos de controle.</span>
                             </div>
                             <div className='estrelaAula'>
-                                <img src={Estrela} alt="estrelaAula" /> <span>0 / 5</span>
+                                <img src={Estrela} alt="estrelaAula" /> <span>0 / 7</span>
                             </div>
                             <div className='botaoAula'><button onClick={() => {
 
@@ -183,7 +183,7 @@ function Lobby() {
                                 <span>Aula explicativa sobre a estrutura condicional switch case, ideal para selecionar entre várias opções baseadas em uma única variável.</span>
                             </div>
                             <div className='estrelaAula'>
-                                <img src={Estrela} alt="estrelaAula" /> <span>0 / 5</span>
+                                <img src={Estrela} alt="estrelaAula" /> <span>0 / 6</span>
                             </div>
                             <div className='botaoAula'><button onClick={() => {
                                 sessionStorage.setItem("nivel", nivelSelecionado);
