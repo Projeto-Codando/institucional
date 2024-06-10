@@ -87,16 +87,13 @@ const idProfessor = sessionStorage.getItem('userId')
         <div className="estudantes">
             {loading && <LoadingSpinner />}
             <div className='barraNavegacao'>
+                <div className='navigationBar'>
             <div className='selecionar'>
                         <input type="checkbox" checked={allSelected} onChange={handleSelectAll} />
                         <label>Selecionar todos</label>
                 </div>
                 <div className='botoesDireita'>
-                    <div className='botoesEstudantes' onClick={handleDownloadCSV}>
-                        <div className='excluir'>
-                            <p>Download CSV</p>
-                        </div>
-                    </div>
+                
                     <div className='botoesDireita'>
                         <div className='botoesEstudantes' onClick={handleDownloadCSV}>
                             <div className='excluir'>
@@ -126,6 +123,7 @@ const idProfessor = sessionStorage.getItem('userId')
                         </div>
                     </div>
                 </div>
+                </div>
             </div>
             <div className='estudantesInformacoes'>
                 {alunosTurma.map((aluno) => (
@@ -133,7 +131,7 @@ const idProfessor = sessionStorage.getItem('userId')
                         key={aluno.id}
                         nomeAluno={aluno.nome + ' ' + aluno.sobrenome}
                         apelido={'@' + aluno.apelido}
-                        qtdPontos={aluno.pontuacao}
+                        qtdPontos={aluno.pontuacao || 0}
                         AvatarAluno={aluno.avatar[0]?.imagemURL || avatarGenerico}
                         openEditarModal={openEditarModal}
                         isSelected={selectedAlunos.includes(aluno.id)}

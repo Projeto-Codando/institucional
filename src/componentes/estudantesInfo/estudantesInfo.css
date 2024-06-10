@@ -18,20 +18,27 @@
     }
 
     .infosPrincipais {
+        width: 100%;
         font-size: 24px;
         font-weight: bold;
         color: white;
         gap: 60px;
         display: flex;
     }
+    .infosPrincipais span {
+        width: 200px;
+    }
 
     .pontosAluno {
         display: flex;
         gap: 5px;
     }
+    .pontosAluno span {
+        width: 10px;
+    }
     .finalCard {
         display: flex;
-        width: 30%;
+        width: 50%;
         justify-content: end;
     }
 

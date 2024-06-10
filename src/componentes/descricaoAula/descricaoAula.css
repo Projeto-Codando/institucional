@@ -8,7 +8,6 @@
 }
 
 .descricaoAula p {
-    margin-top: 5px;
     color: white;
     font-size: 20px;
     font-weight: bolder;
@@ -75,5 +74,11 @@
 }
 
 .nomeAula {
+    display: flex;
     width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.nomeAula p {
+margin: 0;
 }

@@ -4,19 +4,25 @@
     width: 100%;
     height: 100%;
 }
+.navigationBar {
+    display: flex;
+    width: 93%;
+    align-items: center;
+}
 
 .barraNavegacao {
     display: flex;
-    padding: 20px 20px 10px 10px;
+    padding: 20px 0 20px 0;
     align-items: center;
     height: 10%;
-    width: 92%;
+    width: 99%;
+    justify-content: center;
 }
 
 .selecionar {
     color: #595959;
     display: flex;
-    width: 100%;
+    width: 58%;
     gap: 5px;
 }
 
@@ -95,3 +101,4 @@
     justify-content: center;
     width: 100%;
 }
+
