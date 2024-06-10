@@ -6,10 +6,10 @@ export default function EstudantesInfo(props) {
     return (
         <div className="estudantesInfo">
             <div className='selectImagem'>
-                <input type="checkbox" />
-                <div className='avatarAtividade'>
-                    <img src={props.AvatarAluno} alt="imagem do aluno" />
-                </div>
+            <input type="checkbox" />
+            <div className='avatarAtividade'>
+            <img src={props.AvatarAluno} alt="imagem do aluno" style={{width: '50px', borderRadius: 360}}/>
+            </div>
             </div>
             <div className='infosPrincipais'>
                 <span>{props.nomeAluno}</span>

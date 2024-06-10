@@ -4,7 +4,7 @@ import Cadastro from "./screens/cadastro/cadastro"
 import Login from "./screens/login/login"
 import Lobby from "./screens/lobby/lobby";
 import Jogo from "./screens/jogo/jogo"
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route} from "react-router-dom";
 function Rotas() {
     return (
         <>

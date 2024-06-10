@@ -18,6 +18,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Lobby from './screens/lobby/lobby';
 import 'react-toastify/dist/ReactToastify.css';
 import { AvatarProvider } from './componentes/avatarContext/avatarContext';
+import TurmasArquivadas from './screens/turmasArquivadas/turmasArquivadas';
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
           <Route path='/jogo/4' element={<Jogo4 />} />
           <Route path='/jogo/5' element={<Jogo5 />} />
           <Route path='/portal/sala' element={<PortalSala />} />
+          <Route path='/portal/arquivadas' element={<TurmasArquivadas />} />
         </Routes>
       </BrowserRouter>
     </AvatarProvider>

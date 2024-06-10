@@ -1,6 +1,6 @@
 .botao-conteudo{
     display: flex;
-    align-items: end;
+    align-items: flex-end;
 }
 .botao-conteudo button {
     width: 200px;

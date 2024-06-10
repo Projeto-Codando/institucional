@@ -5,7 +5,6 @@ import RetanguloInvertivo from '../../imgs/retanguloInvertido.svg'
 import Retangulo from '../../imgs/retangulo.svg'
 import DescricaoAula from '../descricaoAula/descricaoAula';
 import Botao from '../botaoConteudo/botaoConteudo'
-import { useState } from 'react';
 
 function ModalConteudo({ isOpen, onClose, escolaridade, setEscolaridade, ...props }) {
     const aula = props.conteudoAula;
@@ -40,7 +39,7 @@ function ModalConteudo({ isOpen, onClose, escolaridade, setEscolaridade, ...prop
                     <div style={MODAL_STYLE}>
                         <div className='conteudoCard'>
                             <div className='retangulo'>
-                                <img id="retangulo" src={RetanguloInvertivo} />
+                                <img id="retangulo" src={RetanguloInvertivo} alt="Retangulo codando"/>
                             </div>
                             <div className='borda'>
 
@@ -69,7 +68,7 @@ function ModalConteudo({ isOpen, onClose, escolaridade, setEscolaridade, ...prop
                             />    
                             </div>
                             <div className='retangulo'>
-                                <img id="retangulo" src={Retangulo} />
+                                <img id="retangulo" src={Retangulo} alt='Retangulo sobre o codando'/>
                             </div>
                         </div>
                     </div>

@@ -81,7 +81,6 @@ function Lobby() {
                             <div className='tema'>
                                 <span className='span1'>Tema atual:</span>
                                 <span className='span2'>Condicional</span>
-                                <button className='botaoBemVindo'> <img src={Start} alt="" />Continue</button>
                             </div>
                         </div>
                     </div>

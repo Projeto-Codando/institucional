@@ -11,10 +11,11 @@ import IconControleRoxo from '../../imgs/iconControleRoxo.png';
 import IconControleBranco from '../../imgs/IconControleBranco.png';
 
 function Jogo() {
-
     const [isAlunoLoggedIn, setIsAlunoLoggedIn] = useState(false);
     const [isProfessorLoggedIn, setIsProfessorLoggedIn] = useState(false);
     const [quizStack, setQuizStack] = useState([1]);
+    const [completedQuizzes, setCompletedQuizzes] = useState([]);
+    const [correctOptions, setCorrectOptions] = useState({});
 
     useEffect(() => {
         const apelido = sessionStorage.getItem("apelidoUser");
@@ -28,8 +29,10 @@ function Jogo() {
         }
     }, []);
 
-    const handleNextQuiz = () => {
+    const handleNextQuiz = (quizNumber, correctOption) => {
         setQuizStack(prev => [...prev, prev[prev.length - 1] + 1]);
+        setCompletedQuizzes(prev => [...prev, quizNumber]);
+        setCorrectOptions(prev => ({ ...prev, [quizNumber]: correctOption }));
     };
 
     const handlePreviousQuiz = () => {
@@ -37,6 +40,18 @@ function Jogo() {
     };
 
     const currentQuiz = quizStack[quizStack.length - 1];
+
+    const getBackgroundColor = (quizNumber) => {
+        if (currentQuiz === quizNumber) return '#F3DE2C';
+        if (completedQuizzes.includes(quizNumber)) return '#662E9B';
+        return '#D9D9D9';
+    };
+
+    const getIcon = (quizNumber) => {
+        if (currentQuiz === quizNumber) return IconControle;
+        if (completedQuizzes.includes(quizNumber)) return IconControleBranco;
+        return IconControleRoxo;
+    };
 
     return (
         <div className='jogo'>
@@ -56,46 +71,19 @@ function Jogo() {
                 <div className='niveisJogo'>
                     <img className='trianguloD' src={TrianguloD} alt="Triangulo direita" />
                     <div className='cardsNivel'>
-                        <CardNivelJogo
-                            backgroundColor='#7CB518'
-                            statusTitulo='true'
-                            titulo='Aula 1'
+                    <CardNivelJogo 
+                        backgroundColor='#7CB518'
+                        statusTitulo='true'
+                        titulo='Aula 1'
                         />
-                        <CardNivelJogo
-                            backgroundColor={currentQuiz === 1 ? '#F3DE2C' : currentQuiz > 1 ? '#662E9B' : '#D9D9D9'}
-                            statusImg='true'
-                            imagem={currentQuiz === 1 ? IconControle : currentQuiz > 1 ? IconControleBranco : IconControleRoxo}
-                        />
-                        <CardNivelJogo
-                            backgroundColor={currentQuiz === 2 ? '#F3DE2C' : currentQuiz > 2 ? '#662E9B' : '#D9D9D9'}
-                            statusImg='true'
-                            imagem={currentQuiz === 2 ? IconControle : currentQuiz > 2 ? IconControleBranco : IconControleRoxo}
-                        />
-                        <CardNivelJogo
-                            backgroundColor={currentQuiz === 3 ? '#F3DE2C' : currentQuiz > 3 ? '#662E9B' : '#D9D9D9'}
-                            statusImg='true'
-                            imagem={currentQuiz === 3 ? IconControle : currentQuiz > 3 ? IconControleBranco : IconControleRoxo}
-                        />
-                        <CardNivelJogo
-                            backgroundColor={currentQuiz === 4 ? '#F3DE2C' : currentQuiz > 4 ? '#662E9B' : '#D9D9D9'}
-                            statusImg='true'
-                            imagem={currentQuiz === 4 ? IconControle : currentQuiz > 4 ? IconControleBranco : IconControleRoxo}
-                        />
-                        <CardNivelJogo
-                            backgroundColor={currentQuiz === 5 ? '#F3DE2C' : currentQuiz > 5 ? '#662E9B' : '#D9D9D9'}
-                            statusImg='true'
-                            imagem={currentQuiz === 5 ? IconControle : currentQuiz > 5 ? IconControleBranco : IconControleRoxo}
-                        />
-                        <CardNivelJogo
-                            backgroundColor={currentQuiz === 6 ? '#F3DE2C' : currentQuiz > 6 ? '#662E9B' : '#D9D9D9'}
-                            statusImg='true'
-                            imagem={currentQuiz === 6 ? IconControle : currentQuiz > 6 ? IconControleBranco : IconControleRoxo}
-                        />
-                        <CardNivelJogo
-                            backgroundColor={currentQuiz === 7 ? '#F3DE2C' : currentQuiz > 7 ? '#662E9B' : '#D9D9D9'}
-                            statusImg='true'
-                            imagem={currentQuiz === 7 ? IconControle : currentQuiz > 7 ? IconControleBranco : IconControleRoxo}
-                        />
+                        {[1, 2, 3, 4, 5, 6, 7].map((num) => (
+                            <CardNivelJogo
+                                key={num}
+                                backgroundColor={getBackgroundColor(num)}
+                                statusImg='true'
+                                imagem={getIcon(num)}
+                            />  
+                        ))}
                     </div>
                     <img className='trianguloE' src={TrianguloE} alt="Triangulo esquerda" />
                 </div>
@@ -110,7 +98,8 @@ function Jogo() {
                             opcao2='!'
                             opcao3='?'
                             indexCorreto={1}
-                            onCorrect={handleNextQuiz}
+                            correctOption={correctOptions[1]}
+                            onCorrect={() => handleNextQuiz(1, 1)}
                             onBack={handlePreviousQuiz}
                         />
                     )}
@@ -140,10 +129,12 @@ console.log("A quantidade de bananas é diferente que 5!"); `}</pre>
                             opcao2='A quantidade de bananas é diferente que 5'
                             opcao3='Nenhuma das anteriores'
                             indexCorreto={2}
+                            statusExemploResposta='true'
                             exemploResposta={
                                 <pre>{`A quantidade de bananas é diferente que 5`}</pre>
                             }
-                            onCorrect={handleNextQuiz}
+                            correctOption={correctOptions[2]}
+                            onCorrect={() => handleNextQuiz(2, 2)}
                             onBack={handlePreviousQuiz}
                         />
                     )}
@@ -158,10 +149,12 @@ console.log("A quantidade de bananas é diferente que 5!"); `}</pre>
                             opcao2=' Loop para verificar repetidamente '
                             opcao3='Avaliação da complexidade da senha'
                             indexCorreto={1}
+                            statusExemploResposta='true'
                             exemploResposta={
                                 <pre>{`Verificação do comprimento da string`}</pre>
                             }
-                            onCorrect={handleNextQuiz}
+                            correctOption={correctOptions[3]}
+                            onCorrect={() => handleNextQuiz(3, 1)}
                             onBack={handlePreviousQuiz}
                         />
                     )}
@@ -171,6 +164,7 @@ console.log("A quantidade de bananas é diferente que 5!"); `}</pre>
                             qtdQuestao='7'
                             tituloQuiz='Em uma aventura noturna, os macacos precisam determinar se a lua está cheia para realizar um ritual especial. Eles têm um sensor que retorna o valor true se a lua estiver cheia e false caso contrário. Como os macacos podem usar uma estrutura de if para verificar se a lua está cheia e imprimir "A lua está cheia!"? '
                             statusExemploQuiz='true'
+                            statusExemploResposta='true'
                             exemplo={
                                 <pre>{`let luaCheia = true; 
 
@@ -187,7 +181,8 @@ console.log("A lua está cheia!");
                             exemploResposta={
                                 <pre>{`luaCheia`}</pre>
                             }
-                            onCorrect={handleNextQuiz}
+                            correctOption={correctOptions[4]}
+                            onCorrect={() => handleNextQuiz(4, 0)}
                             indexCorreto={0}
                             onBack={handlePreviousQuiz}
                         />
@@ -198,6 +193,7 @@ console.log("A lua está cheia!");
                             qtdQuestao='7'
                             tituloQuiz='Os macacos querem verificar se a temperatura está acima de 30 graus para decidir se vão nadar no rio. Eles possuem uma variável chamada temperatura. Qual estrutura de if é adequada para essa verificação?'
                             statusExemploQuiz='true'
+                            statusExemploResposta='true'
                             exemplo={
                                 <pre>{`let temperatura = 35; 
 
@@ -209,13 +205,13 @@ console.log("Vamos nadar no rio!");
                             }
                             opcao0='temperatura < 30'
                             opcao1='temperatura >= 30'
-                            opcao2='temperatura == 30'
+                            opcao2='temperatura <= 30'
                             opcao3='temperatura != 30'
                             indexCorreto={1}
                             exemploResposta={
-                                <pre>{`temperatura >= 30`}</pre>
-                            }
-                            onCorrect={handleNextQuiz}
+                                <pre>{`temperatura >= 30`}</pre>}
+                            correctOption={correctOptions[5]}
+                            onCorrect={() => handleNextQuiz(5, 1)}
                             onBack={handlePreviousQuiz}
                         />
                     )}
@@ -223,7 +219,7 @@ console.log("Vamos nadar no rio!");
                         <Quiz
                             numeroQuestao='6'
                             qtdQuestao='7'
-                            tituloQuiz='Em uma competição de escalada de árvores, os macacos precisam verificar se a altura de uma árvore é maior que 15 metros para escolher a árvore certa para a competição. Eles possuem uma variável alturaArvore. Qual estrutura de if usariam?'
+                            tituloQuiz='Os macacos precisam verificar se a altura de uma árvore é maior que 15 metros para escolher a árvore certa para a competição. Eles possuem uma variável alturaArvore. Qual estrutura de if usariam?'
                             statusExemploQuiz='true'
                             exemplo={
                                 <pre>{`let alturaArvore = 20; 
@@ -239,10 +235,12 @@ console.log("Essa árvore é adequada para a competição!");
                             opcao2='alturaArvore > 15'
                             opcao3='alturaArvore == 15'
                             indexCorreto={2}
+                            statusExemploResposta='true'
                             exemploResposta={
                                 <pre>{`alturaArvore > 15`}</pre>
                             }
-                            onCorrect={handleNextQuiz}
+                            correctOption={correctOptions[6]}
+                            onCorrect={() => handleNextQuiz(6, 2)}
                             onBack={handlePreviousQuiz}
                         />
                     )}
@@ -252,6 +250,7 @@ console.log("Essa árvore é adequada para a competição!");
                             qtdQuestao='7'
                             tituloQuiz='Um macaco curioso está testando diferentes tipos de frutas para ver quais são comestíveis. Ele tem uma variável frutaComestivel que retorna true se a fruta for comestível e false caso contrário. Como ele pode usar uma estrutura de if para verificar se a fruta é comestível e imprimir "A fruta é comestível!"?'
                             statusExemploQuiz='true'
+                            statusExemploResposta='true'
                             exemplo={
                                 <pre>{`let frutaComestivel = true; 
 
@@ -269,8 +268,10 @@ console.log("A fruta é comestível!");
                             exemploResposta={
                                 <pre>{`frutaComestivel == true`}</pre>
                             }
-                            onCorrect={handleNextQuiz}
+                            correctOption={correctOptions[7]}
+                            onCorrect={() => handleNextQuiz(7, 2)}
                             onBack={handlePreviousQuiz}
+                            onFinal={true}
                         />
                     )}
                     <div className='telaQuiz'>

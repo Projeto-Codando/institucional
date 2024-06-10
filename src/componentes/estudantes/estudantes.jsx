@@ -6,8 +6,13 @@ import Setinha from '../../imgs/setinhaEstudantes.svg';
 import EstudantesInfo from '../estudantesInfo/estudantesInfo';
 import ModalExcluirEstudante from '../modalEstudante/modalExcluirEstudante'; 
 import ModalEditarEstudante from '../modalEstudante/modalEditarEstudante';
+import api from '../../api';
+import { saveAs } from 'file-saver';
+
+
 
 export default function Estudantes(props) {
+    
     const [isExcluirModalOpen, setIsExcluirModalOpen] = useState(false);
     const [isEditarModalOpen, setIsEditarModalOpen] = useState(false);
 
@@ -16,6 +21,23 @@ export default function Estudantes(props) {
 
     const openEditarModal = () => setIsEditarModalOpen(true);
     const closeEditarModal = () => setIsEditarModalOpen(false);
+    const idProfessor = sessionStorage.getItem('userId')
+    const idTurma = sessionStorage.getItem('idTurmaClicada')
+
+    const handleDownloadCSV = async () => {
+        try{
+            const response = await api.get(`/turmas/gerarCSV/${idProfessor}/${idTurma}`, { responseType: 'blob', 
+                headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } 
+            })
+            const blob = new Blob([response.data], { type: 'application/csv' })
+            saveAs(blob, 'dadosTurma.csv');
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const alunosTurma = props.listaEstudantes
+    const avatarGenerico = sessionStorage.getItem('defaultAvatar')
 
     return (
         <div className="estudantes">
@@ -25,6 +47,11 @@ export default function Estudantes(props) {
                     <label htmlFor="">Selecionar todos</label>
                 </div>
                 <div className='botoesDireita'>
+                    <div className='botoesEstudantes' onClick={handleDownloadCSV}>
+                        <div className='excluir'>
+                            <p>Download CSV</p>
+                        </div>
+                    </div>
                     <div className='botoesEstudantes'>
                         <div className='excluir' onClick={openExcluirModal}>
                             <p>Excluir</p>
@@ -49,12 +76,12 @@ export default function Estudantes(props) {
                 </div>
             </div>
             <div className='estudantesInformacoes'>
-                <EstudantesInfo
-                    nomeAluno='Guilherme Santos'
-                    apelido='@guido'
-                    qtdPontos='10'
-                    openEditarModal={openEditarModal}
-                />
+                {alunosTurma.map((aluno) => {
+                    return (
+                        <EstudantesInfo nomeAluno={aluno.nome + ' ' + aluno.sobrenome} apelido={'@' + aluno.apelido} qtdPontos={aluno.pontuacao} AvatarAluno={aluno.avatar[0]?.imagemURL || avatarGenerico} />
+                    )
+                }
+                )}
             </div>
             <ModalExcluirEstudante
                 isOpen={isExcluirModalOpen}

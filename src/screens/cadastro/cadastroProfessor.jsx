@@ -15,10 +15,9 @@ function CadastroProfessor() {
   const [nome, setNome] = useState("")
   const [sobrenome, setSobrenome] = useState("")
   const [email, setEmail] = useState("")
-  const [senhaTurma, setSenhaTurma] = useState("")
   const [senha, setSenha] = useState("")
 
-  const [isAlunoLoggedIn, setIsAlunoLoggedIn] = useState(false);
+    const [isAlunoLoggedIn, setIsAlunoLoggedIn] = useState(false);
     const [isProfessorLoggedIn, setIsProfessorLoggedIn] = useState(false);
 
     useEffect(() => {
@@ -49,7 +48,6 @@ function CadastroProfessor() {
       nome,
       sobrenome,
       email,
-      senhaTurma,
       senha,
       "status": "ativo"
     }

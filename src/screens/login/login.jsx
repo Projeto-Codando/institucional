@@ -18,7 +18,7 @@ function Login() {
 
     const [isAlunoLoggedIn, setIsAlunoLoggedIn] = useState(false);
     const [isProfessorLoggedIn, setIsProfessorLoggedIn] = useState(false);
-    const [listaAvatares, setListaAvatares] = useState([])
+    const [listaAvatares, setListaAvatares] = useState([]);
 
     useEffect(() => {
 
@@ -41,6 +41,8 @@ function Login() {
 
     const handleSave = async (event) => {
         event.preventDefault();
+        
+        console.log(listaAvatares);
 
         const objetoAdicionado = {
             apelido,

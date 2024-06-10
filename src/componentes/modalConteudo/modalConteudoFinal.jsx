@@ -4,9 +4,10 @@ import RetanguloVerdeInvertivo from '../../imgs/RetanguloVerdeInverso.png';
 import RetanguloVerde from '../../imgs/RetanguloVerde.png';
 import Botao from '../botao/botoes';
 import BananaPoint from '../../imgs/estrela.png';
-import Parabens from '../../imgs/img-parabens.png';
 
-function ModalConteudo({ isOpen, onClose, onCorrect, ...props }) {
+import { useNavigate } from 'react-router-dom';
+
+function ModalConteudoFinal({ isOpen, onClose, onCorrect, ...props }) {
     const BACKGROUND_STYLE = {
         position: 'fixed',
         top: '0',
@@ -29,16 +30,14 @@ function ModalConteudo({ isOpen, onClose, onCorrect, ...props }) {
         flexDirection: 'column',
         boxSizing: 'border-box',
     };
-
+    const navigate = useNavigate();
     const handleButtonClick = () => {
-        if (onCorrect) {
-            onCorrect();
-        }
+
         setTimeout(() => {
-            if (onClose) {
                 onClose();
-            }
-        }, 500); // Delay de 0,5 segundos
+        }, 500);
+        
+        navigate("/lobby")
     };
 
     if (isOpen) {
@@ -48,34 +47,35 @@ function ModalConteudo({ isOpen, onClose, onCorrect, ...props }) {
                     <div style={MODAL_STYLE} >
                         <div className='conteudoCard'>
                             <div className='retangulo'>
-                                <img id="retanguloVerde" src={RetanguloVerdeInvertivo} alt='Retangulo verde'/>
+                                <img id="retanguloVerde" src={RetanguloVerdeInvertivo} alt='Retangulo Verde invertido'/>
                             </div>
-                            <div className='borda' style={{padding: '15px'}}>
-                                <div style={{ display: 'flex', justifyContent: 'start', paddingBottom: '10px', width: '100%', alignItems: 'center', padding: '15px 0px 0px 20px' }}>
-                                    <img src={BananaPoint} style={{ width: '30px' }} alt="close" />
-                                    <span style={{ color: '#F3DE2C', fontSize: '20px', fontWeight: '900', marginLeft: '8px' }}>2</span>
-                                </div>
-                                <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
-                                    <img src={Parabens} alt="imagem de parabens" />
-                                </div>
-                                <div className='temaTitulo' style={{ marginTop: '5px', width: '450px' }}>
-                                    <span id='tituloParabens' style={{ fontSize: '30px', fontWeight: 'bold', marginBottom: '20px' }}>
-                                        Parabens!
+                            <div className='borda' style={{ padding: '15px' }}>
+
+                                <div className='temaTitulo' style={{ marginTop: '15px', width: '450px' }}>
+                                    <span id='tituloParabens' style={{ fontSize: '30px', fontWeight: 'bold', marginBottom: '20px', textAlign: 'center' }}>
+                                        Parabens, Explorador!
                                     </span>
                                 </div>
                                 <div style={{ display: 'flex', justifyContent: 'center', width: '100%', marginBottom: '20px' }}>
-                                    <span style={{ display: 'flex', justifyContent: 'center', width: '270px' }}>
-                                        Para resolucionar a questão foi necessário o código abaixo:
+                                    <span style={{ display: 'flex', justifyContent: 'center', width: '270px', textAlign: 'center' }}>
+                                        Você foi corajoso e esperto.<br />
+                                        Depois de completar todos os desafios, você é um verdadeiro mestre da floresta e da programação.
+                                        Continue explorando e criando!
                                     </span>
                                 </div>
-                                {props.statusExemploResposta && (
-                                    <div className='exemplo' style={{ minWidth: '270px', marginBottom: '20px' }}>
-                                        {props.exemploResposta}
-                                    </div>
-                                )}
+                                <div style={{ display: 'flex', justifyContent: 'center', width: '100%', marginBottom: '20px' }}>
+                                    <span style={{ display: 'flex', justifyContent: 'center', width: '270px', textAlign: 'center', fontSize: '20px', fontWeight: 'bold' }}>
+                                        Banana Points conquistadas:
+                                    </span>
+                                </div>
+                                <div style={{ display: 'flex', justifyContent: 'center', width: '100%', alignItems: 'center', marginBottom: '30px' }}>
+                                    <img src={BananaPoint} style={{ width: '30px' }} alt="close" />
+                                    <span style={{ color: '#F3DE2C', fontSize: '30px', fontWeight: '900', marginLeft: '8px' }}>DEIXAR DINAMICO</span>
+                                </div>
+
 
                                 <Botao
-                                    texto='Próxima atividade'
+                                    texto='Finalizar aula'
                                     backgroundColor="#7CB518"
                                     width="198.5px"
                                     fontSize='20px'
@@ -85,7 +85,7 @@ function ModalConteudo({ isOpen, onClose, onCorrect, ...props }) {
                                 />
                             </div>
                             <div className='retangulo'>
-                                <img id="retanguloVerde" src={RetanguloVerde} alt='Retangulo verde'/>
+                                <img id="retanguloVerde" src={RetanguloVerde} alt='Retangulo Verde'/>
                             </div>
                         </div>
                     </div>
@@ -96,4 +96,4 @@ function ModalConteudo({ isOpen, onClose, onCorrect, ...props }) {
     return null;
 }
 
-export default ModalConteudo;
+export default ModalConteudoFinal;

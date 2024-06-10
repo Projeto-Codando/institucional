@@ -25,6 +25,7 @@ export function SobreProjeto() {
                         }} />
                 </div>
                 <img src={SetaCurva}
+                alt='Seta curva para baixo'
                     style={{
                         width: '180px',
                         height: '200px'

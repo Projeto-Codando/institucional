@@ -16,7 +16,7 @@ function PortalSala() {
   const [estudantes, setEstudantes] = useState([]);
   const [visibleComponent, setVisibleComponent] = useState('Progresso'); 
   const [selectedNavegacao, setSelectedNavegacao] = useState('Progresso');
-  const [turmaBuscada, setTurmaBuscada] = useState(sessionStorage.getItem('idTurmaClicada'));
+  const [turmaBuscada] = useState(sessionStorage.getItem('idTurmaClicada'));
 
   useEffect(() => {
     const apelido = sessionStorage.getItem("apelidoUser");
@@ -44,7 +44,7 @@ function PortalSala() {
     }).catch((error) => {
       console.log(error)
     });
-  }, []);
+  }, [turmaBuscada]);
 
   if (!turmaData) {
     return null; 
@@ -77,7 +77,7 @@ function PortalSala() {
         <div className='telaPrincipal'>
           {visibleComponent === 'Conteudo' && <Conteudo />}
           {visibleComponent === 'Progresso' && <Progresso />}
-          {visibleComponent === 'Estudantes' && <Estudantes />}
+          {visibleComponent === 'Estudantes' && <Estudantes listaEstudantes={estudantes}/>}
         </div>
       </div>
     </div>

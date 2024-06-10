@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
+
 import './barra-lateral.css';
-import MenuAmarelo from '../../imgs/menuAmarelo.png';
+import BotaoClose from '../../imgs/closeButton.png';
 import LogoC from '../../imgs/Logo-C.svg';
 import IconHome from '../../imgs/IconHome.png';
 import IconBox from '../../imgs/IconBox.png';
@@ -12,15 +13,15 @@ import IconPay from '../../imgs/IconPlay.png';
 import IconGlobe from '../../imgs/IconGlobe.png';
 import IconQuestion from '../../imgs/IconQuestion.png';
 import IconClip from '../../imgs/IconClip.png';
-import IconPasta from '../../imgs/IconPasta.png';
 import IconUsers from '../../imgs/IconUsers.png';
 import { useNavigate } from 'react-router-dom';
 import ModalEscolhaAvatar from '../modalEscolhaAvatar/modalEscolhaAvatar';
 import ModalComprarAvatar from '../modalComprarAvatar/modalComprarAvatar';
 
-
 const apelidoAluno = sessionStorage.getItem("apelidoUser");
-const avatarSession = sessionStorage.getItem("ImagemURL_AVATAR");
+sessionStorage.setItem("defaultAvatar", "https://previews.dropbox.com/p/thumb/ACQrgeBBcui9gljnEFhmCTgAXZbSMILhpwZmjNgKRXnTMwDJ9qlA6mQBF0G9ZJVpWu6xiQ3QGzryGAj9uUdXrqGklSeUamwWjddiMPqmW4o33M_rNz-EeiiDnoDPXmn2wYutrh9rJP7SdC3GDJoQOWwDkkLsi-bxZ57tyLw473qgZiQJY40h6GeuAaFihrvPS_8rNypaMFi7pp8rA1V691XudMtN5AhYw05xuMd178c3eDXGPklR3LM7cf1V5owUWdlyCv4g_n6hSKQWRmjR3NmSDjcgmoc4fzBjJ3yly4UdbIrNRWqd8Se7w--7NNSn2X2PB34I5RqoG8QrcT6SR4ac/p.png");
+
+const avatarGenerico = sessionStorage.getItem("defaultAvatar");
 
 function BarraLateral(props) {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -57,16 +58,16 @@ function BarraLateral(props) {
             <div className={`section-barra-lateral ${open ? 'aberto' : ''}`}>
                 <div className={`barra-lateral ${open ? 'aberto' : ''}`} style={{ opacity: open ? 1 : 0 }}>
                     <div className='container-menu'>
-                        <img src={MenuAmarelo} alt="menu" onClick={changeStateBar} className='botao-fechar' />
+                        <img src={BotaoClose} alt="menu" onClick={changeStateBar} className='botao-fechar' />
                         <img src={LogoC} alt="logo c" className='logoC' />
                     </div>
                     {props.logoff && (
                         <div>
-                            <div className='row' style={{ marginTop: '50px' }}>
+                            <div className='row' style={{ marginTop: '20px' }}>
                                 <img src={IconHome} alt="Home" />
                                 <span>Inicio</span>
                             </div>
-                            <div className='row' >
+                            <div className='row' onClick={() => navigate("/")}>
                                 <img src={IconBox} alt="Planos" />
                                 <span>Planos</span>
                             </div>
@@ -77,7 +78,7 @@ function BarraLateral(props) {
                                 onAvatarChange={props.onUpdateAvatar}
                             /> */}
 
-                            <div className='row'>
+                            <div className='row' onClick={() => navigate("/")}>
                                 <img src={IconFaq} alt="F.A.Q" />
                                 <span>F.A.Q</span>
                             </div>
@@ -94,7 +95,7 @@ function BarraLateral(props) {
                     )}
                     {props.login && (
                         <div>
-                            <div className='row' style={{ marginTop: '50px' }}>
+                            <div className='row' style={{ marginTop: '20px' }}>
                                 <img src={IconHome} alt="Home" />
                                 <span>Inicio</span>
                             </div>
@@ -131,7 +132,7 @@ function BarraLateral(props) {
                                 <img src={IconPay} alt="Play" />
                                 <span>Continuar jogo</span>
                             </div>
-                            <div className='row'>
+                            <div className='row' onClick={() => { navigate("/lobby"); }}>
                                 <img src={IconGlobe} alt="Globe" />
                                 <span>Mapa</span>
                             </div>
@@ -152,7 +153,7 @@ function BarraLateral(props) {
                                         .map((aluno) => {
                                             return (
                                                 <div className='rowAluno' key={aluno.id}>
-                                                    <img src={avatarSession} style={{ width: '24px', height: '24px' }} alt="Avatar do Aluno" />
+                                                    <img src={aluno.avatar[0]?.imagemURL || avatarGenerico} style={{ width: '24px', height: '24px' }} alt="Avatar do Aluno" />
                                                     <span>@{aluno.apelido}</span>
                                                     <div className={'statusAluno' + aluno.status}></div>
                                                 </div>
@@ -170,17 +171,13 @@ function BarraLateral(props) {
                             <div className='containerRowTitulo'>
                                 <span className='nameCodando'>Codando</span>
                             </div>
-                            <div className='row'>
+                            <div className='row' onClick={() => { navigate("/portal"); }}>
                                 <img src={IconUsers} alt="Users" />
                                 <span>Turmas</span>
                             </div>
-                            <div className='row'>
+                            <div className='row' onClick={() => { navigate("/lobby"); }}>
                                 <img src={IconClip} alt="Clip" />
                                 <span>Turmas Arquivadas</span>
-                            </div>
-                            <div className='row'>
-                                <img src={IconPasta} alt="Pasta" />
-                                <span>Meus Projetos</span>
                             </div>
                             <div className='row'>
                                 <img src={IconQuestion} alt="Question" />
@@ -197,7 +194,7 @@ function BarraLateral(props) {
                                     props.listaEstudantes.map((estudante) => {
                                         return (
                                             <div className='rowAluno' key={estudante.id}>
-                                                <img src={avatarSession} style={{ width: '24px', height: '24px' }} alt="Avatar do Aluno" />
+                                                <img src={(estudante.avatar[0]?.imagemURL) || avatarGenerico} style={{ width: '24px', height: '24px' }} alt="Avatar do Aluno" />
                                                 <span>{estudante.nome + " " + estudante.sobrenome}</span>
                                                 <div className={'statusAluno' + estudante.status}></div>
                                             </div>

@@ -41,7 +41,7 @@
     height: 90%;
     border: solid 2px #476334;
     border-radius: 10px ;
-    justify-content: start;
+    justify-content: flex-start;
     gap: 20px;
 }
 .alertas h1 {

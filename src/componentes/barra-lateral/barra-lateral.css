@@ -39,24 +39,23 @@
 }
 
 .botao-fechar {
-  width: 22.44px;
-  height: 18.85px;
-  margin-left: 22px;
-  margin-top: 44px;
+  transform: scale(0.7);
 }
 
 .container-menu {
   height: min-content;
   display: flex;
   width: 100%;
-  justify-content: space-between;
+  gap: 90px;
+  justify-content: center;
   align-items: center;
+  margin-top: 30px;
 }
 
-.logoC {
+/* .logoC {
   margin-right: 45px;
   margin-top: 28px;
-}
+} */
 
 .row {
   display: flex;
@@ -86,7 +85,7 @@
 .containerRowTitulo {
   width: 100%;
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   margin-left: 22px;
   font-weight: bold;
 }
@@ -100,14 +99,22 @@
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  background-color: #D9D9D9;
-  border-color: #D9D9D9;
-  border-bottom-style: none;
+  background-color: #ffffff;
+  border-color: 1px solid black;
   color: black;
-  font-size: 10px;
-  width: 100px;
+  font-size: 13px;
+  padding: 5px;
+  width: 150px;
   font-weight: normal;
   font-family: "Inter", sans-serif;
+  border-radius: 5px;
+  transition: all 0.3s;
+}
+
+.botaoLogin:hover {
+  cursor: pointer;
+  background-color: #e2e2e2;
+  transition: ease-in-out 0.3s;
 }
 
 .containerScroll {

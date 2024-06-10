@@ -11,10 +11,11 @@ import IconControleRoxo from '../../imgs/iconControleRoxo.png';
 import IconControleBranco from '../../imgs/IconControleBranco.png';
 
 function Jogo2() {
-
     const [isAlunoLoggedIn, setIsAlunoLoggedIn] = useState(false);
     const [isProfessorLoggedIn, setIsProfessorLoggedIn] = useState(false);
     const [quizStack, setQuizStack] = useState([1]);
+    const [completedQuizzes, setCompletedQuizzes] = useState([]);
+    const [correctOptions, setCorrectOptions] = useState({});
 
     useEffect(() => {
         const apelido = sessionStorage.getItem("apelidoUser");
@@ -28,8 +29,10 @@ function Jogo2() {
         }
     }, []);
 
-    const handleNextQuiz = () => {
+    const handleNextQuiz = (quizNumber, correctOption) => {
         setQuizStack(prev => [...prev, prev[prev.length - 1] + 1]);
+        setCompletedQuizzes(prev => [...prev, quizNumber]);
+        setCorrectOptions(prev => ({ ...prev, [quizNumber]: correctOption }));
     };
 
     const handlePreviousQuiz = () => {
@@ -37,6 +40,18 @@ function Jogo2() {
     };
 
     const currentQuiz = quizStack[quizStack.length - 1];
+
+    const getBackgroundColor = (quizNumber) => {
+        if (currentQuiz === quizNumber) return '#F3DE2C';
+        if (completedQuizzes.includes(quizNumber)) return '#662E9B';
+        return '#D9D9D9';
+    };
+
+    const getIcon = (quizNumber) => {
+        if (currentQuiz === quizNumber) return IconControle;
+        if (completedQuizzes.includes(quizNumber)) return IconControleBranco;
+        return IconControleRoxo;
+    };
 
     return (
         <div className='jogo'>
@@ -56,41 +71,19 @@ function Jogo2() {
                 <div className='niveisJogo'>
                     <img className='trianguloD' src={TrianguloD} alt="Triangulo direita" />
                     <div className='cardsNivel'>
-                        <CardNivelJogo
-                            backgroundColor='#7CB518'
-                            statusTitulo='true'
-                            titulo='Aula 2'
+                    <CardNivelJogo 
+                        backgroundColor='#7CB518'
+                        statusTitulo='true'
+                        titulo='Aula 2'
                         />
-                        <CardNivelJogo
-                            backgroundColor={currentQuiz === 1 ? '#F3DE2C' : currentQuiz > 1 ? '#662E9B' : '#D9D9D9'}
-                            statusImg='true'
-                            imagem={currentQuiz === 1 ? IconControle : currentQuiz > 1 ? IconControleBranco : IconControleRoxo}
-                        />
-                        <CardNivelJogo
-                            backgroundColor={currentQuiz === 2 ? '#F3DE2C' : currentQuiz > 2 ? '#662E9B' : '#D9D9D9'}
-                            statusImg='true'
-                            imagem={currentQuiz === 2 ? IconControle : currentQuiz > 2 ? IconControleBranco : IconControleRoxo}
-                        />
-                        <CardNivelJogo
-                            backgroundColor={currentQuiz === 3 ? '#F3DE2C' : currentQuiz > 3 ? '#662E9B' : '#D9D9D9'}
-                            statusImg='true'
-                            imagem={currentQuiz === 3 ? IconControle : currentQuiz > 3 ? IconControleBranco : IconControleRoxo}
-                        />
-                        <CardNivelJogo
-                            backgroundColor={currentQuiz === 4 ? '#F3DE2C' : currentQuiz > 4 ? '#662E9B' : '#D9D9D9'}
-                            statusImg='true'
-                            imagem={currentQuiz === 4 ? IconControle : currentQuiz > 4 ? IconControleBranco : IconControleRoxo}
-                        />
-                        <CardNivelJogo
-                            backgroundColor={currentQuiz === 5 ? '#F3DE2C' : currentQuiz > 5 ? '#662E9B' : '#D9D9D9'}
-                            statusImg='true'
-                            imagem={currentQuiz === 5 ? IconControle : currentQuiz > 5 ? IconControleBranco : IconControleRoxo}
-                        />
-                        <CardNivelJogo
-                            backgroundColor={currentQuiz === 6 ? '#F3DE2C' : currentQuiz > 6 ? '#662E9B' : '#D9D9D9'}
-                            statusImg='true'
-                            imagem={currentQuiz === 6 ? IconControle : currentQuiz > 6 ? IconControleBranco : IconControleRoxo}
-                        />
+                    {[1, 2, 3, 4, 5, 6].map((num) => (
+                            <CardNivelJogo
+                                key={num}
+                                backgroundColor={getBackgroundColor(num)}
+                                statusImg='true'
+                                imagem={getIcon(num)}
+                            />  
+                        ))}
                     </div>
                     <img className='trianguloE' src={TrianguloE} alt="Triangulo esquerda" />
                 </div>
@@ -108,7 +101,8 @@ function Jogo2() {
                             exemploResposta={
                                 <pre>{`==`}</pre>
                             }
-                            onCorrect={handleNextQuiz}
+                            correctOption={correctOptions[1]}
+                            onCorrect={() => handleNextQuiz(1, 2)}
                             onBack={handlePreviousQuiz}
                         />
                     )}
@@ -139,7 +133,8 @@ default: console.log("Tipo de folha desconhecido"); }  `}</pre>
                             exemploResposta={
                                 <pre>{`Folha média`}</pre>
                             }
-                            onCorrect={handleNextQuiz}
+                            correctOption={correctOptions[2]}
+                            onCorrect={() => handleNextQuiz(2, 1)}
                             onBack={handlePreviousQuiz}
                         />
                     )}
@@ -170,7 +165,8 @@ default: console.log("Tipo de dança desconhecido"); } `}</pre>
                             exemploResposta={
                                 <pre>{`Dança do sol `}</pre>
                             }
-                            onCorrect={handleNextQuiz}
+                            correctOption={correctOptions[3]}
+                            onCorrect={() => handleNextQuiz(3, 2)}
                             onBack={handlePreviousQuiz}
                         />
                     )}
@@ -196,8 +192,9 @@ console.log("A lua está cheia!");
                             exemploResposta={
                                 <pre>{`Fruta desconhecida `}</pre>
                             }
-                            onCorrect={handleNextQuiz}
                             indexCorreto={3}
+                            correctOption={correctOptions[4]}
+                            onCorrect={() => handleNextQuiz(4, 3)}
                             onBack={handlePreviousQuiz}
                         />
                     )}
@@ -230,7 +227,8 @@ default: console.log("Cor de flor desconhecida"); }
                             exemploResposta={
                                 <pre>{`temperatura >= 30`}</pre>
                             }
-                            onCorrect={handleNextQuiz}
+                            correctOption={correctOptions[5]}
+                            onCorrect={() => handleNextQuiz(5, 1)}
                             onBack={handlePreviousQuiz}
                         />
                     )}
@@ -261,7 +259,8 @@ default: console.log("Jogo desconhecido"); } `}</pre>
                             exemploResposta={
                                 <pre>{`Vôlei`}</pre>
                             }
-                            onCorrect={handleNextQuiz}
+                            correctOption={correctOptions[6]}
+                            onCorrect={() => handleNextQuiz(6, 2)}
                             onBack={handlePreviousQuiz}
                         />
                     )}

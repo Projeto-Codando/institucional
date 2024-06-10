@@ -80,5 +80,7 @@
   width: 100%;
 }
 
-
+.reticencias svg{
+    display: none;
+}
   
