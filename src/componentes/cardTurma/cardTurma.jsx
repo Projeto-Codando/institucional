@@ -88,16 +88,21 @@ function CardTurma({ onClick, ...props }) {
                 setSenhaTurma={props.setSenhaTurma}
                 onClick={props.onClick}
             />
-            <div className='reticencias' style={{ display: 'flex', justifyContent: 'end', paddingRight: '50px', paddingTop: '20px' }}>
-                <FontAwesomeIcon icon={faEllipsis} style={{ height: '30px', cursor: 'pointer' }} onClick={toggleMenu} />
-                {menuAberto && (
-                    <div className='menuOpcoes' style={menuStyle}>
-                        <div style={{ height: '30px', cursor: 'pointer' }} onClick={openModal} className='opcaoMenu'>Editar</div>
-                        <div style={{ padding: '0', height: '1px', width: '100%', backgroundColor: 'rgba(000, 000, 000, 0.5)' }} className='linha'></div>
-                        <div style={{ height: '30px', cursor: 'pointer' }} className='opcaoMenu' onClick={arquivarCard}>Arquivar</div>
-                    </div>
-                )}
-            </div>
+            {props.statusMenuOpcoes && (
+                <div className='reticencias' style={{ display: 'flex', justifyContent: 'end', paddingRight: '50px', paddingTop: '20px' }}>
+
+                    <FontAwesomeIcon icon={faEllipsis} style={{ height: '30px', cursor: 'pointer' }} onClick={toggleMenu} />
+                    {menuAberto && (
+                        <div className='menuOpcoes' style={menuStyle}>
+                            <div style={{ height: '30px', cursor: 'pointer' }} onClick={openModal} className='opcaoMenu'>Editar</div>
+                            <div style={{ padding: '0', height: '1px', width: '100%', backgroundColor: 'rgba(000, 000, 000, 0.5)' }} className='linha'></div>
+                            <div style={{ height: '30px', cursor: 'pointer' }} className='opcaoMenu' onClick={arquivarCard}>Arquivar</div>
+                        </div>
+                    )}
+                </div>
+            )
+            }
+
             <div className="imagemCardTurma" style={{ borderRadius: '20px' }}>
                 <img src={TurmaImg1} alt='Turma' />
             </div>
