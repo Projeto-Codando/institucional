@@ -27,7 +27,7 @@ function CardTurma({ onClick, ...props }) {
     };
 
     const arquivarCard = () => {
-        api.post(`/turmas/desativar/${sessionStorage.getItem("userId")}/${props.idCard}`, {}, {
+        api.post(`/turmas/desativar/${sessionStorage.getItem("userId")}/${props.idTurma}`, {}, {
             headers: {
                 Authorization: `Bearer ${sessionStorage.getItem('token')}`
             }

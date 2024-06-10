@@ -5,14 +5,14 @@ import Ajuda from '../../componentes/ajuda/ajuda'
 import Logo from '../../imgs/verde-logo.svg'
 import { useNavigate } from 'react-router-dom'
 import React, { useEffect, useState } from 'react'
-import './portalProfessor.css'
+import './turmasArquivadas.css'
 import * as Yup from 'yup'
 import { ErrorMessage } from 'formik'
 import { toast } from 'react-toastify'
 import api from '../../api';
 import { faKey } from '@fortawesome/free-solid-svg-icons'
 
-function Portal() {
+function TurmasArquivadas() {
   let navigate = useNavigate()
 
   const [nomeTurma, setNomeTurma] = useState('')
@@ -37,7 +37,7 @@ function Portal() {
     }).then(response => {
       console.log(response.data);
       const updatedTurmas = response.data
-        .filter(turma => turma.statusTurma === "Ativa")
+        .filter(turma => turma.statusTurma === "Inativa")
         .map(turma => {
           console.log(turma)
           return {
@@ -134,28 +134,14 @@ function Portal() {
       <div className="portal">
         <h1 style={{ color: "#ffffff", fontSize: '32px' }}>Bem vindo(a), {sessionStorage.getItem("nome")}</h1>
         <div className="CardTurmas" style={{ display: 'flex', flexDirection: 'row', gap: '50px', overflowY: 'hidden'}}>
-          <div className='cardCadastro'>
-          <CardTurmaCadastro
-            onClick={handleSavePost}
-            setNomeTurma={setNomeTurma}
-            setEscolaridade={setEscolaridade}
-            setSenhaTurma={setSenhaTurma}
-            text="Criar turma"
-            configCardTurmaCadastro={{
-              backgroundColor: '#FFFFFF99',
-              padding: '3px',
-              width: '400px',
-              color: '#476334',
-            }}
-          />
-          </div>
+         
           {turmas.map((turma, index) => (
             <CardTurma
               key={index}
               turma={turma.nomeTurma}
               serie={turma.escolaridade}
               qtdAlunos={`${turma.qtdAlunos || 0} Alunos`}
-              idTurma={turma.idTurma}
+              idCard={index + 1}
               onClick={() => handleClickCard(turma.idCard)}
               configCardTurma={{
                 backgroundColor: '#FFFFFF99',
@@ -172,4 +158,4 @@ function Portal() {
   )
 }
 
-export default Portal
+export default TurmasArquivadas

@@ -19,7 +19,7 @@ function CardTurmaCadastro(props) {
       backgroundColor: props.configCardTurmaCadastro.backgroundColor,
       padding: props.configCardTurmaCadastro.padding,
       width: props.configCardTurmaCadastro.width,
-      color: props.configCardTurmaCadastro.color,
+      color: props.configCardTurmaCadastro.color
     };
   
     return (
