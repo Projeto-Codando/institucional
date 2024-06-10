@@ -6,28 +6,53 @@ import Setinha from '../../imgs/setinhaEstudantes.svg';
 import EstudantesInfo from '../estudantesInfo/estudantesInfo';
 import api from '../../api';
 import { saveAs } from 'file-saver';
+import LoadingSpinner from '../loadingSpinner/loadingSpinner';
 
 export default function Estudantes(props) {
     const idProfessor = sessionStorage.getItem('userId')
     const idTurma = sessionStorage.getItem('idTurmaClicada')
+    const [loading, setLoading] = React.useState(false);
+    const alunosTurma = props.listaEstudantes
+    const avatarGenerico = 'https://qxztjedmqxjnfloewgbv.supabase.co/storage/v1/object/public/macaco/chimpaZe_default.png'
+
+    // var listaDeProgresso = [];
 
     const handleDownloadCSV = async () => {
-        try{
-            const response = await api.get(`/turmas/gerarCSV/${idProfessor}/${idTurma}`, { responseType: 'blob', 
-                headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } 
+        setLoading(true)
+        try {
+            const response = await api.get(`/turmas/gerarCSV/${idProfessor}/${idTurma}`, {
+                responseType: 'blob',
+                headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` }
             })
             const blob = new Blob([response.data], { type: 'application/csv' })
             saveAs(blob, 'dadosTurma.csv');
+            setLoading(false)
         } catch (error) {
+            setLoading(false)
             console.log(error)
         }
     }
 
-    const alunosTurma = props.listaEstudantes
-    const avatarGenerico = sessionStorage.getItem('defaultAvatar')
+    // const handleFindTrofeus = async () => {
+    //     setLoading(true)
+    //     try {
+    //         const response = await api.get(`/progresso-aluno`, {
+    //             headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` }
+    //         })
+    //         listaDeProgresso = (response.data)
+    //         console.log(listaDeProgresso)
+    //         setLoading(false)
+    //     } catch (error) {
+    //         setLoading(false)
+    //         console.log(error)
+    //     }
+    // }
+
+
 
     return (
         <div className="estudantes">
+            {loading && <LoadingSpinner />}
             <div className='barraNavegacao'>
                 <div className='selecionar'>
                     <input type="checkbox" />

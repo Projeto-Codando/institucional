@@ -16,7 +16,8 @@ export default function HeaderLogin(props) {
 
     const escolaridadeSession = sessionStorage.getItem("escolaridade");
     const moedasSession = sessionStorage.getItem("moedas");
-    const avatarSession = sessionStorage.getItem("defaultAvatar");
+    const avatarSession = 'https://qxztjedmqxjnfloewgbv.supabase.co/storage/v1/object/public/macaco/chimpaZe_default.png'
+    const avatarUsuario = sessionStorage.getItem("ImagemURL_AVATAR")
 
     const openModal = () => {
         setIsModalOpen(true);
@@ -29,7 +30,12 @@ export default function HeaderLogin(props) {
     useEffect(() => {
         const handleStorageChange = () => {
             setEscolaridade(escolaridadeSession);
-            setAvatar(avatarSession);
+
+            if(!avatarUsuario){
+                setAvatar(avatarSession);
+            } else {
+                setAvatar(avatarUsuario);
+            }
             setMoedas(moedasSession);
         };
 
@@ -40,7 +46,7 @@ export default function HeaderLogin(props) {
         return () => {
             window.removeEventListener('storage', handleStorageChange);
         };
-    }, [avatar, avatarSession, escolaridadeSession, moedasSession]);
+    }, [avatar, avatarSession, escolaridadeSession, moedasSession, avatarUsuario]);
 
     return (
         <header className="headerLogin">
@@ -99,7 +105,6 @@ export default function HeaderLogin(props) {
                     <div className='avatar' onClick={props.statusLoginProfessor ? undefined : openModal}>
                         <img src={avatar} alt="imagem do avatar" style={{ width: "59px", height: "59px" }} />
                     </div>
-
                 )}
                 <ModalEscolhaAvatar
                     isOpen={isModalOpen}
