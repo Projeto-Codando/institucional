@@ -1,33 +1,18 @@
 import Header from '../../componentes/headerLoginCadastro/headerLogin'
-import CardTurmaCadastro from '../../componentes/cardTurmaCadastro/cardTurmaCadastro'
 import CardTurma from '../../componentes/cardTurma/cardTurma'
 import Ajuda from '../../componentes/ajuda/ajuda'
 import Logo from '../../imgs/verde-logo.svg'
 import { useNavigate } from 'react-router-dom'
 import React, { useEffect, useState } from 'react'
 import './turmasArquivadas.css'
-import * as Yup from 'yup'
-import { ErrorMessage } from 'formik'
-import { toast } from 'react-toastify'
 import api from '../../api';
-import { faKey } from '@fortawesome/free-solid-svg-icons'
 
 function TurmasArquivadas() {
   let navigate = useNavigate()
 
-  const [nomeTurma, setNomeTurma] = useState('')
-  const [escolaridade, setEscolaridade] = useState('')
-  const [senhaTurma, setSenhaTurma] = useState('')
   const [turmas, setTurmas] = useState([])
-  const fkEducador = sessionStorage.getItem('userId')
   const [isAlunoLoggedIn, setIsAlunoLoggedIn] = useState(false);
   const [isProfessorLoggedIn, setIsProfessorLoggedIn] = useState(false);
-
-  const validationSchema = Yup.object().shape({
-    nomeTurma: Yup.string().required('Campo Obrigatório'),
-    senhaTurma: Yup.string().required('Campo Obrigatório').min(6, 'No mínimo 6 digitos da senha da Turma!'),
-    escolaridade: Yup.string().required('Campo Obrigatório')
-  })
 
   useEffect(() => {
     api.get(`/turmas/${sessionStorage.getItem('userId')}`, {
@@ -71,54 +56,6 @@ function TurmasArquivadas() {
     navigate(`/portal/sala`)
   }
 
-  const handleSavePost = async (event) => {
-    event.preventDefault()
-    console.log("Clicou no botão")
-
-    const novaTurma = {
-      nomeTurma,
-      escolaridade,
-      senhaTurma,
-    }
-
-    const turmaAdicionada = {
-      nome: nomeTurma,
-      senha: senhaTurma,
-      fkEscolaridade: escolaridade,
-      fkEducador: fkEducador,
-      fkModulo: 1
-    }
-
-    try {
-      await validationSchema.validate(novaTurma, { abortEarly: false })
-
-      api.post('/turmas', turmaAdicionada, {
-        headers: {
-          Authorization: `Bearer ${sessionStorage.getItem('token')}`
-        }
-      }).then(response => {
-        toast.success("Criação da sala realizada com sucesso!")
-        setTurmas([...turmas, novaTurma])
-        window.location.reload()
-      }
-      ).catch(error => {
-        console.error(error)
-      })
-
-      setNomeTurma('')
-      setEscolaridade('')
-      setSenhaTurma('')
-
-
-    } catch (error) {
-      if (error instanceof Yup.ValidationError) {
-        console.error("Erros de validação:")
-        error.inner.forEach((err) => {
-          toast.error(err.message)
-        })
-      }
-    }
-  }
   return (
     <div className="portalProfessor" style={{ overflow: 'hidden' }}>
       <Header

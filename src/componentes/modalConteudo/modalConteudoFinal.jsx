@@ -47,7 +47,7 @@ function ModalConteudoFinal({ isOpen, onClose, onCorrect, ...props }) {
                     <div style={MODAL_STYLE} >
                         <div className='conteudoCard'>
                             <div className='retangulo'>
-                                <img id="retanguloVerde" src={RetanguloVerdeInvertivo} />
+                                <img id="retanguloVerde" src={RetanguloVerdeInvertivo} alt='Retangulo Verde invertido'/>
                             </div>
                             <div className='borda' style={{ padding: '15px' }}>
 
@@ -85,7 +85,7 @@ function ModalConteudoFinal({ isOpen, onClose, onCorrect, ...props }) {
                                 />
                             </div>
                             <div className='retangulo'>
-                                <img id="retanguloVerde" src={RetanguloVerde} />
+                                <img id="retanguloVerde" src={RetanguloVerde} alt='Retangulo Verde'/>
                             </div>
                         </div>
                     </div>

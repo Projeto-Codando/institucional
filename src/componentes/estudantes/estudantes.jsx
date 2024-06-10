@@ -4,8 +4,24 @@ import XzinCinza from '../../imgs/XzinhoCinza.svg';
 import Lupazinha from '../../imgs/lupazinha.svg';
 import Setinha from '../../imgs/setinhaEstudantes.svg';
 import EstudantesInfo from '../estudantesInfo/estudantesInfo';
+import api from '../../api';
+import { saveAs } from 'file-saver';
 
 export default function Estudantes(props) {
+    const idProfessor = sessionStorage.getItem('userId')
+    const idTurma = sessionStorage.getItem('idTurmaClicada')
+
+    const handleDownloadCSV = async () => {
+        try{
+            const response = await api.get(`/turmas/gerarCSV/${idProfessor}/${idTurma}`, { responseType: 'blob', 
+                headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } 
+            })
+            const blob = new Blob([response.data], { type: 'application/csv' })
+            saveAs(blob, 'dadosTurma.csv');
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     const alunosTurma = props.listaEstudantes
     const avatarGenerico = sessionStorage.getItem('defaultAvatar')
@@ -18,6 +34,11 @@ export default function Estudantes(props) {
                     <label htmlFor="">Selecionar todos</label>
                 </div>
                 <div className='botoesDireita'>
+                    <div className='botoesEstudantes' onClick={handleDownloadCSV}>
+                        <div className='excluir'>
+                            <p>Download CSV</p>
+                        </div>
+                    </div>
                     <div className='botoesEstudantes'>
                         <div className='excluir'>
                             <p>Excluir</p>
@@ -25,7 +46,7 @@ export default function Estudantes(props) {
                         </div>
                     </div>
                     <div className='botoesEstudantes'>
-                        <div className='pesquisarEstudante' onClick={{}}>
+                        <div className='pesquisarEstudante'>
                             <img src={Lupazinha} alt="" />
                         </div>
                     </div>
@@ -44,7 +65,7 @@ export default function Estudantes(props) {
             <div className='estudantesInformacoes'>
                 {alunosTurma.map((aluno) => {
                     return (
-                        <EstudantesInfo nomeAluno={aluno.nome + ' ' + aluno.sobrenome} apelido={'@'+aluno.apelido} qtdPontos={aluno.pontuacao}  AvatarAluno={aluno.avatar[0]?.imagemURL || avatarGenerico}/>
+                        <EstudantesInfo nomeAluno={aluno.nome + ' ' + aluno.sobrenome} apelido={'@' + aluno.apelido} qtdPontos={aluno.pontuacao} AvatarAluno={aluno.avatar[0]?.imagemURL || avatarGenerico} />
                     )
                 }
                 )}

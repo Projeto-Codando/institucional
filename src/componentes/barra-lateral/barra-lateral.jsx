@@ -13,7 +13,6 @@ import IconPay from '../../imgs/IconPlay.png';
 import IconGlobe from '../../imgs/IconGlobe.png';
 import IconQuestion from '../../imgs/IconQuestion.png';
 import IconClip from '../../imgs/IconClip.png';
-import IconPasta from '../../imgs/IconPasta.png';
 import IconUsers from '../../imgs/IconUsers.png';
 import { useNavigate } from 'react-router-dom';
 import ModalEscolhaAvatar from '../modalEscolhaAvatar/modalEscolhaAvatar';
@@ -134,7 +133,7 @@ function BarraLateral(props) {
                                 <img src={IconPay} alt="Play" />
                                 <span>Continuar jogo</span>
                             </div>
-                            <div className='row' onClick={() => { navigate("/lobby"); console.log("Botao clicado") }}>
+                            <div className='row' onClick={() => { navigate("/lobby"); }}>
                                 <img src={IconGlobe} alt="Globe" />
                                 <span>Mapa</span>
                             </div>
@@ -173,17 +172,13 @@ function BarraLateral(props) {
                             <div className='containerRowTitulo'>
                                 <span className='nameCodando'>Codando</span>
                             </div>
-                            <div className='row'>
+                            <div className='row' onClick={() => { navigate("/portal"); }}>
                                 <img src={IconUsers} alt="Users" />
                                 <span>Turmas</span>
                             </div>
-                            <div className='row'>
+                            <div className='row' onClick={() => { navigate("/lobby"); }}>
                                 <img src={IconClip} alt="Clip" />
                                 <span>Turmas Arquivadas</span>
-                            </div>
-                            <div className='row'>
-                                <img src={IconPasta} alt="Pasta" />
-                                <span>Meus Projetos</span>
                             </div>
                             <div className='row'>
                                 <img src={IconQuestion} alt="Question" />

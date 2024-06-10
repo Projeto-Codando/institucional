@@ -34,6 +34,7 @@
     width: auto;
     height: 20px;
     padding: 5px;
+    transition: all 0.3s;
 }
 
 .excluir {
@@ -51,6 +52,7 @@
     width: 100%;
     display: flex;
     gap: 20px;
+
 }
 
 .pesquisarEstudantes {
@@ -82,4 +84,9 @@
     max-height: calc(100% - 10%); /* Adjust the height to fit within telaPrincipal */
     overflow-y: auto; /* Enable vertical scroll */
     width: 100%; /* Ensure it takes the full width */
+}
+
+
+.botoesEstudantes:hover{
+    opacity: 0.8;
 }
