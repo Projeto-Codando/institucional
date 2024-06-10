@@ -21,7 +21,7 @@ export default function Formulario(props) {
                             type='text'
                             id='nome'
                             width='200px'
-                            onChange={typeof props.suetNome === 'function' ? props.setNome : undefined}
+                            onChange={typeof props.setNome === 'function' ? props.setNome : undefined}
                             placeholder='Digite seu nome'
                         />
                         <InputsLogin
