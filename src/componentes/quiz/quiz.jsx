@@ -72,6 +72,7 @@ export default function Quiz(props) {
                     <ModalConteudoFinal
                     isOpen={isModalOpenFinal}
                     onClose={closeModalFinal}
+                    qtdPontos={props.qtdQuestao * 20}
                     />
                     {[props.opcao0, props.opcao1, props.opcao2, props.opcao3].map((option, index) => {
                         const correct = index === props.indexCorreto;

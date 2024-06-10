@@ -4,6 +4,8 @@ import RetanguloVerdeInvertivo from '../../imgs/RetanguloVerdeInverso.png';
 import RetanguloVerde from '../../imgs/RetanguloVerde.png';
 import Botao from '../botao/botoes';
 import BananaPoint from '../../imgs/estrela.png';
+import api from '../../api';
+import LoadingSpinner from '../loadingSpinner/loadingSpinner';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -31,23 +33,54 @@ function ModalConteudoFinal({ isOpen, onClose, onCorrect, ...props }) {
         boxSizing: 'border-box',
     };
     const navigate = useNavigate();
-    const handleButtonClick = () => {
 
-        setTimeout(() => {
-                onClose();
-        }, 500);
+    const [isLoaded, setIsLoaded] = React.useState(false);
+
+    const idAluno = sessionStorage.getItem('userId');
+    const idAula = sessionStorage.getItem('nivel');
+
+    const qtdPontosFinal = props.qtdPontos;
+
+    console.log(qtdPontosFinal);
+
+    const body = {
+        pontos: qtdPontosFinal,
+        moedas: qtdPontosFinal
+    }
+ 
+    const handleButtonClick = () => {
+        setIsLoaded(true);
+        api.put(`/progresso-aluno/aluno/${idAluno}/aula/${idAula}/pontos`, body, {
+            headers: {
+                Authorization: `Bearer ${sessionStorage.getItem('token')}`
+            }
+        }).then(response => {
+            setIsLoaded(false);
+            console.log(response.data);
+            sessionStorage.setItem('moedas', response.data.aluno.moedas)
+            window.location.reload();
+        }
+        ).catch(error => {
+            setIsLoaded(false);
+            console.error(error)
+        })
         
+        setTimeout(() => {
+            onClose();
+        }, 500);
+
         navigate("/lobby")
     };
 
     if (isOpen) {
         return (
             <div className="modalConteudo">
+                {isLoaded && <LoadingSpinner />}
                 <div style={BACKGROUND_STYLE} >
                     <div style={MODAL_STYLE} >
                         <div className='conteudoCard'>
                             <div className='retangulo'>
-                                <img id="retanguloVerde" src={RetanguloVerdeInvertivo} alt='Retangulo Verde invertido'/>
+                                <img id="retanguloVerde" src={RetanguloVerdeInvertivo} alt='Retangulo Verde invertido' />
                             </div>
                             <div className='borda' style={{ padding: '15px' }}>
 
@@ -70,7 +103,7 @@ function ModalConteudoFinal({ isOpen, onClose, onCorrect, ...props }) {
                                 </div>
                                 <div style={{ display: 'flex', justifyContent: 'center', width: '100%', alignItems: 'center', marginBottom: '30px' }}>
                                     <img src={BananaPoint} style={{ width: '30px' }} alt="close" />
-                                    <span style={{ color: '#F3DE2C', fontSize: '30px', fontWeight: '900', marginLeft: '8px' }}>DEIXAR DINAMICO</span>
+                                    <span style={{ color: '#F3DE2C', fontSize: '30px', fontWeight: '900', marginLeft: '8px' }}>{props.qtdPontosFinal}</span>
                                 </div>
 
 
@@ -85,7 +118,7 @@ function ModalConteudoFinal({ isOpen, onClose, onCorrect, ...props }) {
                                 />
                             </div>
                             <div className='retangulo'>
-                                <img id="retanguloVerde" src={RetanguloVerde} alt='Retangulo Verde'/>
+                                <img id="retanguloVerde" src={RetanguloVerde} alt='Retangulo Verde' />
                             </div>
                         </div>
                     </div>

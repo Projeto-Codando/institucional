@@ -14,7 +14,6 @@ export const AvatarProvider = ({ children }) => {
                     console.error("O token não foi encontrado!");
                     return;
                 }
-
                 console.log("Token encontrado!");
                 const response = await api.get('/avatares', {
                     headers: {
