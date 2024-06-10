@@ -19,10 +19,7 @@ import ModalEscolhaAvatar from '../modalEscolhaAvatar/modalEscolhaAvatar';
 import ModalComprarAvatar from '../modalComprarAvatar/modalComprarAvatar';
 
 const apelidoAluno = sessionStorage.getItem("apelidoUser");
-sessionStorage.setItem("defaultAvatar", "https://previews.dropbox.com/p/thumb/ACQrgeBBcui9gljnEFhmCTgAXZbSMILhpwZmjNgKRXnTMwDJ9qlA6mQBF0G9ZJVpWu6xiQ3QGzryGAj9uUdXrqGklSeUamwWjddiMPqmW4o33M_rNz-EeiiDnoDPXmn2wYutrh9rJP7SdC3GDJoQOWwDkkLsi-bxZ57tyLw473qgZiQJY40h6GeuAaFihrvPS_8rNypaMFi7pp8rA1V691XudMtN5AhYw05xuMd178c3eDXGPklR3LM7cf1V5owUWdlyCv4g_n6hSKQWRmjR3NmSDjcgmoc4fzBjJ3yly4UdbIrNRWqd8Se7w--7NNSn2X2PB34I5RqoG8QrcT6SR4ac/p.png");
-
-const avatarGenerico = sessionStorage.getItem("defaultAvatar");
-
+const avatarGenerico = 'https://qxztjedmqxjnfloewgbv.supabase.co/storage/v1/object/public/macaco/chimpaZe_default.png'
 function BarraLateral(props) {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isModalCompraOpen, setIsModalCompraOpen] = useState(false);
@@ -63,7 +60,7 @@ function BarraLateral(props) {
                     </div>
                     {props.logoff && (
                         <div>
-                            <div className='row' style={{ marginTop: '20px' }}>
+                            <div className='row' onClick={() => { navigate("/"); }} style={{ marginTop: '20px' }}>
                                 <img src={IconHome} alt="Home" />
                                 <span>Inicio</span>
                             </div>
@@ -95,7 +92,7 @@ function BarraLateral(props) {
                     )}
                     {props.login && (
                         <div>
-                            <div className='row' style={{ marginTop: '20px' }}>
+                            <div className='row' onClick={() => { navigate("/"); }} style={{ marginTop: '20px' }}>
                                 <img src={IconHome} alt="Home" />
                                 <span>Inicio</span>
                             </div>
@@ -143,24 +140,31 @@ function BarraLateral(props) {
                             <div className='containerRow'>
                                 <div className='lineDivisoria'></div>
                             </div>
-                            <div className='containerRowTitulo'>
-                                <span className='nameCodando'>Colegas</span>
-                            </div>
-                            <div className='containerScroll' id="listaAlunosLogados">
-                                {Array.isArray(props.listaAlunos) && (
-                                    props.listaAlunos
-                                        .filter(aluno => aluno.apelido !== apelidoAluno)
-                                        .map((aluno) => {
-                                            return (
-                                                <div className='rowAluno' key={aluno.id}>
-                                                    <img src={aluno.avatar[0]?.imagemURL || avatarGenerico} style={{ width: '24px', height: '24px' }} alt="Avatar do Aluno" />
-                                                    <span>@{aluno.apelido}</span>
-                                                    <div className={'statusAluno' + aluno.status}></div>
-                                                </div>
-                                            );
-                                        })
-                                )}
-                            </div>
+                            {props.statusAlunosAtivos && (
+                                <div>
+                                    <div className='containerRowTitulo'>
+                                        <span className='nameCodando'>Colegas</span>
+                                    </div>
+                                    <div className='containerScroll' id="listaAlunosLogados">
+                                        {Array.isArray(props.listaAlunos) && (
+                                            props.listaAlunos
+                                                .filter(aluno => aluno.apelido !== apelidoAluno)
+                                                .map((aluno) => {
+                                                    return (
+                                                        <div className='rowAluno' key={aluno.id}>
+                                                            <img src={aluno.avatar[0]?.imagemURL || avatarGenerico} style={{ width: '24px', height: '24px' }} alt="Avatar do Aluno" />
+                                                            <span>@{aluno.apelido}</span>
+                                                            <div className={'statusAluno' + aluno.status}></div>
+                                                        </div>
+                                                    );
+                                                })
+                                        )}
+                                    </div>
+                                </div>
+                            )
+
+                            }
+
                         </div>
                     )}
                     {props.loginProfessor && (
@@ -175,7 +179,7 @@ function BarraLateral(props) {
                                 <img src={IconUsers} alt="Users" />
                                 <span>Turmas</span>
                             </div>
-                            <div className='row' onClick={() => { navigate("/lobby"); }}>
+                            <div className='row' onClick={() => { navigate("/portal/arquivadas"); }}>
                                 <img src={IconClip} alt="Clip" />
                                 <span>Turmas Arquivadas</span>
                             </div>
@@ -186,22 +190,29 @@ function BarraLateral(props) {
                             <div className='containerRow'>
                                 <div className='lineDivisoria'></div>
                             </div>
-                            <div className='containerRowTitulo'>
-                                <span className='nameCodando'>Estudantes</span>
-                            </div>
-                            <div className="containerScroll">
-                                {props.listaEstudantes && Array.isArray(props.listaEstudantes) && (
-                                    props.listaEstudantes.map((estudante) => {
-                                        return (
-                                            <div className='rowAluno' key={estudante.id}>
-                                                <img src={(estudante.avatar[0]?.imagemURL) || avatarGenerico} style={{ width: '24px', height: '24px' }} alt="Avatar do Aluno" />
-                                                <span>{estudante.nome + " " + estudante.sobrenome}</span>
-                                                <div className={'statusAluno' + estudante.status}></div>
-                                            </div>
-                                        );
-                                    })
-                                )}
-                            </div>
+                            {props.statusAula && (
+                                <div>
+                                    <div className='containerRowTitulo'>
+                                        <span className='nameCodando'>Estudantes</span>
+                                    </div>
+                                    <div className="containerScroll">
+                                        {props.listaEstudantes && Array.isArray(props.listaEstudantes) && (
+                                            props.listaEstudantes.map((estudante) => {
+                                                return (
+                                                    <div className='rowAluno' key={estudante.id}>
+                                                        <img src={(estudante.avatar[0]?.imagemURL) || avatarGenerico} style={{ width: '24px', height: '24px' }} alt="Avatar do Aluno" />
+                                                        <span>{estudante.nome + " " + estudante.sobrenome}</span>
+                                                        <div className={'statusAluno' + estudante.status}></div>
+                                                    </div>
+                                                );
+                                            })
+                                        )}
+                                    </div>
+                                </div>
+                            )
+                            }
+
+
                         </div>
                     )}
                 </div>

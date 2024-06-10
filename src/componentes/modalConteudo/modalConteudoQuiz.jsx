@@ -48,9 +48,9 @@ function ModalConteudo({ isOpen, onClose, onCorrect, ...props }) {
                     <div style={MODAL_STYLE} >
                         <div className='conteudoCard'>
                             <div className='retangulo'>
-                                <img id="retanguloVerde" src={RetanguloVerdeInvertivo} alt='Retangulo verde'/>
+                                <img id="retanguloVerde" src={RetanguloVerdeInvertivo} alt='Retangulo verde' />
                             </div>
-                            <div className='borda' style={{padding: '15px'}}>
+                            <div className='borda' style={{ padding: '15px' }}>
                                 <div style={{ display: 'flex', justifyContent: 'start', paddingBottom: '10px', width: '100%', alignItems: 'center', padding: '15px 0px 0px 20px' }}>
                                     <img src={BananaPoint} style={{ width: '30px' }} alt="close" />
                                     <span style={{ color: '#F3DE2C', fontSize: '20px', fontWeight: '900', marginLeft: '8px' }}>2</span>
@@ -68,6 +68,7 @@ function ModalConteudo({ isOpen, onClose, onCorrect, ...props }) {
                                         Para resolucionar a questão foi necessário o código abaixo:
                                     </span>
                                 </div>
+
                                 {props.statusExemploResposta && (
                                     <div className='exemplo' style={{ minWidth: '270px', marginBottom: '20px' }}>
                                         {props.exemploResposta}
@@ -85,7 +86,7 @@ function ModalConteudo({ isOpen, onClose, onCorrect, ...props }) {
                                 />
                             </div>
                             <div className='retangulo'>
-                                <img id="retanguloVerde" src={RetanguloVerde} alt='Retangulo verde'/>
+                                <img id="retanguloVerde" src={RetanguloVerde} alt='Retangulo verde' />
                             </div>
                         </div>
                     </div>

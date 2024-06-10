@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import api from '../../api';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom'
+import LoadingSpinner from '../../componentes/loadingSpinner/loadingSpinner';
 function Lobby() {
 
     const [nomeUsuario, setNomeUsuario] = useState("");
@@ -15,9 +16,35 @@ function Lobby() {
     const [nivelSelecionado, setNivelSelecionado] = useState(1);
     const [isAlunoLoggedIn, setIsAlunoLoggedIn] = useState(false);
     const [isProfessorLoggedIn, setIsProfessorLoggedIn] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
 
     const [turma, setTurma] = useState({});
+
+    const body = {
+        fkAluno: sessionStorage.getItem("userId"),
+        fkAula: nivelSelecionado
+    }
+    
+    console.log(body);
+
+    const handleCreateNewProgressGame = () => {
+        setIsLoading(true);
+        api.post(`/progresso-aluno`, body, {
+            headers: {
+                Authorization: `Bearer ${sessionStorage.getItem("token")}`
+            }
+        }).then((response) => {
+            setIsLoading(false);
+            console.log(response.data);
+            toast.success("Quiz iniciado com sucesso!");
+            navigate(`/jogo/${nivelSelecionado}`); 
+        }).catch((error) => {
+            setIsLoading(false);
+            toast.error("Não foi possível iniciar o quiz! " + error.response.data.message);
+            console.error(error);
+        });
+    }
 
     useEffect(() => {
         api.get(`/turmas/buscar-turma-por-id/${sessionStorage.getItem("idTurma")}`, {
@@ -54,6 +81,7 @@ function Lobby() {
 
     return (
         <div className='rotaNiveis'>
+            {isLoading && <LoadingSpinner />}
             <Header
                 logo={Logo}
                 statusBotao1={isAlunoLoggedIn || isProfessorLoggedIn ? null : "true"}
@@ -67,6 +95,7 @@ function Lobby() {
                 statusAvatar={isAlunoLoggedIn || isProfessorLoggedIn ? "true" : null}
                 listaAlunos={turma}
                 onUpdateAvatar={(avatar) => setAvatar(avatar)}
+                alunosAtivos="true"
             />
             <div className='sectionRotas'>
                 <div className='containerBemVindo'>
@@ -90,13 +119,13 @@ function Lobby() {
                         <div className='cardNiveis1'>
                             <div
                                 className={`nivel ${nivelSelecionado === 1 ? 'nivel-selecionado' : ''}`}
-                                onClick={() => handleNivelClick(1)}
+                                //onClick={() => handleNivelClick(1)}
                             >
                                 <span>1</span>
                             </div>
                             <div
                                 className={`nivel ${nivelSelecionado === 2 ? 'nivel-selecionado' : ''}`}
-                                onClick={() => handleNivelClick(2)}
+                                //onClick={() => handleNivelClick(2)}
                             >
                                 <span>2</span>
                             </div>
@@ -105,19 +134,19 @@ function Lobby() {
                             <div className='cardNiveis2'>
                                 <div
                                     className={`nivel ${nivelSelecionado === 3 ? 'nivel-selecionado' : ''}`}
-                                    onClick={() => handleNivelClick(3)}
+                                    //onClick={() => handleNivelClick(3)}
                                 >
                                     <span>3</span>
                                 </div>
                                 <div
                                     className={`nivel ${nivelSelecionado === 4 ? 'nivel-selecionado' : ''}`}
-                                    onClick={() => handleNivelClick(4)}
+                                    //onClick={() => handleNivelClick(4)}
                                 >
                                     <span>4</span>
                                 </div>
                                 <div
                                     className={`nivel ${nivelSelecionado === 5 ? 'nivel-selecionado' : ''}`}
-                                    onClick={() => handleNivelClick(5)}
+                                    //onClick={() => handleNivelClick(5)}
                                 >
                                     <span>5</span>
                                 </div>
@@ -137,7 +166,11 @@ function Lobby() {
                             <div className='estrelaAula'>
                                 <img src={Estrela} alt="estrelaAula" /> <span>0 / 5</span>
                             </div>
-                            <div className='botaoAula'><button onClick={() => navigate("/jogo/1")}><img src={Start} alt="" />Iniciar</button></div>
+                            <div className='botaoAula'><button onClick={() => {
+
+                                sessionStorage.setItem("nivel", nivelSelecionado);
+                                handleCreateNewProgressGame()
+                            }}><img src={Start} alt="" />Iniciar</button></div>
                         </div>
 
                         <div className={`cardAula ${nivelSelecionado === 2 ? 'visible' : 'hidden'}`}>
@@ -152,7 +185,10 @@ function Lobby() {
                             <div className='estrelaAula'>
                                 <img src={Estrela} alt="estrelaAula" /> <span>0 / 5</span>
                             </div>
-                            <div className='botaoAula'><button onClick={() => navigate("/jogo/2")}><img src={Start} alt="" />Iniciar</button></div>
+                            <div className='botaoAula'><button onClick={() => {
+                                sessionStorage.setItem("nivel", nivelSelecionado);
+                                handleCreateNewProgressGame()
+                            }}><img src={Start} alt="" />Iniciar</button></div>
                         </div>
 
                         <div className={`cardAula ${nivelSelecionado === 3 ? 'visible' : 'hidden'}`}>

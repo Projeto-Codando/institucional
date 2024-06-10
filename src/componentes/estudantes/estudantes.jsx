@@ -8,31 +8,38 @@ import ModalExcluirEstudante from '../modalEditarEstudante/modalExcluirEstudante
 import ModalEditarEstudante from '../modalEditarEstudante/modalEditarEstudante';
 import api from '../../api';
 import { saveAs } from 'file-saver';
+import LoadingSpinner from '../loadingSpinner/loadingSpinner';
 
 export default function Estudantes(props) {
-    const [isExcluirModalOpen, setIsExcluirModalOpen] = useState(false);
-    const [isEditarModalOpen, setIsEditarModalOpen] = useState(false);
-    const [allSelected, setAllSelected] = useState(false);
-    const [selectedAlunos, setSelectedAlunos] = useState([]);
+const [isExcluirModalOpen, setIsExcluirModalOpen] = useState(false);
+const [isEditarModalOpen, setIsEditarModalOpen] = useState(false);
+const [allSelected, setAllSelected] = useState(false);
+const [selectedAlunos, setSelectedAlunos] = useState([]);
 
-    const openExcluirModal = () => setIsExcluirModalOpen(true);
-    const closeExcluirModal = () => setIsExcluirModalOpen(false);
+const openExcluirModal = () => setIsExcluirModalOpen(true);
+const closeExcluirModal = () => setIsExcluirModalOpen(false);
 
-    const openEditarModal = () => setIsEditarModalOpen(true);
-    const closeEditarModal = () => setIsEditarModalOpen(false);
-    
-    const idProfessor = sessionStorage.getItem('userId');
-    const idTurma = sessionStorage.getItem('idTurmaClicada');
+const openEditarModal = () => setIsEditarModalOpen(true);
+const closeEditarModal = () => setIsEditarModalOpen(false);    
+const idProfessor = sessionStorage.getItem('userId')
+    const idTurma = sessionStorage.getItem('idTurmaClicada')
+    const [loading, setLoading] = React.useState(false);
+
+    // var listaDeProgresso = [];
 
     const handleDownloadCSV = async () => {
+        setLoading(true)
         try {
-            const response = await api.get(`/turmas/gerarCSV/${idProfessor}/${idTurma}`, { responseType: 'blob', 
-                headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` } 
-            });
-            const blob = new Blob([response.data], { type: 'application/csv' });
+            const response = await api.get(`/turmas/gerarCSV/${idProfessor}/${idTurma}`, {
+                responseType: 'blob',
+                headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` }
+            })
+            const blob = new Blob([response.data], { type: 'application/csv' })
             saveAs(blob, 'dadosTurma.csv');
+            setLoading(false)
         } catch (error) {
-            console.log(error);
+            setLoading(false)
+            console.log(error)
         }
     };
 
@@ -58,13 +65,37 @@ export default function Estudantes(props) {
         setAllSelected(alunosTurma.length === selectedAlunos.length);
     }, [selectedAlunos, alunosTurma]);
 
+
+    // const handleFindTrofeus = async () => {
+    //     setLoading(true)
+    //     try {
+    //         const response = await api.get(`/progresso-aluno`, {
+    //             headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` }
+    //         })
+    //         listaDeProgresso = (response.data)
+    //         console.log(listaDeProgresso)
+    //         setLoading(false)
+    //     } catch (error) {
+    //         setLoading(false)
+    //         console.log(error)
+    //     }
+    // }
+
+
+
     return (
         <div className="estudantes">
-            <div className='navegationBar'>
-                <div className='barraNavegacao'>
-                    <div className='selecionar'>
+            {loading && <LoadingSpinner />}
+            <div className='barraNavegacao'>
+            <div className='selecionar'>
                         <input type="checkbox" checked={allSelected} onChange={handleSelectAll} />
                         <label>Selecionar todos</label>
+                </div>
+                <div className='botoesDireita'>
+                    <div className='botoesEstudantes' onClick={handleDownloadCSV}>
+                        <div className='excluir'>
+                            <p>Download CSV</p>
+                        </div>
                     </div>
                     <div className='botoesDireita'>
                         <div className='botoesEstudantes' onClick={handleDownloadCSV}>

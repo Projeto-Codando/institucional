@@ -66,6 +66,7 @@ function Jogo() {
                 statusEstrela={isAlunoLoggedIn ? "true" : null}
                 statusSerie={isAlunoLoggedIn ? "true" : null}
                 statusAvatar={isAlunoLoggedIn || isProfessorLoggedIn ? "true" : null}
+                alunosAtivos="true"
             />
             <div className='sectionJogo'>
                 <div className='niveisJogo'>
@@ -98,6 +99,10 @@ function Jogo() {
                             opcao2='!'
                             opcao3='?'
                             indexCorreto={1}
+                            statusExemploResposta='true'
+                            exemploResposta={
+                                <pre>{`!=`}</pre>
+                            }
                             correctOption={correctOptions[1]}
                             onCorrect={() => handleNextQuiz(1, 1)}
                             onBack={handlePreviousQuiz}
@@ -150,6 +155,7 @@ console.log("A quantidade de bananas é diferente que 5!"); `}</pre>
                             opcao3='Avaliação da complexidade da senha'
                             indexCorreto={1}
                             statusExemploResposta='true'
+                            statusCodNeces='true'
                             exemploResposta={
                                 <pre>{`Verificação do comprimento da string`}</pre>
                             }
@@ -178,6 +184,7 @@ console.log("A lua está cheia!");
                             opcao1='luaCheia == false'
                             opcao2='luaCheia != true'
                             opcao3='luaCheia == false'
+                            statusCodNeces='true'
                             exemploResposta={
                                 <pre>{`luaCheia`}</pre>
                             }
@@ -194,6 +201,7 @@ console.log("A lua está cheia!");
                             tituloQuiz='Os macacos querem verificar se a temperatura está acima de 30 graus para decidir se vão nadar no rio. Eles possuem uma variável chamada temperatura. Qual estrutura de if é adequada para essa verificação?'
                             statusExemploQuiz='true'
                             statusExemploResposta='true'
+                            statusCodNeces='true'
                             exemplo={
                                 <pre>{`let temperatura = 35; 
 
@@ -236,6 +244,7 @@ console.log("Essa árvore é adequada para a competição!");
                             opcao3='alturaArvore == 15'
                             indexCorreto={2}
                             statusExemploResposta='true'
+                            statusCodNeces='true'
                             exemploResposta={
                                 <pre>{`alturaArvore > 15`}</pre>
                             }
@@ -265,6 +274,7 @@ console.log("A fruta é comestível!");
                             opcao2='frutaComestivel == true'
                             opcao3='frutaComestivel != false'
                             indexCorreto={2}
+                            statusCodNeces='true'
                             exemploResposta={
                                 <pre>{`frutaComestivel == true`}</pre>
                             }
