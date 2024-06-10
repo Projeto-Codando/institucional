@@ -9,6 +9,13 @@ import CardNivelJogo from '../../componentes/cardNivelJogo/cardNivelJogo';
 import IconControle from '../../imgs/iconControle.png';
 import IconControleRoxo from '../../imgs/iconControleRoxo.png';
 import IconControleBranco from '../../imgs/IconControleBranco.png';
+import Img1QUiz from '../../imgs/Aula01-Questao01.gif'
+import Img2QUiz from '../../imgs/Aula01-Questao02.gif'
+import Img3QUiz from '../../imgs/Aula01-Questao03.gif'
+import Img4QUiz from '../../imgs/Aula01-Questao04.gif'
+import Img5QUiz from '../../imgs/Aula01-Questao05.gif'
+import Img6QUiz from '../../imgs/Aula01-Questao06.gif'
+import Img7QUiz from '../../imgs/Aula01-Questao07.gif'
 
 function Jogo() {
     const [isAlunoLoggedIn, setIsAlunoLoggedIn] = useState(false);
@@ -286,43 +293,43 @@ console.log("A fruta é comestível!");
                     )}
                     {currentQuiz === 1 && (
                         <div className='telaQuiz'>
-                            <div className='imagemQuiz'></div>
+                            <img src={Img1QUiz} className='imagemQuiz' alt="Imagem questão 1" />
                         </div>
                     )
                     }
                     {currentQuiz === 2 && (
                         <div className='telaQuiz'>
-                            <div className='imagemQuiz'></div>
+                            <img src={Img2QUiz} className='imagemQuiz' alt="Imagem questão 1" />
                         </div>
                     )
                     }
                     {currentQuiz === 3 && (
                         <div className='telaQuiz'>
-                            <div className='imagemQuiz'></div>
+                            <img src={Img3QUiz} className='imagemQuiz' alt="Imagem questão 1" />
                         </div>
                     )
                     }
                     {currentQuiz === 4 && (
                         <div className='telaQuiz'>
-                            <div className='imagemQuiz'></div>
+                             <img src={Img4QUiz} className='imagemQuiz' alt="Imagem questão 1" />
                         </div>
                     )
                     }
                     {currentQuiz === 5 && (
                         <div className='telaQuiz'>
-                            <div className='imagemQuiz'></div>
+                             <img src={Img5QUiz} className='imagemQuiz' alt="Imagem questão 1" />
                         </div>
                     )
                     }
                     {currentQuiz === 6 && (
                         <div className='telaQuiz'>
-                            <div className='imagemQuiz'></div>
+                             <img src={Img6QUiz} className='imagemQuiz' alt="Imagem questão 1" />
                         </div>
                     )
                     }
                     {currentQuiz === 7 && (
                         <div className='telaQuiz'>
-                            <div className='imagemQuiz'></div>
+                             <img src={Img7QUiz} className='imagemQuiz' alt="Imagem questão 1" />
                         </div>
                     )
                     }

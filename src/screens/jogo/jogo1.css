@@ -17,7 +17,7 @@
 
 .containerJogo{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     width: 90%;
     align-items: center;
 }
