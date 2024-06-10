@@ -9,6 +9,7 @@
     background-color: #82502F;
     border-radius: 10px 10px 0px 0px;
     border: solid 2px #476334;
+    border-bottom: none;
     cursor: pointer;
 }
 

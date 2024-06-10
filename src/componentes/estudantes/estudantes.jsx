@@ -4,8 +4,8 @@ import XzinCinza from '../../imgs/XzinhoCinza.svg';
 import Lupazinha from '../../imgs/lupazinha.svg';
 import Setinha from '../../imgs/setinhaEstudantes.svg';
 import EstudantesInfo from '../estudantesInfo/estudantesInfo';
-import ModalExcluirEstudante from '../modalEstudante/modalExcluirEstudante';
-import ModalEditarEstudante from '../modalEstudante/modalEditarEstudante';
+import ModalExcluirEstudante from '../modalEditarEstudante/modalExcluirEstudante';
+import ModalEditarEstudante from '../modalEditarEstudante/modalEditarEstudante';
 import api from '../../api';
 import { saveAs } from 'file-saver';
 
