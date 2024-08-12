@@ -26,33 +26,64 @@
     font-size: 64px;
     color: black;
     font-weight: 800;
-
 }
 
 .card-faq {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: center;
     background: url(../../imgs/card-faq.png);
     width: 800px;
-    height: 100px;
     margin-bottom: 23px;
     box-shadow: 0px 7px 12px 0px black;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-.redirect {
-    padding: 0px 40px 0px;
+.card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 40px;
 }
 
 .card-faq span {
     font-size: 24px;
     color: white;
     text-shadow: 3px 3px 3px black;
+    flex: 1;
+}
+
+.card-faq img {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.3s ease;
+}
+
+.card-faq.active img {
+    transform: rotate(88deg);
+}
+
+.answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    padding: 0 40px;
+    color: white;
+    text-shadow: none;
+    font-size: 16px;
+    line-height: 1.4;
+}
+
+.card-faq.active .answer {
+    max-height: 100px; 
+    padding: 20px 40px; 
 }
 
 .subtitulo-faq {
     width: 100%;
-    text-align: flex-end;
+    text-align: end;
     font-size: 24px;
     color: #763B16;
     font-weight: 700;

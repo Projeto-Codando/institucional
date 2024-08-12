@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://codandojava.azurewebsites.net/',
+  baseURL: 'https://localhost:3000',
 });
 
 export default api;
