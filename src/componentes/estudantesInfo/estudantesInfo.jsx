@@ -6,9 +6,17 @@ export default function EstudantesInfo(props) {
     return (
         <div className="estudantesInfo">
             <div className='selectImagem'>
-                <input type="checkbox" checked={props.isSelected} onChange={props.handleSelect} />
+                <input  className='checkboxAluno'
+                    type="checkbox" 
+                    checked={props.isSelected} 
+                    onChange={props.handleSelect} 
+                />
                 <div className='avatarAtividade'>
-                    <img src={props.AvatarAluno} alt="imagem do aluno" style={{width: '50px', borderRadius: 360}}/>
+                    <img 
+                        src={props.AvatarAluno} 
+                        alt="imagem do aluno" 
+                        style={{ width: '50px', borderRadius: 360 }} 
+                    />
                 </div>
             </div>
             <div className='infosPrincipais'>
