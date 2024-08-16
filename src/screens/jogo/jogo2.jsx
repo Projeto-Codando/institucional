@@ -9,6 +9,12 @@ import CardNivelJogo from '../../componentes/cardNivelJogo/cardNivelJogo';
 import IconControle from '../../imgs/iconControle.png';
 import IconControleRoxo from '../../imgs/iconControleRoxo.png';
 import IconControleBranco from '../../imgs/IconControleBranco.png';
+import Img1QUiz from '../../imgs/Aula02-Questao01.gif'
+import ImgQUiz from '../../imgs/Aula02-Questao02.gif'
+import Img3QUiz from '../../imgs/Aula02-Questao03.gif'
+import Img4QUiz from '../../imgs/Aula02-Questao04.gif'
+import Img5QUiz from '../../imgs/Aula02-Questao05.gif'
+import Img6QUiz from '../../imgs/Aula02-Questao06.gif'
 
 function Jogo2() {
     const [isAlunoLoggedIn, setIsAlunoLoggedIn] = useState(false);

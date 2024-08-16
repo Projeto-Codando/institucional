@@ -7,10 +7,10 @@ import Start from '../../imgs/start.png';
 import { useEffect, useState } from 'react';
 import api from '../../api';
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 import LoadingSpinner from '../../componentes/loadingSpinner/loadingSpinner';
-function Lobby() {
 
+function Lobby() {
     const [nomeUsuario, setNomeUsuario] = useState("");
     const [avatar, setAvatar] = useState();
     const [nivelSelecionado, setNivelSelecionado] = useState(1);
@@ -18,14 +18,13 @@ function Lobby() {
     const [isProfessorLoggedIn, setIsProfessorLoggedIn] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
-
     const [turma, setTurma] = useState({});
 
     const body = {
         fkAluno: sessionStorage.getItem("userId"),
         fkAula: nivelSelecionado
-    }
-    
+    };
+
     console.log(body);
 
     const handleCreateNewProgressGame = () => {
@@ -38,7 +37,7 @@ function Lobby() {
             setIsLoading(false);
             console.log(response.data);
             toast.success("Quiz iniciado com sucesso!");
-            navigate(`/jogo/${nivelSelecionado}`); 
+            navigate(`/jogo/${nivelSelecionado}`);
         }).catch((error) => {
             setIsLoading(false);
             toast.error("Não foi possível iniciar o quiz! " + error.response.data.message);
@@ -52,11 +51,11 @@ function Lobby() {
                 Authorization: `Bearer ${sessionStorage.getItem("token")}`
             }
         }).then((json) => {
-            console.log(json.data)
+            console.log(json.data);
             setTurma(json.data.alunos);
         }).catch(() => {
             toast.error("Não foi possível encontrar a turma!");
-        })
+        });
 
         const nome = sessionStorage.getItem("apelidoUser");
         const avatar = sessionStorage.getItem("ImagemURL_AVATAR");
@@ -73,6 +72,13 @@ function Lobby() {
         if (email) {
             setIsProfessorLoggedIn(true);
         }
+
+        // Verificação de sessionStorage e aplicação de classe
+        const fkAula = parseInt(sessionStorage.getItem("nivel"));
+        if (fkAula) {
+            setNivelSelecionado(fkAula + 1);
+        }
+
     }, [avatar]);
 
     const handleNivelClick = (nivel) => {
@@ -119,13 +125,14 @@ function Lobby() {
                         <div className='cardNiveis1'>
                             <div
                                 className={`nivel ${nivelSelecionado === 1 ? 'nivel-selecionado' : ''}`}
-                                //onClick={() => handleNivelClick(1)}
+                                style={{ background: nivelSelecionado === 2 ? 'purple' : ''}}
+                                onClick={() => handleNivelClick(1)}
                             >
-                                <span>1</span>
+                                <span style={{color: nivelSelecionado === 2 ? 'white' : null }}>1</span>
                             </div>
                             <div
                                 className={`nivel ${nivelSelecionado === 2 ? 'nivel-selecionado' : ''}`}
-                                //onClick={() => handleNivelClick(2)}
+                                onClick={() => handleNivelClick(2)}
                             >
                                 <span>2</span>
                             </div>
@@ -134,19 +141,19 @@ function Lobby() {
                             <div className='cardNiveis2'>
                                 <div
                                     className={`nivel ${nivelSelecionado === 3 ? 'nivel-selecionado' : ''}`}
-                                    //onClick={() => handleNivelClick(3)}
+                                    onClick={() => handleNivelClick(3)}
                                 >
                                     <span>3</span>
                                 </div>
                                 <div
                                     className={`nivel ${nivelSelecionado === 4 ? 'nivel-selecionado' : ''}`}
-                                    //onClick={() => handleNivelClick(4)}
+                                    onClick={() => handleNivelClick(4)}
                                 >
                                     <span>4</span>
                                 </div>
                                 <div
                                     className={`nivel ${nivelSelecionado === 5 ? 'nivel-selecionado' : ''}`}
-                                    //onClick={() => handleNivelClick(5)}
+                                    onClick={() => handleNivelClick(5)}
                                 >
                                     <span>5</span>
                                 </div>
@@ -164,10 +171,9 @@ function Lobby() {
                                 <span>Aula detalhada sobre a combinação das estruturas condicionais if e else, incluindo exemplos de uso em fluxos de controle.</span>
                             </div>
                             <div className='estrelaAula'>
-                                <img src={Estrela} alt="estrelaAula" /> <span>0 / 5</span>
+                                <img src={Estrela} alt="estrelaAula" /> <span>0 / 7</span>
                             </div>
                             <div className='botaoAula'><button onClick={() => {
-
                                 sessionStorage.setItem("nivel", nivelSelecionado);
                                 handleCreateNewProgressGame()
                             }}><img src={Start} alt="" />Iniciar</button></div>
@@ -183,7 +189,7 @@ function Lobby() {
                                 <span>Aula explicativa sobre a estrutura condicional switch case, ideal para selecionar entre várias opções baseadas em uma única variável.</span>
                             </div>
                             <div className='estrelaAula'>
-                                <img src={Estrela} alt="estrelaAula" /> <span>0 / 5</span>
+                                <img src={Estrela} alt="estrelaAula" /> <span>0 / 6</span>
                             </div>
                             <div className='botaoAula'><button onClick={() => {
                                 sessionStorage.setItem("nivel", nivelSelecionado);
@@ -198,12 +204,15 @@ function Lobby() {
                             </div>
                             <div className='titulo'><span>Variável</span></div>
                             <div className='subtituloAula'>
-                                <span>Lorem ipsum dolor sit amet consec tetur. Nisi rhoncus diam magna ullamcorper Lorem ipsum dolor sit amet consectetur.</span>
+                                <span>Uma variável é um espaço de memória identificado por um nome que armazena valores que podem ser alterados durante a execução do programa.</span>
                             </div>
                             <div className='estrelaAula'>
                                 <img src={Estrela} alt="estrelaAula" /> <span>0 / 5</span>
                             </div>
-                            <div className='botaoAula'><button onClick={() => navigate("/jogo/3")}><img src={Start} alt="" />Iniciar</button></div>
+                            <div className='botaoAula'><button onClick={() => {
+                                sessionStorage.setItem("nivel", nivelSelecionado);
+                                handleCreateNewProgressGame()
+                            }}><img src={Start} alt="" />Iniciar</button></div>
                         </div>
 
                         <div className={`cardAula ${nivelSelecionado === 4 ? 'visible' : 'hidden'}`}>
@@ -211,14 +220,17 @@ function Lobby() {
                                 <span className='aula'>Aula 04</span>
                                 <span className='tituloMateria'>Logica de Programação</span>
                             </div>
-                            <div className='titulo'><span>Laço de Repetição</span></div>
+                            <div className='titulo'><span>Função</span></div>
                             <div className='subtituloAula'>
-                                <span>Lorem ipsum dolor sit amet consec tetur. Nisi rhoncus diam magna ullamcorper Lorem ipsum dolor sit amet consectetur.</span>
+                                <span>Uma função é um bloco de código projetado para realizar uma tarefa específica e pode ser chamado quando necessário, facilitando a reutilização e organização do código.</span>
                             </div>
                             <div className='estrelaAula'>
                                 <img src={Estrela} alt="estrelaAula" /> <span>0 / 5</span>
                             </div>
-                            <div className='botaoAula'><button onClick={() => navigate("/jogo/1")}><img src={Start} alt="" />Iniciar</button></div>
+                            <div className='botaoAula'><button onClick={() => {
+                                sessionStorage.setItem("nivel", nivelSelecionado);
+                                handleCreateNewProgressGame()
+                            }}><img src={Start} alt="" />Iniciar</button></div>
                         </div>
 
                         <div className={`cardAula ${nivelSelecionado === 5 ? 'visible' : 'hidden'}`}>
@@ -226,20 +238,23 @@ function Lobby() {
                                 <span className='aula'>Aula 05</span>
                                 <span className='tituloMateria'>Logica de Programação</span>
                             </div>
-                            <div className='titulo'><span>Laço de Repetição</span></div>
+                            <div className='titulo'><span>Array</span></div>
                             <div className='subtituloAula'>
-                                <span>Lorem ipsum dolor sit amet consec tetur. Nisi rhoncus diam magna ullamcorper Lorem ipsum dolor sit amet consectetur.</span>
+                                <span>Um array é uma coleção de elementos, todos do mesmo tipo, armazenados em locais de memória contíguos, que podem ser acessados por um índice numérico.</span>
                             </div>
                             <div className='estrelaAula'>
                                 <img src={Estrela} alt="estrelaAula" /> <span>0 / 5</span>
                             </div>
-                            <div className='botaoAula'><button onClick={() => navigate("/jogo/1")}><img src={Start} alt="" />Iniciar</button></div>
+                            <div className='botaoAula'><button onClick={() => {
+                                sessionStorage.setItem("nivel", nivelSelecionado);
+                                handleCreateNewProgressGame()
+                            }}><img src={Start} alt="" />Iniciar</button></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 export default Lobby;

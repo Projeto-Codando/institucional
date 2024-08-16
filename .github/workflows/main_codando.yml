@@ -1,10 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-
-name: Build and deploy Node.js app to Azure Web App - CodandoInt
+name: Build and deploy Node.js app to Azure Web App - Codando
 
 on:
   push:
@@ -22,14 +19,13 @@ jobs:
       - name: Set up Node.js version
         uses: actions/setup-node@v3
         with:
-          node-version: '20.x'
+          node-version: '18.x'
 
       - name: npm install, build, and test
         run: |
           npm install
-          npm run build --if-present
+          CI=false npm run build --if-present
           npm run test --if-present
-        continue-on-error: true # This will allow the workflow to continue even if there are warnings
 
       - name: Zip artifact for deployment
         run: zip release.zip ./* -r
@@ -47,7 +43,7 @@ jobs:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
-      id-token: write #This is required for requesting the JWT
+      id-token: write # This is required for requesting the JWT
 
     steps:
       - name: Download artifact from build job
@@ -61,14 +57,14 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v1
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_013B4E6092B6446A9A60DE1E5EADE591 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_8C778E9238B64E43AB9349A6F140A30F }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_200615FB31604BF0B76B08B2DA392FD0 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_911D519CA38C4E008E38C66912A1F40B }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_F43C2FE7722E432294932F6C11329099 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_556A8E98FB9D47688A57CB46A81B3EBA }}
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'CodandoInt'
+          app-name: 'Codando'
           slot-name: 'Production'
           package: .
