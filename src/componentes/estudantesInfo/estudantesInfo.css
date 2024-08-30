@@ -31,10 +31,12 @@
 
     .pontosAluno {
         display: flex;
+        width: 30px;
         gap: 5px;
+        justify-content: flex-end;
     }
     .pontosAluno span {
-        width: 10px;
+        width: min-content;
     }
     .finalCard {
         display: flex;

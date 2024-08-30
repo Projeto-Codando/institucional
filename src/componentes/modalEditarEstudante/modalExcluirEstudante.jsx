@@ -86,7 +86,8 @@ function ModalExcluirEstudante({ isOpen, onClose, escolaridade, setEscolaridade,
                                 <div className='listaEstudantes'>
                                     {props.alunos.map((aluno, index) => (
                                         <div className='alunoInfo'>
-                                            <span>{aluno.nome}</span>
+                                            <span style={{width: '200px'}}>{aluno.nome + ' ' + aluno.sobrenome}</span>
+                                            
                                             <span>{aluno.apelido}</span>
                                         </div>
                                     ))}

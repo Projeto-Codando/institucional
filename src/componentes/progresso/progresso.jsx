@@ -60,17 +60,16 @@ export default function Progresso(props) {
             {isloading && <LoadingSpinner />}
             <div className='aulas'>
                 <div className='nomesLabels'>
-                    <p>Aula</p>
+                    <p id='pImportante'>Aula</p>
                     <div className='barraVertical'></div>
-                    <p>Tema</p>
+                    <p id='pImportante'>Tema</p>
                     <div className='barraVertical'></div>
                     <p>Qtd. Conclusão</p>
                     <div className='barraVertical'></div>
-                    <p>Pontuação Média</p>
+                    <p>Pont. Média</p>
                 </div>
                 <div className='barraHorizontal'></div>
                 {Object.values(groupedProgressos).map((group, index) => {
-                     console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' + group.totalPontuacao);
                     const alunosConclusao = group.alunos.filter(aluno => aluno.statusAula === 'Finalizada').length;
                     const pontuacaoMedia = group.alunos.length > 0 ? (group.totalPontuacao / group.alunos.length).toFixed(2) : 'N/A';
 

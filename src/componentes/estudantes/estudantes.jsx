@@ -137,7 +137,7 @@ export default function Estudantes(props) {
                                 </div>
                             </div>
                             <div className='botoesEstudantes'>
-                                <div className='pesquisarEstudante'>
+                                <div className='pesquisarEstudante' style={{display: 'flex', gap: '5px'}}>
                                     <input type="text" value={filtroPesquisa} onChange={event => handleFilter(event.target.value)} />
                                     <img src={Lupazinha} alt="" />
                                 </div>

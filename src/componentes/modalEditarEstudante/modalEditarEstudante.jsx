@@ -25,8 +25,6 @@ function ModalEditarEstudante({ isOpen, onClose, escolaridade, setEscolaridade, 
         top: '50%',
         left: '50%',
         transform: 'translate(-50%,-50%)',
-        height: '500px',
-        width: '400px',
         backgroundColor: '#fff',
         borderRadius: '10px',
         flexDirection: 'column',
@@ -96,27 +94,32 @@ function ModalEditarEstudante({ isOpen, onClose, escolaridade, setEscolaridade, 
                             <img src={Xzinho} onClick={onClose} style={{ width: '40px', cursor: 'pointer' }} alt="close" />
                         </div>
                         <span style={{ color: '#476334', fontSize: '30px', fontWeight: 'bold', marginBottom: '20px' }}>
-                            Editar aluno {props.idAluno}
+                            Editar aluno
                         </span>
                         <InputsModal
+                            padding='20px'
                             text="Nome do Aluno"
                             id="nomeAluno"
                             value={nome}
                             onChange={setNome}
                         />
-                            <InputsModal
+                        <InputsModal
+                            padding='20px'
                             text="Sobrenome do Aluno"
                             id="sobrenomeAluno"
                             value={sobrenome}
                             onChange={setSobrenome}
                         />
-                            <InputsModal
+                        <InputsModal
+                            padding='20px'
                             text="Apelido do Aluno"
                             id="apelidoAluno"
                             value={apelido}
                             onChange={setApelido}
                         />
                         <InputsModal
+                            padding='20px'
+
                             text="Senha do aluno"
                             id="senhaAluno"
                             value={senha}
