@@ -3,6 +3,8 @@ import Trofeu from '../../imgs/Trophy.svg';
 import BotaoEditar from '../botaoEditar/botaoEditar';
 
 export default function EstudantesInfo(props) {
+
+
     return (
         <div className="estudantesInfo">
             <div className='selectImagem'>

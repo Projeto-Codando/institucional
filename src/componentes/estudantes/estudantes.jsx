@@ -17,6 +17,8 @@ export default function Estudantes(props) {
     const [selectedAlunos, setSelectedAlunos] = useState([]);
     const [sortOption, setSortOption] = useState("1");
     const [loading, setLoading] = useState(false);
+    const [idAlunoEditando, setIdAlunoEditando] = useState(0);
+    const [filtroPesquisa, setFiltroPesquisa] = useState('');
 
     const idProfessor = sessionStorage.getItem('userId');
     const idTurma = sessionStorage.getItem('idTurmaClicada');
@@ -28,6 +30,19 @@ export default function Estudantes(props) {
 
     const openEditarModal = () => setIsEditarModalOpen(true);
     const closeEditarModal = () => setIsEditarModalOpen(false);
+
+    const handleFilter = (filtro) => {
+        setFiltroPesquisa(filtro);
+        filtro = filtro.toLowerCase()
+
+        let novaLista = props.listaEstudantes.filter(aluno => {
+            return (aluno.nome.toLowerCase().includes(filtro)) || (aluno.sobrenome.toLowerCase().includes(filtro)) || (aluno.apelido.toLowerCase().includes(filtro));
+        })
+
+        novaLista = sortEstudantes(novaLista)
+
+        setSortedEstudantes(novaLista)
+    }
 
     const handleDownloadCSV = async () => {
         setLoading(true);
@@ -49,7 +64,7 @@ export default function Estudantes(props) {
         const newAllSelected = !allSelected;
         setAllSelected(newAllSelected);
         if (newAllSelected) {
-            setSelectedAlunos(alunosTurma.map(aluno => aluno.id));
+            setSelectedAlunos(alunosTurma.map(aluno => aluno.idAluno));
         } else {
             setSelectedAlunos([]);
         }
@@ -71,10 +86,15 @@ export default function Estudantes(props) {
     }, [selectedAlunos, alunosTurma]);
 
     const handleSortChange = (event) => {
+        console.log('target: ' + event.target.value);
         setSortOption(event.target.value);
+        handleFilter(filtroPesquisa)
+        setSortedEstudantes(sortEstudantes(sortedEstudantes))
     };
 
     const sortEstudantes = (students) => {
+        console.log('Studantds: ' + students)
+        console.log('Sort: ' + sortOption)
         return students.sort((a, b) => {
             if (sortOption === "1") {
                 return a.nome.localeCompare(b.nome);
@@ -87,7 +107,7 @@ export default function Estudantes(props) {
         });
     };
 
-    const sortedEstudantes = sortEstudantes(alunosTurma);
+    const [sortedEstudantes, setSortedEstudantes] = useState(sortEstudantes(props.listaEstudantes));
 
     return (
         <div className="estudantes">
@@ -95,11 +115,11 @@ export default function Estudantes(props) {
             <div className='barraNavegacao'>
                 <div className='navigationBar'>
                     <div className='selecionar'>
-                        <input 
-                            className="checkboxEstudantes" 
-                            type="checkbox" 
-                            checked={allSelected} 
-                            onChange={handleSelectAll} 
+                        <input
+                            className="checkboxEstudantes"
+                            type="checkbox"
+                            checked={allSelected}
+                            onChange={handleSelectAll}
                         />
                         <label>Selecionar todos</label>
                     </div>
@@ -118,15 +138,16 @@ export default function Estudantes(props) {
                             </div>
                             <div className='botoesEstudantes'>
                                 <div className='pesquisarEstudante'>
+                                    <input type="text" value={filtroPesquisa} onChange={event => handleFilter(event.target.value)} />
                                     <img src={Lupazinha} alt="" />
                                 </div>
                             </div>
                             <div className='botoesEstudantes'>
                                 <div className='ordernarEstudantes'>
-                                    <select 
-                                        name="" 
-                                        id="ordenacao-select" 
-                                        value={sortOption} 
+                                    <select
+                                        name=""
+                                        id="ordenacao-select"
+                                        value={sortOption}
                                         onChange={handleSortChange}
                                     >
                                         <option value="1">Ordem Alfabética</option>
@@ -140,39 +161,33 @@ export default function Estudantes(props) {
                     </div>
                 </div>
             </div>
-            
+
             <div className='estudantesInformacoes'>
                 {sortedEstudantes.map((aluno) => (
-                    <EstudantesInfo 
-                        key={aluno.id}
+                    <EstudantesInfo
+                        key={aluno.idAluno}
                         nomeAluno={aluno.nome + ' ' + aluno.sobrenome}
                         apelido={'@' + aluno.apelido}
                         qtdPontos={aluno.pontuacao || 0}
                         AvatarAluno={aluno.avatar[0]?.imagemURL || avatarGenerico}
-                        openEditarModal={openEditarModal}
-                        isSelected={selectedAlunos.includes(aluno.id)}
-                        handleSelect={() => handleSelectAluno(aluno.id)}
+                        openEditarModal={() => setIdAlunoEditando(aluno.idAluno) || openEditarModal()}
+                        isSelected={selectedAlunos.includes(aluno.idAluno)}
+                        handleSelect={() => handleSelectAluno(aluno.idAluno)}
                     />
                 ))}
             </div>
             <ModalExcluirEstudante
                 isOpen={isExcluirModalOpen}
                 onClose={closeExcluirModal}
-                alunos={alunosTurma.filter(aluno => selectedAlunos.includes(aluno.id))}
-                onExcluir={() => {
-                    // Implementar a lógica de exclusão aqui
-                    closeExcluirModal();
-                }}
+                alunos={alunosTurma.filter(aluno => selectedAlunos.includes(aluno.idAluno))}
+
             />
             <ModalEditarEstudante
                 isOpen={isEditarModalOpen}
                 onClose={closeEditarModal}
-                escolaridade={props.escolaridade}
-                setEscolaridade={props.setEscolaridade}
-                edicaoNomeTurma={props.edicaoNomeTurma}
-                setNomeTurma={props.setNomeTurma}
-                edicaoSenhaTurma={props.edicaoSenhaTurma}
-                setSenhaTurma={props.setSenhaTurma}
+                idAluno={idAlunoEditando}
+                nomeAluno={props.edicaoNomeAluno}
+                senhaAluno={props.edicaoSenhaAluno}
                 onClick={props.onClick}
             />
         </div>

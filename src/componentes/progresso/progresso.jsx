@@ -70,12 +70,13 @@ export default function Progresso(props) {
                 </div>
                 <div className='barraHorizontal'></div>
                 {Object.values(groupedProgressos).map((group, index) => {
+                     console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' + group.totalPontuacao);
                     const alunosConclusao = group.alunos.filter(aluno => aluno.statusAula === 'Finalizada').length;
                     const pontuacaoMedia = group.alunos.length > 0 ? (group.totalPontuacao / group.alunos.length).toFixed(2) : 'N/A';
 
                     return (
                         <DetalhesAula
-                            key={group.aula.idAula || index} // Adicionei chave única
+                            key={group.aula.idAula || index}
                             aula={group.aula.nome || 'Nome não disponível'}
                             tema={'Condicional'}
                             alunosConclusao={alunosConclusao}

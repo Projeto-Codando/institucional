@@ -1,9 +1,11 @@
 import React from 'react';
 import './modalEstudante.css';
 import Xzinho from '../../imgs/xModal.svg';
-import InputsModal from '../inputsModal/inputsModal';
 import Botao from '../botaoModal/botaoModal';
-import SelectBox from '../inputsModal/selectBoxModal';
+import api from '../../api';
+import { toast } from 'react-toastify';
+
+
 
 function ModalExcluirEstudante({ isOpen, onClose, escolaridade, setEscolaridade, ...props }) {
     const BACKGROUND_STYLE = {
@@ -30,6 +32,31 @@ function ModalExcluirEstudante({ isOpen, onClose, escolaridade, setEscolaridade,
         padding: '20px',
         boxSizing: 'border-box',
     };
+    const handleExcluirAluno = async (event) => {
+        event.preventDefault();
+        console.log("Clicou no botão");
+
+        const listaEstudantes = props.alunos.map((aluno) => aluno.idAluno)
+
+        try {
+            api.delete('/alunos/excluirLista', {
+                headers: {
+                    Authorization: `Bearer ${sessionStorage.getItem('token')}`
+                },
+                data: listaEstudantes
+            }).then((json) => {
+                console.log(json)
+                toast.success("Remoção realizada com sucesso!")
+                onClose()
+            }).catch(() => {
+                console.log("Ocorreu um erro na sua Remoção!");
+            });
+
+        } catch (error) {
+            console.error(error.message);
+            toast.error(error.message);
+        }
+    }
 
     if (isOpen) {
         return (
@@ -57,20 +84,19 @@ function ModalExcluirEstudante({ isOpen, onClose, escolaridade, setEscolaridade,
                                     <div className='linhaRoxaHorizontal'></div>
                                 </div>
                                 <div className='listaEstudantes'>
-                                    <div className='alunoInfo'>  
-                                        <span>{props.nomeAluno}</span>
-                                        <span>{props.apelido}</span>
+                                    {props.alunos.map((aluno, index) => (
+                                        <div className='alunoInfo'>
+                                            <span>{aluno.nome}</span>
+                                            <span>{aluno.apelido}</span>
                                         </div>
-                                       
+                                    ))}
                                 </div>
-                                
-
                             </div>
 
                             <Botao
                                 text="Excluir aluno"
                                 id="excluirEstudante"
-                                onClick={props.onClick}
+                                onClick={handleExcluirAluno}
                             />
                         </div>
                     </div>
