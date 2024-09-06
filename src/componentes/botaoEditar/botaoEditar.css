@@ -1,0 +1,17 @@
+.botao-editar{
+    display: flex;
+    align-items: center;
+}
+.botao-editar button {
+    width: 100px;
+    height: 40px;
+    border: white 1px solid;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    background-color: #FB6107;
+    color: white;
+}
+.botao-editar img {
+    width: 20px;
+}

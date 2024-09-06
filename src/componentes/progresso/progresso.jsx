@@ -60,13 +60,13 @@ export default function Progresso(props) {
             {isloading && <LoadingSpinner />}
             <div className='aulas'>
                 <div className='nomesLabels'>
-                    <p>Aula</p>
+                    <p id='pImportante'>Aula</p>
                     <div className='barraVertical'></div>
-                    <p>Tema</p>
+                    <p id='pImportante'>Tema</p>
                     <div className='barraVertical'></div>
                     <p>Qtd. Conclusão</p>
                     <div className='barraVertical'></div>
-                    <p>Pontuação Média</p>
+                    <p>Pont. Média</p>
                 </div>
                 <div className='barraHorizontal'></div>
                 {Object.values(groupedProgressos).map((group, index) => {
@@ -75,7 +75,7 @@ export default function Progresso(props) {
 
                     return (
                         <DetalhesAula
-                            key={group.aula.idAula || index} // Adicionei chave única
+                            key={group.aula.idAula || index}
                             aula={group.aula.nome || 'Nome não disponível'}
                             tema={'Condicional'}
                             alunosConclusao={alunosConclusao}

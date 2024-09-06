@@ -61,11 +61,7 @@ function ModalConteudo({ isOpen, onClose, escolaridade, setEscolaridade, ...prop
                                         />
                                     ))}
                                 </div>
-                            <Botao
-                            text='Atribuir'
-                            id='Atribuir'
-                            onClick={props.onClick}
-                            />    
+                     
                             </div>
                             <div className='retangulo'>
                                 <img id="retangulo" src={Retangulo} alt='Retangulo sobre o codando'/>

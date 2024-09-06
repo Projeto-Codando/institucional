@@ -96,7 +96,7 @@ function CardTurma({ onClick, ...props }) {
                     <FontAwesomeIcon icon={faEllipsis} style={{ height: '30px', cursor: 'pointer' }} onClick={toggleMenu} />
                     {menuAberto && (
                         <div className='menuOpcoes' style={menuStyle}>
-                            <div style={{ height: '30px', cursor: 'pointer' }} onClick={openModal} className='opcaoMenu'>Editar</div>
+                            <div style={{ height: '30px', cursor: 'pointer' }}  className='opcaoMenu'>Editar</div>
                             <div style={{ padding: '0', height: '1px', width: '100%', backgroundColor: 'rgba(000, 000, 000, 0.5)' }} className='linha'></div>
                             <div style={{ height: '30px', cursor: 'pointer' }} className='opcaoMenu' onClick={arquivarCard}>Arquivar</div>
                         </div>

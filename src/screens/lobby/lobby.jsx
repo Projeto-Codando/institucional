@@ -81,10 +81,7 @@ function Lobby() {
 
     }, [avatar]);
 
-    const handleNivelClick = (nivel) => {
-        setNivelSelecionado(nivel);
-    };
-
+  
     return (
         <div className='rotaNiveis'>
             {isLoading && <LoadingSpinner />}
@@ -126,13 +123,13 @@ function Lobby() {
                             <div
                                 className={`nivel ${nivelSelecionado === 1 ? 'nivel-selecionado' : ''}`}
                                 style={{ background: nivelSelecionado === 2 ? 'purple' : ''}}
-                                onClick={() => handleNivelClick(1)}
+                                
                             >
                                 <span style={{color: nivelSelecionado === 2 ? 'white' : null }}>1</span>
                             </div>
                             <div
                                 className={`nivel ${nivelSelecionado === 2 ? 'nivel-selecionado' : ''}`}
-                                onClick={() => handleNivelClick(2)}
+                                
                             >
                                 <span>2</span>
                             </div>
@@ -141,19 +138,19 @@ function Lobby() {
                             <div className='cardNiveis2'>
                                 <div
                                     className={`nivel ${nivelSelecionado === 3 ? 'nivel-selecionado' : ''}`}
-                                    onClick={() => handleNivelClick(3)}
+                                    
                                 >
                                     <span>3</span>
                                 </div>
                                 <div
                                     className={`nivel ${nivelSelecionado === 4 ? 'nivel-selecionado' : ''}`}
-                                    onClick={() => handleNivelClick(4)}
+                                   
                                 >
                                     <span>4</span>
                                 </div>
                                 <div
                                     className={`nivel ${nivelSelecionado === 5 ? 'nivel-selecionado' : ''}`}
-                                    onClick={() => handleNivelClick(5)}
+                                    
                                 >
                                     <span>5</span>
                                 </div>

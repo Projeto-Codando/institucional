@@ -1,34 +1,48 @@
-.estudantesInfo {
-    display: flex;
-    padding: 0 20px 0 20px;
-    align-items: center;
-    background-color: #476334;
-    width: 90%;
-    height: 70px;
-    gap: 100px;
-}
+    .estudantesInfo {
+        display: flex;
+        padding: 0 20px 0 20px;
+        align-items: center;
+        background-color: #476334;
+        width: 90%;
+        height: 70px;
+        gap: 100px;
+    }
 
-.selectImagem {
-    display: flex;
-    gap: 20px;
-}
+    .selectImagem {
+        display: flex;
+        gap: 20px;
+    }
 
-.selectImagem img {
-    width: 20px;
-}
+    .selectImagem img {
+        width: 20px;
+    }
 
-.infosPrincipais {
-    font-size: 24px;
-    font-weight: bold;
-    color: white;
-    gap: 60px;
-    display: flex;
-}
+    .infosPrincipais {
+        width: 100%;
+        font-size: 24px;
+        font-weight: bold;
+        color: white;
+        gap: 60px;
+        display: flex;
+    }
+    .infosPrincipais span {
+        width: 250px;
+    }
 
-.pontosAluno {
-    display: flex;
-    gap: 5px;
-}
+    .pontosAluno {
+        display: flex;
+        width: 30px;
+        gap: 5px;
+        justify-content: flex-end;
+    }
+    .pontosAluno span {
+        width: min-content;
+    }
+    .finalCard {
+        display: flex;
+        width: 50%;
+        justify-content: end;
+    }
 
 .avatarAtividade{
     display: flex;

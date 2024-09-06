@@ -14,7 +14,7 @@ function PortalSala() {
   const [isAlunoLoggedIn, setIsAlunoLoggedIn] = useState(false);
   const [isProfessorLoggedIn, setIsProfessorLoggedIn] = useState(false);
   const [estudantes, setEstudantes] = useState([]);
-  const [visibleComponent, setVisibleComponent] = useState('Progresso'); 
+  const [visibleComponent, setVisibleComponent] = useState('Progresso');
   const [selectedNavegacao, setSelectedNavegacao] = useState('Progresso');
   const [turmaBuscada] = useState(sessionStorage.getItem('idTurmaClicada'));
 
@@ -47,7 +47,7 @@ function PortalSala() {
   }, [turmaBuscada]);
 
   if (!turmaData) {
-    return null; 
+    return null;
   }
 
   console.log(estudantes);
@@ -78,7 +78,10 @@ function PortalSala() {
         <div className='telaPrincipal'>
           {visibleComponent === 'Conteudo' && <Conteudo />}
           {visibleComponent === 'Progresso' && <Progresso />}
-          {visibleComponent === 'Estudantes' && <Estudantes listaEstudantes={estudantes}/>}
+          {visibleComponent === 'Estudantes' && <Estudantes listaEstudantes={estudantes.map((aluno, index) => {
+            aluno.pontuacao = index * 10
+            return aluno
+          })} />}
         </div>
       </div>
     </div>

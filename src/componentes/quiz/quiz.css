@@ -100,10 +100,13 @@
 }
 
 .imagemQuiz{
-    background-image: url(../../imgs/video-jogo1.png);
     width: 100%;
     height: 100%;
     border-radius: 30px;
+}
+
+#imagemQuiz1 {
+    background-image: url(../../imgs/video-jogo1.png);
 }
 
 .quiz-option.correct {

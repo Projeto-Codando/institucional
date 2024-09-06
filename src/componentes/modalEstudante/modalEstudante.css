@@ -1,0 +1,47 @@
+.modalEstudante{
+    display: flex;
+justify-content: center;}
+.detalhesEstudantes {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+}
+.detalhesTitulos {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    
+}
+.itensHorizontais {
+    align-items: center;
+    display: flex;
+}
+.linhaRoxaVertical {
+    width: 1px;
+    height: 20px;
+    background-color: #9E6AE1;
+    margin-right: 2%;
+}
+.linhaRoxaHorizontal {
+    width: 100%;
+    height: 1px;
+    background-color: #9E6AE1;
+}
+.conteudoPrincipal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+}
+.listaEstudantes {
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+
+}
+.alunoInfo {
+    display: flex;
+    width: 100%;
+    gap: 25%;
+}

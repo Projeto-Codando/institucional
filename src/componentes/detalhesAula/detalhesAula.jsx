@@ -4,8 +4,8 @@ import Trofeu from '../../imgs/Trofeu.svg'
 export default function DetalhesAula(props) {
     return(
         <div className='detalhesAula'>
-         <p>{props.aula}</p>
-         <p>{props.tema}</p>
+         <p id='pImportante'>{props.aula}</p>
+         <p id='pImportante'>{props.tema}</p>
          <div className='qtdConclusao'>
          <p>{props.alunosConclusao}/{props.alunosTotal}</p>
          <img src={Certinho} alt="" /> 

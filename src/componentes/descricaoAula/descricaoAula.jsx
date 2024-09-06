@@ -16,19 +16,19 @@ export default function DescricaoAula(props) {
             </div>
             <div className='descricaoTitulo'>
                 <div className='abrirDetalhes'>
-                    <div className='triangulo'>
-                        <img src={Triangulo} alt="Triangulo" onClick={toggleExpanded} />
+                    <div className='detalhesAbrir'>
+                        <div className={`triangulo ${expanded ? 'rotated' : ''}`} onClick={toggleExpanded}>
+                            <img src={Triangulo} alt="Triangulo" />
+                        </div>
+                        <div className='nomeAula'>
+                            <p>{props.nomeAula}</p>
+                        </div>
                     </div>
-                    <div className='detalhesAbrir'> 
-                    <div className='nomeAula'>
-                        <p>{props.nomeAula}</p>
-                    </div>
-                    {expanded && <p id='descricao' className="descricaoTexto">{props.descricaoTexto}</p>}
+                    <div className='descricaoAula'>
+                        {expanded && <p id='descricao' className="descricaoTexto">{props.descricaoTexto}</p>}
                     </div>
                 </div>
-                
             </div>
-            
         </div>
     );
 }

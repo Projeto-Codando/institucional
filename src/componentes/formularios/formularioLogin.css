@@ -41,7 +41,6 @@
   .forms-login{
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
     width: 435px;
     height: 226px;
     margin-top: 10px;
@@ -129,7 +128,8 @@
 
 .eye-icon {
   cursor: pointer;
-  margin-left: 30px;
   display: flex;
   align-items: center;
+  position: absolute;
+  left: 80%;
 }
