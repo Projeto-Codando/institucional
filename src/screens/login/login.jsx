@@ -116,9 +116,6 @@ function Login() {
                 listaAvatares={setListaAvatares}
             />
             <section className='sectionBackgroundLogin' >
-                <div className='buttom-voltar'>
-                    <button onClick={() => navigate("/")}> &lt; VOLTAR </button>
-                </div>
                 <div className='container-background' >
                     <FormularioLogin setApelido={setApelido} setSenha={setSenha} onClick={handleSave} />
                 </div>

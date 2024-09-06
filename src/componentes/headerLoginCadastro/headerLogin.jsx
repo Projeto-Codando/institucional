@@ -61,7 +61,7 @@ export default function HeaderLogin(props) {
                 statusAula={props.statusAulaProfessor}
                 statusAlunosAtivos={props.alunosAtivos}
             />
-            <div className="logo">
+            <div className="logo" onClick={() => navigate("/")}>
                 <img src={props.logo} alt="Logo codando" />
             </div>
             <div className="buttons" style={{

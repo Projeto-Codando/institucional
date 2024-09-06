@@ -7,4 +7,4 @@ function Ajuda(){
     </div>
     )
 }
-export default Ajuda
+export default Ajuda 

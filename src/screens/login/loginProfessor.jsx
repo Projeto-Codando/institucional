@@ -80,9 +80,6 @@ function LoginProfessor() {
                 statusLogoff={isAlunoLoggedIn || isProfessorLoggedIn ? null : "true"}
             />
             <section className='sectionBackgroundLoginProfessor' >
-                <div className='buttom-voltar'>
-                    <button onClick={() => navigate("/")}> &lt; VOLTAR </button>
-                </div>
                 <div className='container-backgroundProfessor' >
                     <FormularioLoginProfessor setEmail={setEmail} setSenha={setSenha} onClick={handleSave} />
                 </div>

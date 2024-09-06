@@ -89,7 +89,7 @@ function TurmasArquivadas() {
             />
           ))}
         </div>
-        <Ajuda />
+        {/* <Ajuda /> */}
       </div>
     </div>
   )

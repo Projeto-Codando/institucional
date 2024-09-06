@@ -14,15 +14,18 @@ import IconGlobe from '../../imgs/IconGlobe.png';
 import IconQuestion from '../../imgs/IconQuestion.png';
 import IconClip from '../../imgs/IconClip.png';
 import IconUsers from '../../imgs/IconUsers.png';
+import IconExit from '../../imgs/IconExit.png'
 import { useNavigate } from 'react-router-dom';
 import ModalEscolhaAvatar from '../modalEscolhaAvatar/modalEscolhaAvatar';
 import ModalComprarAvatar from '../modalComprarAvatar/modalComprarAvatar';
+import ModalAjuda from '../modalAjuda/modalAjuda';
 
 const apelidoAluno = sessionStorage.getItem("apelidoUser");
 const avatarGenerico = 'https://qxztjedmqxjnfloewgbv.supabase.co/storage/v1/object/public/macaco/chimpaZe_default.png'
 function BarraLateral(props) {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isModalCompraOpen, setIsModalCompraOpen] = useState(false);
+    const [isModalAjudaOpen, setIsModalAjudaOpen] = useState(false);
     const [open, setOpen] = useState(false);
     const navigate = useNavigate();
 
@@ -42,6 +45,14 @@ function BarraLateral(props) {
         setIsModalCompraOpen(false);
     };
 
+    const openModalAjuda = () => {
+        setIsModalAjudaOpen(true);
+    };
+
+    const closeModalAjuda = () => {
+        setIsModalAjudaOpen(false);
+        changeStateBar(open)
+    };    
 
     function changeStateBar() {
         setOpen(!open);
@@ -108,7 +119,6 @@ function BarraLateral(props) {
                                 isOpen={isModalCompraOpen}
                                 onClose={closeModalCompra}
                             />
-
                             <div className='row' onClick={openModal}>
                                 <img src={IconUser} alt="Perfil" />
                                 <span>Perfil</span>
@@ -118,7 +128,13 @@ function BarraLateral(props) {
                                 onClose={closeModal}
                                 listaAvatares={props.listaAvatares}
                             />
-
+                            <div className='row' onClick={() => { 
+                                navigate("/"); 
+                                sessionStorage.clear(); 
+                            }}>
+                                <img src={IconExit} alt="Sair" />
+                                <span>Sair</span>
+                            </div>
                             <div className='containerRow'>
                                 <div className='lineDivisoria'></div>
                             </div>
@@ -133,9 +149,13 @@ function BarraLateral(props) {
                                 <img src={IconGlobe} alt="Globe" />
                                 <span>Mapa</span>
                             </div>
-                            <div className='row'>
+                            <div className='row' onClick={openModalAjuda}>
                                 <img src={IconQuestion} alt="Question" />
                                 <span>Ajuda</span>
+                            <ModalAjuda
+                                isOpen={isModalAjudaOpen}
+                                onClose={closeModalAjuda}
+                            />
                             </div>
                             <div className='containerRow'>
                                 <div className='lineDivisoria'></div>
@@ -186,6 +206,13 @@ function BarraLateral(props) {
                             <div className='row'>
                                 <img src={IconQuestion} alt="Question" />
                                 <span>Ajuda</span>
+                            </div>
+                            <div className='row' onClick={() => { 
+                                navigate("/"); 
+                                sessionStorage.clear(); 
+                            }}>
+                                <img src={IconExit} alt="Sair" />
+                                <span>Sair</span>
                             </div>
                             <div className='containerRow'>
                                 <div className='lineDivisoria'></div>

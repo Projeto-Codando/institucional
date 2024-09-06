@@ -165,7 +165,7 @@ function Portal() {
             />
           ))}
         </div>
-        <Ajuda />
+        {/* <Ajuda /> */}
       </div>
     </div>
   )
