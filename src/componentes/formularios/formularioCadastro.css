@@ -42,7 +42,6 @@
   .forms{
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
     width: 435px;
     height: 365px;
     margin-top: 10px;
