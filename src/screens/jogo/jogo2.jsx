@@ -10,7 +10,7 @@ import IconControle from '../../imgs/iconControle.png';
 import IconControleRoxo from '../../imgs/iconControleRoxo.png';
 import IconControleBranco from '../../imgs/IconControleBranco.png';
 import Img1QUiz from '../../imgs/Aula02-Questao01.gif'
-import ImgQUiz from '../../imgs/Aula02-Questao02.gif'
+import Img2QUiz from '../../imgs/Aula02-Questao02.gif'
 import Img3QUiz from '../../imgs/Aula02-Questao03.gif'
 import Img4QUiz from '../../imgs/Aula02-Questao04.gif'
 import Img5QUiz from '../../imgs/Aula02-Questao05.gif'
@@ -268,12 +268,45 @@ default: console.log("Jogo desconhecido"); } `}</pre>
                             correctOption={correctOptions[6]}
                             onCorrect={() => handleNextQuiz(6, 2)}
                             onBack={handlePreviousQuiz}
+                            onFinal={true}
                         />
-                    )}
+                    )}{currentQuiz === 1 && (
+                        <div className='telaQuiz'>
+                            <img src={Img1QUiz} className='imagemQuiz' alt="Imagem questão 1" />
+                        </div>
+                    )
+                    }
+                    {currentQuiz === 2 && (
+                        <div className='telaQuiz'>
+                            <img src={Img2QUiz} className='imagemQuiz' alt="Imagem questão 2" />
+                        </div>
+                    )
+                    }
+                    {currentQuiz === 3 && (
+                        <div className='telaQuiz'>
+                            <img src={Img3QUiz} className='imagemQuiz' alt="Imagem questão 3" />
+                        </div>
+                    )
+                    }
+                    {currentQuiz === 4 && (
+                        <div className='telaQuiz'>
+                            <img src={Img4QUiz} className='imagemQuiz' alt="Imagem questão 4" />
+                        </div>
+                    )
+                    }
+                    {currentQuiz === 5 && (
+                        <div className='telaQuiz'>
+                            <img src={Img5QUiz} className='imagemQuiz' alt="Imagem questão 5" />
+                        </div>
+                    )
+                    }
+                    {currentQuiz === 6 && (
+                        <div className='telaQuiz'>
+                            <img src={Img6QUiz} className='imagemQuiz' alt="Imagem questão 6" />
+                        </div>
+                    )
+                    }
                    
-                    <div className='telaQuiz'>
-                        <div className='imagemQuiz'></div>
-                    </div>
                 </div>
             </div>
         </div>
