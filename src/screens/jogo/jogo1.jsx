@@ -299,37 +299,37 @@ console.log("A fruta é comestível!");
                     }
                     {currentQuiz === 2 && (
                         <div className='telaQuiz'>
-                            <img src={Img2QUiz} className='imagemQuiz' alt="Imagem questão 1" />
+                            <img src={Img2QUiz} className='imagemQuiz' alt="Imagem questão 2" />
                         </div>
                     )
                     }
                     {currentQuiz === 3 && (
                         <div className='telaQuiz'>
-                            <img src={Img3QUiz} className='imagemQuiz' alt="Imagem questão 1" />
+                            <img src={Img3QUiz} className='imagemQuiz' alt="Imagem questão 3" />
                         </div>
                     )
                     }
                     {currentQuiz === 4 && (
                         <div className='telaQuiz'>
-                             <img src={Img4QUiz} className='imagemQuiz' alt="Imagem questão 1" />
+                            <img src={Img4QUiz} className='imagemQuiz' alt="Imagem questão 4" />
                         </div>
                     )
                     }
                     {currentQuiz === 5 && (
                         <div className='telaQuiz'>
-                             <img src={Img5QUiz} className='imagemQuiz' alt="Imagem questão 1" />
+                            <img src={Img5QUiz} className='imagemQuiz' alt="Imagem questão 5" />
                         </div>
                     )
                     }
                     {currentQuiz === 6 && (
                         <div className='telaQuiz'>
-                             <img src={Img6QUiz} className='imagemQuiz' alt="Imagem questão 1" />
+                            <img src={Img6QUiz} className='imagemQuiz' alt="Imagem questão 6" />
                         </div>
                     )
                     }
                     {currentQuiz === 7 && (
                         <div className='telaQuiz'>
-                             <img src={Img7QUiz} className='imagemQuiz' alt="Imagem questão 1" />
+                            <img src={Img7QUiz} className='imagemQuiz' alt="Imagem questão 7" />
                         </div>
                     )
                     }
