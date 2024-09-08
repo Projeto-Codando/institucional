@@ -203,10 +203,6 @@ function BarraLateral(props) {
                                 <img src={IconClip} alt="Clip" />
                                 <span>Turmas Arquivadas</span>
                             </div>
-                            <div className='row'>
-                                <img src={IconQuestion} alt="Question" />
-                                <span>Ajuda</span>
-                            </div>
                             <div className='row' onClick={() => { 
                                 navigate("/"); 
                                 sessionStorage.clear(); 
