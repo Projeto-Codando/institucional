@@ -122,37 +122,37 @@ function Lobby() {
                         <div className='cardNiveis1'>
                             <div
                                 className={`nivel ${nivelSelecionado === 1 ? 'nivel-selecionado' : ''}`}
-                                style={{ background: nivelSelecionado === 2 ? 'purple' : ''}}
+                                style={{ background: nivelSelecionado > 1 ? 'purple' : ''}}
                                 
                             >
-                                <span style={{color: nivelSelecionado === 2 ? 'white' : null }}>1</span>
+                                <span style={{color: nivelSelecionado > 1 ? 'white' : null }}>1</span>
                             </div>
                             <div
                                 className={`nivel ${nivelSelecionado === 2 ? 'nivel-selecionado' : ''}`}
-                                
+                                style={{ background: nivelSelecionado > 2 ? 'purple' : ''}}
                             >
-                                <span>2</span>
+                               <span style={{color: nivelSelecionado > 2 ? 'white' : null }}>2</span>
                             </div>
                         </div>
                         <div className='containerNivel'>
                             <div className='cardNiveis2'>
                                 <div
                                     className={`nivel ${nivelSelecionado === 3 ? 'nivel-selecionado' : ''}`}
-                                    
+                                    style={{ background: nivelSelecionado > 3 ? 'purple' : ''}}
                                 >
-                                    <span>3</span>
+                                    <span style={{color: nivelSelecionado > 3 ? 'white' : null }}>3</span>
                                 </div>
                                 <div
                                     className={`nivel ${nivelSelecionado === 4 ? 'nivel-selecionado' : ''}`}
-                                   
+                                    style={{ background: nivelSelecionado > 4 ? 'purple' : ''}}
                                 >
-                                    <span>4</span>
+                                    <span style={{color: nivelSelecionado > 4 ? 'white' : null }}>4</span>
                                 </div>
                                 <div
                                     className={`nivel ${nivelSelecionado === 5 ? 'nivel-selecionado' : ''}`}
-                                    
+                                    style={{ background: nivelSelecionado > 5 ? 'purple' : ''}}
                                 >
-                                    <span>5</span>
+                                    <span style={{color: nivelSelecionado > 5 ? 'white' : null }}>5</span>
                                 </div>
                             </div>
                         </div>

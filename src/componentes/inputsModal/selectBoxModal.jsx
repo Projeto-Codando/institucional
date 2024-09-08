@@ -4,7 +4,7 @@ export default function SelectBoxModal(props) {
     
 
     return (
-        <div class="inputs">
+        <div class="inputs" style={{paddingLeft: '45px'}}>
            <label for={props.text}>{props.text}</label>
            <select name="" id="escolaridade-select" value={props.value} onChange={props.onChange}>
                         <option disabled selected>Selecione uma escolaridade</option>
