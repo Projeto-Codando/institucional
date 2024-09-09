@@ -1,8 +1,5 @@
 .faixaTurma {
-
     position: relative;
-    z-index: 0;
-    padding-left: 4.8%;
     background-color: #7CB518;
     width: 100%;
     height: 8rem;
@@ -10,6 +7,10 @@
 
 }
 
+.containerFaixa{
+    padding-left: 2.4%;
+    padding-top: 3px;
+}
 .faixaTurma {
     display: flex;
 
