@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
-
 import './barra-lateral.css';
 import BotaoClose from '../../imgs/closeButton.png';
 import LogoC from '../../imgs/Logo-C.svg';
@@ -19,6 +18,9 @@ import { useNavigate } from 'react-router-dom';
 import ModalEscolhaAvatar from '../modalEscolhaAvatar/modalEscolhaAvatar';
 import ModalComprarAvatar from '../modalComprarAvatar/modalComprarAvatar';
 import ModalAjuda from '../modalAjuda/modalAjuda';
+import { toast } from 'react-toastify';
+import api from '../../api';
+import LoadingSpinner from '../../componentes/loadingSpinner/loadingSpinner';
 
 const apelidoAluno = sessionStorage.getItem("apelidoUser");
 const avatarGenerico = 'https://qxztjedmqxjnfloewgbv.supabase.co/storage/v1/object/public/macaco/chimpaZe_default.png'
@@ -27,6 +29,8 @@ function BarraLateral(props) {
     const [isModalCompraOpen, setIsModalCompraOpen] = useState(false);
     const [isModalAjudaOpen, setIsModalAjudaOpen] = useState(false);
     const [open, setOpen] = useState(false);
+    const [nivelSelecionado, setNivelSelecionado] = useState(1);
+    const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
 
     const openModal = () => {
@@ -58,8 +62,46 @@ function BarraLateral(props) {
         setOpen(!open);
     }
 
+    const body = {
+        fkAluno: sessionStorage.getItem("userId"),
+        fkAula: nivelSelecionado
+    };
+
+
+    const handleCreateNewProgressGame = () => {
+        setIsLoading(true);
+        api.post(`/progresso-aluno`, body, {
+            headers: {
+                Authorization: `Bearer ${sessionStorage.getItem("token")}`
+            }
+        }).then((response) => {
+
+            setIsLoading(false);
+            console.log(response.data);
+
+            toast.success("Quiz iniciado com sucesso!");
+            navigate(`/jogo/${nivelSelecionado}`);
+        }).catch((error) => {
+            setIsLoading(false);
+            toast.error("Não foi possível iniciar o quiz! " + error.response.data.message);
+            console.error(error);
+        });
+        
+    }
+
+    useEffect(() => {
+       
+        // Verificação de sessionStorage e aplicação de classe
+        const fkAula = parseInt(sessionStorage.getItem("nivel"));
+        if (fkAula) {
+            setNivelSelecionado(fkAula + 1);
+        }
+
+    });
+
     return (
         <div>
+             {isLoading && <LoadingSpinner />}
             <div className="menu-icon" style={{ width: '150px', display: 'flex' }}>
                 <FontAwesomeIcon icon={faBars} onClick={changeStateBar} className='text-cor-roxa' />
             </div>
@@ -141,9 +183,12 @@ function BarraLateral(props) {
                             <div className='containerRowTitulo'>
                                 <span className='nameCodando'>Codando</span>
                             </div>
-                            <div className='row'>
+                            <div className='row' onClick={() => {
+                                sessionStorage.setItem("nivel", nivelSelecionado);
+                                handleCreateNewProgressGame()
+                            }}>
                                 <img src={IconPay} alt="Play" />
-                                <span>Continuar jogo</span>
+                                <span>Iniciar jogo</span>
                             </div>
                             <div className='row' onClick={() => { navigate("/lobby"); }}>
                                 <img src={IconGlobe} alt="Globe" />
