@@ -103,7 +103,7 @@ function ModalConteudoFinal({ isOpen, onClose, onCorrect, ...props }) {
                                 </div>
                                 <div style={{ display: 'flex', justifyContent: 'center', width: '100%', alignItems: 'center', marginBottom: '30px' }}>
                                     <img src={BananaPoint} style={{ width: '30px' }} alt="close" />
-                                    <span style={{ color: '#F3DE2C', fontSize: '30px', fontWeight: '900', marginLeft: '8px' }}>{props.qtdPontosFinal}</span>
+                                    <span style={{ color: '#F3DE2C', fontSize: '30px', fontWeight: '900', marginLeft: '8px' }}>{qtdPontosFinal}</span>
                                 </div>
 
 
