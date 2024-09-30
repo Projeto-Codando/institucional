@@ -1,6 +1,7 @@
 import './progresso.css'
 import AlertaSala from '../alertaSala/alertaSala'
 import DetalhesAula from '../detalhesAula/detalhesAula'
+import Mensagem from '../mensagemProfessor/mensagemProfessor'
 import { useEffect, useState } from 'react'
 import api from '../../api'
 import LoadingSpinner from '../loadingSpinner/loadingSpinner'
@@ -117,6 +118,7 @@ export default function Progresso(props) {
                 })} 
                 <div className='barraHorizontal'></div>
             </div>
+            <div className='lado-direito-tela'>
             <div className='alertas'>
                 <h1>A L E R T A S</h1>
                 {alertasGerados.map((alerta, index) => (
@@ -128,6 +130,24 @@ export default function Progresso(props) {
                     />
                 ))}
             </div>
+            <div className='mural'>
+                <div className='titulo-mural'>
+                <h1>M U R A L</h1>
+                </div>
+                <div className='mensagens'>
+                    <Mensagem
+                    text = 'ashbasbsybdasyu ashbasbsybdasyu ashbasbsybdasyu ashbasbsybdasyu ashbasbsybdasyu ashbasbsybdasyu ashbasbsybdasyu ashbasbsybdasyu ashbasbsybdasyu '
+                    horario = '12:33 PM'
+                    />
+
+                </div>
+                <div className='botoes'>    
+
+                </div>
+            
+            </div>
+            </div>
+   
         </div>
     )
 }

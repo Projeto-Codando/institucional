@@ -1,0 +1,31 @@
+ .mensagens .mensagem {
+    color: #FFFFFF;
+
+
+}
+.mensagens .inputs {
+    display: flex;
+    flex-direction: column;
+    background-color: #89BC2F ;
+    border-radius: 20px 20px 16px 20px;
+    width: auto;
+    padding: 0;
+    padding-left: 20px;
+}
+
+
+.mensagens .inputs img {
+    width: 10px;
+
+}
+.perninha {
+    color: #FFFFFF;
+    
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    width: -webkit-fill-available;
+}
+.perninha label {
+    font-size: 10px;
+}
