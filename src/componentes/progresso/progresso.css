@@ -116,17 +116,17 @@
     display: flex;
     width: 80%;
     height: 80%;
-    overflow-x: hidden; /* Esconde a barra de rolagem */
-    scroll-behavior: smooth; /* Anima a rolagem de forma suave */
-    white-space: nowrap; /* Mantém os itens na mesma linha */
-    position: relative; /* Para facilitar o posicionamento das setas, se necessário */
+    overflow-x: hidden; 
+    scroll-behavior: smooth; 
+    white-space: nowrap; 
+    position: relative; 
 }
 
 .kpi {
     width: 260px;
     height: 140px;
     margin-right: 20px;
-    flex-shrink: 0; /* Impede que os itens sejam redimensionados */
+    flex-shrink: 0; 
     background-image: url(../../imgs/backgroundKpi.png);
     border-radius: 20px;
 }
