@@ -94,3 +94,7 @@
     display: flex;
     justify-content: end;
 }
+.botoes {
+    display: flex;
+    gap: 2px  ;
+}

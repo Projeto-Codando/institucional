@@ -5,6 +5,8 @@ import Mensagem from '../mensagemProfessor/mensagemProfessor'
 import { useEffect, useState } from 'react'
 import api from '../../api'
 import LoadingSpinner from '../loadingSpinner/loadingSpinner'
+import Input from '../inputsLogins/inputsLogins'
+import BotaoEnviar from '../botaoEnviar/botaoEnviar'
 
 export default function Progresso(props) {
     const idTurma = sessionStorage.getItem('idTurmaClicada');
@@ -139,9 +141,11 @@ export default function Progresso(props) {
                     text = 'ashbasbsybdasyu ashbasbsybdasyu ashbasbsybdasyu ashbasbsybdasyu ashbasbsybdasyu ashbasbsybdasyu ashbasbsybdasyu ashbasbsybdasyu ashbasbsybdasyu '
                     horario = '12:33 PM'
                     />
-
+                
                 </div>
-                <div className='botoes'>    
+                <div className='botoes'> 
+                    <Input></Input>
+                    <BotaoEnviar/>
 
                 </div>
             
