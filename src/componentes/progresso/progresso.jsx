@@ -5,6 +5,9 @@ import Mensagem from '../mensagemProfessor/mensagemProfessor'
 import { useEffect, useState } from 'react'
 import api from '../../api'
 import LoadingSpinner from '../loadingSpinner/loadingSpinner'
+import SetaE from '../../imgs/setaEsquerda.png'
+import SetaD from '../../imgs/setaDireira.png'
+import React, { useRef } from 'react';
 
 export default function Progresso(props) {
     const idTurma = sessionStorage.getItem('idTurmaClicada');
@@ -14,6 +17,22 @@ export default function Progresso(props) {
     const [turmaBuscada] = useState(sessionStorage.getItem('idTurmaClicada'));
     const [groupedProgressos, setGroupedProgressos] = useState({});
     const [estudantes, setEstudantes] = useState([])
+
+    const scrollRef = useRef(null);
+
+    const scrollLeft = () => {
+        console.log('Scroll Left');
+        if (scrollRef.current) {
+            scrollRef.current.scrollBy({ left: -300, behavior: 'smooth' });
+        }
+    };
+    
+    const scrollRight = () => {
+        console.log('Scroll Right');
+        if (scrollRef.current) {
+            scrollRef.current.scrollBy({ left: 300, behavior: 'smooth' });
+        }
+    };
 
     useEffect(() => {
         setLoading(true);
@@ -87,67 +106,94 @@ export default function Progresso(props) {
             setAlertasGerados(novosAlertas);
         }
     }, [estudantes, progressos]);
-    
+
     return (
         <div className='progresso'>
             {isLoading && <LoadingSpinner />}
-            <div className='aulas'>
-                <div className='nomesLabels'>
-                    <p id='pImportante'>Aula</p>
-                    <div className='barraVertical'></div>
-                    <p id='pImportante'>Tema</p>
-                    <div className='barraVertical'></div>
-                    <p>Qtd. Conclusão</p>
-                    <div className='barraVertical'></div>
-                    <p>Pont. Média</p>
+            <div className='lado-esquerdo-tela'>
+                <div className='aulas'>
+                    <div className='nomesLabels'>
+                        <p id='pImportante'>Aula</p>
+                        <div className='barraVertical'></div>
+                        <p id='pImportante'>Tema</p>
+                        <div className='barraVertical'></div>
+                        <p>Qtd. Conclusão</p>
+                        <div className='barraVertical'></div>
+                        <p>Pont. Média</p>
+                    </div>
+                    <div className='barraHorizontal'></div>
+                    {Object.values(groupedProgressos).map((group, index) => {
+                        const alunosConclusao = group.alunos.filter(aluno => aluno.statusAula === 'Em andamento').length;
+                        const pontuacaoMedia = group.alunos.length > 0 ? (group.aula.pontuacaoMaxima / estudantes.length).toFixed(2) : 'N/A';
+                        return (
+                            <DetalhesAula
+                                key={group.aula.idAula || index}
+                                aula={group.aula.nome || 'Nome não disponível'}
+                                tema={'Condicional'}
+                                alunosConclusao={alunosConclusao}
+                                alunosTotal={estudantes.length}
+                                pontuacaoMedia={pontuacaoMedia}
+                            />
+                        )
+                    })}
+                    <div className='barraHorizontal'></div>
                 </div>
-                <div className='barraHorizontal'></div>
-                 {Object.values(groupedProgressos).map((group, index) => {
-                    const alunosConclusao = group.alunos.filter(aluno => aluno.statusAula === 'Em andamento').length;
-                    const pontuacaoMedia = group.alunos.length > 0 ? (group.aula.pontuacaoMaxima / estudantes.length).toFixed(2) : 'N/A';
-                    return (
-                        <DetalhesAula
-                            key={group.aula.idAula || index}
-                            aula={group.aula.nome || 'Nome não disponível'}
-                            tema={'Condicional'}
-                            alunosConclusao={alunosConclusao}
-                            alunosTotal={estudantes.length}
-                            pontuacaoMedia={pontuacaoMedia}
-                        />
-                    )
-                })} 
-                <div className='barraHorizontal'></div>
+                <div className='containerKpis'>
+                    <div className='tituloKpi'>
+                        <h2>Questoes mais erradas</h2>
+                        <div className='setaRolagem'>
+                            <img src={SetaE} alt="seta rolagem esquerda" onClick={scrollLeft} />
+                            <img src={SetaD} alt="seta rolagem direita" onClick={scrollRight} />
+                        </div>
+                    </div>
+                    <div className='cardsKpi' ref={scrollRef}>
+                        <div className="kpi"></div>
+                        <div className="kpi" ></div>
+                        <div className="kpi"></div>
+                        <div className="kpi"></div>
+                        <div className="kpi"></div>
+                        <div className="kpi"></div>
+                        <div className="kpi"></div>
+                        <div className="kpi"></div>
+                        <div className="kpi"></div>
+                        <div className="kpi"></div>
+                        <div className="kpi"></div>
+                        <div className="kpi"></div>
+                    </div>
+
+                </div>
             </div>
+
             <div className='lado-direito-tela'>
-            <div className='alertas'>
-                <h1>A L E R T A S</h1>
-                {alertasGerados.map((alerta, index) => (
-                    <AlertaSala
-                        key={index}
-                        urgente={true}
-                        nomeAluno={alerta.nomeAluno}
-                        descricao={alerta.descricao}
-                    />
-                ))}
-            </div>
-            <div className='mural'>
-                <div className='titulo-mural'>
-                <h1>M U R A L</h1>
+                <div className='alertas'>
+                    <h1>A L E R T A S</h1>
+                    {alertasGerados.map((alerta, index) => (
+                        <AlertaSala
+                            key={index}
+                            urgente={true}
+                            nomeAluno={alerta.nomeAluno}
+                            descricao={alerta.descricao}
+                        />
+                    ))}
                 </div>
-                <div className='mensagens'>
-                    <Mensagem
-                    text = 'ashbasbsybdasyu ashbasbsybdasyu ashbasbsybdasyu ashbasbsybdasyu ashbasbsybdasyu ashbasbsybdasyu ashbasbsybdasyu ashbasbsybdasyu ashbasbsybdasyu '
-                    horario = '12:33 PM'
-                    />
+                <div className='mural'>
+                    <div className='titulo-mural'>
+                        <h1>M U R A L</h1>
+                    </div>
+                    <div className='mensagens'>
+                        <Mensagem
+                            text='ashbasbsybdasyu ashbasbsybdasyu ashbasbsybdasyu ashbasbsybdasyu ashbasbsybdasyu ashbasbsybdasyu ashbasbsybdasyu ashbasbsybdasyu ashbasbsybdasyu '
+                            horario='12:33 PM'
+                        />
+
+                    </div>
+                    <div className='botoes'>
+
+                    </div>
 
                 </div>
-                <div className='botoes'>    
+            </div>
 
-                </div>
-            
-            </div>
-            </div>
-   
         </div>
     )
 }
