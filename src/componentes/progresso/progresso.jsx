@@ -5,9 +5,10 @@ import Mensagem from '../mensagemProfessor/mensagemProfessor'
 import { useEffect, useState } from 'react'
 import api from '../../api'
 import LoadingSpinner from '../loadingSpinner/loadingSpinner'
-import SetaE from '../../imgs/setaEsquerda.png'
-import SetaD from '../../imgs/setaDireira.png'
+import SetaE from '../../imgs/setaEsquerda.svg'
+import SetaD from '../../imgs/setaDireita.svg'
 import React, { useRef } from 'react';
+import CardKpi from '../cardKpi/cardKpi'
 
 export default function Progresso(props) {
     const idTurma = sessionStorage.getItem('idTurmaClicada');
@@ -43,6 +44,22 @@ export default function Progresso(props) {
         }).then(response => {
             setLoading(false);
             setProgressos(response.data);
+        }).catch(error => {
+            setLoading(false);
+            console.error(error);
+        });
+    }, [idTurma]);
+
+    useEffect(() => {
+        setLoading(true);
+        api.get(`/perguntas/erros`, {
+            headers: {
+                Authorization: `Bearer ${sessionStorage.getItem("token")}`
+            }
+        }).then(response => {
+            setLoading(false);
+            console.log(response)
+            
         }).catch(error => {
             setLoading(false);
             console.error(error);
@@ -140,25 +157,14 @@ export default function Progresso(props) {
                 </div>
                 <div className='containerKpis'>
                     <div className='tituloKpi'>
-                        <h2>Questoes mais erradas</h2>
+                        <h2>Questões mais erradas</h2>
                         <div className='setaRolagem'>
                             <img src={SetaE} alt="seta rolagem esquerda" onClick={scrollLeft} />
                             <img src={SetaD} alt="seta rolagem direita" onClick={scrollRight} />
                         </div>
                     </div>
                     <div className='cardsKpi' ref={scrollRef}>
-                        <div className="kpi"></div>
-                        <div className="kpi" ></div>
-                        <div className="kpi"></div>
-                        <div className="kpi"></div>
-                        <div className="kpi"></div>
-                        <div className="kpi"></div>
-                        <div className="kpi"></div>
-                        <div className="kpi"></div>
-                        <div className="kpi"></div>
-                        <div className="kpi"></div>
-                        <div className="kpi"></div>
-                        <div className="kpi"></div>
+                        <CardKpi/>
                     </div>
 
                 </div>

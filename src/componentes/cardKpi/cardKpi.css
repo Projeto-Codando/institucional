@@ -1,0 +1,170 @@
+.kpi {
+    width: 260px;
+    height: 140px;
+    margin-right: 20px;
+    flex-shrink: 0; 
+    background-image: url(../../imgs/backgroundKpi.png);
+    border-radius: 20px;
+    position: relative;
+}
+
+.temaAula{
+    margin: 11px 0px 0px 24px;
+    font-size: 10.81px;
+    width: min-content;
+    color: #7CB518;
+    background-color: #F0ECEC;
+    padding: 2px;
+    border-radius: 6px;
+}
+
+.questao{
+    color: white;
+    font-weight: bold;
+    margin-left: 24px;
+}
+
+.expandir{
+    position: absolute;
+    right: 15px;
+    top: 15px;
+}
+
+.dados{
+    display: flex;
+    width: 193px;
+    justify-content: space-between;
+    margin-left: 34px;
+}
+
+.valores{
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+
+.valorDado{
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.modalContent {
+    background-image: url(../../imgs/backgroundQuestaoKpi.svg);
+    position: relative;
+    width: 498px;
+    height: max-content;
+    border-radius: 50px;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    align-items: center;
+
+}
+
+.fecharModal {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+}
+
+.topBarCard{
+    display: flex;
+    width: 100%;
+    justify-content: center;   
+    margin-bottom: 15px;
+}
+
+.topBarCard .tituloTopCard{
+    font-size: 20px;
+    font-family: "Press Start 2P", system-ui;
+    color: white;
+    opacity: 0.7;
+}
+
+.linhaDivisorCard{
+    width: 112%;
+    height: 1px;
+    background-color: white;
+    margin-bottom: 24px;
+}
+
+
+.tituloQuizCard {
+    width: 100%; 
+    text-align: center;
+    word-wrap: break-word; 
+    white-space: normal; 
+   
+}
+
+.tituloQuizCard span {
+    font-size: 20px;
+    color: white;
+    text-align: center;
+}
+
+.exemploCard{
+    width: 366px;
+    height: max-content;
+    background-color: #B8B8B8;
+    border: solid 2px black;
+    border-radius: 10px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    padding: 10px;
+}
+
+.exemploCard span{
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.quiz-questionCard{
+    width: 416.57px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    
+}
+
+.quiz-optionCard {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    background-color: white;
+    height: 30px;
+    width: 415px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.circleCard {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #D9D9D9;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.quiz-optionCard span{
+    font-size: 12px;
+}
+
+    
+
