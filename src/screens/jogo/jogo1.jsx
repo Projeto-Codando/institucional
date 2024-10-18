@@ -1,5 +1,7 @@
 import './jogo1.css';
 import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
+import api from '../../api';
 import Header from "../../componentes/headerLoginCadastro/headerLogin";
 import Logo from "../../imgs/logo-roxo.png";
 import Quiz from '../../componentes/quiz/quiz';
@@ -9,13 +11,13 @@ import CardNivelJogo from '../../componentes/cardNivelJogo/cardNivelJogo';
 import IconControle from '../../imgs/iconControle.png';
 import IconControleRoxo from '../../imgs/iconControleRoxo.png';
 import IconControleBranco from '../../imgs/IconControleBranco.png';
-import Img1QUiz from '../../imgs/Aula01-Questao01.gif'
-import Img2QUiz from '../../imgs/Aula01-Questao02.gif'
-import Img3QUiz from '../../imgs/Aula01-Questao03.gif'
-import Img4QUiz from '../../imgs/Aula01-Questao04.gif'
-import Img5QUiz from '../../imgs/Aula01-Questao05.gif'
-import Img6QUiz from '../../imgs/Aula01-Questao06.gif'
-import Img7QUiz from '../../imgs/Aula01-Questao07.gif'
+import Img1Quiz from '../../imgs/Aula01-Questao01.gif'
+import Img2Quiz from '../../imgs/Aula01-Questao02.gif'
+import Img3Quiz from '../../imgs/Aula01-Questao03.gif'
+import Img4Quiz from '../../imgs/Aula01-Questao04.gif'
+import Img5Quiz from '../../imgs/Aula01-Questao05.gif'
+import Img6Quiz from '../../imgs/Aula01-Questao06.gif'
+import Img7Quiz from '../../imgs/Aula01-Questao07.gif'
 
 function Jogo() {
     const [isAlunoLoggedIn, setIsAlunoLoggedIn] = useState(false);
@@ -23,6 +25,36 @@ function Jogo() {
     const [quizStack, setQuizStack] = useState([1]);
     const [completedQuizzes, setCompletedQuizzes] = useState([]);
     const [correctOptions, setCorrectOptions] = useState({});
+
+    const [selectedOption, setSelectedOption] = useState(null);
+    const [isCorrect, setIsCorrect] = useState(null);
+
+    const [quizData, setQuizData] = useState([]);
+    const [correctIndexes, setCorrectIndexes] = useState([]);
+
+    useEffect(() => {
+        const idAula = sessionStorage.getItem("nivel");
+
+        if (idAula) {
+            api.get(`/perguntas/aulas/${idAula}`, {
+                headers: {
+                    Authorization: `Bearer ${sessionStorage.getItem("token")}`
+                }
+            })
+                .then((response) => {
+                    const data = response.data;
+                    setQuizData(data);
+
+                    const indexes = data.map(quiz =>
+                        quiz.respostas.findIndex(resposta => resposta.correta)
+                    );
+                    setCorrectIndexes(indexes); // Armazena os índices em um estado
+                })
+                .catch(() => {
+                    toast.error("Não foi possível encontrar as perguntas");
+                });
+        }
+    }, []);
 
     useEffect(() => {
         const apelido = sessionStorage.getItem("apelidoUser");
@@ -40,10 +72,16 @@ function Jogo() {
         setQuizStack(prev => [...prev, prev[prev.length - 1] + 1]);
         setCompletedQuizzes(prev => [...prev, quizNumber]);
         setCorrectOptions(prev => ({ ...prev, [quizNumber]: correctOption }));
+
+        setSelectedOption(null);
+        setIsCorrect(null);
     };
 
     const handlePreviousQuiz = () => {
         setQuizStack(prev => prev.length > 1 ? prev.slice(0, -1) : prev);
+
+        setSelectedOption(null);
+        setIsCorrect(null);
     };
 
     const currentQuiz = quizStack[quizStack.length - 1];
@@ -59,6 +97,9 @@ function Jogo() {
         if (completedQuizzes.includes(quizNumber)) return IconControleBranco;
         return IconControleRoxo;
     };
+
+    const quizImages = [Img1Quiz, Img2Quiz, Img3Quiz, Img4Quiz, Img5Quiz, Img6Quiz, Img7Quiz];
+
 
     return (
         <div className='jogo'>
@@ -96,243 +137,34 @@ function Jogo() {
                     <img className='trianguloE' src={TrianguloE} alt="Triangulo esquerda" />
                 </div>
                 <div className='containerJogo'>
-                    {currentQuiz === 1 && (
+                    {quizData.length > 0 && currentQuiz <= quizData.length && (
                         <Quiz
-                            numeroQuestao='1'
-                            qtdQuestao='7'
-                            tituloQuiz='Em uma aventura na selva, um macaco curioso encontrou uma árvore mágica cheia de frutas diferentes. Para saber quais frutas ele ainda não experimentou, ele precisa comparar se as duas frutas são diferentes. Qual símbolo ele deve usar para fazer essa comparação?'
-                            opcao0='=='
-                            opcao1='!='
-                            opcao2='!'
-                            opcao3='?'
-                            indexCorreto={1}
+                            key={currentQuiz}
+                            numeroQuestao={quizData[currentQuiz - 1].idPergunta.toString()}
+                            qtdQuestao={quizData.length.toString()}
+                            tituloQuiz={quizData[currentQuiz - 1].texto}
+                            opcao0={quizData[currentQuiz - 1].respostas[0].texto}
+                            opcao1={quizData[currentQuiz - 1].respostas[1].texto}
+                            opcao2={quizData[currentQuiz - 1].respostas[2].texto}
+                            opcao3={quizData[currentQuiz - 1].respostas[3].texto}
+                            indexCorreto={correctIndexes[currentQuiz - 1]} // Encontra o índice da resposta correta
                             statusExemploResposta='true'
-                            exemploResposta={
-                                <pre>{`!=`}</pre>
-                            }
-                            correctOption={correctOptions[1]}
-                            onCorrect={() => handleNextQuiz(1, 1)}
+                            exemploResposta={<pre>{quizData[currentQuiz - 1].respostas.find(r => r.correta).texto}</pre>}
+                            correctOption={correctOptions[currentQuiz]}
+                            onCorrect={() => handleNextQuiz(currentQuiz, correctOptions[currentQuiz])}
                             onBack={handlePreviousQuiz}
+                            onFinal={currentQuiz === quizData.length}
                         />
                     )}
-                    {currentQuiz === 2 && (
-                        <Quiz
-                            numeroQuestao='2'
-                            qtdQuestao='7'
-                            tituloQuiz='Em uma aventura na floresta, um grupo de macacos encontra uma árvore carregada de bananas. Eles estão usando um código JavaScript para decidir o que fazer com as bananas: '
-                            statusExemploQuiz='true'
-                            exemplo={
-                                <pre>{`let bananas= 10; 
-
-if (bananas == 5) { 
-
-console.log("A quantidade de bananas é igual a 5!"); 
-
-} else if (bananas < 5) { 
-
-console.log("A quantidade de bananas é menor que 5!"); 
-
-} else { 
-
-console.log("A quantidade de bananas é diferente que 5!"); `}</pre>
-                            }
-                            opcao0='A quantidade de bananas é menor que 5! '
-                            opcao1='A quantidade de bananas é igual a 5! '
-                            opcao2='A quantidade de bananas é diferente que 5'
-                            opcao3='Nenhuma das anteriores'
-                            indexCorreto={2}
-                            statusExemploResposta='true'
-                            exemploResposta={
-                                <pre>{`A quantidade de bananas é diferente que 5`}</pre>
-                            }
-                            correctOption={correctOptions[2]}
-                            onCorrect={() => handleNextQuiz(2, 2)}
-                            onBack={handlePreviousQuiz}
-                        />
-                    )}
-                    {currentQuiz === 3 && (
-                        <Quiz
-                            numeroQuestao='3'
-                            qtdQuestao='7'
-                            tituloQuiz='Você está ajudando um grupo de macacos programadores a desenvolver um sistema de acesso a uma caverna misteriosa na floresta. Para garantir a segurança, eles precisam verificar se a senha inserida pelo explorador tem pelo menos oito caracteres. Qual seria a melhor estrutura para realizar essa verificação? '
-
-                            opcao0=' Iteração para contar caracteres '
-                            opcao1='Verificação do comprimento da string '
-                            opcao2=' Loop para verificar repetidamente '
-                            opcao3='Avaliação da complexidade da senha'
-                            indexCorreto={1}
-                            statusExemploResposta='true'
-                            statusCodNeces='true'
-                            exemploResposta={
-                                <pre>{`Verificação do comprimento da string`}</pre>
-                            }
-                            correctOption={correctOptions[3]}
-                            onCorrect={() => handleNextQuiz(3, 1)}
-                            onBack={handlePreviousQuiz}
-                        />
-                    )}
-                    {currentQuiz === 4 && (
-                        <Quiz
-                            numeroQuestao='4'
-                            qtdQuestao='7'
-                            tituloQuiz='Em uma aventura noturna, os macacos precisam determinar se a lua está cheia para realizar um ritual especial. Eles têm um sensor que retorna o valor true se a lua estiver cheia e false caso contrário. Como os macacos podem usar uma estrutura de if para verificar se a lua está cheia e imprimir "A lua está cheia!"? '
-                            statusExemploQuiz='true'
-                            statusExemploResposta='true'
-                            exemplo={
-                                <pre>{`let luaCheia = true; 
-
-if (___) { 
-
-console.log("A lua está cheia!"); 
-
-} `}</pre>
-                            }
-                            opcao0='luaCheia'
-                            opcao1='luaCheia == false'
-                            opcao2='luaCheia != true'
-                            opcao3='luaCheia == false'
-                            statusCodNeces='true'
-                            exemploResposta={
-                                <pre>{`luaCheia`}</pre>
-                            }
-                            correctOption={correctOptions[4]}
-                            onCorrect={() => handleNextQuiz(4, 0)}
-                            indexCorreto={0}
-                            onBack={handlePreviousQuiz}
-                        />
-                    )}
-                    {currentQuiz === 5 && (
-                        <Quiz
-                            numeroQuestao='5'
-                            qtdQuestao='7'
-                            tituloQuiz='Os macacos querem verificar se a temperatura está acima de 30 graus para decidir se vão nadar no rio. Eles possuem uma variável chamada temperatura. Qual estrutura de if é adequada para essa verificação?'
-                            statusExemploQuiz='true'
-                            statusExemploResposta='true'
-                            statusCodNeces='true'
-                            exemplo={
-                                <pre>{`let temperatura = 35; 
-
-if (___) { 
-
-console.log("Vamos nadar no rio!"); 
-
-}  `}</pre>
-                            }
-                            opcao0='temperatura < 30'
-                            opcao1='temperatura >= 30'
-                            opcao2='temperatura <= 30'
-                            opcao3='temperatura != 30'
-                            indexCorreto={1}
-                            exemploResposta={
-                                <pre>{`temperatura >= 30`}</pre>}
-                            correctOption={correctOptions[5]}
-                            onCorrect={() => handleNextQuiz(5, 1)}
-                            onBack={handlePreviousQuiz}
-                        />
-                    )}
-                    {currentQuiz === 6 && (
-                        <Quiz
-                            numeroQuestao='6'
-                            qtdQuestao='7'
-                            tituloQuiz='Os macacos precisam verificar se a altura de uma árvore é maior que 15 metros para escolher a árvore certa para a competição. Eles possuem uma variável alturaArvore. Qual estrutura de if usariam?'
-                            statusExemploQuiz='true'
-                            exemplo={
-                                <pre>{`let alturaArvore = 20; 
-
-if (___) { 
-
-console.log("Essa árvore é adequada para a competição!"); 
-
-} `}</pre>
-                            }
-                            opcao0='alturaArvore <= 15'
-                            opcao1='alturaArvore < 15'
-                            opcao2='alturaArvore > 15'
-                            opcao3='alturaArvore == 15'
-                            indexCorreto={2}
-                            statusExemploResposta='true'
-                            statusCodNeces='true'
-                            exemploResposta={
-                                <pre>{`alturaArvore > 15`}</pre>
-                            }
-                            correctOption={correctOptions[6]}
-                            onCorrect={() => handleNextQuiz(6, 2)}
-                            onBack={handlePreviousQuiz}
-                        />
-                    )}
-                    {currentQuiz === 7 && (
-                        <Quiz
-                            numeroQuestao='7'
-                            qtdQuestao='7'
-                            tituloQuiz='Um macaco curioso está testando diferentes tipos de frutas para ver quais são comestíveis. Ele tem uma variável frutaComestivel que retorna true se a fruta for comestível e false caso contrário. Como ele pode usar uma estrutura de if para verificar se a fruta é comestível e imprimir "A fruta é comestível!"?'
-                            statusExemploQuiz='true'
-                            statusExemploResposta='true'
-                            exemplo={
-                                <pre>{`let frutaComestivel = true; 
-
-if (___) { 
-
-console.log("A fruta é comestível!"); 
-
-} `}</pre>
-                            }
-                            opcao0='frutaComestivel != true'
-                            opcao1='frutaComestivel == false'
-                            opcao2='frutaComestivel == true'
-                            opcao3='frutaComestivel != false'
-                            indexCorreto={2}
-                            statusCodNeces='true'
-                            exemploResposta={
-                                <pre>{`frutaComestivel == true`}</pre>
-                            }
-                            correctOption={correctOptions[7]}
-                            onCorrect={() => handleNextQuiz(7, 2)}
-                            onBack={handlePreviousQuiz}
-                            onFinal={true}
-                        />
-                    )}
-                    {currentQuiz === 1 && (
-                        <div className='telaQuiz'>
-                            <img src={Img1QUiz} className='imagemQuiz' alt="Imagem questão 1" />
-                        </div>
-                    )
-                    }
-                    {currentQuiz === 2 && (
-                        <div className='telaQuiz'>
-                            <img src={Img2QUiz} className='imagemQuiz' alt="Imagem questão 2" />
-                        </div>
-                    )
-                    }
-                    {currentQuiz === 3 && (
-                        <div className='telaQuiz'>
-                            <img src={Img3QUiz} className='imagemQuiz' alt="Imagem questão 3" />
-                        </div>
-                    )
-                    }
-                    {currentQuiz === 4 && (
-                        <div className='telaQuiz'>
-                            <img src={Img4QUiz} className='imagemQuiz' alt="Imagem questão 4" />
-                        </div>
-                    )
-                    }
-                    {currentQuiz === 5 && (
-                        <div className='telaQuiz'>
-                            <img src={Img5QUiz} className='imagemQuiz' alt="Imagem questão 5" />
-                        </div>
-                    )
-                    }
-                    {currentQuiz === 6 && (
-                        <div className='telaQuiz'>
-                            <img src={Img6QUiz} className='imagemQuiz' alt="Imagem questão 6" />
-                        </div>
-                    )
-                    }
-                    {currentQuiz === 7 && (
-                        <div className='telaQuiz'>
-                            <img src={Img7QUiz} className='imagemQuiz' alt="Imagem questão 7" />
-                        </div>
-                    )
-                    }
+                    <div className='telaQuiz'>
+                        {currentQuiz > 0 && currentQuiz <= quizImages.length && (
+                            <img
+                                src={quizImages[currentQuiz - 1]} // currentQuiz começa de 1, então subtrai 1 para acessar o array
+                                className='imagemQuiz'
+                                alt={`Imagem questão ${currentQuiz}`}
+                            />
+                        )}
+                    </div>
                 </div>
             </div>
         </div>
