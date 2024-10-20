@@ -7,7 +7,6 @@ import Expandir from '../../imgs/expandir.svg'
 import IconFechar from '../../imgs/iconFechar.svg';
 
 export default function CardKpi(props) {
-
     const [modalAberto, setModalAberto] = useState(false);
 
     const abrirModal = () => {
@@ -17,23 +16,23 @@ export default function CardKpi(props) {
     const fecharModal = () => {
         setModalAberto(false);
     };
+
     return (
         <div className="kpi">
-            <h3 className='temaAula'>Constantes</h3>
             <img src={Expandir} alt="expandir" className='expandir' onClick={abrirModal} />
-            <h2 className='questao'>Questao 0</h2>
+            <h2 className='questao'>Questao {props.questao}</h2>
             <div className='dados'>
                 <div className='valores'>
                     <img src={IconAluno} alt="icon aluno" />
-                    <span className='valorDado'>20</span>
+                    <span className='valorDado'>{props.totalAlunos}</span>
                 </div>
                 <div className='valores'>
                     <img src={IconCorreto} alt="icon correto" />
-                    <span className='valorDado'>40%</span>
+                    <span className='valorDado'>{props.porcentagemCorretas}</span>
                 </div>
                 <div className='valores'>
                     <img src={IconErrado} alt="icon errado" />
-                    <span className='valorDado'>60%</span>
+                    <span className='valorDado'>{props.porcentagemErradas}</span>
                 </div>
             </div>
 
@@ -45,24 +44,18 @@ export default function CardKpi(props) {
                             <span className='tituloTopCard'>QUIZ</span>
                         </div>
                         <div className='linhaDivisorCard'></div>
-                        <div className='tituloQuizCard'><span>Quantos passos o macaco tem que andar para pegar a banana ?</span></div>
+                        <div className='tituloQuizCard'><span>{props.textoPergunta}</span></div>
                         <div className='exemploCard'>
-                            <span><pre>{`let bananas= 10; 
-if (bananas == 5) { 
-console.log("A quantidade de bananas é igual a 5!"); 
-} else if (bananas < 5) { 
-console.log("A quantidade de bananas é menor que 5!"); 
-} else { 
-console.log("A quantidade de bananas é diferente que 5!"); `}</pre></span>
+                            <span><pre>{`Aqui você pode adicionar mais detalhes da pergunta, respostas, etc.`}</pre></span>
                         </div>
                         <div className='quizRespostasCard'>
                             <div className="quiz-questionCard">
-
-                                <div className="quiz-optionCard">
-                                    <div className="circleCard"></div>
-                                    <span>2</span>
-                                </div>
-
+                                {props.respostas.map((resposta, index) => (
+                                    <div key={index} className={`quiz-optionCard ${resposta.correta ? 'correct' : ''}`}>
+                                        <div className="circleCard"></div>
+                                        <span>{resposta.texto}</span>
+                                    </div>
+                                ))}
                             </div>
                         </div>
                     </div>
@@ -70,5 +63,4 @@ console.log("A quantidade de bananas é diferente que 5!"); `}</pre></span>
             )}
         </div>
     )
-
 }

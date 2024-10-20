@@ -6,6 +6,9 @@
     background-image: url(../../imgs/backgroundKpi.png);
     border-radius: 20px;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .temaAula{
@@ -78,7 +81,7 @@
 .fecharModal {
     position: absolute;
     top: 20px;
-    right: 20px;
+    right: 30px;
     cursor: pointer;
 }
 
@@ -164,6 +167,11 @@
 
 .quiz-optionCard span{
     font-size: 12px;
+}
+
+.quiz-optionCard.correct {
+    background-color: #7CB518; 
+    color: white;
 }
 
     

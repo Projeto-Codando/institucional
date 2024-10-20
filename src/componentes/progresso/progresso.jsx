@@ -18,18 +18,17 @@ export default function Progresso(props) {
     const [turmaBuscada] = useState(sessionStorage.getItem('idTurmaClicada'));
     const [groupedProgressos, setGroupedProgressos] = useState({});
     const [estudantes, setEstudantes] = useState([])
+    const [perguntas, setPerguntas] = useState([]);
 
     const scrollRef = useRef(null);
 
     const scrollLeft = () => {
-        console.log('Scroll Left');
         if (scrollRef.current) {
             scrollRef.current.scrollBy({ left: -300, behavior: 'smooth' });
         }
     };
-    
+
     const scrollRight = () => {
-        console.log('Scroll Right');
         if (scrollRef.current) {
             scrollRef.current.scrollBy({ left: 300, behavior: 'smooth' });
         }
@@ -51,20 +50,39 @@ export default function Progresso(props) {
     }, [idTurma]);
 
     useEffect(() => {
-        setLoading(true);
         api.get(`/perguntas/erros`, {
             headers: {
                 Authorization: `Bearer ${sessionStorage.getItem("token")}`
             }
         }).then(response => {
+            console.log(response.data)
+            const perguntasComAlunos = response.data.map(pergunta => {
+                // Conjunto para armazenar os IDs únicos dos alunos que responderam
+                const alunosUnicos = new Set();
+
+                // Iterar sobre todas as respostas da pergunta
+                pergunta.respostas.forEach(resposta => {
+                    // Adicionar os IDs dos alunos de cada resposta ao conjunto (Set evita duplicatas)
+                    resposta.alunos.forEach(aluno => {
+                        alunosUnicos.add(aluno.idAluno);
+                    });
+                });
+
+                // Retorna a pergunta com a nova propriedade `totalAlunosUnicos`
+                return {
+                    ...pergunta,
+                    totalAlunosUnicos: alunosUnicos.size // Conta os alunos únicos
+                };
+            });
+
+            setPerguntas(perguntasComAlunos); // Armazena as perguntas com a quantidade de alunos únicos
             setLoading(false);
-            console.log(response)
-            
         }).catch(error => {
             setLoading(false);
             console.error(error);
         });
-    }, [idTurma]);
+    }, []);
+
 
     useEffect(() => {
         api.get(`/turmas/buscar-turma-por-id/${turmaBuscada}`, {
@@ -164,10 +182,21 @@ export default function Progresso(props) {
                         </div>
                     </div>
                     <div className='cardsKpi' ref={scrollRef}>
-                        <CardKpi/>
+                        {perguntas.map((pergunta, index) => (
+                            <CardKpi
+                                key={index}
+                                questao={pergunta.idPergunta}
+                                contador={pergunta.contador}
+                                porcentagemCorretas={pergunta.porcentagemRespostasCorretas}
+                                porcentagemErradas={pergunta.porcentagemRespostasIncorretas}
+                                totalAlunos={pergunta.totalAlunosUnicos}
+                                textoPergunta={pergunta.texto}
+                                respostas={pergunta.respostas}
+                            />
+                        ))}
                     </div>
-
                 </div>
+
             </div>
 
             <div className='lado-direito-tela'>
