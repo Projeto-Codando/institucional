@@ -7,7 +7,6 @@ import api from '../../api'
 import LoadingSpinner from '../loadingSpinner/loadingSpinner'
 import Input from '../inputsLogins/inputsLogins'
 import BotaoEnviar from '../botaoEnviar/botaoEnviar'
-import React, { useRef } from 'react';
 import { toast } from 'react-toastify'
 import { array } from 'yup'
 import SetaE from '../../imgs/setaEsquerda.svg'
@@ -163,7 +162,7 @@ export default function Progresso(props) {
             }
         }).then(response => {
             console.log(response.data);
-            if(response.data.length == Array) {
+            if(Array.isArray(response.data)) {
             setMensagens(response.data);}
         }).catch(error => {
             console.error(error)
