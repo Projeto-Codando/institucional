@@ -94,8 +94,11 @@
 }
 .mensagens {
     width: 90%;
+    gap: 5px;
+    align-items: end;
     display: flex;
     justify-content: end;
+    flex-direction: column;
 }
 .botoes {
     display: flex;
