@@ -7,12 +7,13 @@ import api from '../../api'
 import LoadingSpinner from '../loadingSpinner/loadingSpinner'
 import Input from '../inputsLogins/inputsLogins'
 import BotaoEnviar from '../botaoEnviar/botaoEnviar'
-import SetaE from '../../imgs/setaEsquerda.png'
-import SetaD from '../../imgs/setaDireira.png'
 import React, { useRef } from 'react';
 import { toast } from 'react-toastify'
 import { array } from 'yup'
-
+import SetaE from '../../imgs/setaEsquerda.svg'
+import SetaD from '../../imgs/setaDireita.svg'
+import React, { useRef } from 'react';
+import CardKpi from '../cardKpi/cardKpi'
 
 export default function Progresso(props) {
     const idTurma = sessionStorage.getItem('idTurmaClicada');
@@ -21,23 +22,22 @@ export default function Progresso(props) {
     const [alertasGerados, setAlertasGerados] = useState([]);
     const [turmaBuscada] = useState(sessionStorage.getItem('idTurmaClicada'));
     const [groupedProgressos, setGroupedProgressos] = useState({});
-    const [estudantes, setEstudantes] = useState([])
-    const [mensagem, setMensagem] = useState("")
-    const [mensagens, setMensagens] = useState([])
+    const [estudantes, setEstudantes] = useState([]);
+    const [mensagem, setMensagem] = useState("");
+    const [mensagens, setMensagens] = useState([]);
 
 
+    const [perguntas, setPerguntas] = useState([]);
 
     const scrollRef = useRef(null);
 
     const scrollLeft = () => {
-        console.log('Scroll Left');
         if (scrollRef.current) {
             scrollRef.current.scrollBy({ left: -300, behavior: 'smooth' });
         }
     };
 
     const scrollRight = () => {
-        console.log('Scroll Right');
         if (scrollRef.current) {
             scrollRef.current.scrollBy({ left: 300, behavior: 'smooth' });
         }
@@ -57,6 +57,41 @@ export default function Progresso(props) {
             console.error(error);
         });
     }, [idTurma]);
+
+    useEffect(() => {
+        api.get(`/perguntas/erros`, {
+            headers: {
+                Authorization: `Bearer ${sessionStorage.getItem("token")}`
+            }
+        }).then(response => {
+            console.log(response.data)
+            const perguntasComAlunos = response.data.map(pergunta => {
+                // Conjunto para armazenar os IDs únicos dos alunos que responderam
+                const alunosUnicos = new Set();
+
+                // Iterar sobre todas as respostas da pergunta
+                pergunta.respostas.forEach(resposta => {
+                    // Adicionar os IDs dos alunos de cada resposta ao conjunto (Set evita duplicatas)
+                    resposta.alunos.forEach(aluno => {
+                        alunosUnicos.add(aluno.idAluno);
+                    });
+                });
+
+                // Retorna a pergunta com a nova propriedade `totalAlunosUnicos`
+                return {
+                    ...pergunta,
+                    totalAlunosUnicos: alunosUnicos.size // Conta os alunos únicos
+                };
+            });
+
+            setPerguntas(perguntasComAlunos); // Armazena as perguntas com a quantidade de alunos únicos
+            setLoading(false);
+        }).catch(error => {
+            setLoading(false);
+            console.error(error);
+        });
+    }, []);
+
 
     useEffect(() => {
         api.get(`/turmas/buscar-turma-por-id/${turmaBuscada}`, {
@@ -211,28 +246,28 @@ export default function Progresso(props) {
                 </div>
                 <div className='containerKpis'>
                     <div className='tituloKpi'>
-                        <h2>Questoes mais erradas</h2>
+                        <h2>Questões mais erradas</h2>
                         <div className='setaRolagem'>
                             <img src={SetaE} alt="seta rolagem esquerda" onClick={scrollLeft} />
                             <img src={SetaD} alt="seta rolagem direita" onClick={scrollRight} />
                         </div>
                     </div>
                     <div className='cardsKpi' ref={scrollRef}>
-                        <div className="kpi"></div>
-                        <div className="kpi" ></div>
-                        <div className="kpi"></div>
-                        <div className="kpi"></div>
-                        <div className="kpi"></div>
-                        <div className="kpi"></div>
-                        <div className="kpi"></div>
-                        <div className="kpi"></div>
-                        <div className="kpi"></div>
-                        <div className="kpi"></div>
-                        <div className="kpi"></div>
-                        <div className="kpi"></div>
+                        {perguntas.map((pergunta, index) => (
+                            <CardKpi
+                                key={index}
+                                questao={pergunta.idPergunta}
+                                contador={pergunta.contador}
+                                porcentagemCorretas={pergunta.porcentagemRespostasCorretas}
+                                porcentagemErradas={pergunta.porcentagemRespostasIncorretas}
+                                totalAlunos={pergunta.totalAlunosUnicos}
+                                textoPergunta={pergunta.texto}
+                                respostas={pergunta.respostas}
+                            />
+                        ))}
                     </div>
-
                 </div>
+
             </div>
 
             <div className='lado-direito-tela'>
