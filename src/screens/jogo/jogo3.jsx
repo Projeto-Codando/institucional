@@ -14,6 +14,8 @@ function Jogo() {
 
     const [isAlunoLoggedIn, setIsAlunoLoggedIn] = useState(false);
     const [isProfessorLoggedIn, setIsProfessorLoggedIn] = useState(false);
+    
+
 
     useEffect(() => {
 

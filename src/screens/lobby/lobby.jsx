@@ -2,61 +2,38 @@ import './lobby.css';
 import Header from "../../componentes/headerLoginCadastro/headerLogin";
 import Logo from "../../imgs/verde-logo.svg";
 import MetadeFloresta from "../../imgs/background-floresta-cortado.png";
-import Estrela from '../../imgs/estrela.png';
-import Start from '../../imgs/start.png';
 import { useEffect, useState } from 'react';
 import api from '../../api';
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
-import LoadingSpinner from '../../componentes/loadingSpinner/loadingSpinner';
+import CardAula from '../../componentes/cardAula/cardAula';
 
 function Lobby() {
     const [nomeUsuario, setNomeUsuario] = useState("");
     const [avatar, setAvatar] = useState();
+    const [aulas, setAulas] = useState([]);
     const [nivelSelecionado, setNivelSelecionado] = useState(1);
     const [isAlunoLoggedIn, setIsAlunoLoggedIn] = useState(false);
     const [isProfessorLoggedIn, setIsProfessorLoggedIn] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
-    const navigate = useNavigate();
     const [turma, setTurma] = useState({});
-
-    const body = {
-        fkAluno: sessionStorage.getItem("userId"),
-        fkAula: nivelSelecionado
-    };
-
-    console.log(body);
-
-    const handleCreateNewProgressGame = () => {
-        setIsLoading(true);
-        api.post(`/progresso-aluno`, body, {
-            headers: {
-                Authorization: `Bearer ${sessionStorage.getItem("token")}`
-            }
-        }).then((response) => {
-            setIsLoading(false);
-            console.log(response.data);
-            toast.success("Quiz iniciado com sucesso!");
-            navigate(`/jogo/${nivelSelecionado}`);
-        }).catch((error) => {
-            setIsLoading(false);
-            toast.error("Não foi possível iniciar o quiz! " + error.response.data.message);
-            console.error(error);
-        });
-    }
+    const [aulaSelecionada, setAulaSelecionada] = useState([]);
+    const [tema, setTema] = useState([]);
+    const [temaAtualIndex, setTemaAtualIndex] = useState(0); // Index para controlar o tema atual
+    const [isMounted, setIsMounted] = useState(false);
 
     useEffect(() => {
-        api.get(`/turmas/buscar-turma-por-id/${sessionStorage.getItem("idTurma")}`, {
-            headers: {
-                Authorization: `Bearer ${sessionStorage.getItem("token")}`
-            }
-        }).then((json) => {
-            console.log(json.data);
-            setTurma(json.data.alunos);
-        }).catch(() => {
-            toast.error("Não foi possível encontrar a turma!");
-        });
-
+        const idTurma = sessionStorage.getItem("idTurma");
+        if (idTurma && !turma?.id) {
+            api.get(`/turmas/buscar-turma-por-id/${idTurma}`, {
+                headers: {
+                    Authorization: `Bearer ${sessionStorage.getItem("token")}`
+                }
+            }).then((json) => {
+                setTurma(json.data.alunos);
+            }).catch(() => {
+                toast.error("Não foi possível encontrar a turma!");
+            });
+        }
+        
         const nome = sessionStorage.getItem("apelidoUser");
         const avatar = sessionStorage.getItem("ImagemURL_AVATAR");
 
@@ -73,18 +50,60 @@ function Lobby() {
             setIsProfessorLoggedIn(true);
         }
 
-        // Verificação de sessionStorage e aplicação de classe
+        setIsMounted(true);
+    }, []);
+
+    useEffect(() => {
         const fkAula = parseInt(sessionStorage.getItem("nivel"));
-        if (fkAula) {
+        if (fkAula && fkAula + 1 !== nivelSelecionado) {
             setNivelSelecionado(fkAula + 1);
         }
+    }, [nivelSelecionado]);
 
-    }, [avatar]);
+    useEffect(() => {
+        if (isMounted && tema.length === 0) {
+            api.get(`/temas`, {
+                headers: {
+                    Authorization: `Bearer ${sessionStorage.getItem("token")}`
+                }
+            }).then((json) => {
+                const temaData = json.data;
+                if (temaData.length > 0) {
+                    setTema(temaData);
+                    setAulas(temaData[temaAtualIndex].aulas);
+                } else {
+                    toast.error("Nenhuma aula encontrada!");
+                }
+            }).catch(() => {
+                toast.error("Não foi possível encontrar as aulas!");
+            });
+        }
+    }, [isMounted, tema, temaAtualIndex]);
 
-  
+    useEffect(() => {
+        let totalAulasAnteriores = 0;
+        for (let i = 0; i < temaAtualIndex; i++) {
+            totalAulasAnteriores += tema[i].aulas.length;
+        }
+
+        const nivelGlobal = nivelSelecionado + totalAulasAnteriores;
+
+        let aulaEncontrada = null;
+        for (let i = 0; i < tema.length; i++) {
+            const temaAtual = tema[i];
+            if (nivelGlobal <= totalAulasAnteriores + temaAtual.aulas.length) {
+                const indexAula = nivelGlobal - totalAulasAnteriores - 1;
+                aulaEncontrada = temaAtual.aulas[indexAula];
+                setTemaAtualIndex(i);
+                setAulaSelecionada(aulaEncontrada);
+                break;
+            }
+            totalAulasAnteriores += temaAtual.aulas.length;
+        }
+    }, [nivelSelecionado, tema, temaAtualIndex]);
+
     return (
         <div className='rotaNiveis'>
-            {isLoading && <LoadingSpinner />}
             <Header
                 logo={Logo}
                 statusBotao1={isAlunoLoggedIn || isProfessorLoggedIn ? null : "true"}
@@ -105,149 +124,72 @@ function Lobby() {
                     <img className='background-bemVindo' src={MetadeFloresta} alt="Background Floresta" />
                     <div className='cardsBemVindo'>
                         <div className='bemVindo'>
-                            <img src={avatar} alt="Imagem avatar" style={{borderRadius: "360px"}}/>
+                            <img src={avatar} alt="Imagem avatar" style={{ borderRadius: "360px" }} />
                             <span>Bem vindo(a), <br />
-                            @{nomeUsuario}</span>
+                                @{nomeUsuario}</span>
                         </div>
                         <div className='cardTema'>
                             <div className='tema'>
                                 <span className='span1'>Tema atual:</span>
-                                <span className='span2'>Condicional</span>
+                                <span className='span2'>{tema[temaAtualIndex]?.nome}</span>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className='containerRota'>
-                    <div className='rota'>
+                <div className='rota'>
                         <div className='cardNiveis1'>
                             <div
                                 className={`nivel ${nivelSelecionado === 1 ? 'nivel-selecionado' : ''}`}
-                                style={{ background: nivelSelecionado > 1 ? 'purple' : ''}}
-                                
+                                style={{ background: nivelSelecionado > 1 ? 'purple' : '' }}
                             >
-                                <span style={{color: nivelSelecionado > 1 ? 'white' : null }}>1</span>
+                                <span style={{ color: nivelSelecionado > 1 ? 'white' : null }}>1</span>
                             </div>
                             <div
                                 className={`nivel ${nivelSelecionado === 2 ? 'nivel-selecionado' : ''}`}
-                                style={{ background: nivelSelecionado > 2 ? 'purple' : ''}}
+                                style={{ background: nivelSelecionado > 2 ? 'purple' : '' }}
                             >
-                               <span style={{color: nivelSelecionado > 2 ? 'white' : null }}>2</span>
+                                <span style={{ color: nivelSelecionado > 2 ? 'white' : null }}>2</span>
                             </div>
                         </div>
                         <div className='containerNivel'>
                             <div className='cardNiveis2'>
                                 <div
                                     className={`nivel ${nivelSelecionado === 3 ? 'nivel-selecionado' : ''}`}
-                                    style={{ background: nivelSelecionado > 3 ? 'purple' : ''}}
+                                    style={{ background: nivelSelecionado > 3 ? 'purple' : '' }}
                                 >
-                                    <span style={{color: nivelSelecionado > 3 ? 'white' : null }}>3</span>
+                                    <span style={{ color: nivelSelecionado > 3 ? 'white' : null }}>3</span>
                                 </div>
                                 <div
                                     className={`nivel ${nivelSelecionado === 4 ? 'nivel-selecionado' : ''}`}
-                                    style={{ background: nivelSelecionado > 4 ? 'purple' : ''}}
+                                    style={{ background: nivelSelecionado > 4 ? 'purple' : '' }}
                                 >
-                                    <span style={{color: nivelSelecionado > 4 ? 'white' : null }}>4</span>
+                                    <span style={{ color: nivelSelecionado > 4 ? 'white' : null }}>4</span>
                                 </div>
                                 <div
                                     className={`nivel ${nivelSelecionado === 5 ? 'nivel-selecionado' : ''}`}
-                                    style={{ background: nivelSelecionado > 5 ? 'purple' : ''}}
+                                    style={{ background: nivelSelecionado > 5 ? 'purple' : '' }}
                                 >
-                                    <span style={{color: nivelSelecionado > 5 ? 'white' : null }}>5</span>
+                                    <span style={{ color: nivelSelecionado > 5 ? 'white' : null }}>5</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div className='containerAula'>
-                        <div className={`cardAula ${nivelSelecionado === 1 ? 'visible' : 'hidden'}`}>
-                            <div className='materia'>
-                                <span className='aula'>Aula 01</span>
-                                <span className='tituloMateria'>Condicional</span>
-                            </div>
-                            <div className='titulo'><span>If / Else</span></div>
-                            <div className='subtituloAula'>
-                                <span>Aula detalhada sobre a combinação das estruturas condicionais if e else, incluindo exemplos de uso em fluxos de controle.</span>
-                            </div>
-                            <div className='estrelaAula'>
-                                <img src={Estrela} alt="estrelaAula" /> <span>0 / 7</span>
-                            </div>
-                            <div className='botaoAula'><button onClick={() => {
-                                sessionStorage.setItem("nivel", nivelSelecionado);
-                                handleCreateNewProgressGame()
-                            }}><img src={Start} alt="" />Iniciar</button></div>
-                        </div>
-
-                        <div className={`cardAula ${nivelSelecionado === 2 ? 'visible' : 'hidden'}`}>
-                            <div className='materia'>
-                                <span className='aula'>Aula 02</span>
-                                <span className='tituloMateria'>Condicional</span>
-                            </div>
-                            <div className='titulo'><span>Switch Case</span></div>
-                            <div className='subtituloAula'>
-                                <span>Aula explicativa sobre a estrutura condicional switch case, ideal para selecionar entre várias opções baseadas em uma única variável.</span>
-                            </div>
-                            <div className='estrelaAula'>
-                                <img src={Estrela} alt="estrelaAula" /> <span>0 / 6</span>
-                            </div>
-                            <div className='botaoAula'><button onClick={() => {
-                                sessionStorage.setItem("nivel", nivelSelecionado);
-                                handleCreateNewProgressGame()
-                            }}><img src={Start} alt="" />Iniciar</button></div>
-                        </div>
-
-                        <div className={`cardAula ${nivelSelecionado === 3 ? 'visible' : 'hidden'}`}>
-                            <div className='materia'>
-                                <span className='aula'>Aula 03</span>
-                                <span className='tituloMateria'>Logica de Programação</span>
-                            </div>
-                            <div className='titulo'><span>Variável</span></div>
-                            <div className='subtituloAula'>
-                                <span>Uma variável é um espaço de memória identificado por um nome que armazena valores que podem ser alterados durante a execução do programa.</span>
-                            </div>
-                            <div className='estrelaAula'>
-                                <img src={Estrela} alt="estrelaAula" /> <span>0 / 5</span>
-                            </div>
-                            <div className='botaoAula'><button onClick={() => {
-                                sessionStorage.setItem("nivel", nivelSelecionado);
-                                handleCreateNewProgressGame()
-                            }}><img src={Start} alt="" />Iniciar</button></div>
-                        </div>
-
-                        <div className={`cardAula ${nivelSelecionado === 4 ? 'visible' : 'hidden'}`}>
-                            <div className='materia'>
-                                <span className='aula'>Aula 04</span>
-                                <span className='tituloMateria'>Logica de Programação</span>
-                            </div>
-                            <div className='titulo'><span>Função</span></div>
-                            <div className='subtituloAula'>
-                                <span>Uma função é um bloco de código projetado para realizar uma tarefa específica e pode ser chamado quando necessário, facilitando a reutilização e organização do código.</span>
-                            </div>
-                            <div className='estrelaAula'>
-                                <img src={Estrela} alt="estrelaAula" /> <span>0 / 5</span>
-                            </div>
-                            <div className='botaoAula'><button onClick={() => {
-                                sessionStorage.setItem("nivel", nivelSelecionado);
-                                handleCreateNewProgressGame()
-                            }}><img src={Start} alt="" />Iniciar</button></div>
-                        </div>
-
-                        <div className={`cardAula ${nivelSelecionado === 5 ? 'visible' : 'hidden'}`}>
-                            <div className='materia'>
-                                <span className='aula'>Aula 05</span>
-                                <span className='tituloMateria'>Logica de Programação</span>
-                            </div>
-                            <div className='titulo'><span>Array</span></div>
-                            <div className='subtituloAula'>
-                                <span>Um array é uma coleção de elementos, todos do mesmo tipo, armazenados em locais de memória contíguos, que podem ser acessados por um índice numérico.</span>
-                            </div>
-                            <div className='estrelaAula'>
-                                <img src={Estrela} alt="estrelaAula" /> <span>0 / 5</span>
-                            </div>
-                            <div className='botaoAula'><button onClick={() => {
-                                sessionStorage.setItem("nivel", nivelSelecionado);
-                                handleCreateNewProgressGame()
-                            }}><img src={Start} alt="" />Iniciar</button></div>
-                        </div>
+                        {aulaSelecionada && tema.length > 0 ? (
+                            <CardAula
+                                titulo={aulaSelecionada.titulo}
+                                descricao={aulaSelecionada.descricao}
+                                tema={tema[temaAtualIndex].nome}
+                                numeroAula={nivelSelecionado}
+                                numEstrela='0'
+                                numTotalEstrela={aulaSelecionada.pontuacaoMaxima}
+                            />
+                        ) : (
+                            <p>Nenhuma aula encontrada.</p>
+                        )}
                     </div>
+                    
                 </div>
             </div>
         </div>
