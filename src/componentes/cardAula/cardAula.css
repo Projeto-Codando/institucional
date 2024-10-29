@@ -1,0 +1,77 @@
+.cardAula {
+    height: 85%;
+    width: 85%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.materia {
+    width: 80%;
+    height: max-content;
+    display: flex;
+    gap: 15px;
+}
+
+.aula {
+    color: #7CB518;
+}
+
+.tituloMateria {
+    width: max-content;
+    background-color: #7CB518;
+    color: white;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 17px;
+    padding: 1px;
+}
+
+.titulo span {
+    font-family: "Press Start 2P", system-ui;
+    font-size: 19px;
+}
+
+.subtituloAula {
+    width: 86%;
+}
+
+.subtituloAula span{
+    font-size: 21px;
+    font-weight: 600;
+}
+
+.estrelaAula {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 7px;
+}
+
+.estrelaAula img{
+    width: 50px;
+}
+
+.estrelaAula span{
+    font-size: 31px;
+    text-align: center;
+    font-weight: 900;
+    color: #F3DE2C;
+}
+
+.botaoAula {
+    display: flex;
+    justify-content: center;
+}
+
+.botaoAula button {
+    width: 180px;
+    height: 41px;
+    background-color: #7CB518;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}

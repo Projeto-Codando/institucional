@@ -10,7 +10,11 @@
     border-radius: 20px 20px 16px 20px;
     width: auto;
     padding: 0;
-    padding-left: 20px;
+    padding-left: 15px;
+
+}
+.mensagens .inputs #texto {
+    padding-right: 15px;
 }
 
 
