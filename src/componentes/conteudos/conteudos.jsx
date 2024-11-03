@@ -11,11 +11,12 @@ export default function Conteudo(props) {
 
     useEffect(() => {
         setIsLoading(true)
-        api.get(`/modulos/1`, {
+        api.get(`/modulos/1/${sessionStorage.getItem("idTurmaClicada")}`, {
+            
             headers: {
                 Authorization: `Bearer ${sessionStorage.getItem("token")}`
             }
-        }).then((json) => {
+        }).then((json) => { 
             setModulos(json.data)
             setIsLoading(false)
             console.log("Modulo Buscado")
