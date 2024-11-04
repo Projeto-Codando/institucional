@@ -46,10 +46,9 @@ export default function Quiz(props) {
         // Calcular o idResposta baseado na questão e na resposta escolhida
         const idResposta = (props.numeroQuestao - 1) * 4 + index + 1;
 
-        // Apenas incrementa o contador se a resposta estiver errada
-        if (!correct) {
+       
             incrementarContador(idResposta);
-        }
+        
 
         // Lógica de abertura dos modais
         if (correct && props.onCorrect && !props.onFinal) {
