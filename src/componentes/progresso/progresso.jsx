@@ -5,6 +5,10 @@ import Mensagem from '../mensagemProfessor/mensagemProfessor'
 import { useEffect, useState } from 'react'
 import api from '../../api'
 import LoadingSpinner from '../loadingSpinner/loadingSpinner'
+import Input from '../inputsLogins/inputsLogins'
+import BotaoEnviar from '../botaoEnviar/botaoEnviar'
+import { toast } from 'react-toastify'
+import { array } from 'yup'
 import SetaE from '../../imgs/setaEsquerda.svg'
 import SetaD from '../../imgs/setaDireita.svg'
 import React, { useRef } from 'react';
@@ -17,7 +21,11 @@ export default function Progresso(props) {
     const [alertasGerados, setAlertasGerados] = useState([]);
     const [turmaBuscada] = useState(sessionStorage.getItem('idTurmaClicada'));
     const [groupedProgressos, setGroupedProgressos] = useState({});
-    const [estudantes, setEstudantes] = useState([])
+    const [estudantes, setEstudantes] = useState([]);
+    const [mensagem, setMensagem] = useState("");
+    const [mensagens, setMensagens] = useState([]);
+
+
     const [perguntas, setPerguntas] = useState([]);
 
     const scrollRef = useRef(null);
@@ -141,6 +149,68 @@ export default function Progresso(props) {
             setAlertasGerados(novosAlertas);
         }
     }, [estudantes, progressos]);
+    
+    useEffect(() => {
+        getNovasMensagens()
+    },[])
+
+
+    const getNovasMensagens = async () => {
+        api.get(`/mensagens/turma/${idTurma}`, {
+            headers: {
+                Authorization: `Bearer ${sessionStorage.getItem('token')}`
+            }
+        }).then(response => {
+            console.log(response.data);
+            if(Array.isArray(response.data)) {
+            setMensagens(response.data);}
+        }).catch(error => {
+            console.error(error)
+        })
+    }
+
+
+    const handleSave = async (event) => {
+        event.preventDefault();
+        api.post('/mensagens', {
+            idTurma,
+            texto: mensagem
+        }, {
+            headers: {
+                Authorization: `Bearer ${sessionStorage.getItem("token")}`
+            }
+        }).then((response) => {
+            // setIsLoading(false);
+            console.log("Mensagem Cadastrada: "  + response.data);
+            toast.success("Mensagem cadastrada com sucesso!");
+            getNovasMensagens();
+        }).catch((error) => {
+            // setIsLoading(false);
+            toast.error("Não foi possível cadastrar sua mensagem " + error.response.data.message);
+            console.error(error);
+        });
+        
+    }
+
+    function formatarHorario(dataEnvio) {
+        if (!dataEnvio) return '';
+    
+        const horas = parseInt(dataEnvio.slice(11, 13), 10);
+        const minutos = dataEnvio.slice(14, 16);
+    
+        const periodo = horas >= 12 ? 'PM' : 'AM';
+        const horas12 = horas % 12 || 12;
+    
+        return `${horas12}:${minutos} ${periodo}`;
+    }
+    
+    {mensagens.map((mensagemNova, index) => (
+        <Mensagem
+            key={index}
+            text={mensagemNova.mensagem}
+            horario={formatarHorario(mensagemNova.dataEnvio)}
+        />
+    ))}
 
     return (
         <div className='progresso'>
@@ -216,13 +286,25 @@ export default function Progresso(props) {
                         <h1>M U R A L</h1>
                     </div>
                     <div className='mensagens'>
-                        <Mensagem
-                            text='ashbasbsybdasyu ashbasbsybdasyu ashbasbsybdasyu ashbasbsybdasyu ashbasbsybdasyu ashbasbsybdasyu ashbasbsybdasyu ashbasbsybdasyu ashbasbsybdasyu '
-                            horario='12:33 PM'
-                        />
-
+                        {mensagens.map((mensagemNova, index) => (
+                            <Mensagem
+                                text={mensagemNova.mensagem}
+                                horario={formatarHorario(mensagemNova.dataEnvio)}
+                            />
+                        ))}
                     </div>
+
                     <div className='botoes'>
+                        <Input
+                            id='mensagem'
+                            width='350px'
+                            setMensagem={setMensagem}
+                            onChange={typeof setMensagem === 'function' ? setMensagem : undefined}
+
+                        />
+                        <BotaoEnviar
+                            onClick={handleSave}
+                        />
 
                     </div>
 

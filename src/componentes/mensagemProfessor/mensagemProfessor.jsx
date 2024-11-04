@@ -6,7 +6,7 @@ export default function Mensagem(props) {
     return (
         <div class="inputs">
             <div class="mensagem">
-            <label>{props.text}</label>
+            <label id='texto'>{props.text}</label>
             </div>
             <div class="perninha">
             <label>{props.horario}</label>
