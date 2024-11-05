@@ -30,3 +30,5 @@ EXPOSE 80
 
 # Comando para rodar o Nginxdocker 
 CMD ["nginx", "-g", "daemon off;"]
+
+
