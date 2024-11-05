@@ -19,7 +19,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
-          context: ./institucional/
+          context: .
           file: ./Dockerfile  # Ajuste o caminho do Dockerfile
           push: true
           tags: |
