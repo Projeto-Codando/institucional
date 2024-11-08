@@ -1,14 +1,8 @@
-networks:
-  api-codando_codando-net:
-    external: true
-
 services:
-  nginx:
+  nginx1:
     build:
       context: .
-      dockerfile: Dockerfile  # Assumindo que o Dockerfile do Nginx está no mesmo diretório
-    container_name: nginx
+      dockerfile: Dockerfile 
+    container_name: nginx1
     ports:
-      - "80:80"
-    networks:
-      - api-codando_codando-net
+      - "80:80"  
