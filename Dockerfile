@@ -1,5 +1,5 @@
 # Etapa 1: Construção da aplicação
-FROM node:18 AS build
+FROM node:18-alpine AS build
 
 # Diretório de trabalho na imagem
 WORKDIR /app
