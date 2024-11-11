@@ -46,4 +46,5 @@ jobs:
       - name: Trigger EC2 Runner Workflow
         run: |
           ssh -o StrictHostKeyChecking=no ubuntu@54.210.10.240 \
-            'docker-compose pull && docker-compose up -d'
+            'docker pull ismaelog1/codando_server:latest && docker stop codando && docker rm codando && sudo docker run -d --name codando -p 80:80 ismaelog1/codando_server:latest'
+
