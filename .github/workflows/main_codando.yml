@@ -25,3 +25,25 @@ jobs:
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/codando_server:latest
             ${{ secrets.DOCKERHUB_USERNAME }}/codando_server:${{ github.run_number }}
+      
+  update-ec2:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+  
+      - name: Set up SSH
+        run: |
+          # Criar diretório SSH e configurar a chave privada
+          mkdir -p ~/.ssh
+          echo "${{ secrets.EC2_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+  
+          # Adicionar a chave pública do host (se necessário)
+          ssh-keyscan -t rsa 54.210.10.240 >> ~/.ssh/known_hosts
+  
+      - name: Trigger EC2 Runner Workflow
+        run: |
+          ssh -o StrictHostKeyChecking=no ubuntu@54.210.10.240 \
+            'docker-compose pull && docker-compose up -d'
