@@ -15,11 +15,11 @@ export default function Quiz(props) {
     const idAluno = sessionStorage.getItem("userId");
 
     // Função que faz a requisição PUT para incrementar o contador
-    const incrementarContador = (idResposta) => {
+    const incrementarContador = (idResposta, foiCorreta) => {
         setContador(prevContador => prevContador + 1); // Incrementa o contador local
 
         api.put(`/respostas/${idResposta}/${idAluno}`, {
-           
+           foiCorreta: foiCorreta
         }, {
             headers: {
                 Authorization: `Bearer ${sessionStorage.getItem('token')}`
@@ -47,9 +47,7 @@ export default function Quiz(props) {
         const idResposta = (props.numeroQuestao - 1) * 4 + index + 1;
 
         // Apenas incrementa o contador se a resposta estiver errada
-        if (!correct) {
-            incrementarContador(idResposta);
-        }
+            incrementarContador(idResposta, correct);
 
         // Lógica de abertura dos modais
         if (correct && props.onCorrect && !props.onFinal) {
