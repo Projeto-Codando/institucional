@@ -24,7 +24,7 @@ export default function SubtituloForm(props) {
     return (
         <div className='container-subtitulo'>
             <div className='subtitulo-login'>
-                <span>Detalhes da conta ramon ramon</span>
+                <span>Detalhes da conta</span>
             </div>
             <div className='botao-aluno-professor'>
 
