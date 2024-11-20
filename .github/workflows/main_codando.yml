@@ -40,6 +40,7 @@ jobs:
           echo "${{ secrets.EC2_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
   
+          # Adicionar a chave pública do host (se necessário)
           ssh-keyscan -t rsa 54.210.10.240 >> ~/.ssh/known_hosts
   
       - name: Validate EC2 Availability
@@ -54,6 +55,8 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no ubuntu@54.210.10.240 \
             'sudo docker pull ismaelog1/codando_server:latest && \
-             sudo docker stop codando || true && \
-             sudo docker rm codando || true && \
-             sudo docker run -d -p 80:80 -p 443:443 ismaelog1/codando_server'
+             if lsof -i :80; then \
+               sudo docker stop $(sudo docker ps -q --filter "publish=80") || true && \
+               sudo docker rm $(sudo docker ps -a -q --filter "publish=80") || true; \
+             fi && \
+             sudo docker run -d -p 80:80 -p 443:443 --name codando ismaelog1/codando_server'
