@@ -40,11 +40,20 @@ jobs:
           echo "${{ secrets.EC2_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
   
-          # Adicionar a chave pública do host (se necessário)
           ssh-keyscan -t rsa 54.210.10.240 >> ~/.ssh/known_hosts
   
+      - name: Validate EC2 Availability
+        run: |
+          # Testar a conexão com a EC2
+          if ! ssh -o ConnectTimeout=10 -o StrictHostKeyChecking=no ubuntu@54.210.10.240 'echo "Conexão bem-sucedida"'; then
+            echo "A EC2 está desligada ou inacessível. Encerrando o workflow."
+            exit 1
+          fi
+
       - name: Trigger EC2 Runner Workflow
         run: |
           ssh -o StrictHostKeyChecking=no ubuntu@54.210.10.240 \
-            'sudo docker pull ismaelog1/codando_server:latest && sudo docker stop codando && sudo docker rm codando && sudo docker run -d -p 80:80 -p 443:443 ismaelog1/codando_server'
-
+            'sudo docker pull ismaelog1/codando_server:latest && \
+             sudo docker stop codando || true && \
+             sudo docker rm codando || true && \
+             sudo docker run -d -p 80:80 -p 443:443 ismaelog1/codando_server'
