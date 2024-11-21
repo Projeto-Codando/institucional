@@ -63,47 +63,68 @@
     display: flex;
     flex-direction: column;
     width: 40%;
+    gap: 20px;
 }
 .lado-esquerdo-tela {
     display: flex;
     flex-direction: column;
     width: 60%;
     justify-content: space-between;
-}
-.mural {
-    overflow-y: auto;
-    margin-top: 20px;
+
+}.mural {
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: #E6E6E6;
     width: 90%;
-    height: 45%;
+    height: 45%; /* Define a altura do mural */
     border: solid 2px #476334;
-    border-radius: 10px ;
-    justify-content: flex-start;
+    border-radius: 10px;
+    overflow: hidden; /* Evita conteúdo fora dos limites */
+    position: relative; /* Necessário para o sticky funcionar */
+}
+
+.titulo-mural {
+    position: sticky; /* Fixa o título dentro do mural */
+    top: 0; /* Alinha ao topo do mural */
+    background-color: #E6E6E6; /* Fundo para continuidade visual */
+    z-index: 10; /* Garante que o título fique acima do conteúdo */
+    width: 100%; /* Ocupa toda a largura */
+    text-align: center;
+    padding: 0px;
+    font-size: 25px;
+    font-weight: bold;
 }
 .mural h1 {
     margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 0;
     font-size: 25px;
     color: black;
     text-shadow: none;
 }
-.titulo-mural {
-    position:relative;
-}
+
 .mensagens {
-    width: 90%;
-    gap: 5px;
-    align-items: end;
+    flex: 1; /* Ocupa o espaço restante no mural */
+    width: 100%; /* Alinha com o mural */
+    overflow-y: auto; /* Permite a rolagem vertical */
     display: flex;
-    justify-content: end;
     flex-direction: column;
+    gap: 10px;
+    padding: 10px; /* Espaçamento interno */
+    align-items: flex-end; /* Alinha mensagens à direita */
+    justify-content: flex-start; /* Inicia mensagens de cima */
 }
+
 .botoes {
+    position: sticky; /* Fixa os botões no final do mural */
+    bottom: 0; /* Alinha à base do mural */
+    background-color: #E6E6E6; /* Fundo igual ao mural */
+    z-index: 10; /* Garante que fique acima das mensagens */
     display: flex;
-    gap: 2px  ;
+    justify-content: center;
+    gap: 10px;
+    padding: 0;
+    padding-bottom: 7px;
 }
 .containerKpis {
     height: 50%;

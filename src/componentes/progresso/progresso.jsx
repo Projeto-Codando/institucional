@@ -184,6 +184,11 @@ export default function Progresso(props) {
             console.log("Mensagem Cadastrada: "  + response.data);
             toast.success("Mensagem cadastrada com sucesso!");
             getNovasMensagens();
+            setMensagem("");
+            const inputElement = document.querySelector('#mensagem'); 
+            if (inputElement) {
+                inputElement.value = ""; // Limpa o campo
+            }
         }).catch((error) => {
             // setIsLoading(false);
             toast.error("Não foi possível cadastrar sua mensagem " + error.response.data.message);
