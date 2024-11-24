@@ -25,21 +25,18 @@ RUN apk add --no-cache openssl
 # Diretório para certificados SSL
 RUN mkdir -p /etc/nginx/ssl
 
-# Gerar o certificado autoassinado
-RUN openssl req -x509 -nodes -days 365 \
-    -newkey rsa:2048 \
-    -keyout /etc/nginx/ssl/selfsigned.key \
-    -out /etc/nginx/ssl/selfsigned.crt \
-    -subj "/C=BR/ST=SP/L=SaoPaulo/O=MinhaEmpresa/OU=TI/CN=localhost"
-
 # Copia os arquivos de build para o diretório do Nginx
 COPY --from=build /app/build /usr/share/nginx/html
 
 # Copia o arquivo de configuração do Nginx
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
+# Adiciona o script de inicialização
+COPY init.sh /usr/local/bin/init.sh
+RUN chmod +x /usr/local/bin/init.sh
+
 # Expor as portas 80 e 443
 EXPOSE 80 443
 
-# Comando para rodar o Nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Executa o script init.sh no início
+CMD ["/usr/local/bin/init.sh"]
