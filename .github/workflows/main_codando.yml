@@ -55,8 +55,6 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no ubuntu@54.210.10.240 \
             'sudo docker pull ismaelog1/codando_server:latest && \
-             if lsof -i :80; then \
-               sudo docker stop $(sudo docker ps -q --filter "publish=80") || true && \
-               sudo docker rm $(sudo docker ps -a -q --filter "publish=80") || true; \
-             fi && \
+             sudo docker stop $(sudo docker ps -aq) || true && \
+             sudo docker rm $(sudo docker ps -aq) || true && \
              sudo docker run -d -p 80:80 -p 443:443 --name codando ismaelog1/codando_server'
