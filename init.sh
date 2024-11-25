@@ -14,5 +14,6 @@ openssl req -x509 -nodes -days 365 \
     -subj "/C=BR/ST=SP/L=SaoPaulo/O=MinhaEmpresa/OU=TI/CN=localhost"
 
 # Inicia o Nginx
+#------
 echo "Iniciando o Nginx..."
 nginx -g "daemon off;"
