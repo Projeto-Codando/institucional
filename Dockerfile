@@ -16,14 +16,8 @@ COPY . .
 # Compila a aplicação React para produção
 RUN npm run build
 
-# Etapa 2: Servir a aplicação com o Nginx e configurar SSL
+# Etapa 2: Servir a aplicação com o Nginx
 FROM nginx:alpine
-
-# Instala OpenSSL para gerar certificados autoassinados
-RUN apk add --no-cache openssl
-
-# Diretório para certificados SSL
-RUN mkdir -p /etc/nginx/ssl
 
 # Copia os arquivos de build para o diretório do Nginx
 COPY --from=build /app/build /usr/share/nginx/html
@@ -31,12 +25,8 @@ COPY --from=build /app/build /usr/share/nginx/html
 # Copia o arquivo de configuração do Nginx
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Adiciona o script de inicialização
-COPY init.sh /usr/local/bin/init.sh
-RUN chmod +x /usr/local/bin/init.sh
-
 # Expor as portas 80 e 443
 EXPOSE 80 443
 
-# Executa o script init.sh no início
-CMD ["/usr/local/bin/init.sh"]
+# Comando padrão para iniciar o Nginx
+CMD ["nginx", "-g", "daemon off;"]
