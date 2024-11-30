@@ -19,11 +19,11 @@ RUN npm run build
 # Etapa 2: Servir a aplicação com o Nginx e Certbot
 FROM nginx:alpine
 
-# Instalar Certbot e dependências necessárias
-RUN apk add --no-cache certbot bash curl
+# Instalar Certbot, OpenSSL e dependências necessárias
+RUN apk add --no-cache certbot bash curl openssl
 
 # Diretório para certificados SSL
-RUN mkdir -p /etc/letsencrypt/live/codando.hopto.org
+RUN mkdir -p /etc/nginx/ssl
 
 # Copia os arquivos de build para o diretório do Nginx
 COPY --from=build /app/build /usr/share/nginx/html
