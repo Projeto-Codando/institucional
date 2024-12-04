@@ -4,13 +4,13 @@
 SSL_CERT="/etc/letsencrypt/live/codando.hopto.org/fullchain.pem"
 SSL_KEY="/etc/letsencrypt/live/codando.hopto.org/privkey.pem"
 
-if [ ! -f "$SSL_CERT" ] || [ ! -f "$SSL_KEY" ]; then
-    echo "Obtendo certificados SSL com Certbot..."
-    certbot certonly --standalone --agree-tos --email matheusismael013@gmail.com \
-        -d codando.hopto.org -d codandoapp.me -d www.codandoapp.me
+if [ ! -f "/etc/letsencrypt/live/codando.hopto.org/fullchain.pem" ] || [ ! -f "/etc/letsencrypt/live/codando.hopto.org/privkey.pem" ]; then
+    echo "Certificados SSL ausentes ou inválidos. Aguarde até que a emissão esteja liberada novamente."
+    exit 1
 else
-    echo "Certificados SSL já existem. Pulando geração."
+    echo "Usando certificados SSL existentes."
 fi
+
 
 echo "Iniciando o Nginx..."
 nginx -g "daemon off;"
